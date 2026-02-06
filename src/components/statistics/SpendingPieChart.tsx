@@ -3,19 +3,17 @@
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip, Legend } from "recharts";
 import { useLanguage } from "@/i18n/LanguageContext";
 
-// Federal budget breakdown data (2024)
+// Federal budget breakdown data (2026)
 // Source: Federal Finance Administration
 const budgetData = [
-  { id: "social-welfare", value: 33.8, color: "#2563EB" },
-  { id: "finances-taxes", value: 12.4, color: "#7C3AED" },
-  { id: "transport", value: 11.3, color: "#059669" },
-  { id: "education-research", value: 8.1, color: "#DC2626" },
-  { id: "defense", value: 6.2, color: "#F59E0B" },
+  { id: "social-welfare", value: 31.7, color: "#2563EB" },
+  { id: "finances-taxes", value: 15, color: "#7C3AED" },
+  { id: "transport", value: 10.8, color: "#059669" },
+  { id: "education-research", value: 9, color: "#DC2626" },
+  { id: "defense", value: 7.77, color: "#F59E0B" },
+  { id: "foreign-affairs", value: 3.83, color: "#6366F1" },
   { id: "agriculture-food", value: 3.7, color: "#10B981" },
-  { id: "foreign-affairs", value: 3.2, color: "#6366F1" },
-  { id: "justice-police", value: 1.7, color: "#EC4899" },
-  { id: "environment-energy", value: 1.5, color: "#14B8A6" },
-  { id: "other", value: 18.1, color: "#94A3B8" },
+  { id: "other", value: 9.1, color: "#94A3B8" },
 ];
 
 const labels: Record<string, { en: string; it: string }> = {
@@ -26,8 +24,6 @@ const labels: Record<string, { en: string; it: string }> = {
   "defense": { en: "Defense", it: "Difesa" },
   "agriculture-food": { en: "Agriculture & Food", it: "Agricoltura e alimentazione" },
   "foreign-affairs": { en: "Foreign Affairs", it: "Affari esteri" },
-  "justice-police": { en: "Justice & Police", it: "Giustizia e polizia" },
-  "environment-energy": { en: "Environment & Energy", it: "Ambiente e energia" },
   "other": { en: "Other", it: "Altro" },
 };
 
