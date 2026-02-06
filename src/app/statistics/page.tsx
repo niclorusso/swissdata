@@ -3,6 +3,7 @@
 import { useState, useMemo } from "react";
 import { indicators, getIndicatorsByCategory, getLocalizedIndicators, getLocalizedIndicatorsByCategory } from "@/data/indicators";
 import { LargeChart, SingleIndicatorChart } from "@/components/statistics/LargeChart";
+import { SpendingPieChart } from "@/components/statistics/SpendingPieChart";
 import {
   TimeRangeSelector,
   TimeRange,
@@ -19,6 +20,7 @@ import {
   DollarSign,
   ExternalLink,
   Calendar,
+  PieChart as PieChartIcon,
 } from "lucide-react";
 
 // Educational descriptions for indicators
@@ -181,6 +183,38 @@ export default function StatisticsPage() {
               <p className="text-xs sm:text-sm text-swiss-gray-500 mt-4">
                 {t.statistics.comparingChart}
               </p>
+            </CardContent>
+          </Card>
+        </section>
+      )}
+
+      {/* Federal Budget Breakdown */}
+      {(categoryFilter === "all" || categoryFilter === "economic") && (
+        <section className="mb-8 sm:mb-12">
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2 text-base sm:text-lg">
+                <PieChartIcon className="h-5 w-5 text-blue-600" />
+                {t.statistics.federalBudget}
+              </CardTitle>
+              <p className="text-sm text-swiss-gray-500">
+                {t.statistics.federalBudgetSubtitle}
+              </p>
+            </CardHeader>
+            <CardContent>
+              <SpendingPieChart height={380} />
+              <div className="flex items-center justify-between mt-4 pt-4 border-t border-swiss-gray-100">
+                <span className="text-xs text-swiss-gray-500">{t.statistics.source} Federal Finance Administration (EFV)</span>
+                <a 
+                  href="https://www.efv.admin.ch/efv/en/home/finanzberichterstattung/bundeshaushalt_ueb.html" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="text-xs text-blue-600 hover:underline flex items-center gap-1"
+                >
+                  {t.statistics.viewSource}
+                  <ExternalLink className="h-3 w-3" />
+                </a>
+              </div>
             </CardContent>
           </Card>
         </section>
