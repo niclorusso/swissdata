@@ -455,8 +455,8 @@ export default function StatisticsPage() {
               </p>
             </CardHeader>
             <CardContent>
-              <SpendingPieChart height={380} />
-              <div className="flex items-center justify-between mt-4 pt-4 border-t border-swiss-gray-100">
+              <SpendingPieChart />
+              <div className="flex items-center justify-between mt-3 sm:mt-4 pt-3 sm:pt-4 border-t border-swiss-gray-100">
                 <span className="text-xs text-swiss-gray-500">{t.statistics.source} Federal Finance Administration (EFV)</span>
                 <a 
                   href="https://www.efv.admin.ch/en/expenditure" 
@@ -519,8 +519,8 @@ export default function StatisticsPage() {
                   </div>
                 </CardHeader>
                 <CardContent className="px-2 sm:px-6">
-                  <SingleIndicatorChart indicator={indicator} height={180} startYear={startYear} color="#2563EB" />
-                  <div className="flex items-center justify-between mt-3 pt-3 border-t border-swiss-gray-100">
+                  <SingleIndicatorChart indicator={indicator} height={160} startYear={startYear} color="#2563EB" />
+                  <div className="flex items-center justify-between mt-2 sm:mt-3 pt-2 sm:pt-3 border-t border-swiss-gray-100">
                     <span className="text-xs text-swiss-gray-500">{t.statistics.source} {indicator.source}</span>
                     <a href={indicator.sourceUrl} target="_blank" rel="noopener noreferrer" className="text-xs text-blue-600 hover:underline flex items-center gap-1">
                       {t.statistics.viewSource}
@@ -556,8 +556,8 @@ export default function StatisticsPage() {
                   </div>
                 </CardHeader>
                 <CardContent className="px-2 sm:px-6">
-                  <SingleIndicatorChart indicator={indicator} height={180} startYear={startYear} color="#7C3AED" />
-                  <div className="flex items-center justify-between mt-3 pt-3 border-t border-swiss-gray-100">
+                  <SingleIndicatorChart indicator={indicator} height={160} startYear={startYear} color="#7C3AED" />
+                  <div className="flex items-center justify-between mt-2 sm:mt-3 pt-2 sm:pt-3 border-t border-swiss-gray-100">
                     <span className="text-xs text-swiss-gray-500">{t.statistics.source} {indicator.source}</span>
                     <a href={indicator.sourceUrl} target="_blank" rel="noopener noreferrer" className="text-xs text-purple-600 hover:underline flex items-center gap-1">
                       {t.statistics.viewSource}
@@ -593,8 +593,8 @@ export default function StatisticsPage() {
                   </div>
                 </CardHeader>
                 <CardContent className="px-2 sm:px-6">
-                  <SingleIndicatorChart indicator={indicator} height={180} startYear={startYear} color="#059669" />
-                  <div className="flex items-center justify-between mt-3 pt-3 border-t border-swiss-gray-100">
+                  <SingleIndicatorChart indicator={indicator} height={160} startYear={startYear} color="#059669" />
+                  <div className="flex items-center justify-between mt-2 sm:mt-3 pt-2 sm:pt-3 border-t border-swiss-gray-100">
                     <span className="text-xs text-swiss-gray-500">{t.statistics.source} {indicator.source}</span>
                     <a href={indicator.sourceUrl} target="_blank" rel="noopener noreferrer" className="text-xs text-green-600 hover:underline flex items-center gap-1">
                       {t.statistics.viewSource}

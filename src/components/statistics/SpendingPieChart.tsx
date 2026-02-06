@@ -50,9 +50,9 @@ export function SpendingPieChart({ height = 400 }: SpendingPieChartProps) {
     if (active && payload && payload.length) {
       const item = payload[0].payload;
       return (
-        <div className="bg-white border border-swiss-gray-200 rounded-lg shadow-lg p-3">
-          <p className="font-semibold text-swiss-gray-900">{item.name}</p>
-          <p className="text-swiss-gray-600">
+        <div className="bg-white border border-swiss-gray-200 rounded-lg shadow-lg p-2 sm:p-3">
+          <p className="font-semibold text-swiss-gray-900 text-xs sm:text-sm">{item.name}</p>
+          <p className="text-swiss-gray-600 text-xs sm:text-sm">
             <span className="font-bold" style={{ color: item.color }}>
               {item.value}%
             </span>
@@ -66,7 +66,7 @@ export function SpendingPieChart({ height = 400 }: SpendingPieChartProps) {
   };
 
   const renderLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, percent, name }: any) => {
-    if (percent < 0.05) return null; // Don't show labels for small slices
+    if (percent < 0.06) return null; // Don't show labels for small slices (increased threshold for mobile)
     const RADIAN = Math.PI / 180;
     const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
     const x = cx + radius * Math.cos(-midAngle * RADIAN);
@@ -79,15 +79,21 @@ export function SpendingPieChart({ height = 400 }: SpendingPieChartProps) {
         fill="white"
         textAnchor="middle"
         dominantBaseline="central"
-        className="text-xs font-medium"
+        className="text-[10px] sm:text-xs font-medium"
       >
         {`${(percent * 100).toFixed(0)}%`}
       </text>
     );
   };
 
+  // Responsive height calculation
+  const isMobile = typeof window !== 'undefined' && window.innerWidth < 640;
+  const chartHeight = isMobile ? 280 : height;
+  const outerRadius = isMobile ? 80 : height * 0.35;
+  const innerRadius = isMobile ? 35 : height * 0.15;
+
   return (
-    <div style={{ height }}>
+    <div className="h-[280px] sm:h-[380px]">
       <ResponsiveContainer width="100%" height="100%">
         <PieChart>
           <Pie
@@ -96,8 +102,8 @@ export function SpendingPieChart({ height = 400 }: SpendingPieChartProps) {
             cy="50%"
             labelLine={false}
             label={renderLabel}
-            outerRadius={height * 0.35}
-            innerRadius={height * 0.15}
+            outerRadius="70%"
+            innerRadius="30%"
             dataKey="value"
             paddingAngle={1}
           >
@@ -107,15 +113,15 @@ export function SpendingPieChart({ height = 400 }: SpendingPieChartProps) {
           </Pie>
           <Tooltip content={<CustomTooltip />} />
           <Legend
-            layout="vertical"
-            align="right"
-            verticalAlign="middle"
+            layout="horizontal"
+            align="center"
+            verticalAlign="bottom"
             iconType="circle"
-            iconSize={10}
+            iconSize={8}
             formatter={(value: string) => (
-              <span className="text-xs sm:text-sm text-swiss-gray-700">{value}</span>
+              <span className="text-[10px] sm:text-xs text-swiss-gray-700">{value}</span>
             )}
-            wrapperStyle={{ paddingLeft: "10px" }}
+            wrapperStyle={{ paddingTop: "10px", fontSize: "10px" }}
           />
         </PieChart>
       </ResponsiveContainer>

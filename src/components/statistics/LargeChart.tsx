@@ -121,22 +121,22 @@ export function LargeChart({
   return (
     <div className="w-full">
       {title && (
-        <h3 className="text-lg font-semibold text-swiss-gray-900 mb-4">{title}</h3>
+        <h3 className="text-base sm:text-lg font-semibold text-swiss-gray-900 mb-3 sm:mb-4">{title}</h3>
       )}
       <ResponsiveContainer width="100%" height={height}>
-        <LineChart data={data} margin={{ top: 20, right: 30, left: 20, bottom: 20 }}>
+        <LineChart data={data} margin={{ top: 10, right: 10, left: 0, bottom: 10 }}>
           {showGrid && <CartesianGrid strokeDasharray="3 3" stroke="#E5E5E5" />}
           <XAxis
             dataKey="year"
-            tick={{ fill: "#525252", fontSize: 12 }}
+            tick={{ fill: "#525252", fontSize: 10 }}
             tickLine={{ stroke: "#A3A3A3" }}
             axisLine={{ stroke: "#A3A3A3" }}
           />
           <YAxis
-            tick={{ fill: "#525252", fontSize: 12 }}
+            tick={{ fill: "#525252", fontSize: 10 }}
             tickLine={{ stroke: "#A3A3A3" }}
             axisLine={{ stroke: "#A3A3A3" }}
-            width={60}
+            width={45}
           />
           <Tooltip content={<CustomTooltip />} />
           <Legend
@@ -229,19 +229,19 @@ export function SingleIndicatorChart({
 
   return (
     <ResponsiveContainer width="100%" height={height}>
-      <LineChart data={data} margin={{ top: 10, right: 20, left: 10, bottom: 10 }}>
+      <LineChart data={data} margin={{ top: 10, right: 10, left: 0, bottom: 10 }}>
         <CartesianGrid strokeDasharray="3 3" stroke="#E5E5E5" />
         <XAxis
           dataKey="year"
-          tick={{ fill: "#525252", fontSize: 11 }}
+          tick={{ fill: "#525252", fontSize: 10 }}
           tickLine={{ stroke: "#A3A3A3" }}
           axisLine={{ stroke: "#A3A3A3" }}
         />
         <YAxis
-          tick={{ fill: "#525252", fontSize: 11 }}
+          tick={{ fill: "#525252", fontSize: 10 }}
           tickLine={{ stroke: "#A3A3A3" }}
           axisLine={{ stroke: "#A3A3A3" }}
-          width={50}
+          width={40}
           domain={["auto", "auto"]}
         />
         <Tooltip content={<CustomTooltip />} />
