@@ -3,6 +3,57 @@
  * Switzerland uses apostrophe (') as thousands separator and period (.) as decimal separator
  */
 
+// Unit translations
+const unitTranslations: Record<string, Record<string, string>> = {
+  en: {
+    "% of GDP": "% of GDP",
+    "Million": "Million",
+    "years": "years",
+    "per 1,000 inhabitants": "per 1,000 inhabitants",
+    "% of total population": "% of total population",
+    "Index (Q4 2019=100)": "Index (Q4 2019=100)",
+    "CHF/month": "CHF/month",
+    "per km²": "per km²",
+  },
+  it: {
+    "% of GDP": "% del PIL",
+    "Million": "Milioni",
+    "years": "anni",
+    "per 1,000 inhabitants": "per 1'000 abitanti",
+    "% of total population": "% della popolazione",
+    "Index (Q4 2019=100)": "Indice (Q4 2019=100)",
+    "CHF/month": "CHF/mese",
+    "per km²": "per km²",
+  },
+  de: {
+    "% of GDP": "% des BIP",
+    "Million": "Millionen",
+    "years": "Jahre",
+    "per 1,000 inhabitants": "pro 1'000 Einwohner",
+    "% of total population": "% der Bevölkerung",
+    "Index (Q4 2019=100)": "Index (Q4 2019=100)",
+    "CHF/month": "CHF/Monat",
+    "per km²": "pro km²",
+  },
+  fr: {
+    "% of GDP": "% du PIB",
+    "Million": "Millions",
+    "years": "ans",
+    "per 1,000 inhabitants": "pour 1'000 habitants",
+    "% of total population": "% de la population",
+    "Index (Q4 2019=100)": "Indice (T4 2019=100)",
+    "CHF/month": "CHF/mois",
+    "per km²": "par km²",
+  },
+};
+
+/**
+ * Get translated unit
+ */
+export function getTranslatedUnit(unit: string, locale: "en" | "it" | "de" | "fr" = "en"): string {
+  return unitTranslations[locale]?.[unit] || unit;
+}
+
 /**
  * Format a number in Swiss style (e.g., 1'234'567.89)
  */
@@ -71,16 +122,19 @@ export function formatSwissDate(date: Date | string): string {
 }
 
 /**
- * Format a value with its unit
+ * Format a value with its unit (locale-aware)
  */
-export function formatWithUnit(value: number, unit: string): string {
+export function formatWithUnit(value: number, unit: string, locale: "en" | "it" | "de" = "en"): string {
+  const translatedUnit = getTranslatedUnit(unit, locale);
+  
   switch (unit) {
     case "%":
       return formatPercentage(value);
     case "CHF":
       return formatCHF(value);
     case "CHF/month":
-      return `CHF ${formatSwissNumber(value)}/month`;
+      const monthWord = locale === "it" ? "mese" : locale === "de" ? "Monat" : "month";
+      return `CHF ${formatSwissNumber(value)}/${monthWord}`;
     case "per 100k":
       return formatSwissNumber(value, { decimals: 1 });
     case "km²":
@@ -89,9 +143,10 @@ export function formatWithUnit(value: number, unit: string): string {
     case "persons":
       return formatSwissNumber(value);
     case "people/km²":
-      return `${formatSwissNumber(value)} per km²`;
+      const perWord = locale === "de" ? "pro" : "per";
+      return `${formatSwissNumber(value)} ${perWord} km²`;
     default:
-      return `${formatSwissNumber(value)} ${unit}`;
+      return `${formatSwissNumber(value)} ${translatedUnit}`;
   }
 }
 

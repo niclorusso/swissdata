@@ -5,13 +5,28 @@ const indicatorTranslationsIT: Record<
   string,
   { name: string; shortName: string; description: string; context: string }
 > = {
+  "unemployment-rate-ilo": {
+    name: "Tasso di disoccupazione (ILO)",
+    shortName: "Disoccupazione (ILO)",
+    description:
+      "Tasso di disoccupazione secondo la definizione ILO (cercatori attivi di lavoro)",
+    context:
+      "Il tasso ILO è la metrica ufficiale per i confronti internazionali (Eurostat/OCSE).",
+  },
   "unemployment-rate": {
-    name: "Tasso di disoccupazione",
+    name: "Tasso di disoccupazione (SECO)",
     shortName: "Disoccupazione",
     description:
-      "Tasso di disoccupazione registrato in percentuale della forza lavoro",
+      "Tasso di disoccupazione registrato presso gli URC (Uffici regionali di collocamento)",
     context:
-      "La Svizzera ha uno dei tassi di disoccupazione più bassi d'Europa. La media UE si aggira intorno al 6%.",
+      "Il tasso SECO misura solo i disoccupati iscritti agli URC. È tipicamente inferiore al tasso ILO.",
+  },
+  "gdp-growth-rate": {
+    name: "Tasso di crescita del PIL",
+    shortName: "Crescita PIL",
+    description: "Tasso di crescita annuale del PIL reale a prezzi di mercato",
+    context:
+      "L'economia svizzera mostra resilienza nonostante i rallentamenti industriali globali, trainata dai consumi privati e dal settore chimico-farmaceutico.",
   },
   "gdp-growth": {
     name: "Tasso di crescita del PIL",
@@ -36,6 +51,14 @@ const indicatorTranslationsIT: Record<
     context:
       "La Svizzera ha uno dei salari nominali più alti al mondo, ma anche il costo della vita è elevato.",
   },
+  "federal-debt-gdp": {
+    name: "Debito federale (% del PIL)",
+    shortName: "Debito federale",
+    description:
+      "Debito netto della Confederazione in percentuale del PIL (esclusi Cantoni/Comuni)",
+    context:
+      "Questa cifra è gestita dal 'freno all'indebitamento'. È salita da ~120 mld CHF pre-Covid a ~141 mld CHF (2024) a causa delle spese pandemiche.",
+  },
   "public-debt": {
     name: "Debito pubblico (% del PIL)",
     shortName: "Debito pubblico",
@@ -45,12 +68,12 @@ const indicatorTranslationsIT: Record<
       "La Svizzera ha uno dei rapporti debito/PIL più bassi tra i paesi sviluppati.",
   },
   "housing-price-index": {
-    name: "Indice dei prezzi immobiliari (2015=100)",
+    name: "Indice dei prezzi immobiliari (Q4 2019=100)",
     shortName: "Prezzi immobiliari",
     description:
-      "Indice dei prezzi degli immobili residenziali (2015 = 100)",
+      "Indice ufficiale per case unifamiliari e appartamenti (IMPI, Base Q4 2019 = 100)",
     context:
-      "I prezzi degli immobili svizzeri sono aumentati costantemente, ma la crescita è rallentata dal 2022.",
+      "Dopo una breve stagnazione nel 2023 dovuta ai rialzi dei tassi, i prezzi stanno risalendo a causa della grave carenza abitativa e dei tassi ipotecari più bassi.",
   },
   "foreign-population": {
     name: "Popolazione residente straniera",
@@ -82,6 +105,14 @@ const indicatorTranslationsIT: Record<
       "Aspettativa di vita media alla nascita (entrambi i sessi combinati)",
     context:
       "La Svizzera si colloca tra i primi 5 paesi al mondo per aspettativa di vita.",
+  },
+  "crime-rate-per-1000": {
+    name: "Tasso di criminalità (per 1'000 abitanti)",
+    shortName: "Criminalità",
+    description:
+      "Reati totali secondo il Codice penale svizzero (CP) per 1'000 residenti permanenti",
+    context:
+      "Sebbene la Svizzera resti uno dei paesi più sicuri (tasso di omicidi ~0,5 per 100k), il tasso complessivo è aumentato dal 2022 a causa di cybercrimini e furti di veicoli.",
   },
   "crime-rate": {
     name: "Tasso di criminalità",
@@ -438,6 +469,248 @@ const questionTranslationsIT: Record<
   },
 };
 
+// German translations for indicator data fields
+const indicatorTranslationsDE: Record<
+  string,
+  { name: string; shortName: string; description: string; context: string }
+> = {
+  "unemployment-rate-ilo": {
+    name: "Arbeitslosenquote (ILO-Definition)",
+    shortName: "Arbeitslosigkeit (ILO)",
+    description: "Arbeitslosenquote nach internationalen ILO-Standards (aktiv Arbeitsuchende)",
+    context: "Die ILO-Quote ist die offizielle Kennzahl für internationale Vergleiche (Eurostat/OECD).",
+  },
+  "unemployment-rate": {
+    name: "Arbeitslosenquote (SECO)",
+    shortName: "Arbeitslosigkeit",
+    description: "Registrierte Arbeitslosenquote bei den RAV (Regionale Arbeitsvermittlungszentren)",
+    context: "Die SECO-Quote erfasst nur bei den RAV gemeldete Arbeitslose. Sie ist typischerweise niedriger als die ILO-Quote.",
+  },
+  "gdp-growth-rate": {
+    name: "BIP-Wachstumsrate",
+    shortName: "BIP-Wachstum",
+    description: "Jährliche Wachstumsrate des realen BIP zu Marktpreisen",
+    context: "Die Schweizer Wirtschaft zeigt Widerstandskraft trotz globaler Industrieflaute, getragen von privatem Konsum und dem Chemie-Pharma-Sektor.",
+  },
+  "gdp-growth": {
+    name: "BIP-Wachstumsrate",
+    shortName: "BIP-Wachstum",
+    description: "Jährliche Wachstumsrate des realen BIP",
+    context: "Die Schweiz verzeichnet trotz globaler Unsicherheiten ein stetiges Wachstum.",
+  },
+  "inflation-rate": {
+    name: "Inflationsrate (LIK)",
+    shortName: "Inflation",
+    description: "Jährliche Inflationsrate basierend auf dem Landesindex der Konsumentenpreise",
+    context: "Die Schweizer Inflation bleibt deutlich unter dem europäischen Durchschnitt von ca. 2,5%.",
+  },
+  "average-wage": {
+    name: "Medianer Monatslohn (brutto)",
+    shortName: "Medianlohn",
+    description: "Medianer Bruttomonatslohn über alle Branchen",
+    context: "Die Schweiz hat einen der höchsten Nominallöhne weltweit, aber auch hohe Lebenshaltungskosten.",
+  },
+  "federal-debt-gdp": {
+    name: "Bundesschulden (% des BIP)",
+    shortName: "Bundesschulden",
+    description: "Nettoschulden des Bundes in Prozent des BIP (ohne Kantone/Gemeinden)",
+    context: "Dieser Wert wird durch die Schuldenbremse gesteuert. Er stieg von ~120 Mrd. CHF vor COVID auf ~141 Mrd. CHF (2024) wegen Pandemieausgaben.",
+  },
+  "public-debt": {
+    name: "Staatsverschuldung (% des BIP)",
+    shortName: "Staatsschulden",
+    description: "Gesamte Staatsverschuldung in Prozent des BIP",
+    context: "Die Schweiz hat eine der niedrigsten Schuldenquoten unter den Industrieländern.",
+  },
+  "housing-price-index": {
+    name: "Immobilienpreisindex (Q4 2019=100)",
+    shortName: "Immobilienpreise",
+    description: "Offizieller Index für Einfamilienhäuser und Eigentumswohnungen (IMPI, Basis Q4 2019 = 100)",
+    context: "Nach einer kurzen Stagnation 2023 wegen Zinserhöhungen steigen die Preise wieder aufgrund von Wohnungsmangel und tieferen Hypothekarzinsen.",
+  },
+  "foreign-population": {
+    name: "Ständige ausländische Wohnbevölkerung",
+    shortName: "Ausländische Bevölkerung",
+    description: "Anteil der ständigen Wohnbevölkerung ohne Schweizer Staatsbürgerschaft",
+    context: "Etwa 40% der Ausländer stammen aus EU/EFTA-Ländern. Italien, Deutschland und Portugal sind die häufigsten Nationalitäten.",
+  },
+  "population-total": {
+    name: "Gesamtbevölkerung",
+    shortName: "Bevölkerung",
+    description: "Gesamte ständige Wohnbevölkerung der Schweiz",
+    context: "Das Bevölkerungswachstum wird hauptsächlich durch Einwanderung getragen. Das natürliche Wachstum trägt weniger bei.",
+  },
+  "median-age": {
+    name: "Medianalter",
+    shortName: "Medianalter",
+    description: "Medianalter der Schweizer Bevölkerung",
+    context: "Die Schweizer Bevölkerung altert, mit Auswirkungen auf das Rentensystem und die Gesundheitsversorgung.",
+  },
+  "life-expectancy": {
+    name: "Lebenserwartung bei Geburt",
+    shortName: "Lebenserwartung",
+    description: "Durchschnittliche Lebenserwartung bei Geburt (beide Geschlechter)",
+    context: "Die Schweiz gehört zu den Top-5-Ländern weltweit bei der Lebenserwartung.",
+  },
+  "crime-rate-per-1000": {
+    name: "Kriminalitätsrate (pro 1'000 Einwohner)",
+    shortName: "Kriminalität",
+    description: "Gesamte Straftaten nach Schweizer Strafgesetzbuch (StGB) pro 1'000 ständige Einwohner",
+    context: "Obwohl die Schweiz sehr sicher bleibt (Mordrate ~0,5 pro 100k), ist die Gesamtrate seit 2022 wegen Cyberkriminalität und Fahrzeugdiebstahl gestiegen.",
+  },
+  "crime-rate": {
+    name: "Kriminalitätsrate",
+    shortName: "Kriminalität",
+    description: "Registrierte Straftaten pro 100'000 Einwohner",
+    context: "Gewaltverbrechen machen nur etwa 5% aller Straftaten aus. Die meisten betreffen Eigentum.",
+  },
+  "healthcare-cost": {
+    name: "Durchschnittliche Krankenkassenprämie",
+    shortName: "Gesundheitskosten",
+    description: "Durchschnittliche monatliche Krankenkassenprämie (Grundversicherung)",
+    context: "Etwa 25% der Bevölkerung erhalten Prämienverbilligungen. Die Prämien variieren von Kanton zu Kanton.",
+  },
+  "education-spending": {
+    name: "Bildungsausgaben (% des BIP)",
+    shortName: "Bildung",
+    description: "Öffentliche Bildungsausgaben in Prozent des BIP",
+    context: "Die Schweiz investiert stark in die Berufsbildung – etwa 60% der Jugendlichen wählen eine Lehre.",
+  },
+  "poverty-rate": {
+    name: "Armutsgefährdungsquote",
+    shortName: "Armutsquote",
+    description: "Anteil der Bevölkerung mit Einkommen unter 60% des Medians",
+    context: "Obwohl die Schweiz im Vergleich zum EU-Durchschnitt (ca. 16%) eine niedrige Armutsquote hat, existiert Armut.",
+  },
+  "renewable-energy": {
+    name: "Anteil erneuerbarer Energien",
+    shortName: "Erneuerbare",
+    description: "Anteil erneuerbarer Energien am Gesamtenergieverbrauch",
+    context: "Wasserkraft dominiert bei den Erneuerbaren (ca. 60% des Stroms). Solar wächst am schnellsten.",
+  },
+};
+
+// French translations for indicator data fields
+const indicatorTranslationsFR: Record<
+  string,
+  { name: string; shortName: string; description: string; context: string }
+> = {
+  "unemployment-rate-ilo": {
+    name: "Taux de chômage (définition OIT)",
+    shortName: "Chômage (OIT)",
+    description: "Taux de chômage selon les normes internationales de l'OIT (chercheurs d'emploi actifs)",
+    context: "Le taux OIT est la mesure officielle pour les comparaisons internationales (Eurostat/OCDE).",
+  },
+  "unemployment-rate": {
+    name: "Taux de chômage (SECO)",
+    shortName: "Chômage",
+    description: "Taux de chômage enregistré auprès des ORP (Offices régionaux de placement)",
+    context: "Le taux SECO ne mesure que les chômeurs inscrits aux ORP. Il est généralement inférieur au taux OIT.",
+  },
+  "gdp-growth-rate": {
+    name: "Taux de croissance du PIB",
+    shortName: "Croissance PIB",
+    description: "Taux de croissance annuel du PIB réel aux prix du marché",
+    context: "L'économie suisse fait preuve de résilience malgré le ralentissement industriel mondial, portée par la consommation privée et le secteur chimie-pharma.",
+  },
+  "gdp-growth": {
+    name: "Taux de croissance du PIB",
+    shortName: "Croissance du PIB",
+    description: "Taux de croissance annuel du PIB réel",
+    context: "La Suisse maintient une croissance régulière malgré les incertitudes mondiales.",
+  },
+  "inflation-rate": {
+    name: "Taux d'inflation (IPC)",
+    shortName: "Inflation",
+    description: "Taux d'inflation annuel basé sur l'Indice des prix à la consommation",
+    context: "L'inflation suisse reste bien en dessous de la moyenne européenne d'environ 2,5%.",
+  },
+  "average-wage": {
+    name: "Salaire mensuel médian (brut)",
+    shortName: "Salaire médian",
+    description: "Salaire mensuel brut médian dans tous les secteurs",
+    context: "La Suisse a l'un des salaires nominaux les plus élevés au monde, mais aussi un coût de la vie élevé.",
+  },
+  "federal-debt-gdp": {
+    name: "Dette fédérale (% du PIB)",
+    shortName: "Dette fédérale",
+    description: "Dette nette de la Confédération en pourcentage du PIB (hors cantons/communes)",
+    context: "Ce chiffre est géré par le 'frein à l'endettement'. Il est passé de ~120 Mrd CHF avant COVID à ~141 Mrd CHF (2024) en raison des dépenses pandémiques.",
+  },
+  "public-debt": {
+    name: "Dette publique (% du PIB)",
+    shortName: "Dette publique",
+    description: "Dette publique totale en pourcentage du PIB",
+    context: "La Suisse a l'un des ratios dette/PIB les plus bas parmi les pays développés.",
+  },
+  "housing-price-index": {
+    name: "Indice des prix immobiliers (T4 2019=100)",
+    shortName: "Prix immobiliers",
+    description: "Indice officiel pour les maisons individuelles et appartements (IMPI, Base T4 2019 = 100)",
+    context: "Après une brève stagnation en 2023 due aux hausses de taux, les prix remontent en raison de la pénurie de logements et des taux hypothécaires plus bas.",
+  },
+  "foreign-population": {
+    name: "Population résidente étrangère permanente",
+    shortName: "Population étrangère",
+    description: "Pourcentage de résidents permanents sans citoyenneté suisse",
+    context: "Environ 40% des étrangers viennent de pays UE/AELE. L'Italie, l'Allemagne et le Portugal sont les nationalités principales.",
+  },
+  "population-total": {
+    name: "Population totale",
+    shortName: "Population",
+    description: "Population résidente permanente totale de la Suisse",
+    context: "La croissance démographique est principalement due à l'immigration. La croissance naturelle contribue moins.",
+  },
+  "median-age": {
+    name: "Âge médian",
+    shortName: "Âge médian",
+    description: "Âge médian de la population suisse",
+    context: "La population suisse vieillit, avec des conséquences pour le système de retraite et les soins de santé.",
+  },
+  "life-expectancy": {
+    name: "Espérance de vie à la naissance",
+    shortName: "Espérance de vie",
+    description: "Espérance de vie moyenne à la naissance (les deux sexes)",
+    context: "La Suisse fait partie des 5 premiers pays au monde pour l'espérance de vie.",
+  },
+  "crime-rate-per-1000": {
+    name: "Taux de criminalité (pour 1'000 habitants)",
+    shortName: "Criminalité",
+    description: "Total des infractions selon le Code pénal suisse (CP) pour 1'000 résidents permanents",
+    context: "Bien que la Suisse reste très sûre (taux d'homicide ~0,5 pour 100k), le taux global a augmenté depuis 2022 en raison de la cybercriminalité et des vols de véhicules.",
+  },
+  "crime-rate": {
+    name: "Taux de criminalité",
+    shortName: "Criminalité",
+    description: "Infractions pénales enregistrées pour 100'000 habitants",
+    context: "Les crimes violents ne représentent qu'environ 5% de toutes les infractions. La plupart concernent les biens.",
+  },
+  "healthcare-cost": {
+    name: "Prime moyenne d'assurance maladie",
+    shortName: "Coût santé",
+    description: "Prime mensuelle moyenne d'assurance maladie (couverture de base)",
+    context: "Environ 25% de la population reçoit des réductions de primes. Les primes varient d'un canton à l'autre.",
+  },
+  "education-spending": {
+    name: "Dépenses d'éducation (% du PIB)",
+    shortName: "Éducation",
+    description: "Dépenses publiques d'éducation en pourcentage du PIB",
+    context: "La Suisse investit beaucoup dans la formation professionnelle – environ 60% des jeunes choisissent un apprentissage.",
+  },
+  "poverty-rate": {
+    name: "Taux de risque de pauvreté",
+    shortName: "Taux de pauvreté",
+    description: "Pourcentage de la population avec un revenu inférieur à 60% de la médiane",
+    context: "Bien que la Suisse ait un faible taux de pauvreté par rapport à la moyenne UE (environ 16%), la pauvreté existe.",
+  },
+  "renewable-energy": {
+    name: "Part des énergies renouvelables",
+    shortName: "Renouvelables",
+    description: "Part des énergies renouvelables dans la consommation totale d'énergie",
+    context: "L'hydroélectricité domine les renouvelables (environ 60% de l'électricité). Le solaire croît le plus rapidement.",
+  },
+};
+
 // Helper function to get localized indicator fields
 export function getLocalizedIndicator(
   id: string,
@@ -450,7 +723,9 @@ export function getLocalizedIndicator(
   locale: Locale
 ): { name: string; shortName: string; description: string; context?: string } {
   if (locale === "en") return fields;
-  const t = indicatorTranslationsIT[id];
+  
+  const translations = locale === "de" ? indicatorTranslationsDE : locale === "fr" ? indicatorTranslationsFR : indicatorTranslationsIT;
+  const t = translations[id];
   if (!t) return fields;
   return {
     name: t.name,
@@ -467,6 +742,9 @@ export function getLocalizedQuestion(
   locale: Locale
 ): { question: string; explanation: string } {
   if (locale === "en") return fields;
+  // For now, German and French fall back to English for quiz questions
+  // (adding full German/French quiz translations would be a large undertaking)
+  if (locale === "de" || locale === "fr") return fields;
   const t = questionTranslationsIT[id];
   if (!t) return fields;
   return {

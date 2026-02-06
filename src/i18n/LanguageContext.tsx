@@ -23,7 +23,7 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     const saved = localStorage.getItem("swissdata-locale") as Locale | null;
-    if (saved === "en" || saved === "it") {
+    if (saved === "en" || saved === "it" || saved === "de" || saved === "fr") {
       setLocaleState(saved);
     }
   }, []);

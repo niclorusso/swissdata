@@ -6,13 +6,18 @@ import { Card, CardContent } from "@/components/ui/card";
 import { CategorySection } from "@/components/dashboard/CategorySection";
 import { indicators, getLocalizedIndicatorsByCategory } from "@/data/indicators";
 import { useLanguage } from "@/i18n/LanguageContext";
-import { ArrowRight, HelpCircle, Map, CheckCircle2 } from "lucide-react";
+import { ArrowRight, HelpCircle, Map, CheckCircle2, BarChart3 } from "lucide-react";
 
 export default function HomePage() {
   const { t, locale } = useLanguage();
-  const economicIndicators = getLocalizedIndicatorsByCategory("economic", locale);
-  const demographicIndicators = getLocalizedIndicatorsByCategory("demographic", locale);
-  const socialIndicators = getLocalizedIndicatorsByCategory("social", locale);
+  
+  // Filter to show only key indicators on dashboard
+  const economicIndicators = getLocalizedIndicatorsByCategory("economic", locale)
+    .filter(i => ["gdp-growth-rate", "unemployment-rate-ilo", "federal-debt-gdp"].includes(i.id));
+  const demographicIndicators = getLocalizedIndicatorsByCategory("demographic", locale)
+    .filter(i => ["population-total", "median-age", "life-expectancy"].includes(i.id));
+  const socialIndicators = getLocalizedIndicatorsByCategory("social", locale)
+    .filter(i => ["crime-rate-per-1000", "poverty-rate", "healthcare-cost"].includes(i.id));
 
   return (
     <div className="container mx-auto px-4 py-6 sm:py-8 space-y-8 sm:space-y-12">
@@ -37,6 +42,12 @@ export default function HomePage() {
               <ArrowRight className="h-5 w-5" />
             </Button>
           </Link>
+          <Link href="/statistics">
+            <Button size="xl" variant="outline" className="gap-2 w-full sm:w-auto">
+              <BarChart3 className="h-5 w-5" />
+              {t.home.showStats}
+            </Button>
+          </Link>
           <Link href="/cantons">
             <Button size="xl" variant="outline" className="gap-2 w-full sm:w-auto">
               <Map className="h-5 w-5" />
@@ -50,7 +61,7 @@ export default function HomePage() {
       <section className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
         {[
           { label: t.home.indicatorsTracked, value: indicators.length.toString() },
-          { label: t.home.officialSources, value: "7" },
+          { label: t.home.officialSources, value: "5" },
           { label: t.home.cantonsCovered, value: "26" },
           { label: t.home.questionsInQuiz, value: "50+" },
         ].map((stat) => (

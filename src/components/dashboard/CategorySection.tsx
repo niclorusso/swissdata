@@ -1,11 +1,12 @@
 "use client";
 
+import Link from "next/link";
 import { Indicator, IndicatorCategory } from "@/types";
 import { IndicatorCard } from "./IndicatorCard";
-import { TrendChart } from "./TrendChart";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/i18n/LanguageContext";
-import { TrendingUp, Users, Heart } from "lucide-react";
+import { TrendingUp, Users, Heart, ArrowRight } from "lucide-react";
 
 interface CategorySectionProps {
   category: IndicatorCategory;
@@ -42,8 +43,6 @@ export function CategorySection({ category, indicators }: CategorySectionProps) 
   const config = categoryConfig[category];
   const Icon = config.icon;
 
-  const chartIndicator = indicators.find((i) => i.historicalData && i.historicalData.length > 0);
-
   return (
     <section className="space-y-4 sm:space-y-6">
       {/* Category Header */}
@@ -64,19 +63,15 @@ export function CategorySection({ category, indicators }: CategorySectionProps) 
         ))}
       </div>
 
-      {/* Trend Chart */}
-      {chartIndicator && (
-        <Card>
-          <CardHeader>
-            <CardTitle className="text-base sm:text-lg">
-              {chartIndicator.name} - {t.category.historicalTrend}
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="px-2 sm:px-6">
-            <TrendChart indicator={chartIndicator} height={250} />
-          </CardContent>
-        </Card>
-      )}
+      {/* Link to Statistics */}
+      <div className="flex justify-end">
+        <Link href="/statistics">
+          <Button variant="outline" size="sm" className="gap-2">
+            {t.category.viewAllStatistics}
+            <ArrowRight className="h-4 w-4" />
+          </Button>
+        </Link>
+      </div>
     </section>
   );
 }

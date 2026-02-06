@@ -12,6 +12,7 @@ import {
   ReferenceLine,
 } from "recharts";
 import { Indicator, DataPoint } from "@/types";
+import { useLanguage } from "@/i18n/LanguageContext";
 
 interface ChartSeries {
   indicator: Indicator;
@@ -51,7 +52,7 @@ function mergeData(series: ChartSeries[], startYear: number): Record<string, num
   return Array.from(dataMap.values()).sort((a, b) => (a.year as number) - (b.year as number));
 }
 
-function formatValue(value: number, unit: string): string {
+function formatValue(value: number, unit: string, locale: "en" | "it" | "de" | "fr" = "en"): string {
   if (unit === "people" || unit === "count") {
     return value.toLocaleString("de-CH");
   }
@@ -62,7 +63,8 @@ function formatValue(value: number, unit: string): string {
     return `${value.toFixed(1)}%`;
   }
   if (unit === "years") {
-    return `${value.toFixed(1)} years`;
+    const yearsWord = locale === "it" ? "anni" : locale === "de" ? "Jahre" : locale === "fr" ? "ans" : "years";
+    return `${value.toFixed(1)} ${yearsWord}`;
   }
   if (unit === "index") {
     return value.toFixed(1);
@@ -81,6 +83,7 @@ export function LargeChart({
   title,
   showGrid = true,
 }: LargeChartProps) {
+  const { locale } = useLanguage();
   const data = mergeData(series, startYear);
 
   if (data.length === 0) {
@@ -104,7 +107,7 @@ export function LargeChart({
               <p key={index} className="text-sm" style={{ color: entry.color }}>
                 {seriesItem.indicator.shortName}:{" "}
                 <span className="font-medium">
-                  {formatValue(entry.value, seriesItem.indicator.unit)}
+                  {formatValue(entry.value, seriesItem.indicator.unit, locale)}
                 </span>
               </p>
             );

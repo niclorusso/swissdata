@@ -68,35 +68,6 @@ export function SwitzerlandMap({
           );
         })}
 
-        {/* Canton labels */}
-        {cantons.map((canton) => {
-          const center = cantonCenters[canton.id];
-          if (!center) return null;
-
-          const isSelected = selectedCanton === canton.id;
-          const isHovered = hoveredCanton === canton.id;
-
-          // Smaller cantons get smaller font
-          const smallCantons = ["ai", "bs", "zg", "nw", "ow", "gl", "sh", "ar"];
-          const fontSize = smallCantons.includes(canton.id) ? 14 : 18;
-
-          return (
-            <text
-              key={`label-${canton.id}`}
-              x={center.x}
-              y={center.y}
-              textAnchor="middle"
-              dominantBaseline="middle"
-              className="pointer-events-none select-none font-medium"
-              fill={isSelected || isHovered ? "#991B1B" : "#404040"}
-              fontSize={isSelected ? fontSize + 2 : fontSize}
-              fontWeight={isSelected ? 700 : 500}
-            >
-              {canton.abbreviation}
-            </text>
-          );
-        })}
-
         {/* Country label */}
         <text
           x="526"

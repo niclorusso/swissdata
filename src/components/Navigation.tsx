@@ -24,8 +24,11 @@ export function Navigation() {
         <div className="flex h-14 sm:h-16 items-center justify-between">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2 shrink-0">
-            <div className="flex items-center justify-center w-7 h-7 sm:w-8 sm:h-8 bg-primary rounded">
-              <span className="text-white font-bold text-base sm:text-lg">+</span>
+            <div className="grid grid-cols-2 w-7 h-7 sm:w-8 sm:h-8 bg-primary rounded">
+              <span className="flex items-center justify-center text-white font-bold text-[11px] sm:text-[13px] leading-none">+</span>
+              <span className="flex items-center justify-center text-white font-bold text-[11px] sm:text-[13px] leading-none">−</span>
+              <span className="flex items-center justify-center text-white font-bold text-[11px] sm:text-[13px] leading-none">×</span>
+              <span className="flex items-center justify-center text-white font-bold text-[11px] sm:text-[13px] leading-none">÷</span>
             </div>
             <span className="font-bold text-lg sm:text-xl text-swiss-gray-900">
               Swiss<span className="text-primary">Data</span>
@@ -69,6 +72,28 @@ export function Navigation() {
                 EN
               </button>
               <button
+                onClick={() => setLocale("de")}
+                className={cn(
+                  "px-2.5 py-1.5 text-xs font-semibold transition-colors",
+                  locale === "de"
+                    ? "bg-swiss-gray-900 text-white"
+                    : "text-swiss-gray-500 hover:text-swiss-gray-900"
+                )}
+              >
+                DE
+              </button>
+              <button
+                onClick={() => setLocale("fr")}
+                className={cn(
+                  "px-2.5 py-1.5 text-xs font-semibold transition-colors",
+                  locale === "fr"
+                    ? "bg-swiss-gray-900 text-white"
+                    : "text-swiss-gray-500 hover:text-swiss-gray-900"
+                )}
+              >
+                FR
+              </button>
+              <button
                 onClick={() => setLocale("it")}
                 className={cn(
                   "px-2.5 py-1.5 text-xs font-semibold transition-colors",
@@ -96,6 +121,28 @@ export function Navigation() {
                 )}
               >
                 EN
+              </button>
+              <button
+                onClick={() => setLocale("de")}
+                className={cn(
+                  "px-2 py-1 text-xs font-semibold transition-colors",
+                  locale === "de"
+                    ? "bg-swiss-gray-900 text-white"
+                    : "text-swiss-gray-500"
+                )}
+              >
+                DE
+              </button>
+              <button
+                onClick={() => setLocale("fr")}
+                className={cn(
+                  "px-2 py-1 text-xs font-semibold transition-colors",
+                  locale === "fr"
+                    ? "bg-swiss-gray-900 text-white"
+                    : "text-swiss-gray-500"
+                )}
+              >
+                FR
               </button>
               <button
                 onClick={() => setLocale("it")}

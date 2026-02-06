@@ -95,30 +95,20 @@ export function InfoTooltip({ content, className }: InfoTooltipProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="relative inline-block">
+    <div className="relative inline-flex items-center">
       <button
         onClick={() => setIsOpen(!isOpen)}
         onBlur={() => setTimeout(() => setIsOpen(false), 150)}
         className={cn(
-          "inline-flex items-center justify-center w-5 h-5 rounded-full",
-          "text-swiss-gray-400 hover:text-swiss-gray-600 hover:bg-swiss-gray-100",
+          "inline-flex items-center justify-center w-4 h-4 rounded-full",
+          "bg-swiss-gray-200 text-swiss-gray-500 hover:bg-swiss-gray-300 hover:text-swiss-gray-700",
           "transition-colors focus:outline-none focus:ring-2 focus:ring-primary/20",
+          "text-[10px] font-semibold leading-none",
           className
         )}
         aria-label="More information"
       >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 20 20"
-          fill="currentColor"
-          className="w-4 h-4"
-        >
-          <path
-            fillRule="evenodd"
-            d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zM8.94 6.94a.75.75 0 11-1.061-1.061 .75.75 0 011.06 1.06zm.78 3.81c-.165.248-.399.513-.706.788-.49.44-.906.662-1.242.662a.75.75 0 000 1.5c.697 0 1.34-.349 1.94-.889a7.71 7.71 0 00.966-1.067.75.75 0 00-1.154-.956c-.03.04-.06.08-.092.12a5.61 5.61 0 01-.247.299.75.75 0 00-.15.205c-.077.154-.115.32-.115.49v.003a.75.75 0 001.5 0v-.003c0-.05.004-.1.012-.15a.75.75 0 00-.062-.252zM10 15a1 1 0 100-2 1 1 0 000 2z"
-            clipRule="evenodd"
-          />
-        </svg>
+        ?
       </button>
       {isOpen && (
         <div

@@ -6,7 +6,7 @@ import { ClientLayout } from "@/components/ClientLayout";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "SwissData - Data-Driven Insights for Informed Decisions",
+  title: "SwissData - Switzerland in Numbers",
   description:
     "Explore real statistics about Switzerland's economy, demographics, and society. Make informed decisions with reliable data.",
   keywords: [
@@ -20,7 +20,7 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "SwissData" }],
   openGraph: {
-    title: "SwissData - Data-Driven Insights for Informed Decisions",
+    title: "SwissData - Switzerland in Numbers",
     description:
       "Explore real statistics about Switzerland. Make informed decisions.",
     type: "website",

@@ -11,7 +11,7 @@ import { indicators, getLocalizedIndicators } from "@/data/indicators";
 import { Canton } from "@/types";
 import { formatSwissNumber, formatPercentage } from "@/lib/formatters";
 import { useLanguage } from "@/i18n/LanguageContext";
-import { Map, TrendingUp, Users, Heart, ArrowUpDown } from "lucide-react";
+import { Map, TrendingUp, Users, Heart, ArrowUpDown, Info } from "lucide-react";
 
 type SortKey = "name" | "population" | "area" | "density";
 type SortDirection = "asc" | "desc";
@@ -148,6 +148,12 @@ export default function CantonsPage() {
                         {unit === "%" ? formatPercentage(displayValue) : `${formatSwissNumber(Math.round(displayValue))} ${unit}`}
                       </div>
                       <p className="text-sm text-swiss-gray-500 mt-1">{selectedIndicatorMeta.name}</p>
+                      {selectedIndicator === "unemployment-rate" && (
+                        <div className="mt-3 p-3 bg-blue-50 rounded-lg flex gap-2 text-xs text-blue-700">
+                          <Info className="h-4 w-4 shrink-0 mt-0.5" />
+                          <span>{t.cantons.unemploymentNote}</span>
+                        </div>
+                      )}
                     </>
                   );
                 })()}

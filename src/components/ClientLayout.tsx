@@ -1,7 +1,9 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { LanguageProvider, useLanguage } from "@/i18n/LanguageContext";
 import { Navigation } from "@/components/Navigation";
+import { SplashScreen } from "@/components/SplashScreen";
 
 function Footer() {
   const { t } = useLanguage();
@@ -11,8 +13,11 @@ function Footer() {
       <div className="container mx-auto px-4">
         <div className="flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-2">
-            <div className="flex items-center justify-center w-6 h-6 bg-primary rounded">
-              <span className="text-white font-bold text-sm">+</span>
+            <div className="grid grid-cols-2 w-6 h-6 bg-primary rounded">
+              <span className="flex items-center justify-center text-white font-bold text-[9px] leading-none">+</span>
+              <span className="flex items-center justify-center text-white font-bold text-[9px] leading-none">−</span>
+              <span className="flex items-center justify-center text-white font-bold text-[9px] leading-none">×</span>
+              <span className="flex items-center justify-center text-white font-bold text-[9px] leading-none">÷</span>
             </div>
             <span className="font-semibold text-swiss-gray-900">
               SwissData
@@ -57,9 +62,30 @@ function Footer() {
 }
 
 export function ClientLayout({ children }: { children: React.ReactNode }) {
+  const [showSplash, setShowSplash] = useState(true);
+  const [hasSeenSplash, setHasSeenSplash] = useState(false);
+
+  useEffect(() => {
+    // Check if user has already seen the splash in this session
+    const seen = sessionStorage.getItem("swissdata-splash-seen");
+    if (seen) {
+      setShowSplash(false);
+      setHasSeenSplash(true);
+    }
+  }, []);
+
+  const handleSplashComplete = () => {
+    setShowSplash(false);
+    setHasSeenSplash(true);
+    sessionStorage.setItem("swissdata-splash-seen", "true");
+  };
+
   return (
     <LanguageProvider>
-      <div className="min-h-screen flex flex-col">
+      {showSplash && !hasSeenSplash && (
+        <SplashScreen onComplete={handleSplashComplete} />
+      )}
+      <div className={`min-h-screen flex flex-col ${showSplash && !hasSeenSplash ? "opacity-0" : "opacity-100"} transition-opacity duration-300`}>
         <Navigation />
         <main className="flex-1">{children}</main>
         <Footer />

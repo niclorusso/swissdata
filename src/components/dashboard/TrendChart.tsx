@@ -13,6 +13,7 @@ import {
 } from "recharts";
 import { Indicator } from "@/types";
 import { formatWithUnit } from "@/lib/formatters";
+import { useLanguage } from "@/i18n/LanguageContext";
 
 interface TrendChartProps {
   indicator: Indicator;
@@ -25,6 +26,8 @@ export function TrendChart({
   height = 200,
   showArea = true,
 }: TrendChartProps) {
+  const { locale } = useLanguage();
+  
   if (!indicator.historicalData || indicator.historicalData.length === 0) {
     return (
       <div
@@ -54,7 +57,7 @@ export function TrendChart({
         <div className="bg-white border border-swiss-gray-200 rounded-lg shadow-lg p-3">
           <p className="text-sm font-medium text-swiss-gray-900">{label}</p>
           <p className="text-lg font-bold" style={{ color }}>
-            {formatWithUnit(payload[0].value, indicator.unit)}
+            {formatWithUnit(payload[0].value, indicator.unit, locale)}
           </p>
         </div>
       );

@@ -6,25 +6,32 @@ import { useLanguage } from "@/i18n/LanguageContext";
 // Federal budget breakdown data (2026)
 // Source: Federal Finance Administration
 const budgetData = [
-  { id: "social-welfare", value: 31.7, color: "#2563EB" },
-  { id: "finances-taxes", value: 15, color: "#7C3AED" },
-  { id: "transport", value: 10.8, color: "#059669" },
-  { id: "education-research", value: 9, color: "#DC2626" },
-  { id: "defense", value: 7.8, color: "#F59E0B" },
-  { id: "foreign-affairs", value: 3.8, color: "#6366F1" },
-  { id: "agriculture-food", value: 3.7, color: "#10B981" },
-  { id: "other", value: 9.1, color: "#94A3B8" },
+  { id: "social-welfare", value: 34.9, color: "#2563EB" },
+  { id: "finances-taxes", value: 16.6, color: "#7C3AED" },
+  { id: "transport", value: 11.8, color: "#059669" },
+  { id: "education-research", value: 9.1, color: "#DC2626" },
+  { id: "defense", value: 8.55, color: "#F59E0B" },
+  { id: "foreign-affairs", value: 4.21, color: "#6366F1" },
+  { id: "agriculture-food", value: 4.1, color: "#10B981" },
+  { id: "other", value: 10.7, color: "#94A3B8" },
 ];
 
-const labels: Record<string, { en: string; it: string }> = {
-  "social-welfare": { en: "Social Welfare", it: "Previdenza sociale" },
-  "finances-taxes": { en: "Finances & Taxes", it: "Finanze e imposte" },
-  "transport": { en: "Transport", it: "Trasporti" },
-  "education-research": { en: "Education & Research", it: "Formazione e ricerca" },
-  "defense": { en: "Defense", it: "Difesa" },
-  "agriculture-food": { en: "Agriculture & Food", it: "Agricoltura e alimentazione" },
-  "foreign-affairs": { en: "Foreign Affairs", it: "Affari esteri" },
-  "other": { en: "Other", it: "Altro" },
+const labels: Record<string, { en: string; it: string; de: string; fr: string }> = {
+  "social-welfare": { en: "Social Welfare", it: "Previdenza sociale", de: "Soziale Wohlfahrt", fr: "Protection sociale" },
+  "finances-taxes": { en: "Finances & Taxes", it: "Finanze e imposte", de: "Finanzen & Steuern", fr: "Finances et impôts" },
+  "transport": { en: "Transport", it: "Trasporti", de: "Verkehr", fr: "Transports" },
+  "education-research": { en: "Education & Research", it: "Formazione e ricerca", de: "Bildung & Forschung", fr: "Formation et recherche" },
+  "defense": { en: "Defense", it: "Difesa", de: "Verteidigung", fr: "Défense" },
+  "agriculture-food": { en: "Agriculture & Food", it: "Agricoltura e alimentazione", de: "Landwirtschaft & Ernährung", fr: "Agriculture et alimentation" },
+  "foreign-affairs": { en: "Foreign Affairs", it: "Affari esteri", de: "Auswärtige Angelegenheiten", fr: "Affaires étrangères" },
+  "other": { en: "Other", it: "Altro", de: "Andere", fr: "Autres" },
+};
+
+const budgetText: Record<string, string> = {
+  en: "of federal budget",
+  it: "del bilancio federale",
+  de: "des Bundeshaushalts",
+  fr: "du budget fédéral",
 };
 
 interface SpendingPieChartProps {
@@ -50,7 +57,7 @@ export function SpendingPieChart({ height = 400 }: SpendingPieChartProps) {
               {item.value}%
             </span>
             {" "}
-            {locale === "en" ? "of federal budget" : "del bilancio federale"}
+            {budgetText[locale]}
           </p>
         </div>
       );

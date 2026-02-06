@@ -12,7 +12,7 @@ export const cantons: Canton[] = [
     population: 1579967,
     area: 1729,
     indicators: [
-      { indicatorId: "unemployment-rate", value: 2.4 },
+      { indicatorId: "unemployment-rate", value: 2.9 },
       { indicatorId: "foreign-population", value: 27.8 },
       { indicatorId: "healthcare-cost", value: 386 },
       { indicatorId: "gdp-per-capita", value: 112500 },
@@ -31,7 +31,7 @@ export const cantons: Canton[] = [
     population: 1047474,
     area: 5959,
     indicators: [
-      { indicatorId: "unemployment-rate", value: 1.8 },
+      { indicatorId: "unemployment-rate", value: 2.2 },
       { indicatorId: "foreign-population", value: 16.4 },
       { indicatorId: "healthcare-cost", value: 349 },
       { indicatorId: "gdp-per-capita", value: 78200 },
@@ -50,7 +50,7 @@ export const cantons: Canton[] = [
     population: 429550,
     area: 1493,
     indicators: [
-      { indicatorId: "unemployment-rate", value: 1.5 },
+      { indicatorId: "unemployment-rate", value: 1.9 },
       { indicatorId: "foreign-population", value: 18.9 },
       { indicatorId: "healthcare-cost", value: 328 },
       { indicatorId: "gdp-per-capita", value: 68900 },
@@ -69,7 +69,7 @@ export const cantons: Canton[] = [
     population: 37317,
     area: 1077,
     indicators: [
-      { indicatorId: "unemployment-rate", value: 0.9 },
+      { indicatorId: "unemployment-rate", value: 1.1 },
       { indicatorId: "foreign-population", value: 12.1 },
       { indicatorId: "healthcare-cost", value: 312 },
       { indicatorId: "gdp-per-capita", value: 52800 },
@@ -88,7 +88,7 @@ export const cantons: Canton[] = [
     population: 166280,
     area: 908,
     indicators: [
-      { indicatorId: "unemployment-rate", value: 1.3 },
+      { indicatorId: "unemployment-rate", value: 1.6 },
       { indicatorId: "foreign-population", value: 20.5 },
       { indicatorId: "healthcare-cost", value: 308 },
       { indicatorId: "gdp-per-capita", value: 72400 },
@@ -107,7 +107,7 @@ export const cantons: Canton[] = [
     population: 38707,
     area: 491,
     indicators: [
-      { indicatorId: "unemployment-rate", value: 0.8 },
+      { indicatorId: "unemployment-rate", value: 1.0 },
       { indicatorId: "foreign-population", value: 14.8 },
       { indicatorId: "healthcare-cost", value: 298 },
       { indicatorId: "gdp-per-capita", value: 58200 },
@@ -126,7 +126,7 @@ export const cantons: Canton[] = [
     population: 44006,
     area: 276,
     indicators: [
-      { indicatorId: "unemployment-rate", value: 0.9 },
+      { indicatorId: "unemployment-rate", value: 1.1 },
       { indicatorId: "foreign-population", value: 14.2 },
       { indicatorId: "healthcare-cost", value: 302 },
       { indicatorId: "gdp-per-capita", value: 85600 },
@@ -145,7 +145,7 @@ export const cantons: Canton[] = [
     population: 41450,
     area: 685,
     indicators: [
-      { indicatorId: "unemployment-rate", value: 1.4 },
+      { indicatorId: "unemployment-rate", value: 1.7 },
       { indicatorId: "foreign-population", value: 23.8 },
       { indicatorId: "healthcare-cost", value: 315 },
       { indicatorId: "gdp-per-capita", value: 62100 },
@@ -164,7 +164,7 @@ export const cantons: Canton[] = [
     population: 132111,
     area: 239,
     indicators: [
-      { indicatorId: "unemployment-rate", value: 1.8 },
+      { indicatorId: "unemployment-rate", value: 2.2 },
       { indicatorId: "foreign-population", value: 29.6 },
       { indicatorId: "healthcare-cost", value: 341 },
       { indicatorId: "gdp-per-capita", value: 158900 },
@@ -183,7 +183,7 @@ export const cantons: Canton[] = [
     population: 329809,
     area: 1671,
     indicators: [
-      { indicatorId: "unemployment-rate", value: 2.1 },
+      { indicatorId: "unemployment-rate", value: 2.5 },
       { indicatorId: "foreign-population", value: 23.9 },
       { indicatorId: "healthcare-cost", value: 358 },
       { indicatorId: "gdp-per-capita", value: 54800 },
@@ -202,7 +202,7 @@ export const cantons: Canton[] = [
     population: 282648,
     area: 791,
     indicators: [
-      { indicatorId: "unemployment-rate", value: 2.2 },
+      { indicatorId: "unemployment-rate", value: 2.7 },
       { indicatorId: "foreign-population", value: 22.7 },
       { indicatorId: "healthcare-cost", value: 339 },
       { indicatorId: "gdp-per-capita", value: 61500 },
@@ -221,7 +221,7 @@ export const cantons: Canton[] = [
     population: 196735,
     area: 37,
     indicators: [
-      { indicatorId: "unemployment-rate", value: 3.4 },
+      { indicatorId: "unemployment-rate", value: 4.1 },
       { indicatorId: "foreign-population", value: 37.9 },
       { indicatorId: "healthcare-cost", value: 398 },
       { indicatorId: "gdp-per-capita", value: 165800 },
@@ -240,7 +240,7 @@ export const cantons: Canton[] = [
     population: 295674,
     area: 518,
     indicators: [
-      { indicatorId: "unemployment-rate", value: 2.3 },
+      { indicatorId: "unemployment-rate", value: 2.8 },
       { indicatorId: "foreign-population", value: 22.8 },
       { indicatorId: "healthcare-cost", value: 378 },
       { indicatorId: "gdp-per-capita", value: 68200 },
@@ -259,7 +259,7 @@ export const cantons: Canton[] = [
     population: 84455,
     area: 298,
     indicators: [
-      { indicatorId: "unemployment-rate", value: 2.0 },
+      { indicatorId: "unemployment-rate", value: 2.4 },
       { indicatorId: "foreign-population", value: 26.2 },
       { indicatorId: "healthcare-cost", value: 345 },
       { indicatorId: "gdp-per-capita", value: 72800 },
@@ -278,7 +278,7 @@ export const cantons: Canton[] = [
     population: 55793,
     area: 243,
     indicators: [
-      { indicatorId: "unemployment-rate", value: 1.3 },
+      { indicatorId: "unemployment-rate", value: 1.6 },
       { indicatorId: "foreign-population", value: 16.2 },
       { indicatorId: "healthcare-cost", value: 331 },
       { indicatorId: "gdp-per-capita", value: 56400 },
@@ -297,7 +297,7 @@ export const cantons: Canton[] = [
     population: 16293,
     area: 173,
     indicators: [
-      { indicatorId: "unemployment-rate", value: 1.0 },
+      { indicatorId: "unemployment-rate", value: 1.2 },
       { indicatorId: "foreign-population", value: 11.8 },
       { indicatorId: "healthcare-cost", value: 295 },
       { indicatorId: "gdp-per-capita", value: 48900 },
@@ -316,7 +316,7 @@ export const cantons: Canton[] = [
     population: 524528,
     area: 2026,
     indicators: [
-      { indicatorId: "unemployment-rate", value: 2.0 },
+      { indicatorId: "unemployment-rate", value: 2.4 },
       { indicatorId: "foreign-population", value: 24.5 },
       { indicatorId: "healthcare-cost", value: 328 },
       { indicatorId: "gdp-per-capita", value: 65800 },
@@ -335,7 +335,7 @@ export const cantons: Canton[] = [
     population: 202538,
     area: 7105,
     indicators: [
-      { indicatorId: "unemployment-rate", value: 1.2 },
+      { indicatorId: "unemployment-rate", value: 1.5 },
       { indicatorId: "foreign-population", value: 18.4 },
       { indicatorId: "healthcare-cost", value: 312 },
       { indicatorId: "gdp-per-capita", value: 72100 },
@@ -354,7 +354,7 @@ export const cantons: Canton[] = [
     population: 713353,
     area: 1404,
     indicators: [
-      { indicatorId: "unemployment-rate", value: 2.5 },
+      { indicatorId: "unemployment-rate", value: 3.0 },
       { indicatorId: "foreign-population", value: 25.8 },
       { indicatorId: "healthcare-cost", value: 365 },
       { indicatorId: "gdp-per-capita", value: 64200 },
@@ -373,7 +373,7 @@ export const cantons: Canton[] = [
     population: 290477,
     area: 991,
     indicators: [
-      { indicatorId: "unemployment-rate", value: 1.8 },
+      { indicatorId: "unemployment-rate", value: 2.2 },
       { indicatorId: "foreign-population", value: 26.1 },
       { indicatorId: "healthcare-cost", value: 322 },
       { indicatorId: "gdp-per-capita", value: 58900 },
@@ -392,7 +392,7 @@ export const cantons: Canton[] = [
     population: 351491,
     area: 2812,
     indicators: [
-      { indicatorId: "unemployment-rate", value: 3.8 },
+      { indicatorId: "unemployment-rate", value: 4.5 },
       { indicatorId: "foreign-population", value: 28.3 },
       { indicatorId: "healthcare-cost", value: 375 },
       { indicatorId: "gdp-per-capita", value: 68500 },
@@ -411,7 +411,7 @@ export const cantons: Canton[] = [
     population: 834067,
     area: 3212,
     indicators: [
-      { indicatorId: "unemployment-rate", value: 3.8 },
+      { indicatorId: "unemployment-rate", value: 4.5 },
       { indicatorId: "foreign-population", value: 34.0 },
       { indicatorId: "healthcare-cost", value: 408 },
       { indicatorId: "gdp-per-capita", value: 74200 },
@@ -430,7 +430,7 @@ export const cantons: Canton[] = [
     population: 353209,
     area: 5224,
     indicators: [
-      { indicatorId: "unemployment-rate", value: 3.2 },
+      { indicatorId: "unemployment-rate", value: 3.8 },
       { indicatorId: "foreign-population", value: 24.3 },
       { indicatorId: "healthcare-cost", value: 362 },
       { indicatorId: "gdp-per-capita", value: 52400 },
@@ -449,7 +449,7 @@ export const cantons: Canton[] = [
     population: 176850,
     area: 803,
     indicators: [
-      { indicatorId: "unemployment-rate", value: 4.2 },
+      { indicatorId: "unemployment-rate", value: 5.0 },
       { indicatorId: "foreign-population", value: 26.5 },
       { indicatorId: "healthcare-cost", value: 395 },
       { indicatorId: "gdp-per-capita", value: 72800 },
@@ -468,7 +468,7 @@ export const cantons: Canton[] = [
     population: 514114,
     area: 282,
     indicators: [
-      { indicatorId: "unemployment-rate", value: 4.5 },
+      { indicatorId: "unemployment-rate", value: 5.4 },
       { indicatorId: "foreign-population", value: 40.3 },
       { indicatorId: "healthcare-cost", value: 449 },
       { indicatorId: "gdp-per-capita", value: 98500 },
@@ -487,7 +487,7 @@ export const cantons: Canton[] = [
     population: 73709,
     area: 838,
     indicators: [
-      { indicatorId: "unemployment-rate", value: 3.5 },
+      { indicatorId: "unemployment-rate", value: 4.2 },
       { indicatorId: "foreign-population", value: 15.3 },
       { indicatorId: "healthcare-cost", value: 368 },
       { indicatorId: "gdp-per-capita", value: 58200 },
