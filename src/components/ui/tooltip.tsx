@@ -100,10 +100,10 @@ export function InfoTooltip({ content, className }: InfoTooltipProps) {
         onClick={() => setIsOpen(!isOpen)}
         onBlur={() => setTimeout(() => setIsOpen(false), 150)}
         className={cn(
-          "inline-flex items-center justify-center w-4 h-4 rounded-full",
+          "inline-flex items-center justify-center w-3.5 h-3.5 sm:w-4 sm:h-4 rounded-full",
           "bg-swiss-gray-200 text-swiss-gray-500 hover:bg-swiss-gray-300 hover:text-swiss-gray-700",
           "transition-colors focus:outline-none focus:ring-2 focus:ring-primary/20",
-          "text-[10px] font-semibold leading-none",
+          "text-[9px] sm:text-[10px] font-semibold leading-none",
           className
         )}
         aria-label="More information"

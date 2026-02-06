@@ -108,13 +108,13 @@ export function Navigation() {
           </nav>
 
           {/* Mobile: language toggle + nav */}
-          <div className="flex md:hidden items-center gap-1">
+          <div className="flex md:hidden items-center gap-0.5">
             {/* Language Toggle - Mobile */}
-            <div className="flex items-center rounded-md border border-swiss-gray-200 overflow-hidden mr-1">
+            <div className="flex items-center rounded border border-swiss-gray-200 overflow-hidden mr-0.5">
               <button
                 onClick={() => setLocale("en")}
                 className={cn(
-                  "px-2 py-1 text-xs font-semibold transition-colors",
+                  "px-1.5 py-0.5 text-[10px] font-semibold transition-colors",
                   locale === "en"
                     ? "bg-swiss-gray-900 text-white"
                     : "text-swiss-gray-500"
@@ -125,7 +125,7 @@ export function Navigation() {
               <button
                 onClick={() => setLocale("de")}
                 className={cn(
-                  "px-2 py-1 text-xs font-semibold transition-colors",
+                  "px-1.5 py-0.5 text-[10px] font-semibold transition-colors",
                   locale === "de"
                     ? "bg-swiss-gray-900 text-white"
                     : "text-swiss-gray-500"
@@ -136,7 +136,7 @@ export function Navigation() {
               <button
                 onClick={() => setLocale("fr")}
                 className={cn(
-                  "px-2 py-1 text-xs font-semibold transition-colors",
+                  "px-1.5 py-0.5 text-[10px] font-semibold transition-colors",
                   locale === "fr"
                     ? "bg-swiss-gray-900 text-white"
                     : "text-swiss-gray-500"
@@ -147,7 +147,7 @@ export function Navigation() {
               <button
                 onClick={() => setLocale("it")}
                 className={cn(
-                  "px-2 py-1 text-xs font-semibold transition-colors",
+                  "px-1.5 py-0.5 text-[10px] font-semibold transition-colors",
                   locale === "it"
                     ? "bg-swiss-gray-900 text-white"
                     : "text-swiss-gray-500"
@@ -168,14 +168,14 @@ export function Navigation() {
                     key={item.href}
                     href={item.href}
                     className={cn(
-                      "p-2 rounded-md transition-colors",
+                      "p-1.5 rounded-md transition-colors",
                       isActive
                         ? "bg-primary/10 text-primary"
                         : "text-swiss-gray-600 hover:bg-swiss-gray-100"
                     )}
                     title={item.label}
                   >
-                    <Icon className="h-5 w-5" />
+                    <Icon className="h-4 w-4" />
                   </Link>
                 );
               })}
