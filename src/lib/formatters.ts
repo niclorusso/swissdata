@@ -124,7 +124,7 @@ export function formatSwissDate(date: Date | string): string {
 /**
  * Format a value with its unit (locale-aware)
  */
-export function formatWithUnit(value: number, unit: string, locale: "en" | "it" | "de" = "en"): string {
+export function formatWithUnit(value: number, unit: string, locale: "en" | "it" | "de" | "fr" = "en"): string {
   const translatedUnit = getTranslatedUnit(unit, locale);
   
   switch (unit) {
@@ -133,7 +133,7 @@ export function formatWithUnit(value: number, unit: string, locale: "en" | "it" 
     case "CHF":
       return formatCHF(value);
     case "CHF/month":
-      const monthWord = locale === "it" ? "mese" : locale === "de" ? "Monat" : "month";
+      const monthWord = locale === "it" ? "mese" : locale === "de" ? "Monat" : locale === "fr" ? "mois" : "month";
       return `CHF ${formatSwissNumber(value)}/${monthWord}`;
     case "per 100k":
       return formatSwissNumber(value, { decimals: 1 });
@@ -143,7 +143,7 @@ export function formatWithUnit(value: number, unit: string, locale: "en" | "it" 
     case "persons":
       return formatSwissNumber(value);
     case "people/km²":
-      const perWord = locale === "de" ? "pro" : "per";
+      const perWord = locale === "de" ? "pro" : locale === "fr" ? "par" : "per";
       return `${formatSwissNumber(value)} ${perWord} km²`;
     default:
       return `${formatSwissNumber(value)} ${translatedUnit}`;
