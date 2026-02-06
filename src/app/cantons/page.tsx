@@ -7,7 +7,7 @@ import { CantonTooltip } from "@/components/map/CantonTooltip";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { cantons, getCantonById } from "@/data/cantons";
-import { indicators } from "@/data/indicators";
+import { indicators, getLocalizedIndicators } from "@/data/indicators";
 import { Canton } from "@/types";
 import { formatSwissNumber, formatPercentage } from "@/lib/formatters";
 import { useLanguage } from "@/i18n/LanguageContext";
@@ -17,7 +17,8 @@ type SortKey = "name" | "population" | "area" | "density";
 type SortDirection = "asc" | "desc";
 
 export default function CantonsPage() {
-  const { t } = useLanguage();
+  const { t, locale } = useLanguage();
+  const localizedIndicatorList = getLocalizedIndicators(locale);
   const [selectedCantonId, setSelectedCantonId] = useState<string | null>(null);
   const [selectedIndicator, setSelectedIndicator] = useState<string>("unemployment-rate");
   const [sortKey, setSortKey] = useState<SortKey>("population");
@@ -34,7 +35,7 @@ export default function CantonsPage() {
 
   const selectedCanton = selectedCantonId ? getCantonById(selectedCantonId) : null;
   const selectedIndicatorMeta = cantonIndicators.find((i) => i.id === selectedIndicator);
-  const selectedIndicatorData = indicators.find((i) => i.id === selectedIndicator);
+  const selectedIndicatorData = localizedIndicatorList.find((i) => i.id === selectedIndicator);
 
   const getIndicatorCategory = (indicatorId: string) => {
     const mainIndicator = indicators.find((i) => i.id === indicatorId);

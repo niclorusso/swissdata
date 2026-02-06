@@ -14,13 +14,13 @@ export const questions: QuizQuestion[] = [
     unit: "%",
     minValue: 0,
     maxValue: 15,
-    actualValue: 2.3,
+    actualValue: 2.4,
     explanation:
-      "At 2.3%, Switzerland has one of the lowest unemployment rates in Europe. The EU average is around 6%. The labor market is tight, with many sectors experiencing worker shortages, particularly in healthcare, hospitality, and tech industries.",
+      "At 2.4% (2024 annual average), Switzerland has one of the lowest unemployment rates in Europe. The EU average is around 6%. The labor market is tight, with many sectors experiencing worker shortages, particularly in healthcare, hospitality, and tech industries.",
     source: "SECO Labor Market Statistics",
-    sourceUrl: "https://www.seco.admin.ch/seco/en/home/Arbeit/Arbeitslosenversicherung/arbeitslosenzahlen.html",
+    sourceUrl: "https://www.seco.admin.ch/seco/en/home/wirtschaftslage---wirtschaftspolitik/Wirtschaftslage/Arbeitslosenzahlen.html",
     comparisonData: [
-      { label: "Switzerland", value: 2.3 },
+      { label: "Switzerland", value: 2.4 },
       { label: "Netherlands", value: 3.6 },
       { label: "Germany", value: 5.7 },
       { label: "Austria", value: 5.1 },
@@ -114,7 +114,7 @@ export const questions: QuizQuestion[] = [
     explanation:
       "At 41.1 hours per week, Switzerland is above the EU average (37.5 hours). However, Switzerland has high productivity - workers produce more per hour than most countries, enabling competitive wages.",
     source: "BFS Labor Statistics",
-    sourceUrl: "https://www.bfs.admin.ch/bfs/en/home/statistics/work-income/working-conditions.html",
+    sourceUrl: "https://www.bfs.admin.ch/bfs/en/home/statistics/work-income.html",
     comparisonData: [
       { label: "Greece", value: 41.7 },
       { label: "Switzerland", value: 41.1 },
@@ -162,20 +162,20 @@ export const questions: QuizQuestion[] = [
     unit: "CHF",
     minValue: 4000,
     maxValue: 10000,
-    actualValue: 6788,
+    actualValue: 7024,
     explanation:
-      "The median gross salary is CHF 6,788 per month (2022 data). This means half of workers earn more and half earn less. After deductions for social security (~13%) and taxes (varies by canton), net income is typically 70-80% of gross.",
+      "The median gross salary is CHF 7,024 per month (2024 ESS data). This means half of workers earn more and half earn less. After deductions for social security (~13%) and taxes (varies by canton), net income is typically 70-80% of gross.",
     source: "BFS Wage Statistics",
     sourceUrl: "https://www.bfs.admin.ch/bfs/en/home/statistics/work-income/wages-income-employment-labour-costs.html",
     comparisonData: [
-      { label: "Zürich", value: 7800 },
-      { label: "Basel-Stadt", value: 7600 },
-      { label: "Zug", value: 7500 },
-      { label: "Swiss Median", value: 6788 },
-      { label: "Bern", value: 6500 },
-      { label: "St. Gallen", value: 6200 },
-      { label: "Ticino", value: 5500 },
-      { label: "Jura", value: 5800 },
+      { label: "Zürich", value: 8028 },
+      { label: "Basel-Stadt", value: 7891 },
+      { label: "Zug", value: 7762 },
+      { label: "Swiss Median", value: 7024 },
+      { label: "Bern", value: 6868 },
+      { label: "St. Gallen", value: 6439 },
+      { label: "Jura", value: 6048 },
+      { label: "Ticino", value: 5625 },
     ],
   },
   {
@@ -190,7 +190,7 @@ export const questions: QuizQuestion[] = [
     explanation:
       "Women earn on average 10.8% less than men for equivalent work (unexplained gap). The total gap is larger (~18%) when including all factors. Progress has been slow, but the 2020 Equal Pay Act requires companies with 100+ employees to conduct pay analyses.",
     source: "BFS Wage Statistics",
-    sourceUrl: "https://www.bfs.admin.ch/bfs/en/home/statistics/work-income/wages-income-employment-labour-costs/wage-levels-switzerland/wage-gap.html",
+    sourceUrl: "https://www.bfs.admin.ch/bfs/en/home/statistics/work-income/wages-income-employment-labour-costs/earnings-structure/wage-gap.html",
     comparisonData: [
       { label: "Luxembourg", value: 0.7 },
       { label: "Romania", value: 3.6 },
@@ -287,7 +287,7 @@ export const questions: QuizQuestion[] = [
     explanation:
       "The SNB holds about 1,040 tonnes of gold, making it one of the world's largest gold holders per capita. In 2014, a referendum to require 20% gold backing for the franc was rejected (77% no). The gold is stored in Switzerland, UK, and Canada.",
     source: "Swiss National Bank",
-    sourceUrl: "https://www.snb.ch/en/the-snb/mandates-goals/asset-management/gold",
+    sourceUrl: "https://www.snb.ch/en/the-snb/mandates-goals/investment-assets/assets-structure",
     comparisonData: [
       { label: "USA", value: 8133 },
       { label: "Germany", value: 3352 },
@@ -311,7 +311,7 @@ export const questions: QuizQuestion[] = [
     explanation:
       "Switzerland manages about 27% of the world's cross-border private wealth (~CHF 2.4 trillion), making it the global leader in wealth management. This has declined from 50%+ in the 2000s due to increased competition and pressure on banking secrecy.",
     source: "Swiss Bankers Association",
-    sourceUrl: "https://www.swissbanking.ch/en/topics/facts-and-figures",
+    sourceUrl: "https://www.swissbanking.ch/en/financial-centre/facts-and-figures",
     comparisonData: [
       { label: "Switzerland", value: 27 },
       { label: "UK", value: 21 },
@@ -334,7 +334,7 @@ export const questions: QuizQuestion[] = [
     explanation:
       "Switzerland has about 235 banks (2023), down from 400+ in 2000 due to consolidation and regulatory pressure. This includes 24 cantonal banks, 2 big banks (UBS, after CS merger), 60 foreign banks, and numerous private and regional banks.",
     source: "FINMA Banking Statistics",
-    sourceUrl: "https://www.finma.ch/en/supervision/banks-and-securities-dealers/",
+    sourceUrl: "https://www.finma.ch/en/supervision/banks-and-securities-firms/",
     comparisonData: [
       { label: "Germany", value: 1400 },
       { label: "USA", value: 4700 },
@@ -379,11 +379,11 @@ export const questions: QuizQuestion[] = [
     unit: "%",
     minValue: 20,
     maxValue: 80,
-    actualValue: 38,
+    actualValue: 37.4,
     explanation:
-      "Switzerland's public debt is about 38% of GDP, one of the lowest among developed countries. The 'debt brake' constitutional rule since 2003 requires balanced budgets over the business cycle, preventing structural deficits.",
+      "Switzerland's public debt is about 37.4% of GDP, one of the lowest among developed countries. The 'debt brake' constitutional rule since 2003 requires balanced budgets over the business cycle, preventing structural deficits.",
     source: "Federal Finance Administration",
-    sourceUrl: "https://www.efv.admin.ch/efv/en/home/themen/finanzstatistik/schulden.html",
+    sourceUrl: "https://www.efv.admin.ch/efv/en/home/finanzberichterstattung/bundeshaushalt_ueb/schulden.html",
     comparisonData: [
       { label: "Japan", value: 260 },
       { label: "Italy", value: 144 },
@@ -391,7 +391,7 @@ export const questions: QuizQuestion[] = [
       { label: "USA", value: 122 },
       { label: "Germany", value: 66 },
       { label: "Netherlands", value: 50 },
-      { label: "Switzerland", value: 38 },
+      { label: "Switzerland", value: 37.4 },
       { label: "Luxembourg", value: 28 },
     ],
   },
@@ -501,9 +501,9 @@ export const questions: QuizQuestion[] = [
     unit: "million",
     minValue: 6,
     maxValue: 12,
-    actualValue: 8.9,
+    actualValue: 9.0,
     explanation:
-      "Switzerland's population reached 8.9 million in 2024, growing steadily due to immigration. The population has doubled since 1950 (4.7 million). Projections suggest 10 million by 2040 if current trends continue.",
+      "Switzerland's population surpassed 9 million in 2024, reaching 9.05 million. Growth is driven by immigration. The population has nearly doubled since 1950 (4.7 million). Projections suggest 10 million by 2040 if current trends continue.",
     source: "BFS Population Statistics",
     sourceUrl: "https://www.bfs.admin.ch/bfs/en/home/statistics/population.html",
     comparisonData: [
@@ -512,8 +512,8 @@ export const questions: QuizQuestion[] = [
       { label: "Italy", value: 58.9 },
       { label: "Netherlands", value: 17.8 },
       { label: "Belgium", value: 11.7 },
-      { label: "Switzerland", value: 8.9 },
       { label: "Austria", value: 9.1 },
+      { label: "Switzerland", value: 9.0 },
       { label: "Luxembourg", value: 0.67 },
     ],
   },
@@ -600,14 +600,14 @@ export const questions: QuizQuestion[] = [
     unit: "%",
     minValue: 10,
     maxValue: 40,
-    actualValue: 26,
+    actualValue: 26.3,
     explanation:
-      "26% of permanent residents (2.3 million people) are foreign nationals, one of the highest rates in Europe. The largest groups are Italians (320,000), Germans (315,000), Portuguese (260,000), and French (145,000). Many are long-term residents.",
+      "26.3% of permanent residents (2.4 million people) are foreign nationals, one of the highest rates in Europe. The largest groups are Italians (320,000), Germans (315,000), Portuguese (260,000), and French (145,000). Many are long-term residents.",
     source: "BFS Population Statistics",
-    sourceUrl: "https://www.bfs.admin.ch/bfs/en/home/statistics/population/migration-integration/foreign-population.html",
+    sourceUrl: "https://www.bfs.admin.ch/bfs/en/home/statistics/population/migration-integration/foreign.html",
     comparisonData: [
       { label: "Luxembourg", value: 47 },
-      { label: "Switzerland", value: 26 },
+      { label: "Switzerland", value: 26.3 },
       { label: "Austria", value: 19 },
       { label: "Germany", value: 14 },
       { label: "Belgium", value: 13 },
@@ -628,7 +628,7 @@ export const questions: QuizQuestion[] = [
     explanation:
       "About 390,000 cross-border workers ('Grenzgänger') commute into Switzerland daily from France (210,000), Italy (90,000), Germany (65,000), and Austria (8,000). They contribute significantly to the economy, especially in Geneva, Basel, and Ticino.",
     source: "BFS Cross-border Statistics",
-    sourceUrl: "https://www.bfs.admin.ch/bfs/en/home/statistics/work-income/employment-working-hours/employed-persons/swiss-foreign-nationals.html",
+    sourceUrl: "https://www.bfs.admin.ch/bfs/en/home/statistics/work-income/employment-working-hours/economically-active-population/foreign-labour-force.html",
     comparisonData: [
       { label: "From France", value: 210000 },
       { label: "From Italy", value: 90000 },
@@ -653,7 +653,7 @@ export const questions: QuizQuestion[] = [
     explanation:
       "Switzerland's fertility rate of 1.39 is below the replacement level of 2.1, similar to most European countries. It has remained stable since 2000. Without immigration, the population would decline. The average age of first-time mothers is 31.",
     source: "BFS Population Statistics",
-    sourceUrl: "https://www.bfs.admin.ch/bfs/en/home/statistics/population/births-deaths/fertility.html",
+    sourceUrl: "https://www.bfs.admin.ch/bfs/en/home/statistics/population/births-deaths.html",
     comparisonData: [
       { label: "France", value: 1.79 },
       { label: "Sweden", value: 1.67 },
@@ -699,9 +699,9 @@ export const questions: QuizQuestion[] = [
     maxValue: 30,
     actualValue: 19.4,
     explanation:
-      "19.4% of the population (1.7 million people) is over 65, projected to reach 26% by 2050. This aging demographic has implications for the pension system (AHV), healthcare costs, and labor supply. Life expectancy is 84 years.",
+      "19.4% of the population (1.8 million people) is over 65, projected to reach 26% by 2050. This aging demographic has implications for the pension system (AHV), healthcare costs, and labor supply. Life expectancy is 84 years.",
     source: "BFS Population Statistics",
-    sourceUrl: "https://www.bfs.admin.ch/bfs/en/home/statistics/population/effectif-change/age-marital-status-nationality.html",
+    sourceUrl: "https://www.bfs.admin.ch/bfs/en/home/statistics/population/effectif-change.html",
     comparisonData: [
       { label: "Japan", value: 29.0 },
       { label: "Italy", value: 23.8 },
@@ -727,9 +727,9 @@ export const questions: QuizQuestion[] = [
     maxValue: 50,
     actualValue: 26,
     explanation:
-      "About 26% of the Swiss population receives premium subsidies (Prämienverbilligung). The average premium is CHF 359/month, but subsidies can cover up to 100% for low-income households. About 8% receive full coverage, while 18% receive partial subsidies.",
+      "About 26% of the Swiss population receives premium subsidies (Prämienverbilligung). The average adult premium is CHF 449/month (2025), but subsidies can cover up to 100% for low-income households. About 8% receive full coverage, while 18% receive partial subsidies.",
     source: "BAG Health Insurance Statistics",
-    sourceUrl: "https://www.bag.admin.ch/bag/en/home/versicherungen/krankenversicherung.html",
+    sourceUrl: "https://www.bag.admin.ch/en/health-insurance",
     comparisonData: [
       { label: "Receive subsidies", value: 26 },
       { label: "Pay full premium", value: 74 },
@@ -773,7 +773,7 @@ export const questions: QuizQuestion[] = [
     explanation:
       "Switzerland has 4.5 hospital beds per 1,000 people, slightly above the EU average. The country has about 280 hospitals, with capacity varying by canton. Zurich and Bern have the most beds; rural cantons often rely on regional hospitals.",
     source: "BFS Health Statistics",
-    sourceUrl: "https://www.bfs.admin.ch/bfs/en/home/statistics/health/health-system/hospitals.html",
+    sourceUrl: "https://www.bfs.admin.ch/bfs/en/home/statistics/health/health-system.html",
     comparisonData: [
       { label: "Germany", value: 8.0 },
       { label: "Austria", value: 7.2 },
@@ -849,7 +849,7 @@ export const questions: QuizQuestion[] = [
     explanation:
       "About 66% of Swiss youth choose the vocational education path ('Berufslehre'), combining practical work with schooling. This 'dual system' is considered a key reason for low youth unemployment. Over 230 professions offer apprenticeships.",
     source: "SBFI Vocational Education",
-    sourceUrl: "https://www.sbfi.admin.ch/sbfi/en/home/education/vocational-education-and-training.html",
+    sourceUrl: "https://www.sbfi.admin.ch/en/vocational-education-and-training-vet",
     comparisonData: [
       { label: "Switzerland", value: 66 },
       { label: "Austria", value: 45 },
@@ -869,9 +869,9 @@ export const questions: QuizQuestion[] = [
     unit: "%",
     minValue: 3,
     maxValue: 8,
-    actualValue: 5.0,
+    actualValue: 4.9,
     explanation:
-      "Switzerland spends about 5.0% of GDP on education, close to the OECD average. Most funding comes from cantons (primary/secondary) and the federal government (universities, vocational). Per-student spending is among the highest globally.",
+      "Switzerland spends about 4.9% of GDP on education (2022), close to the OECD average. Most funding comes from cantons (primary/secondary) and the federal government (universities, vocational). Per-student spending is among the highest globally.",
     source: "OECD Education Statistics",
     sourceUrl: "https://www.oecd.org/education/education-at-a-glance/",
     comparisonData: [
@@ -879,8 +879,8 @@ export const questions: QuizQuestion[] = [
       { label: "Denmark", value: 6.4 },
       { label: "Belgium", value: 6.1 },
       { label: "UK", value: 5.5 },
-      { label: "Switzerland", value: 5.0 },
       { label: "OECD Average", value: 4.9 },
+      { label: "Switzerland", value: 4.9 },
       { label: "Germany", value: 4.7 },
       { label: "Italy", value: 4.0 },
     ],
@@ -1021,7 +1021,7 @@ export const questions: QuizQuestion[] = [
     explanation:
       "Switzerland has 77 prisoners per 100,000 people, relatively low by international standards. The prison system emphasizes rehabilitation. About 70% of inmates are foreign nationals, reflecting both border proximity and deportation after sentence completion.",
     source: "BFS Justice Statistics",
-    sourceUrl: "https://www.bfs.admin.ch/bfs/en/home/statistics/crime-criminal-justice/enforcement-penal-sentences.html",
+    sourceUrl: "https://www.bfs.admin.ch/bfs/en/home/statistics/crime-criminal-justice/execution-penal-sentences-justice.html",
     comparisonData: [
       { label: "USA", value: 531 },
       { label: "UK", value: 129 },
@@ -1116,16 +1116,16 @@ export const questions: QuizQuestion[] = [
     unit: "%",
     minValue: 15,
     maxValue: 50,
-    actualValue: 30,
+    actualValue: 28,
     explanation:
-      "About 30% of Switzerland's total energy comes from renewables, predominantly hydropower (60% of electricity). Solar and wind are growing but remain small. Note: electricity is 76% renewable, but heating and transport still rely heavily on fossil fuels.",
+      "About 28% of Switzerland's total final energy consumption comes from renewables, predominantly hydropower (60% of electricity). Solar and wind are growing but remain small. Note: electricity is ~76% renewable, but heating and transport still rely heavily on fossil fuels.",
     source: "BFE Energy Statistics",
     sourceUrl: "https://www.bfe.admin.ch/bfe/en/home/supply/statistics-and-geodata/energy-statistics.html",
     comparisonData: [
       { label: "Norway", value: 58 },
       { label: "Sweden", value: 50 },
-      { label: "Switzerland", value: 30 },
       { label: "Austria", value: 36 },
+      { label: "Switzerland", value: 28 },
       { label: "Germany", value: 20 },
       { label: "France", value: 21 },
       { label: "UK", value: 14 },
@@ -1172,7 +1172,7 @@ export const questions: QuizQuestion[] = [
     explanation:
       "Swiss Federal Railways (SBB) achieves 92.5% punctuality (within 3 minutes), which is excellent by international standards. Japan's Shinkansen achieves 99%. Delays do occur, especially during peak hours and bad weather.",
     source: "SBB Annual Report 2023",
-    sourceUrl: "https://company.sbb.ch/en/company/sbb-as-business-partner/facts-figures.html",
+    sourceUrl: "https://reporting.sbb.ch",
     comparisonData: [
       { label: "Japan (Shinkansen)", value: 99 },
       { label: "Switzerland", value: 92.5 },
@@ -1271,7 +1271,7 @@ export const questions: QuizQuestion[] = [
     explanation:
       "The AHV is funded until at least 2032 after the 2022 reform (AHV21). Switzerland's three-pillar system (AHV + pension fund + private savings) provides diversified retirement security. The 2022 reform raised women's retirement age to 65 and increased VAT funding.",
     source: "BSV Pension Statistics",
-    sourceUrl: "https://www.bsv.admin.ch/bsv/en/home/social-insurance/ahv.html",
+    sourceUrl: "https://www.bsv.admin.ch/en",
     comparisonData: [
       { label: "AHV funded until", value: 2032 },
       { label: "Reform year", value: 2022 },
@@ -1287,11 +1287,11 @@ export const questions: QuizQuestion[] = [
     unit: "%",
     minValue: 0,
     maxValue: 20,
-    actualValue: 8.2,
+    actualValue: 8.1,
     explanation:
-      "About 8.2% of the Swiss population (over 700,000 people) lives at risk of poverty. Single parents, elderly women, and people without post-secondary education are most affected. This is lower than the EU average of 16%.",
+      "About 8.1% of the Swiss population (over 700,000 people) lives at risk of poverty. Single parents, elderly women, and people without post-secondary education are most affected. This is lower than the EU average of 16%.",
     source: "BFS Social Situation Statistics",
-    sourceUrl: "https://www.bfs.admin.ch/bfs/en/home/statistics/economic-social-situation-population/social-situation-well-being-and-poverty.html",
+    sourceUrl: "https://www.bfs.admin.ch/bfs/en/home/statistics/economic-social-situation-population/economic-and-social-situation-of-the-population.html",
     comparisonData: [
       { label: "Romania", value: 21.2 },
       { label: "EU Average", value: 16.5 },
@@ -1299,7 +1299,7 @@ export const questions: QuizQuestion[] = [
       { label: "France", value: 14.5 },
       { label: "UK", value: 12.1 },
       { label: "Austria", value: 10.5 },
-      { label: "Switzerland", value: 8.2 },
+      { label: "Switzerland", value: 8.1 },
       { label: "Czech Republic", value: 6.8 },
     ],
   },

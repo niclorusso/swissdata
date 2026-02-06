@@ -5,7 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Canton } from "@/types";
 import { formatSwissNumber, formatPercentage, formatCHF } from "@/lib/formatters";
-import { indicators } from "@/data/indicators";
+import { getLocalizedIndicators } from "@/data/indicators";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { MapPin, Users, Ruler, X } from "lucide-react";
 
@@ -15,7 +15,8 @@ interface CantonTooltipProps {
 }
 
 export function CantonTooltip({ canton, onClose }: CantonTooltipProps) {
-  const { t } = useLanguage();
+  const { t, locale } = useLanguage();
+  const localizedIndicators = getLocalizedIndicators(locale);
 
   const getIndicatorValue = (indicatorId: string) => {
     const cantonIndicator = canton.indicators.find(
@@ -25,7 +26,7 @@ export function CantonTooltip({ canton, onClose }: CantonTooltipProps) {
   };
 
   const formatIndicatorValue = (indicatorId: string, value: number) => {
-    const indicator = indicators.find((i) => i.id === indicatorId);
+    const indicator = localizedIndicators.find((i) => i.id === indicatorId);
     if (!indicator) return value.toString();
 
     switch (indicator.unit) {
@@ -96,7 +97,7 @@ export function CantonTooltip({ canton, onClose }: CantonTooltipProps) {
               {t.cantonTooltip.keyIndicators}
             </p>
             {canton.indicators.map((cantonInd) => {
-              const indicator = indicators.find(
+              const indicator = localizedIndicators.find(
                 (i) => i.id === cantonInd.indicatorId
               );
               if (!indicator) return null;

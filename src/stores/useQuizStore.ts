@@ -1,7 +1,8 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import { QuizQuestion, QuizResult } from "@/types";
-import { questions, getRandomQuestions } from "@/data/questions";
+import { questions, getLocalizedRandomQuestions } from "@/data/questions";
+import { Locale } from "@/i18n/translations";
 import { calculateAccuracy } from "@/lib/formatters";
 
 interface QuizState {
@@ -20,7 +21,7 @@ interface QuizState {
   totalScore: number;
 
   // Actions
-  startQuiz: (count?: number) => void;
+  startQuiz: (count?: number, locale?: Locale) => void;
   setGuess: (value: number) => void;
   revealAnswer: () => void;
   nextQuestion: () => void;
@@ -40,8 +41,8 @@ export const useQuizStore = create<QuizState>()(
       results: [],
       totalScore: 0,
 
-      startQuiz: (count = 5) => {
-        const selected = getRandomQuestions(Math.min(count, questions.length));
+      startQuiz: (count = 5, locale: Locale = "en") => {
+        const selected = getLocalizedRandomQuestions(Math.min(count, questions.length), locale);
         set({
           selectedQuestions: selected,
           currentIndex: 0,

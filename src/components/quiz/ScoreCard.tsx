@@ -7,7 +7,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { Trophy, Target, RefreshCcw, Share2, CheckCircle2, XCircle } from "lucide-react";
-import { questions } from "@/data/questions";
+import { getLocalizedQuestions } from "@/data/questions";
 
 interface ScoreCardProps {
   results: QuizResult[];
@@ -16,7 +16,7 @@ interface ScoreCardProps {
 }
 
 export function ScoreCard({ results, totalScore, onRestart }: ScoreCardProps) {
-  const { t } = useLanguage();
+  const { t, locale } = useLanguage();
   const averageAccuracy = Math.round(totalScore / results.length);
 
   const getGrade = (accuracy: number) => {
@@ -30,7 +30,8 @@ export function ScoreCard({ results, totalScore, onRestart }: ScoreCardProps) {
 
   const { grade, message, color } = getGrade(averageAccuracy);
 
-  const getQuestionById = (id: string) => questions.find((q) => q.id === id);
+  const localizedQuestions = getLocalizedQuestions(locale);
+  const getQuestionById = (id: string) => localizedQuestions.find((q) => q.id === id);
 
   return (
     <motion.div

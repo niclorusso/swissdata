@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useMemo } from "react";
-import { indicators, getIndicatorsByCategory } from "@/data/indicators";
+import { indicators, getIndicatorsByCategory, getLocalizedIndicators, getLocalizedIndicatorsByCategory } from "@/data/indicators";
 import { LargeChart, SingleIndicatorChart } from "@/components/statistics/LargeChart";
 import {
   TimeRangeSelector,
@@ -88,7 +88,7 @@ const indicatorExplanations: Record<string, { what: string; why: string }> = {
 type CategoryFilter = "all" | "economic" | "demographic" | "social";
 
 export default function StatisticsPage() {
-  const { t } = useLanguage();
+  const { t, locale } = useLanguage();
   const [timeRange, setTimeRange] = useState<TimeRange>("20Y");
   const [categoryFilter, setCategoryFilter] = useState<CategoryFilter>("all");
 
@@ -108,13 +108,13 @@ export default function StatisticsPage() {
   ];
 
   const filteredIndicators = useMemo(() => {
-    if (categoryFilter === "all") return indicators;
-    return getIndicatorsByCategory(categoryFilter);
-  }, [categoryFilter]);
+    if (categoryFilter === "all") return getLocalizedIndicators(locale);
+    return getLocalizedIndicatorsByCategory(categoryFilter, locale);
+  }, [categoryFilter, locale]);
 
-  const economicIndicators = getIndicatorsByCategory("economic");
-  const demographicIndicators = getIndicatorsByCategory("demographic");
-  const socialIndicators = getIndicatorsByCategory("social");
+  const economicIndicators = getLocalizedIndicatorsByCategory("economic", locale);
+  const demographicIndicators = getLocalizedIndicatorsByCategory("demographic", locale);
+  const socialIndicators = getLocalizedIndicatorsByCategory("social", locale);
 
   return (
     <div className="container mx-auto px-4 py-6 sm:py-8">

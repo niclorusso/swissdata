@@ -15,7 +15,7 @@ import { useLanguage } from "@/i18n/LanguageContext";
 import { Play, ArrowRight, RotateCcw, Brain } from "lucide-react";
 
 export default function QuizPage() {
-  const { t } = useLanguage();
+  const { t, locale } = useLanguage();
   const {
     selectedQuestions,
     currentIndex,
@@ -116,7 +116,7 @@ export default function QuizPage() {
             </p>
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center flex-wrap">
               <Button
-                onClick={() => startQuiz(5)}
+                onClick={() => startQuiz(5, locale)}
                 size="lg"
                 variant="outline"
                 className="gap-2"
@@ -125,7 +125,7 @@ export default function QuizPage() {
                 {t.quiz.quick} (5)
               </Button>
               <Button
-                onClick={() => startQuiz(10)}
+                onClick={() => startQuiz(10, locale)}
                 size="lg"
                 variant="outline"
                 className="gap-2"
@@ -133,7 +133,7 @@ export default function QuizPage() {
                 <Play className="h-4 w-4" />
                 {t.quiz.standard} (10)
               </Button>
-              <Button onClick={() => startQuiz(20)} size="lg" className="gap-2">
+              <Button onClick={() => startQuiz(20, locale)} size="lg" className="gap-2">
                 <Play className="h-4 w-4" />
                 {t.quiz.deepDive} (20)
               </Button>
