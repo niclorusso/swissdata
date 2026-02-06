@@ -41,6 +41,14 @@ function Footer() {
             >
               OpenData
             </a>
+            <a
+              href="https://www.netlify.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-swiss-gray-900"
+            >
+              Powered by Netlify
+            </a>
           </div>
         </div>
       </div>
