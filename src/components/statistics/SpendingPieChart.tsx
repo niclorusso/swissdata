@@ -10,8 +10,8 @@ const budgetData = [
   { id: "finances-taxes", value: 15, color: "#7C3AED" },
   { id: "transport", value: 10.8, color: "#059669" },
   { id: "education-research", value: 9, color: "#DC2626" },
-  { id: "defense", value: 7.77, color: "#F59E0B" },
-  { id: "foreign-affairs", value: 3.83, color: "#6366F1" },
+  { id: "defense", value: 7.8, color: "#F59E0B" },
+  { id: "foreign-affairs", value: 3.8, color: "#6366F1" },
   { id: "agriculture-food", value: 3.7, color: "#10B981" },
   { id: "other", value: 9.1, color: "#94A3B8" },
 ];

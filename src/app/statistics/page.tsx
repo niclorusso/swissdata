@@ -206,7 +206,7 @@ export default function StatisticsPage() {
               <div className="flex items-center justify-between mt-4 pt-4 border-t border-swiss-gray-100">
                 <span className="text-xs text-swiss-gray-500">{t.statistics.source} Federal Finance Administration (EFV)</span>
                 <a 
-                  href="https://www.efv.admin.ch/efv/en/home/finanzberichterstattung/bundeshaushalt_ueb.html" 
+                  href="https://www.efv.admin.ch/en/expenditure" 
                   target="_blank" 
                   rel="noopener noreferrer" 
                   className="text-xs text-blue-600 hover:underline flex items-center gap-1"
