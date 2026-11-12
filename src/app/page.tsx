@@ -6,7 +6,8 @@ import { Card, CardContent } from "@/components/ui/card";
 import { CategorySection } from "@/components/dashboard/CategorySection";
 import { indicators, getLocalizedIndicatorsByCategory } from "@/data/indicators";
 import { useLanguage } from "@/i18n/LanguageContext";
-import { ArrowRight, HelpCircle, Map, CheckCircle2, BarChart3 } from "lucide-react";
+import { ArrowRight, HelpCircle, Map, CheckCircle2, BarChart3, Landmark } from "lucide-react";
+import { SPENDING_URL } from "@/lib/utils";
 
 export default function HomePage() {
   const { t, locale } = useLanguage();
@@ -76,6 +77,26 @@ export default function HomePage() {
             </CardContent>
           </Card>
         ))}
+      </section>
+
+      {/* Public spending: separate SwissData site (Italian at the root, English under /en/) */}
+      <section>
+        <a
+          href={locale === "it" ? SPENDING_URL : `${SPENDING_URL}/en/`}
+          className="group flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6 rounded-2xl border border-primary/30 bg-accent/40 p-5 sm:p-6 hover:border-primary/60 transition-colors"
+        >
+          <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-primary text-white">
+            <Landmark className="h-5 w-5" />
+          </div>
+          <div className="flex-1 min-w-0">
+            <h2 className="text-lg sm:text-xl font-bold text-swiss-gray-900">{t.home.spendingTitle}</h2>
+            <p className="mt-1 text-sm sm:text-base text-swiss-gray-600">{t.home.spendingText}</p>
+          </div>
+          <span className="inline-flex shrink-0 items-center gap-2 self-start sm:self-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-white group-hover:bg-primary/90">
+            {t.statistics.openSpending}
+            <ArrowRight className="h-4 w-4" />
+          </span>
+        </a>
       </section>
 
       {/* Economic Indicators */}

@@ -22,6 +22,8 @@ export const translations = {
 
     // Home page
     home: {
+      spendingTitle: "Public spending",
+      spendingText: "How much the Confederation, the cantons and the municipalities spend, and on what: federal budget, revenue, debt, federal contracts and the accounts of every municipality in Ticino and Zurich. In English and Italian.",
       badge: "100% sourced from official Swiss statistics",
       title: "Switzerland",
       titleHighlight: "in Numbers",
@@ -285,6 +287,8 @@ export const translations = {
 
     // Home page
     home: {
+      spendingTitle: "Spesa pubblica",
+      spendingText: "Quanto spendono Confederazione, Cantoni e Comuni, e per che cosa: bilancio federale, entrate, debito, appalti federali e i conti di tutti i Comuni di Ticino e Zurigo.",
       badge: "100% basato su statistiche ufficiali svizzere",
       title: "La Svizzera",
       titleHighlight: "in numeri",
@@ -546,6 +550,8 @@ export const translations = {
 
     // Home page
     home: {
+      spendingTitle: "Staatsausgaben",
+      spendingText: "Wie viel Bund, Kantone und Gemeinden ausgeben und wofür: Bundeshaushalt, Einnahmen, Schulden, Beschaffungen des Bundes und die Rechnungen aller Gemeinden der Kantone Tessin und Zürich. Auf Englisch und Italienisch.",
       badge: "100% aus offiziellen Schweizer Statistiken",
       title: "Die Schweiz",
       titleHighlight: "in Zahlen",
@@ -809,6 +815,8 @@ export const translations = {
 
     // Home page
     home: {
+      spendingTitle: "Dépenses publiques",
+      spendingText: "Combien dépensent la Confédération, les cantons et les communes, et pour quoi : budget fédéral, recettes, dette, marchés publics fédéraux et comptes de toutes les communes du Tessin et de Zurich. En anglais et en italien.",
       badge: "100% basé sur les statistiques officielles suisses",
       title: "La Suisse",
       titleHighlight: "en chiffres",
