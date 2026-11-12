@@ -93,6 +93,26 @@ export interface CantonIndicator {
   value: number;
 }
 
+// Reference year and source of the canton figures (generated with src/data/cantons.ts)
+export type LocalizedText = Record<"en" | "it" | "de" | "fr", string>;
+
+export interface CantonIndicatorMeta {
+  id: string;
+  unit: string; // "%", "CHF", "CHF/month", "per 1,000 inhabitants"
+  year: number; // one reference year for all cantons
+  provisional: boolean;
+  national: number; // Switzerland, same table and year
+  source: LocalizedText;
+  sourceUrl: string;
+}
+
+export interface CantonBaseMeta {
+  referenceDate: string; // ISO date
+  national: number;
+  source: LocalizedText;
+  sourceUrl: string;
+}
+
 // UI types
 export interface NavItem {
   label: string;

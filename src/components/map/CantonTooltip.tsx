@@ -4,8 +4,8 @@ import { motion } from "framer-motion";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Canton } from "@/types";
-import { formatSwissNumber, formatPercentage, formatCHF } from "@/lib/formatters";
-import { getLocalizedIndicators } from "@/data/indicators";
+import { formatSwissNumber, formatPercentage } from "@/lib/formatters";
+import { cantonIndicatorMeta } from "@/data/cantons";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { MapPin, Users, Ruler, X } from "lucide-react";
 
@@ -15,29 +15,36 @@ interface CantonTooltipProps {
 }
 
 export function CantonTooltip({ canton, onClose }: CantonTooltipProps) {
-  const { t, locale } = useLanguage();
-  const localizedIndicators = getLocalizedIndicators(locale);
+  const { t } = useLanguage();
 
-  const getIndicatorValue = (indicatorId: string) => {
-    const cantonIndicator = canton.indicators.find(
-      (i) => i.indicatorId === indicatorId
-    );
-    return cantonIndicator?.value;
+  // Labels of the canton indicators (ids, units and Swiss figures come from src/data/cantons.ts)
+  const indicatorNames: Record<string, string> = {
+    "unemployment-rate": t.cantons.unemployment,
+    "foreign-population": t.cantons.foreignPopulation,
+    "health-premium": t.cantons.healthPremium,
+    "gdp-per-capita": t.cantons.gdpPerCapita,
+    "average-rent": t.cantons.averageRent,
+    "crime-rate-per-1000": t.cantons.crimeRate,
   };
 
-  const formatIndicatorValue = (indicatorId: string, value: number) => {
-    const indicator = localizedIndicators.find((i) => i.id === indicatorId);
-    if (!indicator) return value.toString();
-
-    switch (indicator.unit) {
+  const formatIndicatorValue = (unit: string, value: number) => {
+    switch (unit) {
       case "%":
         return formatPercentage(value);
       case "CHF/month":
-        return `CHF ${formatSwissNumber(value)}/mo`;
+        return `CHF ${formatSwissNumber(Math.round(value))}/mo`;
+      case "CHF":
+        return `CHF ${formatSwissNumber(Math.round(value))}`;
       default:
-        return formatSwissNumber(value);
+        return formatSwissNumber(value, { decimals: 1 });
     }
   };
+
+  // Difference to the Swiss figure of the same table and year
+  const formatDiff = (unit: string, diff: number) =>
+    unit === "CHF" || unit === "CHF/month"
+      ? formatSwissNumber(Math.round(diff))
+      : diff.toFixed(1);
 
   return (
     <motion.div
@@ -97,14 +104,13 @@ export function CantonTooltip({ canton, onClose }: CantonTooltipProps) {
               {t.cantonTooltip.keyIndicators}
             </p>
             {canton.indicators.map((cantonInd) => {
-              const indicator = localizedIndicators.find(
-                (i) => i.id === cantonInd.indicatorId
+              const indicator = cantonIndicatorMeta.find(
+                (m) => m.id === cantonInd.indicatorId
               );
               if (!indicator) return null;
 
-              const nationalValue = indicator.value;
               const cantonValue = cantonInd.value;
-              const diff = cantonValue - nationalValue;
+              const diff = cantonValue - indicator.national;
               const isHigher = diff > 0;
 
               return (
@@ -113,19 +119,16 @@ export function CantonTooltip({ canton, onClose }: CantonTooltipProps) {
                   className="flex items-center justify-between"
                 >
                   <span className="text-xs sm:text-sm text-swiss-gray-700">
-                    {indicator.shortName}
+                    {indicatorNames[indicator.id] ?? indicator.id}{" "}
+                    <span className="text-swiss-gray-400">{indicator.year}</span>
                   </span>
                   <div className="text-right">
                     <span className="font-semibold swiss-number text-sm">
-                      {formatIndicatorValue(cantonInd.indicatorId, cantonValue)}
+                      {formatIndicatorValue(indicator.unit, cantonValue)}
                     </span>
-                    <span
-                      className={`text-xs ml-2 ${
-                        isHigher ? "text-red-600" : "text-green-600"
-                      }`}
-                    >
+                    <span className="text-xs ml-2 text-swiss-gray-500">
                       {isHigher ? "+" : ""}
-                      {diff.toFixed(1)} {t.cantonTooltip.vsCH}
+                      {formatDiff(indicator.unit, diff)} {t.cantonTooltip.vsCH}
                     </span>
                   </div>
                 </div>

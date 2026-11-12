@@ -2,9 +2,9 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { cn } from "@/lib/utils";
+import { cn, SPENDING_URL } from "@/lib/utils";
 import { useLanguage } from "@/i18n/LanguageContext";
-import { BarChart3, Brain, Map, Info, TrendingUp } from "lucide-react";
+import { BarChart3, Brain, Map, Info, TrendingUp, Landmark } from "lucide-react";
 
 export function Navigation() {
   const pathname = usePathname();
@@ -15,6 +15,7 @@ export function Navigation() {
     { href: "/statistics", label: t.nav.statistics, icon: TrendingUp },
     { href: "/quiz", label: t.nav.quiz, icon: Brain },
     { href: "/cantons", label: t.nav.cantons, icon: Map },
+    { href: locale === "it" ? SPENDING_URL : `${SPENDING_URL}/en/`, label: t.nav.spending, icon: Landmark },
     { href: "/about", label: t.nav.about, icon: Info },
   ];
 
@@ -157,31 +158,31 @@ export function Navigation() {
               </button>
             </div>
 
-            {/* Mobile nav icons */}
-            <nav className="flex items-center">
-              {navItems.map((item) => {
-                const Icon = item.icon;
-                const isActive = pathname === item.href;
-
-                return (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    className={cn(
-                      "p-1.5 rounded-md transition-colors",
-                      isActive
-                        ? "bg-primary/10 text-primary"
-                        : "text-swiss-gray-600 hover:bg-swiss-gray-100"
-                    )}
-                    title={item.label}
-                  >
-                    <Icon className="h-4 w-4" />
-                  </Link>
-                );
-              })}
-            </nav>
           </div>
         </div>
+    {/* Mobile nav icons: their own row, so six 44px touch targets fit beside nothing else */}
+        <nav className="flex md:hidden items-center justify-around border-t border-swiss-gray-100">
+          {navItems.map((item) => {
+            const Icon = item.icon;
+            const isActive = pathname === item.href;
+
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                className={cn(
+                  "p-1.5 rounded-md transition-colors",
+                  isActive
+                    ? "bg-primary/10 text-primary"
+                    : "text-swiss-gray-600 hover:bg-swiss-gray-100"
+                )}
+                title={item.label}
+              >
+                <Icon className="h-4 w-4" />
+              </Link>
+            );
+          })}
+        </nav>
       </div>
     </header>
   );

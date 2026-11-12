@@ -3,7 +3,7 @@
 import { useState, useMemo } from "react";
 import { indicators, getIndicatorsByCategory, getLocalizedIndicators, getLocalizedIndicatorsByCategory } from "@/data/indicators";
 import { LargeChart, SingleIndicatorChart } from "@/components/statistics/LargeChart";
-import { SpendingPieChart } from "@/components/statistics/SpendingPieChart";
+import { SPENDING_URL } from "@/lib/utils";
 import {
   TimeRangeSelector,
   TimeRange,
@@ -27,19 +27,19 @@ import {
 const indicatorExplanations: Record<string, { en: { what: string; why: string }; it: { what: string; why: string }; de: { what: string; why: string }; fr: { what: string; why: string } }> = {
   "unemployment-rate": {
     en: {
-      what: "The percentage of the labor force that is jobless and actively seeking employment.",
+      what: "The percentage of the labor force registered as unemployed at RAV (regional employment centers).",
       why: "A key health indicator of the economy. Low unemployment suggests a strong job market.",
     },
     it: {
-      what: "Percentuale della forza lavoro disoccupata e in cerca attiva di impiego.",
+      what: "Percentuale della forza lavoro registrata come disoccupata presso gli URC (Uffici regionali di collocamento).",
       why: "Un indicatore chiave della salute economica. Una bassa disoccupazione indica un mercato del lavoro forte.",
     },
     de: {
-      what: "Der Anteil der Erwerbspersonen, die arbeitslos sind und aktiv eine Beschäftigung suchen.",
+      what: "Der Anteil der Erwerbspersonen, die bei den RAV (Regionale Arbeitsvermittlungszentren) als arbeitslos gemeldet sind.",
       why: "Ein wichtiger Indikator für die wirtschaftliche Gesundheit. Niedrige Arbeitslosigkeit deutet auf einen starken Arbeitsmarkt hin.",
     },
     fr: {
-      what: "Le pourcentage de la population active qui est sans emploi et recherche activement un travail.",
+      what: "Le pourcentage de la population active inscrite comme chômeur auprès des ORP (Offices régionaux de placement).",
       why: "Un indicateur clé de la santé économique. Un faible chômage suggère un marché du travail solide.",
     },
   },
@@ -135,19 +135,19 @@ const indicatorExplanations: Record<string, { en: { what: string; why: string };
   },
   "housing-price-index": {
     en: {
-      what: "An index tracking residential property prices over time (base year = 100).",
+      what: "An index tracking residential property prices over time, as annual average (base Q4 2019 = 100).",
       why: "Shows housing affordability trends. Rapid increases may signal a bubble.",
     },
     it: {
-      what: "Un indice che traccia i prezzi immobiliari residenziali nel tempo (anno base = 100).",
+      what: "Un indice che traccia i prezzi immobiliari residenziali nel tempo, in media annua (base Q4 2019 = 100).",
       why: "Mostra le tendenze di accessibilità abitativa. Aumenti rapidi possono segnalare una bolla.",
     },
     de: {
-      what: "Ein Index, der die Wohnimmobilienpreise im Zeitverlauf verfolgt (Basisjahr = 100).",
+      what: "Ein Index, der die Wohnimmobilienpreise im Zeitverlauf verfolgt, als Jahresdurchschnitt (Basis Q4 2019 = 100).",
       why: "Zeigt Trends bei der Erschwinglichkeit von Wohnraum. Schnelle Anstiege können eine Blase signalisieren.",
     },
     fr: {
-      what: "Un indice suivant l'évolution des prix de l'immobilier résidentiel (année de base = 100).",
+      what: "Un indice suivant l'évolution des prix de l'immobilier résidentiel, en moyenne annuelle (base T4 2019 = 100).",
       why: "Montre les tendances d'accessibilité au logement. Des hausses rapides peuvent signaler une bulle.",
     },
   },
@@ -279,38 +279,38 @@ const indicatorExplanations: Record<string, { en: { what: string; why: string };
   },
   "crime-rate-per-1000": {
     en: {
-      what: "Total offenses under the Swiss Criminal Code per 1,000 permanent residents.",
-      why: "Measures public safety. Switzerland remains very safe despite recent increases.",
+      what: "Offences under the Swiss Criminal Code (StGB) recorded by the police per 1,000 permanent residents.",
+      why: "Measures public safety. In 2025 recorded offences fell by 1.5% after three years of increases.",
     },
     it: {
-      what: "Reati totali secondo il Codice Penale svizzero per 1'000 residenti.",
-      why: "Misura la sicurezza pubblica. La Svizzera resta molto sicura nonostante i recenti aumenti.",
+      what: "Reati secondo il Codice penale svizzero (CP) registrati dalla polizia per 1'000 residenti permanenti.",
+      why: "Misura la sicurezza pubblica. Nel 2025 i reati registrati sono diminuiti dell'1,5% dopo tre anni di aumento.",
     },
     de: {
-      what: "Gesamte Straftaten nach Schweizer StGB pro 1'000 ständige Einwohner.",
-      why: "Misst die öffentliche Sicherheit. Die Schweiz bleibt trotz jüngster Anstiege sehr sicher.",
+      what: "Polizeilich registrierte Straftaten nach Schweizer Strafgesetzbuch (StGB) pro 1'000 ständige Einwohner.",
+      why: "Misst die öffentliche Sicherheit. 2025 gingen die registrierten Straftaten um 1,5% zurück, nach drei Jahren mit Zunahmen.",
     },
     fr: {
-      what: "Total des infractions selon le Code pénal suisse pour 1'000 résidents.",
-      why: "Mesure la sécurité publique. La Suisse reste très sûre malgré les augmentations récentes.",
+      what: "Infractions au Code pénal suisse (CP) enregistrées par la police pour 1'000 résidents permanents.",
+      why: "Mesure la sécurité publique. En 2025 les infractions enregistrées ont reculé de 1,5% après trois années de hausse.",
     },
   },
   "healthcare-cost": {
     en: {
-      what: "Average monthly health insurance premium for basic coverage.",
-      why: "A significant household expense. 26% of residents receive subsidies.",
+      what: "Costs of the healthcare system as a percentage of GDP.",
+      why: "Shows how much of economic output goes to healthcare. In 2024 the costs were CHF 97.2 billion (provisional), CHF 899 per person per month.",
     },
     it: {
-      what: "Premio mensile medio dell'assicurazione sanitaria per la copertura base.",
-      why: "Una spesa familiare significativa. Il 26% dei residenti riceve sussidi.",
+      what: "Costi del sistema sanitario in percentuale del PIL.",
+      why: "Indica quanta parte della produzione economica va alla sanità. Nel 2024 i costi sono stati di 97,2 miliardi di franchi (dato provvisorio), 899 franchi al mese per persona.",
     },
     de: {
-      what: "Durchschnittliche monatliche Krankenkassenprämie für die Grundversicherung.",
-      why: "Eine bedeutende Haushaltsausgabe. 26% der Einwohner erhalten Prämienverbilligungen.",
+      what: "Kosten des Gesundheitswesens in Prozent des BIP.",
+      why: "Zeigt, welcher Teil der Wirtschaftsleistung ins Gesundheitswesen fliesst. 2024 betrugen die Kosten 97,2 Milliarden Franken (provisorisch), 899 Franken pro Person und Monat.",
     },
     fr: {
-      what: "Prime mensuelle moyenne d'assurance maladie pour la couverture de base.",
-      why: "Une dépense ménagère importante. 26% des résidents reçoivent des subventions.",
+      what: "Coûts du système de santé en pourcentage du PIB.",
+      why: "Montre quelle part de la production économique va à la santé. En 2024 les coûts étaient de 97,2 milliards de francs (provisoire), 899 francs par personne et par mois.",
     },
   },
   "education-spending": {
@@ -333,38 +333,38 @@ const indicatorExplanations: Record<string, { en: { what: string; why: string };
   },
   "poverty-rate": {
     en: {
-      what: "Percentage living below the national poverty line.",
-      why: "Even wealthy countries have poverty, often among elderly and single parents.",
+      what: "Poverty rate (absolute): share of the population with a household income below the poverty line.",
+      why: "In 2024 the poverty line was CHF 2,388 per month for a single person. The at-risk-of-poverty rate (income below 60% of the median) is a separate figure: 16.4%.",
     },
     it: {
-      what: "Percentuale che vive sotto la soglia di povertà nazionale.",
-      why: "Anche i paesi ricchi hanno povertà, spesso tra anziani e genitori soli.",
+      what: "Tasso di povertà (assoluta): quota della popolazione con un reddito inferiore alla soglia di povertà.",
+      why: "Nel 2024 la soglia di povertà era di 2388 franchi al mese per una persona sola. Il tasso di rischio di povertà (reddito inferiore al 60% della mediana) è un dato distinto: 16,4%.",
     },
     de: {
-      what: "Anteil der Bevölkerung unter der nationalen Armutsgrenze.",
-      why: "Auch wohlhabende Länder haben Armut, oft unter Älteren und Alleinerziehenden.",
+      what: "Armutsquote (absolut): Anteil der Bevölkerung mit einem Einkommen unter der Armutsgrenze.",
+      why: "2024 lag die Armutsgrenze bei 2388 Franken pro Monat für eine Einzelperson. Die Armutsgefährdungsquote (Einkommen unter 60% des Medians) ist eine eigene Zahl: 16,4%.",
     },
     fr: {
-      what: "Pourcentage vivant en dessous du seuil de pauvreté national.",
-      why: "Même les pays riches ont de la pauvreté, souvent parmi les personnes âgées et les parents isolés.",
+      what: "Taux de pauvreté (absolue) : part de la population dont le revenu est inférieur au seuil de pauvreté.",
+      why: "En 2024 le seuil de pauvreté était de 2388 francs par mois pour une personne seule. Le taux de risque de pauvreté (revenu inférieur à 60% de la médiane) est un chiffre distinct : 16,4%.",
     },
   },
   "renewable-energy": {
     en: {
-      what: "Percentage of total energy from renewable sources.",
-      why: "Progress toward climate goals. Electricity is 76% renewable; heating/transport less so.",
+      what: "Share of total final energy consumption that comes from renewable sources (hydro, solar, wind, biomass).",
+      why: "Indicates progress toward climate goals. In 2025, 68.3% of electricity production was renewable, against 30.6% of total final energy consumption.",
     },
     it: {
-      what: "Percentuale dell'energia totale da fonti rinnovabili.",
-      why: "Progressi verso gli obiettivi climatici. L'elettricità è al 76% rinnovabile; riscaldamento/trasporti meno.",
+      what: "Quota del consumo finale totale di energia coperta da fonti rinnovabili (idrico, solare, eolico, biomassa).",
+      why: "Indica i progressi verso gli obiettivi climatici. Nel 2025 era rinnovabile il 68,3% della produzione di elettricità, contro il 30,6% del consumo finale totale di energia.",
     },
     de: {
-      what: "Anteil der Gesamtenergie aus erneuerbaren Quellen.",
-      why: "Fortschritte bei Klimazielen. Strom ist zu 76% erneuerbar; Heizung/Verkehr weniger.",
+      what: "Anteil des gesamten Endenergieverbrauchs aus erneuerbaren Quellen (Wasser, Solar, Wind, Biomasse).",
+      why: "Zeigt Fortschritte bei den Klimazielen. 2025 waren 68,3% der Stromproduktion erneuerbar, gegenüber 30,6% des gesamten Endenergieverbrauchs.",
     },
     fr: {
-      what: "Pourcentage de l'énergie totale provenant de sources renouvelables.",
-      why: "Progrès vers les objectifs climatiques. L'électricité est à 76% renouvelable ; chauffage/transport moins.",
+      what: "Part de la consommation finale totale d'énergie provenant de sources renouvelables (hydraulique, solaire, éolien, biomasse).",
+      why: "Indique les progrès vers les objectifs climatiques. En 2025, 68,3% de la production d'électricité était renouvelable, contre 30,6% de la consommation finale totale d'énergie.",
     },
   },
 };
@@ -455,19 +455,13 @@ export default function StatisticsPage() {
               </p>
             </CardHeader>
             <CardContent>
-              <SpendingPieChart />
-              <div className="flex items-center justify-between mt-3 sm:mt-4 pt-3 sm:pt-4 border-t border-swiss-gray-100">
-                <span className="text-xs text-swiss-gray-500">{t.statistics.source} Federal Finance Administration (EFV)</span>
-                <a 
-                  href="https://www.efv.admin.ch/en/expenditure" 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
-                  className="text-xs text-blue-600 hover:underline flex items-center gap-1"
-                >
-                  {t.statistics.viewSource}
-                  <ExternalLink className="h-3 w-3" />
-                </a>
-              </div>
+              <a
+                href={locale === "it" ? SPENDING_URL : `${SPENDING_URL}/en/`}
+                className="inline-flex items-center gap-2 rounded-md bg-primary px-4 py-2 text-sm font-medium text-white hover:bg-primary/90 transition-colors"
+              >
+                {t.statistics.openSpending}
+                <ExternalLink className="h-4 w-4" />
+              </a>
             </CardContent>
           </Card>
         </section>

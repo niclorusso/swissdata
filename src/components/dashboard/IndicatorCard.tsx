@@ -31,7 +31,7 @@ const indicatorExplanations: Record<string, { en: { what: string; why: string };
   "unemployment-rate": {
     en: {
       what: "The percentage of the labor force registered as unemployed at RAV (regional employment centers).",
-      why: "The SECO rate measures only registered job seekers. It's lower than the ILO rate but useful for tracking domestic trends.",
+      why: "The SECO rate counts only people registered as unemployed. It's lower than the ILO rate but useful for tracking domestic trends.",
     },
     it: {
       what: "Percentuale della forza lavoro registrata come disoccupata presso gli URC (Uffici regionali di collocamento).",
@@ -39,11 +39,11 @@ const indicatorExplanations: Record<string, { en: { what: string; why: string };
     },
     de: {
       what: "Der Anteil der Erwerbspersonen, die bei den RAV (Regionale Arbeitsvermittlungszentren) als arbeitslos gemeldet sind.",
-      why: "Die SECO-Quote erfasst nur gemeldete Arbeitsuchende. Sie ist niedriger als die ILO-Quote, aber nützlich für inländische Trends.",
+      why: "Die SECO-Quote erfasst nur gemeldete Arbeitslose. Sie ist niedriger als die ILO-Quote, aber nützlich für inländische Trends.",
     },
     fr: {
       what: "Le pourcentage de la population active inscrite comme chômeur auprès des ORP (Offices régionaux de placement).",
-      why: "Le taux SECO ne mesure que les demandeurs d'emploi inscrits. Il est inférieur au taux OIT mais utile pour suivre les tendances nationales.",
+      why: "Le taux SECO ne mesure que les chômeurs inscrits. Il est inférieur au taux OIT mais utile pour suivre les tendances nationales.",
     },
   },
   "gdp-growth-rate": {
@@ -120,19 +120,19 @@ const indicatorExplanations: Record<string, { en: { what: string; why: string };
   },
   "housing-price-index": {
     en: {
-      what: "An index tracking changes in residential property prices over time (base Q4 2019 = 100).",
+      what: "An index tracking changes in residential property prices over time, shown as annual average (base Q4 2019 = 100).",
       why: "Shows whether housing is becoming more or less affordable. Rapid increases may indicate a housing bubble.",
     },
     it: {
-      what: "Un indice che traccia le variazioni dei prezzi immobiliari residenziali nel tempo (base Q4 2019 = 100).",
+      what: "Un indice che traccia le variazioni dei prezzi immobiliari residenziali nel tempo, in media annua (base Q4 2019 = 100).",
       why: "Mostra se le abitazioni diventano più o meno accessibili. Aumenti rapidi possono indicare una bolla immobiliare.",
     },
     de: {
-      what: "Ein Index, der die Veränderung der Wohnimmobilienpreise im Zeitverlauf verfolgt (Basis Q4 2019 = 100).",
+      what: "Ein Index, der die Veränderung der Wohnimmobilienpreise im Zeitverlauf verfolgt, als Jahresdurchschnitt (Basis Q4 2019 = 100).",
       why: "Zeigt, ob Wohnen erschwinglicher oder teurer wird. Schnelle Anstiege können auf eine Immobilienblase hinweisen.",
     },
     fr: {
-      what: "Un indice suivant l'évolution des prix de l'immobilier résidentiel au fil du temps (base T4 2019 = 100).",
+      what: "Un indice suivant l'évolution des prix de l'immobilier résidentiel au fil du temps, en moyenne annuelle (base T4 2019 = 100).",
       why: "Montre si le logement devient plus ou moins abordable. Des augmentations rapides peuvent indiquer une bulle immobilière.",
     },
   },
@@ -246,20 +246,20 @@ const indicatorExplanations: Record<string, { en: { what: string; why: string };
   },
   "crime-rate-per-1000": {
     en: {
-      what: "Total offenses under the Swiss Criminal Code (StGB) per 1,000 permanent residents.",
-      why: "Measures public safety. Switzerland remains very safe, but cybercrime and vehicle theft have risen since 2022.",
+      what: "Offences under the Swiss Criminal Code (StGB) recorded by the police per 1,000 permanent residents.",
+      why: "Measures public safety. In 2025 recorded offences fell by 1.5% after three years of increases.",
     },
     it: {
-      what: "Reati totali secondo il Codice Penale svizzero (CP) per 1'000 residenti permanenti.",
-      why: "Misura la sicurezza pubblica. La Svizzera resta molto sicura, ma cybercrimini e furti di veicoli sono aumentati dal 2022.",
+      what: "Reati secondo il Codice penale svizzero (CP) registrati dalla polizia per 1'000 residenti permanenti.",
+      why: "Misura la sicurezza pubblica. Nel 2025 i reati registrati sono diminuiti dell'1,5% dopo tre anni di aumento.",
     },
     de: {
-      what: "Gesamte Straftaten nach Schweizer Strafgesetzbuch (StGB) pro 1'000 ständige Einwohner.",
-      why: "Misst die öffentliche Sicherheit. Die Schweiz bleibt sehr sicher, aber Cyberkriminalität und Fahrzeugdiebstahl sind seit 2022 gestiegen.",
+      what: "Polizeilich registrierte Straftaten nach Schweizer Strafgesetzbuch (StGB) pro 1'000 ständige Einwohner.",
+      why: "Misst die öffentliche Sicherheit. 2025 gingen die registrierten Straftaten um 1,5% zurück, nach drei Jahren mit Zunahmen.",
     },
     fr: {
-      what: "Total des infractions selon le Code pénal suisse (CP) pour 1'000 résidents permanents.",
-      why: "Mesure la sécurité publique. La Suisse reste très sûre, mais la cybercriminalité et les vols de véhicules ont augmenté depuis 2022.",
+      what: "Infractions au Code pénal suisse (CP) enregistrées par la police pour 1'000 résidents permanents.",
+      why: "Mesure la sécurité publique. En 2025 les infractions enregistrées ont reculé de 1,5% après trois années de hausse.",
     },
   },
   "crime-rate": {
@@ -282,20 +282,20 @@ const indicatorExplanations: Record<string, { en: { what: string; why: string };
   },
   "healthcare-cost": {
     en: {
-      what: "Total healthcare expenditure as a percentage of GDP.",
-      why: "Switzerland spends more on healthcare than most countries. Costs are rising faster than GDP due to aging and medical technology.",
+      what: "Costs of the healthcare system as a percentage of GDP.",
+      why: "Shows how much of economic output goes to healthcare. In 2024 the costs were CHF 97.2 billion (provisional), CHF 899 per person per month.",
     },
     it: {
-      what: "Spesa sanitaria totale in percentuale del PIL.",
-      why: "La Svizzera spende più di molti paesi per la sanità. I costi crescono più del PIL a causa dell'invecchiamento e della tecnologia medica.",
+      what: "Costi del sistema sanitario in percentuale del PIL.",
+      why: "Indica quanta parte della produzione economica va alla sanità. Nel 2024 i costi sono stati di 97,2 miliardi di franchi (dato provvisorio), 899 franchi al mese per persona.",
     },
     de: {
-      what: "Gesamte Gesundheitsausgaben in Prozent des BIP.",
-      why: "Die Schweiz gibt mehr für Gesundheit aus als die meisten Länder. Kosten steigen schneller als das BIP wegen Alterung und Medizintechnologie.",
+      what: "Kosten des Gesundheitswesens in Prozent des BIP.",
+      why: "Zeigt, welcher Teil der Wirtschaftsleistung ins Gesundheitswesen fliesst. 2024 betrugen die Kosten 97,2 Milliarden Franken (provisorisch), 899 Franken pro Person und Monat.",
     },
     fr: {
-      what: "Dépenses totales de santé en pourcentage du PIB.",
-      why: "La Suisse dépense plus pour la santé que la plupart des pays. Les coûts augmentent plus vite que le PIB en raison du vieillissement et de la technologie médicale.",
+      what: "Coûts du système de santé en pourcentage du PIB.",
+      why: "Montre quelle part de la production économique va à la santé. En 2024 les coûts étaient de 97,2 milliards de francs (provisoire), 899 francs par personne et par mois.",
     },
   },
   "education-spending": {
@@ -318,38 +318,38 @@ const indicatorExplanations: Record<string, { en: { what: string; why: string };
   },
   "poverty-rate": {
     en: {
-      what: "Percentage of the population living below 60% of median income (at-risk-of-poverty threshold).",
-      why: "Indicates economic inequality. Even wealthy countries have poverty, often among elderly and single parents.",
+      what: "Poverty rate (absolute): share of the population with a household income below the poverty line.",
+      why: "In 2024 the poverty line was CHF 2,388 per month for a single person. The at-risk-of-poverty rate (income below 60% of the median) is a separate figure: 16.4%.",
     },
     it: {
-      what: "Percentuale della popolazione con reddito inferiore al 60% della mediana (soglia di rischio povertà).",
-      why: "Indica la disuguaglianza economica. Anche i paesi ricchi hanno povertà, spesso tra anziani e genitori soli.",
+      what: "Tasso di povertà (assoluta): quota della popolazione con un reddito inferiore alla soglia di povertà.",
+      why: "Nel 2024 la soglia di povertà era di 2388 franchi al mese per una persona sola. Il tasso di rischio di povertà (reddito inferiore al 60% della mediana) è un dato distinto: 16,4%.",
     },
     de: {
-      what: "Anteil der Bevölkerung mit Einkommen unter 60% des Medianeinkommens (Armutsgefährdungsschwelle).",
-      why: "Zeigt wirtschaftliche Ungleichheit. Auch wohlhabende Länder haben Armut, oft unter Älteren und Alleinerziehenden.",
+      what: "Armutsquote (absolut): Anteil der Bevölkerung mit einem Einkommen unter der Armutsgrenze.",
+      why: "2024 lag die Armutsgrenze bei 2388 Franken pro Monat für eine Einzelperson. Die Armutsgefährdungsquote (Einkommen unter 60% des Medians) ist eine eigene Zahl: 16,4%.",
     },
     fr: {
-      what: "Pourcentage de la population vivant en dessous de 60% du revenu médian (seuil de risque de pauvreté).",
-      why: "Indique l'inégalité économique. Même les pays riches ont de la pauvreté, souvent parmi les personnes âgées et les parents isolés.",
+      what: "Taux de pauvreté (absolue) : part de la population dont le revenu est inférieur au seuil de pauvreté.",
+      why: "En 2024 le seuil de pauvreté était de 2388 francs par mois pour une personne seule. Le taux de risque de pauvreté (revenu inférieur à 60% de la médiane) est un chiffre distinct : 16,4%.",
     },
   },
   "renewable-energy": {
     en: {
-      what: "Percentage of total energy consumption from renewable sources (hydro, solar, wind, biomass).",
-      why: "Indicates progress toward climate goals. Electricity is 76% renewable, but heating/transport still rely on fossil fuels.",
+      what: "Share of total final energy consumption that comes from renewable sources (hydro, solar, wind, biomass).",
+      why: "Indicates progress toward climate goals. In 2025, 68.3% of electricity production was renewable, against 30.6% of total final energy consumption.",
     },
     it: {
-      what: "Percentuale del consumo energetico totale da fonti rinnovabili (idrico, solare, eolico, biomassa).",
-      why: "Indica i progressi verso gli obiettivi climatici. L'elettricità è al 76% rinnovabile, ma riscaldamento e trasporti usano ancora fossili.",
+      what: "Quota del consumo finale totale di energia coperta da fonti rinnovabili (idrico, solare, eolico, biomassa).",
+      why: "Indica i progressi verso gli obiettivi climatici. Nel 2025 era rinnovabile il 68,3% della produzione di elettricità, contro il 30,6% del consumo finale totale di energia.",
     },
     de: {
-      what: "Anteil des Gesamtenergieverbrauchs aus erneuerbaren Quellen (Wasser, Solar, Wind, Biomasse).",
-      why: "Zeigt Fortschritte bei Klimazielen. Strom ist zu 76% erneuerbar, aber Heizung/Verkehr nutzen noch fossile Brennstoffe.",
+      what: "Anteil des gesamten Endenergieverbrauchs aus erneuerbaren Quellen (Wasser, Solar, Wind, Biomasse).",
+      why: "Zeigt Fortschritte bei den Klimazielen. 2025 waren 68,3% der Stromproduktion erneuerbar, gegenüber 30,6% des gesamten Endenergieverbrauchs.",
     },
     fr: {
-      what: "Pourcentage de la consommation totale d'énergie provenant de sources renouvelables (hydraulique, solaire, éolien, biomasse).",
-      why: "Indique les progrès vers les objectifs climatiques. L'électricité est à 76% renouvelable, mais le chauffage et les transports dépendent encore des combustibles fossiles.",
+      what: "Part de la consommation finale totale d'énergie provenant de sources renouvelables (hydraulique, solaire, éolien, biomasse).",
+      why: "Indique les progrès vers les objectifs climatiques. En 2025, 68,3% de la production d'électricité était renouvelable, contre 30,6% de la consommation finale totale d'énergie.",
     },
   },
 };

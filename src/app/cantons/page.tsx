@@ -6,10 +6,10 @@ import { SwitzerlandMap } from "@/components/map/SwitzerlandMap";
 import { CantonTooltip } from "@/components/map/CantonTooltip";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { cantons, getCantonById } from "@/data/cantons";
-import { indicators, getLocalizedIndicators } from "@/data/indicators";
+import { cantons, getCantonById, cantonIndicatorMeta, cantonPopulationMeta, cantonAreaMeta } from "@/data/cantons";
+import { indicators } from "@/data/indicators";
 import { Canton } from "@/types";
-import { formatSwissNumber, formatPercentage } from "@/lib/formatters";
+import { formatSwissNumber, formatPercentage, formatSwissDate, getTranslatedUnit } from "@/lib/formatters";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { Map, TrendingUp, Users, Heart, ArrowUpDown, Info } from "lucide-react";
 
@@ -18,31 +18,31 @@ type SortDirection = "asc" | "desc";
 
 export default function CantonsPage() {
   const { t, locale } = useLanguage();
-  const localizedIndicatorList = getLocalizedIndicators(locale);
   const [selectedCantonId, setSelectedCantonId] = useState<string | null>(null);
   const [selectedIndicator, setSelectedIndicator] = useState<string>("unemployment-rate");
   const [sortKey, setSortKey] = useState<SortKey>("population");
   const [sortDirection, setSortDirection] = useState<SortDirection>("desc");
 
-  const cantonIndicators = [
-    { id: "unemployment-rate", name: t.cantons.unemployment, unit: "%" },
-    { id: "foreign-population", name: t.cantons.foreignPopulation, unit: "%" },
-    { id: "healthcare-cost", name: t.cantons.healthcareCost, unit: "CHF/month" },
-    { id: "gdp-per-capita", name: t.cantons.gdpPerCapita, unit: "CHF" },
-    { id: "average-rent", name: t.cantons.averageRent, unit: "CHF/month" },
-    { id: "crime-rate", name: t.cantons.crimeRate, unit: "per 100k" },
-  ];
+  // Ids, units, reference years and sources come from src/data/cantons.ts (generated from official tables).
+  const cantonIndicatorNames: Record<string, string> = {
+    "unemployment-rate": t.cantons.unemployment,
+    "foreign-population": t.cantons.foreignPopulation,
+    "health-premium": t.cantons.healthPremium,
+    "gdp-per-capita": t.cantons.gdpPerCapita,
+    "average-rent": t.cantons.averageRent,
+    "crime-rate-per-1000": t.cantons.crimeRate,
+  };
+  const cantonIndicators = cantonIndicatorMeta.map((meta) => ({ ...meta, name: cantonIndicatorNames[meta.id] ?? meta.id }));
 
   const selectedCanton = selectedCantonId ? getCantonById(selectedCantonId) : null;
   const selectedIndicatorMeta = cantonIndicators.find((i) => i.id === selectedIndicator);
-  const selectedIndicatorData = localizedIndicatorList.find((i) => i.id === selectedIndicator);
 
   const getIndicatorCategory = (indicatorId: string) => {
     const mainIndicator = indicators.find((i) => i.id === indicatorId);
     if (mainIndicator) return mainIndicator.category;
     if (indicatorId === "gdp-per-capita" || indicatorId === "average-rent") return "economic";
     if (indicatorId === "foreign-population") return "demographic";
-    if (indicatorId === "crime-rate" || indicatorId === "healthcare-cost") return "social";
+    if (indicatorId === "crime-rate-per-1000" || indicatorId === "health-premium") return "social";
     return "economic";
   };
 
@@ -138,16 +138,27 @@ export default function CantonsPage() {
               </CardHeader>
               <CardContent>
                 {(() => {
-                  const cantonValues = cantons.map((c) => c.indicators.find((i) => i.indicatorId === selectedIndicator)?.value).filter((v): v is number => v !== undefined);
-                  const avgValue = cantonValues.length > 0 ? cantonValues.reduce((a, b) => a + b, 0) / cantonValues.length : 0;
-                  const displayValue = selectedIndicatorData?.value ?? avgValue;
+                  // Figure for Switzerland from the same official table and year as the canton values
+                  const displayValue = selectedIndicatorMeta.national;
                   const unit = selectedIndicatorMeta.unit;
                   return (
                     <>
                       <div className="text-2xl font-bold swiss-number">
-                        {unit === "%" ? formatPercentage(displayValue) : `${formatSwissNumber(Math.round(displayValue))} ${unit}`}
+                        {unit === "%"
+                          ? formatPercentage(displayValue)
+                          : unit === "per 1,000 inhabitants"
+                            ? `${formatSwissNumber(displayValue, { decimals: 1 })} ${getTranslatedUnit(unit, locale)}`
+                            : `${formatSwissNumber(Math.round(displayValue))} ${getTranslatedUnit(unit, locale)}`}
                       </div>
                       <p className="text-sm text-swiss-gray-500 mt-1">{selectedIndicatorMeta.name}</p>
+                      <p className="text-xs text-swiss-gray-500 mt-1">
+                        {selectedIndicatorMeta.year}
+                        {selectedIndicatorMeta.provisional ? ` (${t.cantons.provisional})` : ""}
+                        {" \u00B7 "}
+                        <a href={selectedIndicatorMeta.sourceUrl} target="_blank" rel="noopener noreferrer" className="underline hover:text-swiss-gray-700">
+                          {selectedIndicatorMeta.source[locale]}
+                        </a>
+                      </p>
                       {selectedIndicator === "unemployment-rate" && (
                         <div className="mt-3 p-3 bg-blue-50 rounded-lg flex gap-2 text-xs text-blue-700">
                           <Info className="h-4 w-4 shrink-0 mt-0.5" />
@@ -212,6 +223,43 @@ export default function CantonsPage() {
               </tbody>
             </table>
           </div>
+        </CardContent>
+      </Card>
+
+      <Card>
+        <CardHeader className="pb-2">
+          <CardTitle className="text-sm text-swiss-gray-500">{t.cantons.dataSources}</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <ul className="space-y-1 text-xs sm:text-sm text-swiss-gray-600">
+            {cantonIndicators.map((indicator) => (
+              <li key={indicator.id}>
+                <span className="font-medium text-swiss-gray-700">{indicator.name}</span>
+                {": "}
+                {indicator.year}
+                {indicator.provisional ? ` (${t.cantons.provisional})` : ""}
+                {" \u00B7 "}
+                <a href={indicator.sourceUrl} target="_blank" rel="noopener noreferrer" className="underline hover:text-swiss-gray-900">
+                  {indicator.source[locale]}
+                </a>
+              </li>
+            ))}
+            {[
+              { name: t.cantons.population, meta: cantonPopulationMeta },
+              { name: t.cantons.area, meta: cantonAreaMeta },
+            ].map(({ name, meta }) => (
+              <li key={name}>
+                <span className="font-medium text-swiss-gray-700">{name}</span>
+                {": "}
+                {formatSwissDate(meta.referenceDate)}
+                {" \u00B7 "}
+                <a href={meta.sourceUrl} target="_blank" rel="noopener noreferrer" className="underline hover:text-swiss-gray-900">
+                  {meta.source[locale]}
+                </a>
+              </li>
+            ))}
+          </ul>
+          <p className="text-xs text-swiss-gray-500 mt-3">{t.cantons.territoryNote}</p>
         </CardContent>
       </Card>
     </div>
