@@ -56,6 +56,13 @@ export const translations = {
       aboutTitle: "About SwissData",
       description: "Official statistics on Switzerland in one place, each with its source and year. Independent site by Nicola Lo Russo, not run by the Confederation.",
     },
+    // Page shown for an address that does not exist
+    notFound: {
+      title: "Page not found",
+      text: "This address does not lead to any page of SwissData. The pages of the site:",
+      home: "Home page",
+    },
+
     // Home page
     home: {
       title: "Official statistics on Switzerland",
@@ -281,6 +288,13 @@ export const translations = {
       aboutTitle: "Il progetto SwissData",
       description: "Statistiche ufficiali sulla Svizzera in un unico posto, ognuna con fonte e anno. Sito indipendente di Nicola Lo Russo, non della Confederazione.",
     },
+    // Page shown for an address that does not exist
+    notFound: {
+      title: "Pagina non trovata",
+      text: "Questo indirizzo non porta a nessuna pagina di SwissData. Le pagine del sito:",
+      home: "Pagina iniziale",
+    },
+
     // Home page
     home: {
       title: "Statistiche ufficiali sulla Svizzera",
@@ -505,6 +519,13 @@ export const translations = {
       aboutTitle: "Das Projekt SwissData",
       description: "Amtliche Statistiken zur Schweiz an einem Ort, jede mit Quelle und Jahr. Unabhängige Website von Nicola Lo Russo, nicht des Bundes.",
     },
+    // Page shown for an address that does not exist
+    notFound: {
+      title: "Seite nicht gefunden",
+      text: "Unter dieser Adresse gibt es keine Seite von SwissData. Die Seiten der Website:",
+      home: "Startseite",
+    },
+
     // Home page
     home: {
       title: "Amtliche Statistiken zur Schweiz",
@@ -730,6 +751,13 @@ export const translations = {
       aboutTitle: "Le projet SwissData",
       description: "Statistiques officielles sur la Suisse réunies en un seul endroit, chacune avec sa source et son année. Site indépendant de Nicola Lo Russo, pas de la Confédération.",
     },
+    // Page shown for an address that does not exist
+    notFound: {
+      title: "Page introuvable",
+      text: "Cette adresse ne mène à aucune page de SwissData. Les pages du site :",
+      home: "Page d'accueil",
+    },
+
     // Home page
     home: {
       title: "Statistiques officielles sur la Suisse",
