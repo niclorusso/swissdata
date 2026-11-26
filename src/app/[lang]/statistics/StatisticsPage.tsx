@@ -39,12 +39,13 @@ function ChartCard({ indicator, startYear }: { indicator: Indicator; startYear: 
 
   return (
     <Card id={indicator.id} data-indicator={indicator.id} className="flex flex-col p-4 sm:p-5 scroll-mt-4">
-      <div className="flex items-start justify-between gap-3">
-        <div className="flex items-start gap-1 min-w-0">
+      {/* the value goes under the title when the two do not fit on one line ("61,3 per 1000 abitanti") */}
+      <div className="flex flex-wrap items-start justify-between gap-x-3 gap-y-1">
+        <div className="flex items-start gap-1 min-w-[11rem] flex-1">
           <h3 className="text-base font-semibold leading-snug text-ink">{indicator.shortName}</h3>
           <MoreInfoButton info={info} label={t.indicatorCard.more.replace("{title}", indicator.shortName)} className="-ml-1.5 mr-0" />
         </div>
-        <span data-value="" className="text-xl sm:text-2xl font-bold swiss-number text-ink text-right shrink-0">
+        <span data-value="" className="ml-auto text-xl sm:text-2xl font-bold swiss-number text-ink text-right">
           {formatIndicatorValue(indicator, locale)}
         </span>
       </div>
