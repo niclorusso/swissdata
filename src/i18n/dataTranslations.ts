@@ -1,132 +1,154 @@
 import { Locale } from "./translations";
 
+/** Texts of an indicator in one language (the English ones are in src/data/indicators.ts). */
+interface IndicatorTexts {
+  name: string;
+  shortName: string;
+  description: string;
+  context: string;
+  unitLine: string;
+  related?: string;
+  howToRead?: string;
+  acronym?: string;
+}
+
+/** The fields of an indicator that have a text in each language. */
+type LocalizedIndicatorFields = {
+  name: string;
+  shortName: string;
+  description: string;
+  context?: string;
+  unitLine: string;
+  related?: { text: string };
+  howToRead?: string;
+  acronym?: string;
+};
+
 // Italian translations for indicator data fields
-const indicatorTranslationsIT: Record<
-  string,
-  { name: string; shortName: string; description: string; context: string }
-> = {
+const indicatorTranslationsIT: Record<string, IndicatorTexts> = {
   "unemployment-rate-ilo": {
     name: "Tasso di disoccupazione (ILO)",
-    shortName: "Disoccupazione (ILO)",
-    description: "Tasso di disoccupazione secondo la definizione ILO: persone senza lavoro, in cerca attiva e disponibili, iscritte o no a un URC (media annua)",
+    shortName: "Disoccupazione secondo l'ILO",
+    description: "Persone senza lavoro, in cerca di un impiego e disponibili, iscritte o no a un ufficio di collocamento. Stima da un'indagine campionaria.",
     context: "È il tasso usato per i confronti internazionali. Nel 2025 era al 4,8\u00A0%, contro il 4,3\u00A0% del 2024.",
+    unitLine: "delle persone attive, media {year}",
+    related: "Due misure ufficiali: il tasso ILO conta anche chi cerca lavoro senza essere iscritto a un URC, perciò è più alto ({year}: {ilo} contro {seco}).",
+    acronym: "ILO = Organizzazione internazionale del lavoro.",
   },
   "unemployment-rate": {
     name: "Tasso di disoccupazione (SECO)",
-    shortName: "Disoccupazione",
-    description: "Disoccupati iscritti agli URC (Uffici regionali di collocamento) in rapporto alla popolazione attiva (media annua)",
+    shortName: "Disoccupazione registrata (SECO)",
+    description: "Persone iscritte come disoccupate a un ufficio regionale di collocamento (URC). Conteggio dai registri, non stima.",
     context: "Il tasso SECO conta solo le persone iscritte come disoccupate a un URC, perciò è più basso del tasso ILO (2025: 2,8\u00A0% contro 4,8\u00A0%).",
+    unitLine: "delle persone attive, media {year}",
+    related: "Due misure ufficiali: il tasso ILO conta anche chi cerca lavoro senza essere iscritto a un URC, perciò è più alto ({year}: {ilo} contro {seco}).",
   },
   "gdp-growth-rate": {
     name: "Tasso di crescita del PIL",
-    shortName: "Crescita PIL",
-    description: "Tasso di crescita annuale del PIL reale (ai prezzi dell'anno precedente)",
-    context: "Prima stima dell'UST per il 2025, pubblicata il 25 agosto 2026. La crescita del 2024 è stata rivista dall'1,4\u00A0% all'1,5\u00A0%.",
-  },
-  "gdp-growth": {
-    name: "Tasso di crescita del PIL",
     shortName: "Crescita del PIL",
-    description: "Tasso di crescita annuale del PIL (reale)",
-    context:
-      "La Svizzera mantiene una crescita costante nonostante le incertezze globali.",
+    description: "Di quanto è cambiato il valore di beni e servizi prodotti in Svizzera, senza l'effetto dei prezzi.",
+    context: "Prima stima dell'UST per il 2025, pubblicata il 25 agosto 2026. La crescita del 2024 è stata rivista dall'1,4\u00A0% all'1,5\u00A0%.",
+    unitLine: "in termini reali, {year}",
+    howToRead: "Sotto lo zero: il PIL è diminuito rispetto all'anno prima.",
   },
   "inflation-rate": {
     name: "Tasso d'inflazione (IPC)",
     shortName: "Inflazione",
-    description: "Rincaro medio annuo secondo l'Indice dei prezzi al consumo",
+    description: "Di quanto sono cambiati in un anno i prezzi di un paniere fisso di beni e servizi comprati dalle economie domestiche.",
     context: "Il rincaro medio annuo è sceso dal 2,8\u00A0% del 2022 allo 0,2\u00A0% del 2025.",
+    unitLine: "media annua, {year}",
+    howToRead: "Sotto lo zero: i prezzi sono scesi.",
   },
   "average-wage": {
     name: "Salario mensile mediano (lordo)",
     shortName: "Salario mediano",
-    description: "Salario mensile lordo mediano per un posto a tempo pieno, settore privato e pubblico insieme. La rilevazione si fa ogni due anni.",
+    description: "Metà dei dipendenti guadagna di più, metà di meno. Settore privato e pubblico; rilevazione ogni due anni.",
     context: "Il salario mediano è passato da 6788\u00A0franchi nel 2022 a 7024\u00A0franchi nel 2024 (+3,5\u00A0%). Metà dei dipendenti guadagna di più, metà di meno.",
+    unitLine: "lordi al mese, tempo pieno, {year}",
   },
   "federal-debt-gdp": {
     name: "Debito federale (% del PIL)",
-    shortName: "Debito federale",
-    description:
-      "Debito netto della Confederazione in percentuale del PIL (esclusi Cantoni/Comuni)",
+    shortName: "Debito della Confederazione",
+    description: "Debiti della sola Confederazione meno i suoi beni finanziari; Cantoni, Comuni e assicurazioni sociali esclusi.",
     context:
       "Questa cifra è gestita dal 'freno all'indebitamento'. Il debito netto è salito da 103\u00A0mld CHF (2019) a 142\u00A0mld CHF (2023) con le spese pandemiche ed era di 140\u00A0mld CHF a fine 2025.",
-  },
-  "public-debt": {
-    name: "Debito pubblico (% del PIL)",
-    shortName: "Debito pubblico",
-    description:
-      "Debito pubblico totale in percentuale del PIL",
-    context:
-      "La Svizzera ha uno dei rapporti debito/PIL più bassi tra i paesi sviluppati.",
+    unitLine: "debito netto, fine {year}",
+    related: "Altra misura: il debito lordo di Confederazione, Cantoni, Comuni e assicurazioni sociali (definizione FMI) era il {value} del PIL nel {year} (stima AFF).",
   },
   "housing-price-index": {
     name: "Indice dei prezzi immobiliari (Q4 2019=100)",
-    shortName: "Prezzi immobiliari",
-    description: "Indice ufficiale per case unifamiliari e appartamenti di proprietà, media annua (IMPI, base Q4 2019 = 100)",
+    shortName: "Prezzi delle abitazioni di proprietà",
+    description: "Prezzi pagati per case unifamiliari e appartamenti di proprietà.",
     context: "Nel 2025 i prezzi delle abitazioni di proprietà sono saliti in media del 4,6\u00A0%, dopo l'1,7\u00A0% del 2024 e il 2,2\u00A0% del 2023. L'indice esiste dal 2017.",
+    unitLine: "indice, 4° trimestre 2019 = 100, media {year}",
+    howToRead: "{value} vuol dire prezzi più alti del {diff} rispetto al 4° trimestre 2019.",
   },
   "foreign-population": {
     name: "Popolazione residente straniera",
-    shortName: "Residenti stranieri",
-    description: "Percentuale di residenti permanenti senza cittadinanza svizzera (31 dicembre)",
+    shortName: "Popolazione straniera",
+    description: "Residenti permanenti senza cittadinanza svizzera, compresi quelli nati in Svizzera.",
     context: "A fine 2025 la Svizzera contava 9\u202F127\u202F100 residenti permanenti, di cui 2\u202F528\u202F100 stranieri. I gruppi più numerosi sono italiani, tedeschi, portoghesi e francesi.",
+    unitLine: "dei residenti permanenti, 31.12.{year}",
   },
   "population-total": {
     name: "Popolazione totale",
     shortName: "Popolazione",
-    description: "Popolazione residente permanente al 31 dicembre (in milioni)",
+    description: "Chi ha domicilio in Svizzera; per gli stranieri, con un permesso o un soggiorno di almeno 12 mesi.",
     context: "A fine 2025 la Svizzera contava 9\u202F127\u202F100 residenti permanenti, lo 0,8\u00A0% in più rispetto a un anno prima (9\u202F051\u202F029). La soglia dei 9\u00A0milioni è stata superata nel corso del 2024: a fine 2023 i residenti erano 8\u202F962\u202F258.",
+    unitLine: "di residenti permanenti, 31.12.{year}",
   },
   "median-age": {
     name: "Età mediana",
     shortName: "Età mediana",
-    description: "Età mediana della popolazione residente al 1° gennaio",
+    description: "Metà della popolazione è più giovane, metà più anziana.",
     context: "L'età mediana è salita da 31,5 anni nel 1965 a 42,9 nel 2025. Al 1° gennaio 2025 era di 45,5 anni in Germania, 49,1 in Italia e 44,9 nell'UE.",
+    unitLine: "1° gennaio {year}",
   },
   "life-expectancy": {
     name: "Speranza di vita alla nascita",
-    shortName: "Speranza di vita",
-    description: "Speranza di vita alla nascita, entrambi i sessi",
+    shortName: "Speranza di vita alla nascita",
+    description: "Quanti anni vivrebbe in media un neonato se i tassi di mortalità restassero quelli dell'anno indicato.",
     context: "Nel 2024 la speranza di vita alla nascita era di 82,4 anni per gli uomini e 85,9 per le donne. Dati dell'UST per il 2025: 82,7 e 86,3 (pubblicati come provvisori il 18 giugno 2026; la tabella dell'UST del 24 settembre 2026 riporta gli stessi valori). Dopo il calo del 2020 (83,1) il valore complessivo è dal 2023 sopra il livello del 2019 (83,8).",
+    unitLine: "donne e uomini insieme, {year}",
   },
   "crime-rate-per-1000": {
     name: "Reati del Codice penale per 1000 abitanti",
-    shortName: "Reati del Codice penale",
-    description: "Reati secondo il Codice penale svizzero (CP) registrati dalla polizia per 1000 residenti permanenti",
+    shortName: "Reati registrati dalla polizia",
+    description: "Reati contro il Codice penale registrati dalla polizia, non condanne.",
     context: "Nel 2025 la polizia ha registrato 554\u202F963 reati secondo il Codice penale, l'1,5\u00A0% in meno rispetto al 2024, dopo tre anni di aumento. I reati contro il patrimonio sono diminuiti del 3,5\u00A0%, i reati violenti gravi sono aumentati dell'8,1\u00A0%. Gli omicidi consumati sono stati 55 (0,6 ogni 100\u202F000 residenti) e i reati commessi con modalità digitali 57\u202F761.",
-  },
-  "crime-rate": {
-    name: "Tasso di criminalità",
-    shortName: "Criminalità",
-    description:
-      "Reati penali registrati ogni 100\u202F000 abitanti",
-    context:
-      "I reati violenti rappresentano solo circa il 5\u00A0% di tutti i reati. La maggior parte riguarda il patrimonio.",
+    unitLine: "reati del Codice penale, {year}",
   },
   "healthcare-cost": {
     name: "Costi della sanità (% del PIL)",
     shortName: "Costi della sanità",
-    description: "Costi del sistema sanitario in percentuale del prodotto interno lordo",
+    description: "Tutto ciò che costa in un anno il sistema sanitario, chiunque paghi, in rapporto al PIL.",
     context: "Nel 2024 il sistema sanitario è costato 97,2\u00A0miliardi di franchi (dato provvisorio), il 4,1\u00A0% in più rispetto al 2023, cioè 899\u00A0franchi al mese per persona. In rapporto al PIL la Svizzera (11,4\u00A0%) è sotto Germania (12,2\u00A0%) e Austria (11,7\u00A0%), allo stesso livello della Francia (11,3\u00A0%) e sopra l'Italia (8,5\u00A0%) (OCSE, 2024).",
+    unitLine: "{year}",
   },
   "education-spending": {
     name: "Spesa per l'istruzione (% del PIL)",
-    shortName: "Istruzione",
-    description:
-      "Spesa pubblica per l'istruzione in percentuale del PIL",
+    shortName: "Spesa pubblica per l'istruzione",
+    description: "Spesa di Confederazione, Cantoni e Comuni per scuole, formazione professionale e università.",
     context:
       "Nel 2023 Confederazione, Cantoni e Comuni hanno speso 45,5\u00A0miliardi di franchi per l'istruzione, il 18,1\u00A0% della spesa pubblica totale e il 5,5\u00A0% del PIL (2022: 42,7\u00A0miliardi di franchi, 5,2\u00A0%).",
+    unitLine: "{year}",
   },
   "poverty-rate": {
     name: "Tasso di povertà (assoluta)",
     shortName: "Tasso di povertà",
-    description: "Tasso di povertà (assoluta): quota della popolazione con un reddito inferiore alla soglia di povertà",
+    description: "Persone in economie domestiche con un reddito inferiore alla soglia di povertà, derivata dalle norme dell'aiuto sociale.",
     context: "Nel 2024 l'8,4\u00A0% della popolazione, circa 743\u202F000 persone, era in povertà reddituale. La soglia di povertà era di 2388\u00A0franchi al mese per una persona sola e di 4159\u00A0franchi per due adulti con due figli. Il tasso di rischio di povertà è una misura distinta (reddito inferiore al 60\u00A0% della mediana): 16,4\u00A0%, circa 1\u202F451\u202F000 persone. I dati precedenti al 2014 non sono confrontabili.",
+    unitLine: "della popolazione, {year}",
+    related: "Da non confondere con il tasso di rischio di povertà (reddito sotto il 60\u00A0% della mediana): {value} nel {year}.",
+    howToRead: "Serie dal 2014: i dati precedenti non sono confrontabili.",
   },
   "renewable-energy": {
     name: "Quota rinnovabile del consumo finale di energia",
-    shortName: "Rinnovabili (consumo finale di energia)",
-    description: "Quota di energia rinnovabile sul consumo finale totale di energia",
+    shortName: "Energia rinnovabile",
+    description: "Parte dell'energia usata da economie domestiche, imprese e trasporti (elettricità, calore, carburanti) che viene da fonti rinnovabili.",
     context: "La quota rinnovabile del consumo finale di energia è scesa al 25,7\u00A0% nel 2022 e da allora è aumentata ogni anno. Nel 2025 era rinnovabile il 68,3\u00A0% della produzione netta di elettricità (produzione meno il consumo delle pompe di accumulazione). Della produzione lorda, l'idroelettrico ha fornito il 55,5\u00A0% e il fotovoltaico l'11,8\u00A0%.",
+    unitLine: "del consumo finale di energia, {year}",
+    related: "Da non confondere con la quota rinnovabile dell'elettricità: {value} della produzione netta nel {year}.",
   },
 };
 
@@ -505,268 +527,273 @@ const questionTranslationsIT: Record<
 };
 
 // German translations for indicator data fields
-const indicatorTranslationsDE: Record<
-  string,
-  { name: string; shortName: string; description: string; context: string }
-> = {
+const indicatorTranslationsDE: Record<string, IndicatorTexts> = {
   "unemployment-rate-ilo": {
     name: "Arbeitslosenquote (ILO-Definition)",
-    shortName: "Arbeitslosigkeit (ILO)",
-    description: "Arbeitslosenquote nach ILO-Standards: Personen ohne Arbeit, die aktiv suchen und verfügbar sind, ob bei einem RAV gemeldet oder nicht (Jahresdurchschnitt)",
+    shortName: "Erwerbslosenquote gemäss ILO",
+    description: "Personen ohne Arbeit, die eine Stelle suchen und verfügbar sind, ob beim RAV gemeldet oder nicht. Schätzung aus einer Stichprobenerhebung.",
     context: "Diese Quote wird für internationale Vergleiche verwendet. 2025 lag sie bei 4,8\u00A0%, nach 4,3\u00A0% im Jahr 2024.",
+    unitLine: "der Erwerbspersonen, Jahresmittel {year}",
+    related: "Zwei amtliche Masse: Die Erwerbslosenquote gemäss ILO zählt auch Stellensuchende, die nicht beim RAV gemeldet sind, und liegt deshalb höher ({year}: {ilo} gegenüber {seco}).",
+    acronym: "ILO = Internationale Arbeitsorganisation.",
   },
   "unemployment-rate": {
     name: "Arbeitslosenquote (SECO)",
-    shortName: "Arbeitslosigkeit",
-    description: "Bei den RAV (Regionale Arbeitsvermittlungszentren) registrierte Arbeitslose im Verhältnis zu den Erwerbspersonen (Jahresdurchschnitt)",
+    shortName: "Registrierte Arbeitslosigkeit (SECO)",
+    description: "Personen, die bei einem Regionalen Arbeitsvermittlungszentrum (RAV) als arbeitslos gemeldet sind. Zählung aus den Registern.",
     context: "Die SECO-Quote zählt nur Personen, die bei einem RAV als arbeitslos gemeldet sind, und liegt deshalb unter der ILO-Quote (2025: 2,8\u00A0% gegenüber 4,8\u00A0%).",
+    unitLine: "der Erwerbspersonen, Jahresmittel {year}",
+    related: "Zwei amtliche Masse: Die Erwerbslosenquote gemäss ILO zählt auch Stellensuchende, die nicht beim RAV gemeldet sind, und liegt deshalb höher ({year}: {ilo} gegenüber {seco}).",
   },
   "gdp-growth-rate": {
     name: "BIP-Wachstumsrate",
-    shortName: "BIP-Wachstum",
-    description: "Jährliche Wachstumsrate des realen BIP (zu Preisen des Vorjahres)",
+    shortName: "Wachstum des BIP",
+    description: "Wie stark sich der Wert der in der Schweiz hergestellten Waren und Dienstleistungen verändert hat, ohne Preiseffekt.",
     context: "Erste Schätzung des BFS für 2025, veröffentlicht am 25. August 2026. Das Wachstum 2024 wurde von 1,4\u00A0% auf 1,5\u00A0% revidiert.",
-  },
-  "gdp-growth": {
-    name: "BIP-Wachstumsrate",
-    shortName: "BIP-Wachstum",
-    description: "Jährliche Wachstumsrate des realen BIP",
-    context: "Die Schweiz verzeichnet trotz globaler Unsicherheiten ein stetiges Wachstum.",
+    unitLine: "real, {year}",
+    howToRead: "Unter null: Das BIP ist gegenüber dem Vorjahr geschrumpft.",
   },
   "inflation-rate": {
     name: "Inflationsrate (LIK)",
-    shortName: "Inflation",
-    description: "Durchschnittliche Jahresteuerung gemäss Landesindex der Konsumentenpreise",
+    shortName: "Teuerung",
+    description: "Wie stark sich die Preise eines festen Warenkorbs der Haushalte innert eines Jahres verändert haben.",
     context: "Die durchschnittliche Jahresteuerung sank von 2,8\u00A0% im Jahr 2022 auf 0,2\u00A0% im Jahr 2025.",
+    unitLine: "Jahresmittel {year}",
+    howToRead: "Unter null: Die Preise sind gesunken.",
   },
   "average-wage": {
     name: "Medianer Monatslohn (brutto)",
     shortName: "Medianlohn",
-    description: "Medianer Bruttomonatslohn für eine Vollzeitstelle, privater und öffentlicher Sektor zusammen. Die Erhebung findet alle zwei Jahre statt.",
+    description: "Die Hälfte der Angestellten verdient mehr, die Hälfte weniger. Privater und öffentlicher Sektor; Erhebung alle zwei Jahre.",
     context: "Der Medianlohn stieg von 6788\u00A0Franken im Jahr 2022 auf 7024\u00A0Franken im Jahr 2024 (+3,5\u00A0%). Die Hälfte der Arbeitnehmenden verdient mehr, die Hälfte weniger.",
+    unitLine: "brutto pro Monat, Vollzeit, {year}",
   },
   "federal-debt-gdp": {
     name: "Bundesschulden (% des BIP)",
-    shortName: "Bundesschulden",
-    description: "Nettoschulden des Bundes in Prozent des BIP (ohne Kantone/Gemeinden)",
+    shortName: "Schulden des Bundes",
+    description: "Schulden des Bundes abzüglich seines Finanzvermögens; ohne Kantone, Gemeinden und Sozialversicherungen.",
     context: "Dieser Wert wird durch die Schuldenbremse gesteuert. Die Nettoschulden stiegen mit den Pandemieausgaben von 103\u00A0Mrd. CHF (2019) auf 142\u00A0Mrd. CHF (2023) und lagen Ende 2025 bei 140\u00A0Mrd. CHF.",
-  },
-  "public-debt": {
-    name: "Staatsverschuldung (% des BIP)",
-    shortName: "Staatsschulden",
-    description: "Gesamte Staatsverschuldung in Prozent des BIP",
-    context: "Die Schweiz hat eine der niedrigsten Schuldenquoten unter den Industrieländern.",
+    unitLine: "Nettoschulden, Ende {year}",
+    related: "Anderes Mass: Die Bruttoschulden von Bund, Kantonen, Gemeinden und Sozialversicherungen (Definition des IWF) betrugen {year} {value} des BIP (Schätzung der EFV).",
   },
   "housing-price-index": {
     name: "Immobilienpreisindex (Q4 2019=100)",
-    shortName: "Immobilienpreise",
-    description: "Offizieller Index für Einfamilienhäuser und Eigentumswohnungen, Jahresdurchschnitt (IMPI, Basis Q4 2019 = 100)",
+    shortName: "Preise für Wohneigentum",
+    description: "Bezahlte Preise für Einfamilienhäuser und Eigentumswohnungen.",
     context: "2025 stiegen die Preise für Wohneigentum im Durchschnitt um 4,6\u00A0%, nach 1,7\u00A0% im Jahr 2024 und 2,2\u00A0% im Jahr 2023. Den Index gibt es seit 2017.",
+    unitLine: "Index, 4. Quartal 2019 = 100, Jahresmittel {year}",
+    howToRead: "{value} bedeutet: Preise {diff} höher als im 4. Quartal 2019.",
   },
   "foreign-population": {
     name: "Ständige ausländische Wohnbevölkerung",
     shortName: "Ausländische Bevölkerung",
-    description: "Anteil der ständigen Wohnbevölkerung ohne Schweizer Staatsbürgerschaft (31. Dezember)",
+    description: "Ständige Einwohnerinnen und Einwohner ohne Schweizer Bürgerrecht, auch wenn sie in der Schweiz geboren sind.",
     context: "Ende 2025 zählte die Schweiz 9\u202F127\u202F100 ständige Einwohnerinnen und Einwohner, davon 2\u202F528\u202F100 Ausländerinnen und Ausländer. Die grössten Gruppen sind italienische, deutsche, portugiesische und französische Staatsangehörige.",
+    unitLine: "der ständigen Wohnbevölkerung, 31.12.{year}",
   },
   "population-total": {
     name: "Gesamtbevölkerung",
     shortName: "Bevölkerung",
-    description: "Ständige Wohnbevölkerung am 31. Dezember (in Millionen)",
+    description: "Wer in der Schweiz wohnt; bei Ausländerinnen und Ausländern mit Bewilligung oder Aufenthalt von mindestens 12 Monaten.",
     context: "Ende 2025 zählte die Schweiz 9\u202F127\u202F100 ständige Einwohnerinnen und Einwohner, 0,8\u00A0% mehr als ein Jahr zuvor (9\u202F051\u202F029). Die 9-Millionen-Marke wurde im Lauf des Jahres 2024 überschritten: Ende 2023 waren es 8\u202F962\u202F258.",
+    unitLine: "ständige Wohnbevölkerung, 31.12.{year}",
   },
   "median-age": {
     name: "Medianalter",
     shortName: "Medianalter",
-    description: "Medianalter der Wohnbevölkerung am 1. Januar",
+    description: "Die Hälfte der Bevölkerung ist jünger, die Hälfte älter.",
     context: "Das Medianalter stieg von 31,5 Jahren im Jahr 1965 auf 42,9 im Jahr 2025. Am 1. Januar 2025 betrug es in Deutschland 45,5 Jahre, in Italien 49,1 und in der EU 44,9.",
+    unitLine: "1. Januar {year}",
   },
   "life-expectancy": {
     name: "Lebenserwartung bei Geburt",
-    shortName: "Lebenserwartung",
-    description: "Lebenserwartung bei Geburt, beide Geschlechter",
+    shortName: "Lebenserwartung bei Geburt",
+    description: "Wie viele Jahre ein Neugeborenes im Durchschnitt leben würde, wenn die Sterberaten des Jahres gleich blieben.",
     context: "2024 betrug die Lebenserwartung bei Geburt 82,4 Jahre für Männer und 85,9 für Frauen. Zahlen des BFS für 2025: 82,7 und 86,3 (am 18. Juni 2026 als provisorisch veröffentlicht; die BFS-Tabelle vom 24. September 2026 enthält dieselben Werte). Nach dem Rückgang von 2020 (83,1) liegt der Gesamtwert seit 2023 über dem Stand von 2019 (83,8).",
+    unitLine: "Frauen und Männer zusammen, {year}",
   },
   "crime-rate-per-1000": {
     name: "Straftaten nach Strafgesetzbuch pro 1000 Einwohner",
-    shortName: "Straftaten nach StGB",
-    description: "Polizeilich registrierte Straftaten nach Schweizer Strafgesetzbuch (StGB) pro 1000 ständige Einwohner",
+    shortName: "Von der Polizei registrierte Straftaten",
+    description: "Von der Polizei registrierte Straftaten nach Strafgesetzbuch, keine Verurteilungen.",
     context: "2025 registrierte die Polizei 554\u202F963 Straftaten nach Strafgesetzbuch, 1,5\u00A0% weniger als 2024, nach drei Jahren mit Zunahmen. Die Vermögensstraftaten gingen um 3,5\u00A0% zurück, die schweren Gewaltstraftaten nahmen um 8,1\u00A0% zu. Es gab 55 vollendete Tötungsdelikte (0,6 pro 100\u202F000 Einwohner) und 57\u202F761 Straftaten mit digitalem Tatvorgehen.",
-  },
-  "crime-rate": {
-    name: "Kriminalitätsrate",
-    shortName: "Kriminalität",
-    description: "Registrierte Straftaten pro 100\u202F000 Einwohner",
-    context: "Gewaltverbrechen machen nur etwa 5\u00A0% aller Straftaten aus. Die meisten betreffen Eigentum.",
+    unitLine: "Straftaten nach Strafgesetzbuch, {year}",
   },
   "healthcare-cost": {
     name: "Gesundheitskosten (% des BIP)",
-    shortName: "Gesundheitskosten",
-    description: "Kosten des Gesundheitswesens in Prozent des Bruttoinlandprodukts",
+    shortName: "Kosten des Gesundheitswesens",
+    description: "Alles, was das Gesundheitswesen in einem Jahr kostet, wer auch immer bezahlt, im Verhältnis zum BIP.",
     context: "2024 kostete das Gesundheitswesen 97,2\u00A0Milliarden Franken (provisorisch), 4,1\u00A0% mehr als 2023, das sind 899\u00A0Franken pro Person und Monat. Gemessen am BIP liegt die Schweiz (11,4\u00A0%) unter Deutschland (12,2\u00A0%) und Österreich (11,7\u00A0%), gleichauf mit Frankreich (11,3\u00A0%) und über Italien (8,5\u00A0%) (OECD, 2024).",
+    unitLine: "{year}",
   },
   "education-spending": {
     name: "Bildungsausgaben (% des BIP)",
-    shortName: "Bildung",
-    description: "Öffentliche Bildungsausgaben in Prozent des BIP",
+    shortName: "Öffentliche Bildungsausgaben",
+    description: "Ausgaben von Bund, Kantonen und Gemeinden für Schulen, Berufsbildung und Hochschulen.",
     context: "2023 gaben Bund, Kantone und Gemeinden 45,5\u00A0Milliarden Franken für die Bildung aus, 18,1\u00A0% der gesamten öffentlichen Ausgaben und 5,5\u00A0% des BIP (2022: 42,7\u00A0Milliarden Franken, 5,2\u00A0%).",
+    unitLine: "{year}",
   },
   "poverty-rate": {
     name: "Armutsquote (absolut)",
     shortName: "Armutsquote",
-    description: "Armutsquote (absolut): Anteil der Bevölkerung mit einem Einkommen unter der Armutsgrenze",
+    description: "Personen in Haushalten mit einem Einkommen unter der Armutsgrenze, die sich aus den Richtlinien der Sozialhilfe ableitet.",
     context: "2024 waren 8,4\u00A0% der Bevölkerung, rund 743\u202F000 Personen, einkommensarm. Die Armutsgrenze lag bei 2388\u00A0Franken pro Monat für eine Einzelperson und bei 4159\u00A0Franken für zwei Erwachsene mit zwei Kindern. Die Armutsgefährdungsquote ist ein eigenes Mass (Einkommen unter 60\u00A0% des Medians): 16,4\u00A0%, rund 1\u202F451\u202F000 Personen. Zahlen vor 2014 sind nicht vergleichbar.",
+    unitLine: "der Bevölkerung, {year}",
+    related: "Nicht zu verwechseln mit der Armutsgefährdungsquote (Einkommen unter 60\u00A0% des Medians): {value} im Jahr {year}.",
+    howToRead: "Reihe ab 2014: Frühere Zahlen sind nicht vergleichbar.",
   },
   "renewable-energy": {
     name: "Erneuerbarer Anteil am Endenergieverbrauch",
-    shortName: "Erneuerbare (Endenergieverbrauch)",
-    description: "Anteil erneuerbarer Energien am gesamten Endenergieverbrauch",
+    shortName: "Erneuerbare Energie",
+    description: "Anteil der von Haushalten, Wirtschaft und Verkehr genutzten Energie (Strom, Wärme, Treibstoffe), der aus erneuerbaren Quellen stammt.",
     context: "Der erneuerbare Anteil am Endenergieverbrauch sank 2022 auf 25,7\u00A0% und ist seither jedes Jahr gestiegen. 2025 waren 68,3\u00A0% der Netto-Stromproduktion (Produktion abzüglich des Verbrauchs der Speicherpumpen) erneuerbar. Von der Bruttoproduktion lieferte die Wasserkraft 55,5\u00A0% und die Photovoltaik 11,8\u00A0%.",
+    unitLine: "des Endenergieverbrauchs, {year}",
+    related: "Nicht zu verwechseln mit dem erneuerbaren Anteil am Strom: {value} der Nettoproduktion {year}.",
   },
 };
 
 // French translations for indicator data fields
-const indicatorTranslationsFR: Record<
-  string,
-  { name: string; shortName: string; description: string; context: string }
-> = {
+const indicatorTranslationsFR: Record<string, IndicatorTexts> = {
   "unemployment-rate-ilo": {
     name: "Taux de chômage (définition OIT)",
-    shortName: "Chômage (OIT)",
-    description: "Taux de chômage selon les normes de l'OIT : personnes sans emploi, en recherche active et disponibles, inscrites ou non à un ORP (moyenne annuelle)",
+    shortName: "Chômage au sens du BIT",
+    description: "Personnes sans emploi, qui en cherchent un et sont disponibles, inscrites ou non dans un ORP. Estimation tirée d'une enquête par sondage.",
     context: "C'est le taux utilisé pour les comparaisons internationales. En 2025 il était de 4,8\u202F%, contre 4,3\u202F% en 2024.",
+    unitLine: "de la population active, moyenne {year}",
+    related: "Deux mesures officielles : le taux au sens du BIT compte aussi les personnes qui cherchent un emploi sans être inscrites dans un ORP ; il est donc plus élevé ({year} : {ilo} contre {seco}).",
+    acronym: "BIT = Bureau international du Travail.",
   },
   "unemployment-rate": {
     name: "Taux de chômage (SECO)",
-    shortName: "Chômage",
-    description: "Chômeurs inscrits aux ORP (Offices régionaux de placement) par rapport à la population active (moyenne annuelle)",
+    shortName: "Chômage enregistré (SECO)",
+    description: "Personnes inscrites comme chômeuses dans un office régional de placement (ORP). Décompte tiré des registres.",
     context: "Le taux SECO ne compte que les personnes inscrites comme chômeuses à un ORP ; il est donc plus bas que le taux OIT (2025 : 2,8\u202F% contre 4,8\u202F%).",
+    unitLine: "de la population active, moyenne {year}",
+    related: "Deux mesures officielles : le taux au sens du BIT compte aussi les personnes qui cherchent un emploi sans être inscrites dans un ORP ; il est donc plus élevé ({year} : {ilo} contre {seco}).",
   },
   "gdp-growth-rate": {
     name: "Taux de croissance du PIB",
-    shortName: "Croissance PIB",
-    description: "Taux de croissance annuel du PIB réel (aux prix de l'année précédente)",
-    context: "Première estimation de l'OFS pour 2025, publiée le 25 août 2026. La croissance de 2024 a été révisée de 1,4\u202F% à 1,5\u202F%.",
-  },
-  "gdp-growth": {
-    name: "Taux de croissance du PIB",
     shortName: "Croissance du PIB",
-    description: "Taux de croissance annuel du PIB réel",
-    context: "La Suisse maintient une croissance régulière malgré les incertitudes mondiales.",
+    description: "Variation de la valeur des biens et services produits en Suisse, hors effet des prix.",
+    context: "Première estimation de l'OFS pour 2025, publiée le 25 août 2026. La croissance de 2024 a été révisée de 1,4\u202F% à 1,5\u202F%.",
+    unitLine: "en termes réels, {year}",
+    howToRead: "Sous zéro : le PIB a reculé par rapport à l'année précédente.",
   },
   "inflation-rate": {
     name: "Taux d'inflation (IPC)",
     shortName: "Inflation",
-    description: "Renchérissement annuel moyen selon l'Indice des prix à la consommation",
+    description: "Variation sur un an des prix d'un panier fixe de biens et services achetés par les ménages.",
     context: "Le renchérissement annuel moyen est passé de 2,8\u202F% en 2022 à 0,2\u202F% en 2025.",
+    unitLine: "moyenne annuelle, {year}",
+    howToRead: "Sous zéro : les prix ont baissé.",
   },
   "average-wage": {
     name: "Salaire mensuel médian (brut)",
     shortName: "Salaire médian",
-    description: "Salaire mensuel brut médian pour un poste à plein temps, secteurs privé et public ensemble. L'enquête a lieu tous les deux ans.",
+    description: "La moitié des salariés gagne plus, l'autre moitié moins. Secteurs privé et public ; enquête tous les deux ans.",
     context: "Le salaire médian est passé de 6788\u00A0francs en 2022 à 7024\u00A0francs en 2024 (+3,5\u202F%). La moitié des salariés gagne plus, l'autre moitié moins.",
+    unitLine: "brut par mois, plein temps, {year}",
   },
   "federal-debt-gdp": {
     name: "Dette fédérale (% du PIB)",
-    shortName: "Dette fédérale",
-    description: "Dette nette de la Confédération en pourcentage du PIB (hors cantons/communes)",
+    shortName: "Dette de la Confédération",
+    description: "Dettes de la seule Confédération moins ses actifs financiers ; sans les cantons, les communes ni les assurances sociales.",
     context: "Ce chiffre est géré par le 'frein à l'endettement'. La dette nette est passée de 103 Mrd CHF (2019) à 142 Mrd CHF (2023) avec les dépenses liées à la pandémie et s'élevait à 140 Mrd CHF fin 2025.",
-  },
-  "public-debt": {
-    name: "Dette publique (% du PIB)",
-    shortName: "Dette publique",
-    description: "Dette publique totale en pourcentage du PIB",
-    context: "La Suisse a l'un des ratios dette/PIB les plus bas parmi les pays développés.",
+    unitLine: "dette nette, fin {year}",
+    related: "Autre mesure : la dette brute de la Confédération, des cantons, des communes et des assurances sociales (définition du FMI) atteignait {value} du PIB en {year} (estimation de l'AFF).",
   },
   "housing-price-index": {
     name: "Indice des prix immobiliers (T4 2019=100)",
-    shortName: "Prix immobiliers",
-    description: "Indice officiel pour les maisons individuelles et les appartements en propriété, moyenne annuelle (IMPI, base T4 2019 = 100)",
+    shortName: "Prix des logements en propriété",
+    description: "Prix payés pour des maisons individuelles et des appartements en propriété.",
     context: "En 2025 les prix des logements en propriété ont augmenté de 4,6\u202F% en moyenne, après 1,7\u202F% en 2024 et 2,2\u202F% en 2023. L'indice existe depuis 2017.",
+    unitLine: "indice, 4e trimestre 2019 = 100, moyenne {year}",
+    howToRead: "{value} signifie des prix supérieurs de {diff} à ceux du 4e trimestre 2019.",
   },
   "foreign-population": {
     name: "Population résidente étrangère permanente",
     shortName: "Population étrangère",
-    description: "Pourcentage de résidents permanents sans nationalité suisse (31 décembre)",
+    description: "Résidents permanents sans nationalité suisse, y compris ceux nés en Suisse.",
     context: "Fin 2025 la Suisse comptait 9\u202F127\u202F100 résidents permanents, dont 2\u202F528\u202F100 étrangers. Les groupes les plus nombreux sont les Italiens, les Allemands, les Portugais et les Français.",
+    unitLine: "de la population résidante permanente, 31.12.{year}",
   },
   "population-total": {
     name: "Population totale",
     shortName: "Population",
-    description: "Population résidante permanente au 31 décembre (en millions)",
+    description: "Personnes domiciliées en Suisse ; pour les étrangers, avec un permis ou un séjour d'au moins 12 mois.",
     context: "Fin 2025 la Suisse comptait 9\u202F127\u202F100 résidents permanents, 0,8\u202F% de plus qu'un an plus tôt (9\u202F051\u202F029). Le seuil des 9\u00A0millions a été franchi au cours de l'année 2024 : fin 2023 ils étaient 8\u202F962\u202F258.",
+    unitLine: "de résidents permanents, 31.12.{year}",
   },
   "median-age": {
     name: "Âge médian",
     shortName: "Âge médian",
-    description: "Âge médian de la population résidante au 1er janvier",
+    description: "La moitié de la population est plus jeune, l'autre moitié plus âgée.",
     context: "L'âge médian est passé de 31,5 ans en 1965 à 42,9 en 2025. Au 1er janvier 2025 il était de 45,5 ans en Allemagne, de 49,1 en Italie et de 44,9 dans l'UE.",
+    unitLine: "1er janvier {year}",
   },
   "life-expectancy": {
     name: "Espérance de vie à la naissance",
-    shortName: "Espérance de vie",
-    description: "Espérance de vie à la naissance, les deux sexes",
+    shortName: "Espérance de vie à la naissance",
+    description: "Nombre moyen d'années que vivrait un nouveau-né si les taux de mortalité de l'année restaient inchangés.",
     context: "En 2024 l'espérance de vie à la naissance était de 82,4 ans pour les hommes et de 85,9 pour les femmes. Chiffres de l'OFS pour 2025 : 82,7 et 86,3 (publiés comme provisoires le 18 juin 2026 ; le tableau de l'OFS du 24 septembre 2026 contient les mêmes valeurs). Après la baisse de 2020 (83,1), la valeur globale dépasse depuis 2023 le niveau de 2019 (83,8).",
+    unitLine: "femmes et hommes ensemble, {year}",
   },
   "crime-rate-per-1000": {
     name: "Infractions au Code pénal pour 1000 habitants",
-    shortName: "Infractions au Code pénal",
-    description: "Infractions au Code pénal suisse (CP) enregistrées par la police pour 1000 résidents permanents",
+    shortName: "Infractions enregistrées par la police",
+    description: "Infractions au Code pénal enregistrées par la police, et non condamnations.",
     context: "En 2025 la police a enregistré 554\u202F963 infractions au Code pénal, 1,5\u202F% de moins qu'en 2024, après trois années de hausse. Les infractions contre le patrimoine ont reculé de 3,5\u202F%, les infractions de violence grave ont augmenté de 8,1\u202F%. Il y a eu 55 homicides consommés (0,6 pour 100\u202F000 habitants) et 57\u202F761 infractions commises avec un mode opératoire numérique.",
-  },
-  "crime-rate": {
-    name: "Taux de criminalité",
-    shortName: "Criminalité",
-    description: "Infractions pénales enregistrées pour 100\u202F000 habitants",
-    context: "Les crimes violents ne représentent qu'environ 5\u202F% de toutes les infractions. La plupart concernent les biens.",
+    unitLine: "infractions au Code pénal, {year}",
   },
   "healthcare-cost": {
     name: "Coûts de la santé (% du PIB)",
-    shortName: "Coûts de la santé",
-    description: "Coûts du système de santé en pourcentage du produit intérieur brut",
+    shortName: "Coûts du système de santé",
+    description: "Tout ce que coûte le système de santé en un an, quel que soit le payeur, rapporté au PIB.",
     context: "En 2024 le système de santé a coûté 97,2\u00A0milliards de francs (provisoire), 4,1\u202F% de plus qu'en 2023, soit 899\u00A0francs par personne et par mois. En part du PIB, la Suisse (11,4\u202F%) se situe sous l'Allemagne (12,2\u202F%) et l'Autriche (11,7\u202F%), au même niveau que la France (11,3\u202F%) et au-dessus de l'Italie (8,5\u202F%) (OCDE, 2024).",
+    unitLine: "{year}",
   },
   "education-spending": {
     name: "Dépenses d'éducation (% du PIB)",
-    shortName: "Éducation",
-    description: "Dépenses publiques d'éducation en pourcentage du PIB",
+    shortName: "Dépenses publiques d'éducation",
+    description: "Dépenses de la Confédération, des cantons et des communes pour l'école, la formation professionnelle et les hautes écoles.",
     context: "En 2023 la Confédération, les cantons et les communes ont dépensé 45,5\u00A0milliards de francs pour l'éducation, soit 18,1\u202F% des dépenses publiques totales et 5,5\u202F% du PIB (2022 : 42,7\u00A0milliards de francs, 5,2\u202F%).",
+    unitLine: "{year}",
   },
   "poverty-rate": {
     name: "Taux de pauvreté (absolue)",
     shortName: "Taux de pauvreté",
-    description: "Taux de pauvreté (absolue) : part de la population dont le revenu est inférieur au seuil de pauvreté",
+    description: "Personnes vivant dans un ménage dont le revenu est inférieur au seuil de pauvreté, dérivé des normes de l'aide sociale.",
     context: "En 2024, 8,4\u202F% de la population, environ 743\u202F000 personnes, étaient en situation de pauvreté en termes de revenu. Le seuil de pauvreté était de 2388\u00A0francs par mois pour une personne seule et de 4159\u00A0francs pour deux adultes avec deux enfants. Le taux de risque de pauvreté est une mesure distincte (revenu inférieur à 60\u202F% de la médiane) : 16,4\u202F%, environ 1\u202F451\u202F000 personnes. Les chiffres antérieurs à 2014 ne sont pas comparables.",
+    unitLine: "de la population, {year}",
+    related: "À ne pas confondre avec le taux de risque de pauvreté (revenu inférieur à 60\u202F% de la médiane) : {value} en {year}.",
+    howToRead: "Série depuis 2014 : les chiffres antérieurs ne sont pas comparables.",
   },
   "renewable-energy": {
     name: "Part renouvelable de la consommation finale d'énergie",
-    shortName: "Renouvelables (consommation finale d'énergie)",
-    description: "Part des énergies renouvelables dans la consommation finale totale d'énergie",
+    shortName: "Énergies renouvelables",
+    description: "Part de l'énergie utilisée par les ménages, l'économie et les transports (électricité, chaleur, carburants) qui provient de sources renouvelables.",
     context: "La part renouvelable de la consommation finale d'énergie est tombée à 25,7\u202F% en 2022 et augmente chaque année depuis. En 2025, 68,3\u202F% de la production nette d'électricité (production moins la consommation des pompes d'accumulation) était renouvelable. De la production brute, l'hydraulique a fourni 55,5\u202F% et le photovoltaïque 11,8\u202F%.",
+    unitLine: "de la consommation finale d'énergie, {year}",
+    related: "À ne pas confondre avec la part renouvelable de l'électricité : {value} de la production nette en {year}.",
   },
 };
 
-// Helper function to get localized indicator fields
-export function getLocalizedIndicator(
-  id: string,
-  fields: {
-    name: string;
-    shortName: string;
-    description: string;
-    context?: string;
-  },
-  locale: Locale
-): { name: string; shortName: string; description: string; context?: string } {
+/** The texts of an indicator in the language of the page; the numbers stay those of src/data/indicators.ts. */
+export function getLocalizedIndicator<F extends LocalizedIndicatorFields>(id: string, fields: F, locale: Locale): F {
   if (locale === "en") return fields;
-  
   const translations = locale === "de" ? indicatorTranslationsDE : locale === "fr" ? indicatorTranslationsFR : indicatorTranslationsIT;
   const t = translations[id];
   if (!t) return fields;
   return {
+    ...fields,
     name: t.name,
     shortName: t.shortName,
     description: t.description,
     context: t.context || fields.context,
+    unitLine: t.unitLine,
+    related: fields.related && t.related ? { ...fields.related, text: t.related } : fields.related,
+    howToRead: t.howToRead ?? fields.howToRead,
+    acronym: t.acronym ?? fields.acronym,
   };
 }
 
