@@ -5,5 +5,11 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-/** The SwissData site on public spending (federal budget, cantons, municipalities, contracts). Italian at the root, English under /en/. */
-export const SPENDING_URL = "https://spending.swissdata-platform.ch";
+
+/** Name of a canton in the language of the page. */
+export function cantonName(
+  canton: { name: string; nameDE: string; nameFR: string; nameIT: string },
+  locale: "en" | "it" | "de" | "fr"
+): string {
+  return locale === "it" ? canton.nameIT : locale === "de" ? canton.nameDE : locale === "fr" ? canton.nameFR : canton.name;
+}

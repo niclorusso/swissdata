@@ -4,12 +4,12 @@ An interactive web app for exploring real statistics about Switzerland's economy
 
 ## Features
 
-- **Dashboard** (`/`) — Key indicators in three categories: economic, demographic and social
-- **Statistics** (`/statistics`) — One chart per indicator with a selectable time range, a category filter and the source of each series
-- **Canton Map** (`/cantons`) — SVG map of the 26 cantons, coloured by a selectable indicator, with a detail panel and a sortable table
-- **Quiz** (`/quiz`) — 53 questions on Swiss statistics, answered with a slider, with a score
-- **About** (`/about`)
-- **Four languages** — English, Italian, German and French. The texts are in `src/i18n/`; the chosen language is stored in the browser
+- **Dashboard** (`/<lang>`) — Key indicators in three categories: economic, demographic and social
+- **Statistics** (`/<lang>/statistics`) — One chart per indicator with a selectable time range, a category filter and the source of each series
+- **Canton Map** (`/<lang>/cantons`) — SVG map of the 26 cantons, coloured by a selectable indicator, with a detail panel and a sortable table
+- **Quiz** (`/<lang>/quiz`) — 53 questions on Swiss statistics, answered with a slider, with a score
+- **About** (`/<lang>/about`)
+- **Four languages** — Italian, German, French and English, each at its own address: `/it/…`, `/de/…`, `/fr/…`, `/en/…` (`src/app/[lang]/`). Every page is prerendered at build time in each language as static HTML, with `<html lang>`, title, description, canonical address and hreflang links in that language; `/sitemap.xml` lists the four versions of every page. The texts are in `src/i18n/`. The addresses without a language (`/`, `/cantons`, `/statistics`, `/quiz`, `/about`) redirect (302) to the same page in a language: the one chosen in the header (cookie `swissdata-locale`, set by the language menu), otherwise the first of the browser's languages (`Accept-Language`) that the site has, otherwise English. That redirect is `src/proxy.ts`, which runs only for those addresses. Links from other sites should name the language: `https://swissdata-platform.ch/<lang>` (`it`, `de`, `fr`, `en`)
 
 ## Data Sources
 
@@ -48,7 +48,7 @@ It needs Python 3.9 or later (standard library only) and `pdftotext` (poppler), 
 
 `scripts/watch/` notices when an official source used by the site has published a newer edition, and when a source link shown to visitors has moved or broken. It changes nothing on the site: it writes a report that names, for each finding, the file and key to edit and the official page to open, with a draft change-log sentence.
 
-- `sources.json` is the registry: one item per indicator, canton figure and quiz fact, with the publisher, where it is used, where the period shown on the site is read (from `src/data/indicators.ts`, `src/data/questions.ts`, `src/data/cantons.ts` and the info texts in `src/i18n/indicatorExplanations.ts`) and one or more probes: FSO tables by order number (DAM API), FSO STAT-TAB cubes (PXWeb API), Eurostat tables (API), the SNB data portal, files at a stable address (ETag/Last-Modified or SHA-256), pages that list editions (a pattern), and figures defined per calendar year. Every `sourceUrl` in the data files and every URL in `src/data/sources.ts` is also checked as a link.
+- `sources.json` is the registry: one item per indicator, canton figure and quiz fact, with the publisher, where it is used, where the period shown on the site is read (from `src/data/indicators.ts`, including the info text of each card (`context`, `related`), `src/data/questions.ts` and `src/data/cantons.ts`) and one or more probes: FSO tables by order number (DAM API), FSO STAT-TAB cubes (PXWeb API), Eurostat tables (API), the SNB data portal, files at a stable address (ETag/Last-Modified or SHA-256), pages that list editions (a pattern), and figures defined per calendar year. Every `sourceUrl` in the data files and every URL in `src/data/sources.ts` is also checked as a link.
 - A source is reported when its edition changed since the last run, or when it offers a newer period than the one the site shows. The second check also finds staleness that is older than the watcher.
 - `.github/workflows/watch-sources.yml` runs it every day and on demand. When there is something to report it updates the one open issue labelled `sources` and adds a comment, or opens a new issue; otherwise it does nothing. The issue body always shows the latest report, including a "Still open" list of findings reported before and not yet resolved. The state of the last run is kept at the bottom of that issue, not in the repository, so the workflow never commits and never triggers a deploy. `state.json` is only the starting point: the sources as seen on the day the watcher was set up. A source that cannot be reached is listed in the report but becomes an item only after three failed runs in a row.
 

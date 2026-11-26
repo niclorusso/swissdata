@@ -21,9 +21,27 @@ export type QuestionSubcategory =
 
 export type TrendDirection = "up" | "down" | "stable";
 
+/**
+ * How the card writes the change against the previous figure:
+ * points: difference in percentage points (values in %); years: difference in years;
+ * relative: change in % (amounts, counts, indices, rates per 1000); previous: only the previous figure
+ * (values that are themselves yearly changes, such as GDP growth and inflation).
+ */
+export type ChangeKind = "points" | "years" | "relative" | "previous";
+
+/** Another official measure of the same thing, named on the card so that the two are not confused. */
+export interface RelatedMeasure {
+  /** text with {value} and {year}; for the two unemployment rates {ilo}, {seco} and {year} */
+  text: string;
+  value?: number;
+  unit?: string;
+  year?: number;
+}
+
 export interface Indicator {
   id: string;
   name: string;
+  /** title on cards and charts */
   shortName: string;
   category: IndicatorCategory;
   value: number;
@@ -32,11 +50,30 @@ export interface Indicator {
   previousPeriod?: string; // period of previousValue when it is not the preceding year (survey held every two years)
   trend: TrendDirection;
   trendPercentage?: number;
+  changeKind: ChangeKind;
+  /**
+   * value and previousValue before rounding, where the source publishes more decimals: the difference in points
+   * is computed from these, as trendPercentage is (e.g. 5.452 against 5.210 gives +0.2, not +0.3)
+   */
+  unrounded?: { value: number; previous: number };
   source: string;
   sourceUrl: string;
+  /**
+   * the day the source first published the figure for the year shown (not a later table refresh or data-update
+   * timestamp): ISO date, or "YYYY-MM" when only the month is known; absent when that day cannot be established
+   */
+  sourcePublished?: string;
   lastUpdated: string;
+  /** definition in one or two sentences */
   description: string;
+  /** what the unit refers to and the period, with {year} */
+  unitLine: string;
   context?: string;
+  related?: RelatedMeasure;
+  /** how to read the chart, with {value} and {diff} where needed */
+  howToRead?: string;
+  /** the acronym in the title, written out */
+  acronym?: string;
   historicalData?: DataPoint[];
 }
 
@@ -56,8 +93,12 @@ export interface QuizQuestion {
   maxValue: number;
   actualValue: number;
   explanation: string;
-  source: string;
+  /** who publishes the answer, in the four languages (offices as "full name (acronym)") */
+  source: LocalizedText;
   sourceUrl: string;
+  /** the day the source first published the answer's figure, as for Indicator.sourcePublished; absent when not known */
+  sourcePublished?: string;
+  period: string; // reference year or period of the answer, shown in the source line
   context?: string;
   comparisonData?: ComparisonPoint[];
   comparisonLabel?: string; // title of the chart when it shows another measure than the question

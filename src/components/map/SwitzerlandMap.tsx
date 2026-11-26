@@ -4,12 +4,15 @@ import { useState } from "react";
 import { cantons } from "@/data/cantons";
 import { cantonPaths, cantonCenters } from "@/data/swiss-map-paths";
 import { Canton } from "@/types";
+import { useLanguage } from "@/i18n/LanguageContext";
+import { cantonName } from "@/lib/utils";
 
 interface SwitzerlandMapProps {
   selectedCanton: string | null;
   onCantonSelect: (cantonId: string | null) => void;
   highlightIndicator?: string;
   getCantonColor?: (canton: Canton) => string;
+  isCantonDimmed?: (canton: Canton) => boolean;
 }
 
 export function SwitzerlandMap({
@@ -17,11 +20,13 @@ export function SwitzerlandMap({
   onCantonSelect,
   highlightIndicator,
   getCantonColor,
+  isCantonDimmed,
 }: SwitzerlandMapProps) {
   const [hoveredCanton, setHoveredCanton] = useState<string | null>(null);
+  const { t, locale } = useLanguage();
 
   const defaultGetColor = (canton: Canton) => {
-    if (selectedCanton === canton.id) return "#DC2626";
+    if (selectedCanton === canton.id) return "#D82525";
     if (hoveredCanton === canton.id) return "#FCA5A5";
     return "#E5E5E5";
   };
@@ -37,9 +42,11 @@ export function SwitzerlandMap({
         className="w-full h-full"
         style={{ maxHeight: "600px" }}
         preserveAspectRatio="xMidYMid meet"
+        role="img"
+        aria-label={t.cantons.title}
       >
         {/* Background */}
-        <rect width="1052.361" height="744.094" fill="#FAFAFA" rx="8" />
+        <rect width="1052.361" height="744.094" fill="#F5F4EF" rx="8" />
 
         {/* Canton paths */}
         {cantons.map((canton) => {
@@ -48,47 +55,40 @@ export function SwitzerlandMap({
 
           const isSelected = selectedCanton === canton.id;
           const isHovered = hoveredCanton === canton.id;
+          // A faded canton keeps its border at full strength; the selected canton is never faded
+          const isDimmed = !isSelected && isCantonDimmed ? isCantonDimmed(canton) : false;
 
           return (
             <path
               key={canton.id}
               d={path}
               fill={colorFn(canton)}
-              stroke={isSelected ? "#991B1B" : isHovered ? "#DC2626" : "#525252"}
+              stroke={isSelected ? "#991B1B" : isHovered ? "#D82525" : "#525252"}
               strokeWidth={isSelected ? 2 : isHovered ? 1.5 : 0.5}
-              className="cursor-pointer transition-colors duration-200"
+              fillOpacity={isDimmed ? 0.2 : 1}
+              data-canton={canton.id}
+              data-dimmed={isDimmed ? "true" : undefined}
+              className="cursor-pointer transition-[fill,stroke,fill-opacity] duration-200 motion-reduce:transition-none"
               onMouseEnter={() => setHoveredCanton(canton.id)}
               onMouseLeave={() => setHoveredCanton(null)}
               onClick={() =>
                 onCantonSelect(selectedCanton === canton.id ? null : canton.id)
               }
             >
-              <title>{canton.name}</title>
+              <title>{cantonName(canton, locale)}</title>
             </path>
           );
         })}
 
-        {/* Country label */}
-        <text
-          x="526"
-          y="710"
-          textAnchor="middle"
-          className="pointer-events-none select-none"
-          fill="#A3A3A3"
-          fontSize="20"
-          fontWeight="500"
-        >
-          SWITZERLAND
-        </text>
       </svg>
 
       {/* Hover tooltip */}
       {hoveredCanton && !selectedCanton && (
         <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-white border border-swiss-gray-200 rounded-lg shadow-lg px-4 py-2 z-10">
           <p className="font-medium text-swiss-gray-900">
-            {getCantonById(hoveredCanton)?.name}
+            {getCantonById(hoveredCanton) ? cantonName(getCantonById(hoveredCanton)!, locale) : ""}
           </p>
-          <p className="text-xs text-swiss-gray-500">Click to select</p>
+          <p className="text-sm text-swiss-gray-600">{t.cantons.clickToSelect}</p>
         </div>
       )}
     </div>

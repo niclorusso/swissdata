@@ -66,7 +66,7 @@ export const cantonIndicatorMeta: CantonIndicatorMeta[] = [
     provisional: false,
     currentBorders: true,
     national: 392.4,
-    source: { en: "FOPH, mean monthly premium of compulsory health insurance, all ages", de: "BAG, mittlere Monatsprämie der obligatorischen Krankenpflegeversicherung, alle Altersklassen", fr: "OFSP, prime mensuelle moyenne de l'assurance obligatoire des soins, toutes classes d'âge", it: "UFSP, premio medio mensile dell'assicurazione obbligatoria delle cure, tutte le classi di età" },
+    source: { en: "FOPH, mean monthly premium of compulsory health insurance, all ages", de: "BAG, mittlere Monatsprämie der obligatorischen Krankenpflegeversicherung, alle Altersklassen", fr: "OFSP, prime mensuelle moyenne de l’assurance obligatoire des soins, toutes classes d’âge", it: "UFSP, premio medio mensile dell’assicurazione obbligatoria delle cure, tutte le classi di età" },
     sourceUrl: "https://www.bag.admin.ch/de/newnsb/BfuGvedj0OOX",
   },
   {

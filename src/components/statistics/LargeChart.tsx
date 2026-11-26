@@ -7,195 +7,72 @@ import {
   YAxis,
   CartesianGrid,
   Tooltip,
-  ResponsiveContainer,
-  Legend,
   ReferenceLine,
+  ResponsiveContainer,
+  type TooltipProps,
 } from "recharts";
-import { Indicator, DataPoint } from "@/types";
+import { Indicator } from "@/types";
 import { useLanguage } from "@/i18n/LanguageContext";
+import { formatNumber, formatYear } from "@/lib/formatters";
+import { formatIndicatorValue } from "@/lib/indicatorText";
+import { niceTicks } from "@/lib/ticks";
 
-interface ChartSeries {
-  indicator: Indicator;
-  color: string;
+/** Amounts and counts: the value axis starts at zero. */
+const FROM_ZERO = new Set(["average-wage", "population-total"]);
+/** Values that are themselves yearly changes and cross zero: the axis keeps the range and shows the zero line. */
+const ZERO_LINE = new Set(["gdp-growth-rate", "inflation-rate"]);
+/** Index with base 100: a light line at 100. */
+const BASE_100 = new Set(["housing-price-index"]);
+
+export interface ValueAxis {
+  ticks: number[];
+  decimals: number;
+  /** true when the lowest tick is above zero: the card says so */
+  notFromZero: boolean;
 }
 
-interface Annotation {
-  year: number;
-  label: string;
+/** Value axis of an indicator's chart for the years shown. */
+export function valueAxis(indicator: Indicator, values: number[]): ValueAxis {
+  const min = Math.min(...values);
+  const max = Math.max(...values);
+  const { ticks, decimals } =
+    FROM_ZERO.has(indicator.id) || ZERO_LINE.has(indicator.id)
+      ? niceTicks(Math.min(0, min), Math.max(0, max))
+      : niceTicks(min, max);
+  return { ticks, decimals, notFromZero: ticks[0] > 0 };
 }
 
-interface LargeChartProps {
-  series: ChartSeries[];
-  height?: number;
-  startYear?: number;
-  annotations?: Annotation[];
-  title?: string;
-  showGrid?: boolean;
+/**
+ * Year ticks: the first and the last year, and in between the round years (multiples of 5; of 10 or 20 for
+ * series longer than 25 or 50 years). A round year too close to the first or last one is left out, so that
+ * labels never touch: 2006–2025 gives 2006, 2010, 2015, 2020, 2025; 1960–2025 gives 1960, 1980, 2000, 2025.
+ */
+export function yearTicks(first: number, last: number): number[] {
+  const span = last - first;
+  const step = span > 50 ? 20 : span > 25 ? 10 : 5;
+  // at least 3 years, and at least 15% of the span, from the first and the last year
+  const gap = Math.max(3, Math.ceil(span * 0.15));
+  const ticks = [first];
+  for (let year = Math.ceil(first / step) * step; year <= last; year += step) {
+    if (year - first >= gap && last - year >= gap) ticks.push(year);
+  }
+  if (last !== first) ticks.push(last);
+  return ticks;
 }
 
-// Merge data from multiple indicators into single dataset
-function mergeData(series: ChartSeries[], startYear: number): Record<string, number | string>[] {
-  const dataMap = new Map<number, Record<string, number | string>>();
-
-  series.forEach(({ indicator }) => {
-    indicator.historicalData?.forEach((point) => {
-      if (point.year >= startYear) {
-        if (!dataMap.has(point.year)) {
-          dataMap.set(point.year, { year: point.year });
-        }
-        const entry = dataMap.get(point.year)!;
-        entry[indicator.id] = point.value;
-      }
-    });
-  });
-
-  return Array.from(dataMap.values()).sort((a, b) => (a.year as number) - (b.year as number));
-}
-
-function formatValue(value: number, unit: string, locale: "en" | "it" | "de" | "fr" = "en"): string {
-  if (unit === "people" || unit === "count") {
-    return value.toLocaleString("de-CH");
-  }
-  if (unit === "CHF" || unit === "CHF/month") {
-    return `CHF ${value.toLocaleString("de-CH")}`;
-  }
-  if (unit === "%") {
-    return `${value.toFixed(1)}%`;
-  }
-  if (unit === "years") {
-    const yearsWord = locale === "it" ? "anni" : locale === "de" ? "Jahre" : locale === "fr" ? "ans" : "years";
-    return `${value.toFixed(1)} ${yearsWord}`;
-  }
-  if (unit === "index") {
-    return value.toFixed(1);
-  }
-  if (unit === "per 100k") {
-    return value.toLocaleString("de-CH");
-  }
-  return value.toString();
-}
-
-export function LargeChart({
-  series,
-  height = 400,
-  startYear = 2000,
-  annotations = [],
-  title,
-  showGrid = true,
-}: LargeChartProps) {
-  const { locale } = useLanguage();
-  const data = mergeData(series, startYear);
-
-  if (data.length === 0) {
-    return (
-      <div className="flex items-center justify-center h-64 text-swiss-gray-500">
-        No data available for the selected time range
-      </div>
-    );
-  }
-
-  // Custom tooltip
-  const CustomTooltip = ({ active, payload, label }: any) => {
-    if (active && payload && payload.length) {
-      return (
-        <div className="bg-white border border-swiss-gray-200 rounded-lg shadow-lg p-3">
-          <p className="font-semibold text-swiss-gray-900 mb-2">{label}</p>
-          {payload.map((entry: any, index: number) => {
-            const seriesItem = series.find((s) => s.indicator.id === entry.dataKey);
-            if (!seriesItem) return null;
-            return (
-              <p key={index} className="text-sm" style={{ color: entry.color }}>
-                {seriesItem.indicator.shortName}:{" "}
-                <span className="font-medium">
-                  {formatValue(entry.value, seriesItem.indicator.unit, locale)}
-                </span>
-              </p>
-            );
-          })}
-        </div>
-      );
-    }
-    return null;
-  };
-
-  return (
-    <div className="w-full">
-      {title && (
-        <h3 className="text-base sm:text-lg font-semibold text-swiss-gray-900 mb-3 sm:mb-4">{title}</h3>
-      )}
-      <ResponsiveContainer width="100%" height={height}>
-        <LineChart data={data} margin={{ top: 10, right: 10, left: 0, bottom: 10 }}>
-          {showGrid && <CartesianGrid strokeDasharray="3 3" stroke="#E5E5E5" />}
-          <XAxis
-            dataKey="year"
-            tick={{ fill: "#525252", fontSize: 10 }}
-            tickLine={{ stroke: "#A3A3A3" }}
-            axisLine={{ stroke: "#A3A3A3" }}
-          />
-          <YAxis
-            tick={{ fill: "#525252", fontSize: 10 }}
-            tickLine={{ stroke: "#A3A3A3" }}
-            axisLine={{ stroke: "#A3A3A3" }}
-            width={45}
-          />
-          <Tooltip content={<CustomTooltip />} />
-          <Legend
-            wrapperStyle={{ paddingTop: 20 }}
-            formatter={(value) => {
-              const seriesItem = series.find((s) => s.indicator.id === value);
-              return seriesItem?.indicator.shortName || value;
-            }}
-          />
-
-          {/* Reference lines for annotations */}
-          {annotations.map((annotation) => (
-            <ReferenceLine
-              key={annotation.year}
-              x={annotation.year}
-              stroke="#DC2626"
-              strokeDasharray="3 3"
-              label={{
-                value: annotation.label,
-                position: "top",
-                fill: "#DC2626",
-                fontSize: 11,
-              }}
-            />
-          ))}
-
-          {/* Data lines */}
-          {series.map(({ indicator, color }) => (
-            <Line
-              key={indicator.id}
-              type="monotone"
-              dataKey={indicator.id}
-              stroke={color}
-              strokeWidth={2}
-              dot={{ fill: color, strokeWidth: 0, r: 3 }}
-              activeDot={{ r: 5, strokeWidth: 0 }}
-              connectNulls
-            />
-          ))}
-        </LineChart>
-      </ResponsiveContainer>
-    </div>
-  );
-}
-
-// Single indicator chart with area fill
+/** Line chart of one indicator over the years: straight segments, a dot for each year with a figure. */
 export function SingleIndicatorChart({
   indicator,
   height = 300,
   startYear = 2000,
-  annotations = [],
   color,
 }: {
   indicator: Indicator;
   height?: number;
   startYear?: number;
-  annotations?: Annotation[];
   color?: string;
 }) {
+  const { locale, t } = useLanguage();
   const categoryColors = {
     economic: "#2563EB",
     demographic: "#7C3AED",
@@ -207,19 +84,33 @@ export function SingleIndicatorChart({
 
   if (data.length === 0) {
     return (
-      <div className="flex items-center justify-center h-48 text-swiss-gray-500">
-        No data available
+      <div className="flex items-center justify-center h-48 text-sm text-swiss-gray-600">
+        {t.statistics.noData}
       </div>
     );
   }
 
-  const CustomTooltip = ({ active, payload, label }: any) => {
+  // Value axis: round steps, every label with the same number of decimals, width from the longest label
+  const { ticks, decimals } = valueAxis(indicator, data.map((d) => d.value));
+  const tickLabel = (value: number) => formatNumber(value, locale, { decimals });
+  const axisWidth = Math.max(...ticks.map((tick) => tickLabel(tick).length)) * 8.4 + 12;
+  const from = data[0];
+  const to = data[data.length - 1];
+
+  const label = t.statistics.chartLabel
+    .replace("{title}", indicator.shortName)
+    .replace("{firstValue}", formatIndicatorValue(indicator, locale, from.value))
+    .replace("{from}", formatYear(from.year))
+    .replace("{lastValue}", formatIndicatorValue(indicator, locale, to.value))
+    .replace("{to}", formatYear(to.year));
+
+  const CustomTooltip = ({ active, payload, label: year }: TooltipProps<number, string>) => {
     if (active && payload && payload.length) {
       return (
-        <div className="bg-white border border-swiss-gray-200 rounded-lg shadow-lg p-3">
-          <p className="font-semibold text-swiss-gray-900">{label}</p>
-          <p className="text-sm" style={{ color: chartColor }}>
-            {formatValue(payload[0].value, indicator.unit)}
+        <div className="bg-white border border-line rounded-lg shadow-lg p-3">
+          <p className="font-semibold text-swiss-gray-900">{formatYear(Number(year))}</p>
+          <p className="text-sm text-swiss-gray-900 swiss-number">
+            {formatIndicatorValue(indicator, locale, Number(payload[0].value))}
           </p>
         </div>
       );
@@ -228,42 +119,48 @@ export function SingleIndicatorChart({
   };
 
   return (
-    <ResponsiveContainer width="100%" height={height}>
-      <LineChart data={data} margin={{ top: 10, right: 10, left: 0, bottom: 10 }}>
-        <CartesianGrid strokeDasharray="3 3" stroke="#E5E5E5" />
-        <XAxis
-          dataKey="year"
-          tick={{ fill: "#525252", fontSize: 10 }}
-          tickLine={{ stroke: "#A3A3A3" }}
-          axisLine={{ stroke: "#A3A3A3" }}
-        />
-        <YAxis
-          tick={{ fill: "#525252", fontSize: 10 }}
-          tickLine={{ stroke: "#A3A3A3" }}
-          axisLine={{ stroke: "#A3A3A3" }}
-          width={40}
-          domain={["auto", "auto"]}
-        />
-        <Tooltip content={<CustomTooltip />} />
-
-        {annotations.map((annotation) => (
-          <ReferenceLine
-            key={annotation.year}
-            x={annotation.year}
-            stroke="#DC2626"
-            strokeDasharray="3 3"
+    <div role="img" aria-label={label} data-points={data.length} style={{ height }}>
+      <ResponsiveContainer width="100%" height="100%">
+        <LineChart data={data} margin={{ top: 10, right: 22, left: 0, bottom: 10 }}>
+          <CartesianGrid strokeDasharray="3 3" stroke="#DEDBD1" />
+          <XAxis
+            dataKey="year"
+            type="number"
+            domain={[from.year, to.year]}
+            ticks={yearTicks(from.year, to.year)}
+            interval={0}
+            tickMargin={8}
+            tickFormatter={(year: number) => formatYear(year)}
+            tick={{ fill: "#4B5058", fontSize: 14 }}
+            tickLine={{ stroke: "#A9A69C" }}
+            axisLine={{ stroke: "#A9A69C" }}
           />
-        ))}
-
-        <Line
-          type="monotone"
-          dataKey="value"
-          stroke={chartColor}
-          strokeWidth={2}
-          dot={{ fill: chartColor, strokeWidth: 0, r: 2 }}
-          activeDot={{ r: 4, strokeWidth: 0 }}
-        />
-      </LineChart>
-    </ResponsiveContainer>
+          <YAxis
+            tick={{ fill: "#4B5058", fontSize: 14 }}
+            tickLine={{ stroke: "#A9A69C" }}
+            axisLine={{ stroke: "#A9A69C" }}
+            width={axisWidth}
+            domain={[ticks[0], ticks[ticks.length - 1]]}
+            ticks={ticks}
+            interval={0}
+            tickFormatter={tickLabel}
+          />
+          {ZERO_LINE.has(indicator.id) && <ReferenceLine y={0} stroke="#4B5058" strokeWidth={1} />}
+          {BASE_100.has(indicator.id) && ticks[0] <= 100 && ticks[ticks.length - 1] >= 100 && (
+            <ReferenceLine y={100} stroke="#A9A69C" strokeWidth={1} />
+          )}
+          <Tooltip content={<CustomTooltip />} />
+          <Line
+            type="linear"
+            dataKey="value"
+            stroke={chartColor}
+            strokeWidth={2}
+            dot={{ fill: chartColor, stroke: chartColor, strokeWidth: 0, r: 3 }}
+            activeDot={{ r: 5, strokeWidth: 0 }}
+            isAnimationActive={false}
+          />
+        </LineChart>
+      </ResponsiveContainer>
+    </div>
   );
 }

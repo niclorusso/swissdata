@@ -13,6 +13,8 @@ interface SliderProps {
   className?: string;
   showValue?: boolean;
   formatValue?: (value: number) => string;
+  /** what the slider sets, for screen readers */
+  label?: string;
 }
 
 export function Slider({
@@ -25,6 +27,7 @@ export function Slider({
   className,
   showValue = true,
   formatValue,
+  label,
 }: SliderProps) {
   const percentage = ((value - min) / (max - min)) * 100;
   const displayValue = formatValue ? formatValue(value) : value.toString();
@@ -56,22 +59,24 @@ export function Slider({
           value={value}
           onChange={(e) => onChange(Number(e.target.value))}
           disabled={disabled}
+          aria-label={label}
+          aria-valuetext={displayValue}
           className={cn(
-            "absolute inset-0 w-full h-full opacity-0 cursor-pointer",
+            "peer absolute -inset-y-5 inset-x-0 w-full h-12 opacity-0 cursor-pointer z-10",
             disabled && "cursor-not-allowed"
           )}
         />
         {/* Thumb */}
         <div
           className={cn(
-            "absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-5 h-5 rounded-full bg-white border-2 border-primary shadow-md transition-transform",
+            "absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-6 h-6 rounded-full bg-white border-2 border-primary shadow-md transition-transform peer-focus-visible:ring-2 peer-focus-visible:ring-primary peer-focus-visible:ring-offset-2",
             !disabled && "hover:scale-110"
           )}
           style={{ left: `${percentage}%` }}
         />
       </div>
       {/* Min/Max labels */}
-      <div className="flex justify-between mt-2 text-xs text-swiss-gray-500">
+      <div className="flex justify-between mt-3 text-sm text-swiss-gray-600 swiss-number">
         <span>{formatValue ? formatValue(min) : min}</span>
         <span>{formatValue ? formatValue(max) : max}</span>
       </div>

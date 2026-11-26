@@ -1,7 +1,8 @@
 "use client";
 
-import { createContext, useContext, useState, useEffect, ReactNode } from "react";
+import { createContext, useContext, useEffect, useMemo, ReactNode } from "react";
 import { translations, Locale } from "./translations";
+import { LOCALE_COOKIE, isLocale } from "./locale";
 
 // Recursively convert literal string types to string
 type DeepString<T> = {
@@ -12,34 +13,39 @@ type TranslationStrings = DeepString<typeof translations.en>;
 
 interface LanguageContextType {
   locale: Locale;
-  setLocale: (locale: Locale) => void;
   t: TranslationStrings;
 }
 
 const LanguageContext = createContext<LanguageContextType | null>(null);
 
-export function LanguageProvider({ children }: { children: ReactNode }) {
-  const [locale, setLocaleState] = useState<Locale>("en");
+/**
+ * Remembers the language chosen in the header for one year. The addresses without a language
+ * (/, /cantons, …) then lead to it (src/proxy.ts).
+ */
+export function rememberLocale(locale: Locale) {
+  document.cookie = `${LOCALE_COOKIE}=${locale}; path=/; max-age=31536000; samesite=lax`;
+}
 
+/**
+ * The language comes from the address (/it, /de, /fr, /en): the page was prerendered in it, so the
+ * first render in the browser is identical to the HTML and nothing is swapped after loading.
+ */
+export function LanguageProvider({ locale, children }: { locale: Locale; children: ReactNode }) {
+  // Visitors who chose a language before the cookie existed had it in localStorage: keep it as their choice.
   useEffect(() => {
-    const saved = localStorage.getItem("swissdata-locale") as Locale | null;
-    if (saved === "en" || saved === "it" || saved === "de" || saved === "fr") {
-      setLocaleState(saved);
+    try {
+      const stored = localStorage.getItem(LOCALE_COOKIE);
+      if (!stored) return;
+      localStorage.removeItem(LOCALE_COOKIE);
+      if (isLocale(stored) && !document.cookie.includes(`${LOCALE_COOKIE}=`)) rememberLocale(stored);
+    } catch {
+      // storage not available
     }
   }, []);
 
-  const setLocale = (newLocale: Locale) => {
-    setLocaleState(newLocale);
-    localStorage.setItem("swissdata-locale", newLocale);
-  };
+  const value = useMemo(() => ({ locale, t: translations[locale] }), [locale]);
 
-  const t = translations[locale];
-
-  return (
-    <LanguageContext.Provider value={{ locale, setLocale, t }}>
-      {children}
-    </LanguageContext.Provider>
-  );
+  return <LanguageContext.Provider value={value}>{children}</LanguageContext.Provider>;
 }
 
 export function useLanguage() {
