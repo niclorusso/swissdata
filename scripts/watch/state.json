@@ -2,7 +2,7 @@
  "note": "Fingerprints of the sources as seen on this date. Only the probes are kept: the first run in CI reports every open gap, link problem and due check once.",
  "probes": {
   "eurostat:cei_wm011?geo=CH": {
-   "fp": "2024|abbd0090220aab69",
+   "fp": "2024|7102b72ab62aff9e",
    "info": {
     "last_period": "2024",
     "updated": "2026-10-15T11:00:00+0200"
@@ -10,7 +10,7 @@
    "since": "2026-11-26"
   },
   "eurostat:crim_off_cat?geo=CH&iccs=ICCS0101&unit=P_HTHAB": {
-   "fp": "2024|ce0c1b25c00d4e8e",
+   "fp": "2024|f8bf7420262cb363",
    "info": {
     "last_period": "2024",
     "updated": "2026-11-25T23:00:00+0100"
@@ -18,7 +18,7 @@
    "since": "2026-11-26"
   },
   "eurostat:crim_off_cat?geo=CH&iccs=ICCS0501&unit=P_HTHAB": {
-   "fp": "2024|5606769d8d2c306b",
+   "fp": "2024|f00e1c23845be56e",
    "info": {
     "last_period": "2024",
     "updated": "2026-11-25T23:00:00+0100"
@@ -26,7 +26,7 @@
    "since": "2026-11-26"
   },
   "eurostat:crim_pris_cap?geo=CH&indic_cr=PRIS_ACT_CAP&unit=P_HTHAB": {
-   "fp": "2024|6db204108ed4fec1",
+   "fp": "2024|c2b5ffe7b20d8a05",
    "info": {
     "last_period": "2024",
     "updated": "2026-04-29T11:00:00+0200"
@@ -34,7 +34,7 @@
    "since": "2026-11-26"
   },
   "eurostat:demo_gind?geo=CH&indic_de=CNMIGRATRT": {
-   "fp": "2025|c5c001d124dfe544",
+   "fp": "2025|0af7b7febdc1729e",
    "info": {
     "last_period": "2025",
     "updated": "2026-11-26T11:00:00+0100"
@@ -42,7 +42,7 @@
    "since": "2026-11-26"
   },
   "eurostat:demo_mlexpec?age=Y_LT1&geo=CH&sex=T&unit=YR": {
-   "fp": "2024|9793295ccb82e741",
+   "fp": "2024|1336ad55d2ee41ec",
    "info": {
     "last_period": "2024",
     "updated": "2026-11-26T11:00:00+0100"
@@ -50,7 +50,7 @@
    "since": "2026-11-26"
   },
   "eurostat:demo_pjanind?geo=CH&indic_de=MEDAGEPOP": {
-   "fp": "2025|b29ba58fc1182ebb",
+   "fp": "2025|2ce27f408c0af0f4",
    "info": {
     "last_period": "2025",
     "updated": "2026-11-26T11:00:00+0100"
@@ -58,7 +58,7 @@
    "since": "2026-11-26"
   },
   "eurostat:demo_r_d3dens?geo=CH&unit=PER_KM2": {
-   "fp": "2024|d7390c8fe90d9c46",
+   "fp": "2024|5a4550188a00dbc4",
    "info": {
     "last_period": "2024",
     "updated": "2026-02-25T23:00:00+0100"
@@ -66,7 +66,7 @@
    "since": "2026-11-26"
   },
   "eurostat:earn_gr_gpgr2?geo=CH&nace_r2=B-S_X_O&unit=PC": {
-   "fp": "2024|bc773801664d5913",
+   "fp": "2024|53143f383ad87153",
    "info": {
     "last_period": "2024",
     "updated": "2026-10-27T23:00:00+0100"
@@ -74,7 +74,7 @@
    "since": "2026-11-26"
   },
   "eurostat:hlth_rs_bds1?facility=HBEDT&geo=CH&hlthcare=TOTAL&unit=P_HTHAB": {
-   "fp": "2024|4ab069ed0a0d951d",
+   "fp": "2024|3b9a36dd48dd98ec",
    "info": {
     "last_period": "2024",
     "updated": "2026-07-13T11:00:00+0200"
@@ -82,7 +82,7 @@
    "since": "2026-11-26"
   },
   "eurostat:ilc_di12?age=TOTAL&geo=CH&statinfo=GINI_HND": {
-   "fp": "2024|a032f8fb5edea69b",
+   "fp": "2024|56a066cfe7bcd104",
    "info": {
     "last_period": "2024",
     "updated": "2026-11-12T23:00:00+0100"
@@ -90,7 +90,7 @@
    "since": "2026-11-26"
   },
   "eurostat:ilc_lvho02?geo=CH&hhcomp=TOTAL&rskpovth=TOTAL&tenure=OWN": {
-   "fp": "2024|81c24d3a0b3c809b",
+   "fp": "2024|22aeb8be3145debf",
    "info": {
     "last_period": "2024",
     "updated": "2026-10-20T23:00:00+0200"
@@ -98,7 +98,7 @@
    "since": "2026-11-26"
   },
   "eurostat:lfsa_ewhun2?age=Y15-64&geo=CH&nace_r2=TOTAL&sex=T&worktime=FT&wstatus=EMP": {
-   "fp": "2025|56524f68f9210da1",
+   "fp": "2025|54f9fc2d8c069107",
    "info": {
     "last_period": "2025",
     "updated": "2026-10-30T11:00:00+0100"
@@ -106,15 +106,15 @@
    "since": "2026-11-26"
   },
   "eurostat:lfsi_emp_a?age=Y15-64&geo=CH&indic_em=ACT&sex=T&unit=PC_POP": {
-   "fp": "2025|31101a44dff710ce",
+   "fp": "2025|8fbb14fe0c4d2b01",
    "info": {
     "last_period": "2025",
     "updated": "2026-11-06T23:00:00+0100"
    },
    "since": "2026-11-26"
   },
-  "eurostat:lfsi_pt_a?age=Y15-64&geo=CH&sex=T&unit=PC_EMP": {
-   "fp": "2025|2d6bc9a2d70ae627",
+  "eurostat:lfsi_pt_a?age=Y15-64&geo=CH&sex=T&unit=PC_EMP&wstatus=EMP_PT": {
+   "fp": "2025|c5b7d66221174d54",
    "info": {
     "last_period": "2025",
     "updated": "2026-11-06T23:00:00+0100"
@@ -122,7 +122,7 @@
    "since": "2026-11-26"
   },
   "eurostat:nama_10_gdp?geo=CH&na_item=B1GQ&unit=CLV_PCH_PRE": {
-   "fp": "2025|1d7b1c7083154219",
+   "fp": "2025|e30756a0c68eb7c5",
    "info": {
     "last_period": "2025",
     "updated": "2026-11-24T23:00:00+0100"
@@ -130,7 +130,7 @@
    "since": "2026-11-26"
   },
   "eurostat:rail_if_line_tr?geo=CH&n_tracks=TOTAL&tra_infr=TOTAL&unit=KM": {
-   "fp": "2024|78aeb7911b5ea166",
+   "fp": "2024|cbf0f9049c8fadb4",
    "info": {
     "last_period": "2024",
     "updated": "2026-10-06T23:00:00+0200"
@@ -138,7 +138,7 @@
    "since": "2026-11-26"
   },
   "eurostat:road_eqs_carhab?geo=CH&unit=NR": {
-   "fp": "2025|33a51c1e467e0a79",
+   "fp": "2025|4e1981f09a8251f3",
    "info": {
     "last_period": "2025",
     "updated": "2026-10-06T23:00:00+0200"
@@ -146,7 +146,7 @@
    "since": "2026-11-26"
   },
   "eurostat:une_rt_a?age=Y15-24&geo=CH&sex=T&unit=PC_ACT": {
-   "fp": "2025|7f4f04befffb3abe",
+   "fp": "2025|4e67cda18f69878d",
    "info": {
     "last_period": "2025",
     "updated": "2026-11-06T23:00:00+0100"
@@ -154,7 +154,7 @@
    "since": "2026-11-26"
   },
   "eurostat:une_rt_a?age=Y15-74&geo=CH&sex=T&unit=PC_ACT": {
-   "fp": "2025|e21243fa2d344d0e",
+   "fp": "2025|85d72d7a2c78f176",
    "info": {
     "last_period": "2025",
     "updated": "2026-11-06T23:00:00+0100"
@@ -162,7 +162,7 @@
    "since": "2026-11-26"
   },
   "fso-dam:cc-d-05.02.08": {
-   "fp": "36970588|2026-11-03|0",
+   "fp": "year:2025",
    "info": {
     "asset": 36970588,
     "period": "1.6.1914-31.10.2026",
@@ -181,16 +181,6 @@
    },
    "since": "2026-11-26"
   },
-  "fso-dam:ind-d-21.02.30.0702.01.01": {
-   "fp": "36900110|2026-11-19|0",
-   "info": {
-    "asset": 36900110,
-    "period": "2000-2025",
-    "provisional": false,
-    "published": "2026-11-19"
-   },
-   "since": "2026-11-26"
-  },
   "fso-dam:ind-d-21.02.30.0702.02.01": {
    "fp": "36900113|2026-11-19|0",
    "info": {
@@ -202,20 +192,30 @@
    "since": "2026-11-26"
   },
   "fso-dam:je-d-03.02.01.16": {
-   "fp": "36890603|2026-11-12|0",
+   "fp": "year:2025",
    "info": {
-    "asset": 36890603,
-    "period": "1.4.2002-30.9.2026",
+    "asset": 36890600,
+    "period": "1.4.1991-30.9.2026",
     "provisional": false,
     "published": "2026-11-12"
    },
    "since": "2026-11-26"
   },
-  "fso-dam:je-d-03.03.01.03": {
-   "fp": "36890792|2026-11-12|0",
+  "fso-dam:je-d-03.02.03.01.02.04": {
+   "fp": "36576913|2026-05-21|0",
    "info": {
-    "asset": 36890792,
-    "period": "1991-2026",
+    "asset": 36576913,
+    "period": "2010-2025",
+    "provisional": false,
+    "published": "2026-05-21"
+   },
+   "since": "2026-11-26"
+  },
+  "fso-dam:je-d-03.03.01.14": {
+   "fp": "year:2025",
+   "info": {
+    "asset": 36890637,
+    "period": "1.4.1991-30.9.2026",
     "provisional": false,
     "published": "2026-11-12"
    },
@@ -487,6 +487,42 @@
    "info": {
     "matches": [
      "01.01.2026"
+    ]
+   },
+   "since": "2026-11-26"
+  },
+  "http-regex:https://pubdb.bfe.admin.ch/de/sammlungen/elektrizitaetsstatistik#Schweizerische Elektrizit(?:ä|&auml;)tsstatistik\\s+(\\d{4})": {
+   "fp": "8014aff4939ed35b",
+   "info": {
+    "matches": [
+     "1998",
+     "1999",
+     "2000",
+     "2001",
+     "2002",
+     "2003",
+     "2004",
+     "2005",
+     "2006",
+     "2007",
+     "2008",
+     "2009",
+     "2010",
+     "2011",
+     "2012",
+     "2013",
+     "2014",
+     "2015",
+     "2016",
+     "2017",
+     "2018",
+     "2019",
+     "2020",
+     "2021",
+     "2022",
+     "2023",
+     "2024",
+     "2025"
     ]
    },
    "since": "2026-11-26"

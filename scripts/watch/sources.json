@@ -9,7 +9,8 @@
     "http-hash": "A small file or API answer at a stable address: SHA-256 of the content (for servers without reliable headers).",
     "http-regex": "A page that lists the editions: the set of matches of a pattern (e.g. file names with a year). Optional period: the highest year in the matches.",
     "calendar-year": "No request. The figure is defined per calendar year (premium of the year, budget of the year, state on 1 January): flags when the site shows an earlier year than today's.",
-    "options": "compare_period: false = do not compare periods for this probe (why says why); period_offset: -1 = the site is expected to show the year before the newest one (e.g. the newest is only an estimate)."
+    "options": "compare_period: false = do not compare periods for this probe (why says why); period_offset: -1 = the site is expected to show the year before the newest one (e.g. the newest is only an estimate); edition: 'annual' = for a monthly or quarterly FSO table, only a new complete year counts as a new publication.",
+    "shown": "Where the period shown on the site is read: from indicators (src/data/indicators.ts, latest year in the chart), questions (src/data/questions.ts, year in the question), cantons (src/data/cantons.ts, year shown on the canton page), explanations (src/i18n/indicatorExplanations.ts, latest year in the English info text). A list checks several places."
   },
   "redirect_rules": [
     {"from": "^https://www\\.bfs\\.admin\\.ch/asset/(de|en|fr|it)/[^/]+$", "to": "^https://statistik\\.admin\\.ch/(de|en|fr|it)/asset/\\d+$", "why": "FSO asset links by order number resolve to the page of the current asset"},
@@ -35,7 +36,7 @@
       "shown": {"from": "indicators", "id": "unemployment-rate-ilo"},
       "url": "https://statistik.admin.ch/de/themen/arbeit-erwerb/erwerbslosigkeit-unterbeschaeftigung",
       "probes": [
-        {"kind": "fso-dam", "orderNr": "je-d-03.03.01.03", "compare_period": false, "why": "the table period includes the quarters of the current year (1991-2026 on 26.11.2026), so it says nothing about annual averages"},
+        {"kind": "fso-dam", "orderNr": "je-d-03.03.01.14", "edition": "annual", "why": "quarterly FSO table of ILO unemployment rates, released together with T 03.03.01.03 (the annual averages the site uses, whose metadata period 1991-2026 does not say which quarters are in); its period ends on a quarter (30.9.2026), so a new year counts once the fourth quarter is in"},
         {"kind": "eurostat", "dataset": "une_rt_a", "filters": {"geo": "CH", "age": "Y15-74", "sex": "T", "unit": "PC_ACT"}, "why": "annual ILO rate for Switzerland: shows when a new annual average exists"}
       ]
     },
@@ -61,10 +62,10 @@
       "id": "indicator/inflation-rate",
       "label": "Inflation rate, CPI annual average (indicator)",
       "publisher": "FSO",
-      "used_in": {"file": "src/data/indicators.ts", "key": "inflation-rate: value, previousValue, trendPercentage, lastUpdated, context, historicalData", "also": "src/i18n/dataTranslations.ts (it, de, fr)"},
-      "shown": {"from": "indicators", "id": "inflation-rate"},
+      "used_in": {"file": "src/data/indicators.ts", "key": "inflation-rate: value, previousValue, trendPercentage, lastUpdated, context, historicalData", "also": "src/i18n/dataTranslations.ts (it, de, fr) and src/i18n/indicatorExplanations.ts (inflation-rate, four languages)"},
+      "shown": [{"from": "indicators", "id": "inflation-rate"}, {"from": "explanations", "id": "inflation-rate"}],
       "url": "https://statistik.admin.ch/de/konsumentenpreise",
-      "probes": [{"kind": "fso-dam", "orderNr": "cc-d-05.02.08", "why": "monthly table; its period ends on the last month published, so a year counts once December is in"}]
+      "probes": [{"kind": "fso-dam", "orderNr": "cc-d-05.02.08", "edition": "annual", "why": "monthly table; only a new complete year (December in) counts, the site shows annual averages"}]
     },
     {
       "id": "indicator/average-wage",
@@ -137,8 +138,8 @@
       "id": "indicator/crime-rate-per-1000",
       "label": "Criminal Code offences per 1,000 inhabitants (indicator)",
       "publisher": "FSO",
-      "used_in": {"file": "src/data/indicators.ts", "key": "crime-rate-per-1000: value, previousValue, trendPercentage, lastUpdated, context, historicalData", "also": "src/i18n/dataTranslations.ts (it, de, fr)"},
-      "shown": {"from": "indicators", "id": "crime-rate-per-1000"},
+      "used_in": {"file": "src/data/indicators.ts", "key": "crime-rate-per-1000: value, previousValue, trendPercentage, lastUpdated, context, historicalData", "also": "src/i18n/dataTranslations.ts (it, de, fr) and src/i18n/indicatorExplanations.ts (crime-rate-per-1000, four languages)"},
+      "shown": [{"from": "indicators", "id": "crime-rate-per-1000"}, {"from": "explanations", "id": "crime-rate-per-1000"}],
       "url": "https://statistik.admin.ch/de/themen/kriminalitaet-strafrecht",
       "probes": [{"kind": "fso-pxweb", "cube": "px-x-1903020100_101"}]
     },
@@ -146,8 +147,8 @@
       "id": "indicator/healthcare-cost",
       "label": "Healthcare costs, % of GDP (indicator)",
       "publisher": "FSO",
-      "used_in": {"file": "src/data/indicators.ts", "key": "healthcare-cost: value, previousValue, trendPercentage, lastUpdated, context, historicalData", "also": "src/i18n/dataTranslations.ts (it, de, fr)"},
-      "shown": {"from": "indicators", "id": "healthcare-cost"},
+      "used_in": {"file": "src/data/indicators.ts", "key": "healthcare-cost: value, previousValue, trendPercentage, lastUpdated, context, historicalData", "also": "src/i18n/dataTranslations.ts (it, de, fr) and src/i18n/indicatorExplanations.ts (healthcare-cost, four languages)"},
+      "shown": [{"from": "indicators", "id": "healthcare-cost"}, {"from": "explanations", "id": "healthcare-cost"}],
       "url": "https://statistik.admin.ch/de/themen/gesundheit/kosten-finanzierung-gesundheitswesens",
       "probes": [{"kind": "fso-dam", "orderNr": "je-d-14.05.01.01", "period_offset": -1, "why": "the last year of this table is an FSO estimate (2025 in the edition of 24.04.2026); the site shows the provisional year before it"}]
     },
@@ -164,8 +165,8 @@
       "id": "indicator/poverty-rate",
       "label": "Poverty rate, absolute (indicator)",
       "publisher": "FSO",
-      "used_in": {"file": "src/data/indicators.ts", "key": "poverty-rate: value, previousValue, trendPercentage, lastUpdated, context, historicalData", "also": "src/i18n/dataTranslations.ts (it, de, fr)"},
-      "shown": {"from": "indicators", "id": "poverty-rate"},
+      "used_in": {"file": "src/data/indicators.ts", "key": "poverty-rate: value, previousValue, trendPercentage, lastUpdated, context, historicalData", "also": "src/i18n/dataTranslations.ts (it, de, fr) and src/i18n/indicatorExplanations.ts (poverty-rate, four languages)"},
+      "shown": [{"from": "indicators", "id": "poverty-rate"}, {"from": "explanations", "id": "poverty-rate"}],
       "url": "https://statistik.admin.ch/de/asset/36395150",
       "probes": [{"kind": "fso-dam", "orderNr": "je-d-20.03.02.01.01"}]
     },
@@ -173,8 +174,8 @@
       "id": "indicator/renewable-energy",
       "label": "Renewable share of final energy consumption (indicator)",
       "publisher": "SFOE",
-      "used_in": {"file": "src/data/indicators.ts", "key": "renewable-energy: value, previousValue, trendPercentage, lastUpdated, context, historicalData", "also": "src/i18n/dataTranslations.ts (it, de, fr)"},
-      "shown": {"from": "indicators", "id": "renewable-energy"},
+      "used_in": {"file": "src/data/indicators.ts", "key": "renewable-energy: value, previousValue, trendPercentage, lastUpdated, context, historicalData", "also": "src/i18n/dataTranslations.ts (it, de, fr) and src/i18n/indicatorExplanations.ts (renewable-energy, four languages)"},
+      "shown": [{"from": "indicators", "id": "renewable-energy"}, {"from": "explanations", "id": "renewable-energy"}],
       "url": "https://www.admin.ch/de/newnsb/YQtEZcK-D9fQ",
       "probes": [{"kind": "fso-dam", "orderNr": "ind-d-21.02.30.0702.02.01", "why": "FSO indicator table built on the SFOE renewable energy statistics; it follows the SFOE edition by a few months"}]
     },
@@ -184,7 +185,7 @@
       "label": "Canton population (canton map and table)",
       "publisher": "FSO",
       "used_in": {"file": "scripts/data/build_cantons.py", "key": "POP_YEAR", "then": "run `python3 scripts/data/build_cantons.py` (it rewrites src/data/cantons.ts)"},
-      "shown": {"from": "build_cantons", "year_const": "POP_YEAR", "url_const": "STATPOP_PAGE"},
+      "shown": {"from": "cantons", "meta": "population"},
       "url": "https://www.pxweb.bfs.admin.ch/pxweb/de/px-x-0102020000_201/",
       "probes": [{"kind": "fso-pxweb", "cube": "px-x-0102020000_201"}]
     },
@@ -193,7 +194,7 @@
       "label": "Canton foreign share (canton map and table)",
       "publisher": "FSO",
       "used_in": {"file": "scripts/data/build_cantons.py", "key": "POP_YEAR (same table as the population)", "then": "run `python3 scripts/data/build_cantons.py`"},
-      "shown": {"from": "build_cantons", "year_const": "POP_YEAR", "url_const": "STATPOP_PAGE"},
+      "shown": {"from": "cantons", "id": "foreign-population"},
       "url": "https://www.pxweb.bfs.admin.ch/pxweb/de/px-x-0102020000_201/",
       "probes": [{"kind": "fso-pxweb", "cube": "px-x-0102020000_201"}]
     },
@@ -202,7 +203,7 @@
       "label": "Canton area (canton map and table)",
       "publisher": "swisstopo",
       "used_in": {"file": "scripts/data/build_cantons.py", "key": "AREA_DATE", "then": "run `python3 scripts/data/build_cantons.py`"},
-      "shown": {"from": "build_cantons", "year_const": "AREA_DATE", "url_const": "SWISSTOPO_PAGE"},
+      "shown": {"from": "cantons", "meta": "area"},
       "url": "https://www.swisstopo.admin.ch/de/landschaftsmodell-swissboundaries3d",
       "probes": [{"kind": "http-regex", "url": "https://api3.geo.admin.ch/rest/services/api/MapServer/ch.swisstopo.swissboundaries3d-kanton-flaeche.fill/legend?lang=de", "pattern": "Datenstand\\s*(?:<[^>]+>\\s*)*(\\d{2}\\.\\d{2}\\.\\d{4})", "period": "max-year", "label": "swisstopo layer legend", "page": "https://www.swisstopo.admin.ch/de/landschaftsmodell-swissboundaries3d", "why": "the legend of the canton-area layer states its data status (Datenstand)"}]
     },
@@ -211,7 +212,7 @@
       "label": "Canton unemployment rate (canton map and table)",
       "publisher": "SECO / FSO",
       "used_in": {"file": "scripts/data/build_cantons.py", "key": "UNEMP_YEAR, UNEMP_XLSX", "then": "run `python3 scripts/data/build_cantons.py`"},
-      "shown": {"from": "build_cantons", "year_const": "UNEMP_YEAR", "url_const": "UNEMP_PAGE"},
+      "shown": {"from": "cantons", "id": "unemployment-rate"},
       "url": "https://www.bfs.admin.ch/asset/de/je-d-03.03.02.03",
       "probes": [{"kind": "fso-dam", "orderNr": "je-d-03.03.02.03", "why": "FSO table T 3.3.2.3 with the SECO annual averages by canton; it carries a new year in early February, months before SECO's yearly report 'Arbeitslosigkeit in der Schweiz'"}]
     },
@@ -220,7 +221,7 @@
       "label": "Canton mean health insurance premium (canton map and table)",
       "publisher": "FOPH",
       "used_in": {"file": "scripts/data/build_cantons.py", "key": "PREMIUM_YEAR, PREMIUM_PDF", "then": "run `python3 scripts/data/build_cantons.py`"},
-      "shown": {"from": "build_cantons", "year_const": "PREMIUM_YEAR", "url_const": "PREMIUM_PAGE"},
+      "shown": {"from": "cantons", "id": "health-premium"},
       "url": "https://www.bag.admin.ch/de/newnsb/BfuGvedj0OOX",
       "probes": [
         {"kind": "http-headers", "url": "https://cms.news.admin.ch/fileservice/sdweb-docs-prod-nsbcch-files/files/2026/09/29/b8752eb8-9587-4fc9-b347-8b705f3ecc73.pdf", "label": "FOPH premium table (PDF)", "page": "https://www.bag.admin.ch/de/newnsb/BfuGvedj0OOX", "why": "the file the build script reads; a change means FOPH replaced it"},
@@ -232,7 +233,7 @@
       "label": "Canton GDP per capita (canton map and table)",
       "publisher": "FSO",
       "used_in": {"file": "scripts/data/build_cantons.py", "key": "GDP_YEAR, GDP_XLSX", "then": "run `python3 scripts/data/build_cantons.py`"},
-      "shown": {"from": "build_cantons", "year_const": "GDP_YEAR", "url_const": "GDP_PAGE"},
+      "shown": {"from": "cantons", "id": "gdp-per-capita"},
       "url": "https://www.bfs.admin.ch/asset/en/je-e-04.02.06.03",
       "probes": [{"kind": "fso-dam", "orderNr": "je-e-04.02.06.03"}]
     },
@@ -241,7 +242,7 @@
       "label": "Canton average rent (canton map and table)",
       "publisher": "FSO",
       "used_in": {"file": "scripts/data/build_cantons.py", "key": "RENT_YEAR, RENT_XLSX", "then": "run `python3 scripts/data/build_cantons.py`"},
-      "shown": {"from": "build_cantons", "year_const": "RENT_YEAR", "url_const": "RENT_PAGE"},
+      "shown": {"from": "cantons", "id": "average-rent"},
       "url": "https://www.bfs.admin.ch/asset/de/je-d-09.03.03.01",
       "probes": [{"kind": "fso-dam", "orderNr": "je-d-09.03.03.01"}]
     },
@@ -250,7 +251,7 @@
       "label": "Canton offences per 1,000 inhabitants (canton map and table)",
       "publisher": "FSO",
       "used_in": {"file": "scripts/data/build_cantons.py", "key": "CRIME_YEAR", "then": "run `python3 scripts/data/build_cantons.py`"},
-      "shown": {"from": "build_cantons", "year_const": "CRIME_YEAR", "url_const": "PKS_PAGE"},
+      "shown": {"from": "cantons", "id": "crime-rate-per-1000"},
       "url": "https://www.pxweb.bfs.admin.ch/pxweb/de/px-x-1903020100_101/",
       "probes": [{"kind": "fso-pxweb", "cube": "px-x-1903020100_101"}]
     },
@@ -293,8 +294,8 @@
       "shown": {"from": "questions", "id": "part-time-rate"},
       "url": "https://ec.europa.eu/eurostat/databrowser/view/lfsi_pt_a/default/table?lang=en",
       "probes": [
-        {"kind": "eurostat", "dataset": "lfsi_pt_a", "filters": {"geo": "CH", "age": "Y15-64", "unit": "PC_EMP", "sex": "T"}},
-        {"kind": "fso-dam", "orderNr": "je-d-03.02.01.16", "why": "FSO definition quoted in the explanation (quarterly table; a year counts once Q4 is in)"}
+        {"kind": "eurostat", "dataset": "lfsi_pt_a", "filters": {"geo": "CH", "age": "Y15-64", "unit": "PC_EMP", "sex": "T", "wstatus": "EMP_PT"}},
+        {"kind": "fso-dam", "orderNr": "je-d-03.02.01.16", "edition": "annual", "why": "FSO definition quoted in the explanation; quarterly table, a year counts once the fourth quarter is in"}
       ]
     },
     {
@@ -304,7 +305,10 @@
       "used_in": {"file": "src/data/questions.ts", "key": "weekly-work-hours: question, actualValue, explanation, comparisonData", "also": "src/i18n/dataTranslations.ts (it)"},
       "shown": {"from": "questions", "id": "weekly-work-hours"},
       "url": "https://www.bfs.admin.ch/asset/de/2026-0533-d",
-      "probes": [{"kind": "eurostat", "dataset": "lfsa_ewhun2", "filters": {"geo": "CH", "age": "Y15-64", "sex": "T", "worktime": "FT", "wstatus": "EMP", "nace_r2": "TOTAL"}, "why": "the comparison chart; the FSO answer comes from a yearly press release whose order number changes every year"}]
+      "probes": [
+        {"kind": "fso-dam", "orderNr": "je-d-03.02.03.01.02.04", "why": "the answer: FSO table of the actual weekly hours of full-time employees (Arbeitsvolumenstatistik), published with the press release of May"},
+        {"kind": "eurostat", "dataset": "lfsa_ewhun2", "filters": {"geo": "CH", "age": "Y15-64", "sex": "T", "worktime": "FT", "wstatus": "EMP", "nace_r2": "TOTAL"}, "why": "the comparison chart"}
+      ]
     },
     {
       "id": "quiz/purchasing-power-rank",
@@ -690,8 +694,7 @@
       "used_in": {"file": "src/data/questions.ts", "key": "nuclear-electricity: question, actualValue, explanation, comparisonData", "also": "src/i18n/dataTranslations.ts (it)"},
       "shown": {"from": "questions", "id": "nuclear-electricity"},
       "url": "https://pubdb.bfe.admin.ch/de/publication/download/12681",
-      "probes": [{"kind": "fso-dam", "orderNr": "ind-d-21.02.30.0702.01.01", "why": "proxy: FSO table of electricity production from renewables, built on the SFOE electricity statistics; it follows the SFOE edition by a few months"}],
-      "manual": {"last_checked": "2026-11-26", "why": "the SFOE electricity statistics come out each June as a new publication with a new number", "how": "look for the next 'Schweizerische Elektrizitätsstatistik' in the SFOE publication database"}
+      "probes": [{"kind": "http-regex", "url": "https://pubdb.bfe.admin.ch/de/sammlungen/elektrizitaetsstatistik", "pattern": "Schweizerische Elektrizit(?:ä|&auml;)tsstatistik\\s+(\\d{4})", "period": "max-year", "label": "SFOE publication list 'Elektrizitätsstatistik'", "page": "https://pubdb.bfe.admin.ch/de/sammlungen/elektrizitaetsstatistik", "why": "the quiz cites the SFOE 'Schweizerische Elektrizitätsstatistik' (2025: publication 12681); the collection page lists every edition by year"}]
     },
     {
       "id": "quiz/co2-per-capita",

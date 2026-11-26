@@ -7,7 +7,7 @@ name: Watch sources
 
 on:
   schedule:
-    - cron: "41 3 * * *"   # 03:41 UTC every day (scheduled runs use the default branch)
+    - cron: "41 3 * * *"   # 03:41 UTC every day; GitHub runs schedules only from the default branch (main)
   workflow_dispatch:
 
 permissions:
@@ -23,13 +23,13 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262  # v4.4.0
         with:
           persist-credentials: false
 
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "3.12"
+      # ubuntu-latest has Python 3 installed; the scripts use the standard library only (3.9+)
+      - name: Python version
+        run: python3 --version
 
       - name: Load the state of the last run (from the issue, else the committed seed)
         env:
