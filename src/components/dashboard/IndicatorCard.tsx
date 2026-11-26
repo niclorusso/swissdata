@@ -1,95 +1,87 @@
 "use client";
 
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { InfoTooltip } from "@/components/ui/tooltip";
+import Link from "next/link";
+import { Card } from "@/components/ui/card";
+import { MoreInfoButton, MoreInfoPanel, useMoreInfo } from "@/components/ui/tooltip";
 import { SourceLine } from "@/components/ui/source-line";
 import { Indicator } from "@/types";
-import { formatNumber, formatWithUnit, percentSign } from "@/lib/formatters";
 import { useLanguage } from "@/i18n/LanguageContext";
-import { getIndicatorExplanation } from "@/i18n/indicatorExplanations";
 import { localizePeriod } from "@/i18n/periods";
 import { localizeSource } from "@/i18n/sourceNames";
-import { TrendingUp, TrendingDown, Minus } from "lucide-react";
+import { localePath } from "@/i18n/routes";
+import {
+  changeLine,
+  firstYear,
+  formatIndicatorValue,
+  howToReadText,
+  publishedText,
+  relatedText,
+  unitLine,
+} from "@/lib/indicatorText";
 
-interface IndicatorCardProps {
-  indicator: Indicator;
+/** The change against the previous figure, the number first and in bold. */
+export function ChangeText({ indicator, className }: { indicator: Indicator; className?: string }) {
+  const { locale } = useLanguage();
+  const line = changeLine(indicator, locale);
+  if (!line) return null;
+  return (
+    <p data-change-kind={indicator.changeKind} className={className}>
+      {line.before}
+      {line.delta && <strong className="font-semibold text-ink swiss-number">{line.delta}</strong>}
+      {line.after}
+    </p>
+  );
 }
 
-export function IndicatorCard({ indicator }: IndicatorCardProps) {
+/**
+ * A figure on the home page. In this order: title and "?", value, unit line, change, definition, the "?"
+ * panel (context, the other official measure, how to read), source line, link to the chart.
+ */
+export function IndicatorCard({ indicator }: { indicator: Indicator }) {
   const { t, locale } = useLanguage();
-
-  const TrendIcon =
-    indicator.trend === "up"
-      ? TrendingUp
-      : indicator.trend === "down"
-      ? TrendingDown
-      : Minus;
-
-  const explanation = getIndicatorExplanation(indicator.id, locale, "card");
+  const info = useMoreInfo();
+  const related = relatedText(indicator, locale);
+  const howToRead = howToReadText(indicator, locale);
 
   return (
-    <Card className="card-hover">
-      <CardHeader className="pb-2">
-        <CardTitle className="text-base font-medium flex items-center gap-1">
-          {indicator.shortName}
-          {explanation && (
-            <InfoTooltip
-              label={`${t.indicatorCard.whatIsIt} ${indicator.shortName}`}
-              content={
-                <div className="space-y-2">
-                  <div>
-                    <p className="font-medium text-swiss-gray-900 mb-1">{t.indicatorCard.whatIsIt}</p>
-                    <p className="text-swiss-gray-600">{explanation.what}</p>
-                  </div>
-                  <div>
-                    <p className="font-medium text-swiss-gray-900 mb-1">{t.indicatorCard.whyItMatters}</p>
-                    <p className="text-swiss-gray-600">{explanation.why}</p>
-                  </div>
-                </div>
-              }
-            />
-          )}
-        </CardTitle>
-      </CardHeader>
-      <CardContent>
-        <div className="space-y-3">
-          {/* Main value */}
-          <div className="flex items-baseline gap-2">
-            <span className="text-2xl sm:text-3xl font-bold swiss-number text-swiss-gray-900">
-              {formatWithUnit(indicator.value, indicator.unit, locale)}
-            </span>
-          </div>
+    <Card data-indicator={indicator.id} className="flex flex-col p-5">
+      <div className="flex items-start justify-between gap-3">
+        <h3 className="text-base font-semibold leading-snug text-ink">{indicator.shortName}</h3>
+        <MoreInfoButton info={info} label={t.indicatorCard.more.replace("{title}", indicator.shortName)} />
+      </div>
 
-          {/* Change against the previous period: direction only, no good/bad colour */}
-          {indicator.trendPercentage !== undefined && (
-            <div className="flex items-center gap-1 text-sm text-swiss-gray-700">
-              <TrendIcon className="h-4 w-4" aria-hidden="true" />
-              <span className="font-medium swiss-number">
-                {formatNumber(indicator.trendPercentage, locale, { decimals: 1, sign: true })}
-                {percentSign(locale)}
-              </span>
-              <span className="text-swiss-gray-500">
-                {indicator.previousPeriod
-                  ? t.indicatorCard.vsPeriod.replace("{period}", indicator.previousPeriod)
-                  : t.indicatorCard.vsLastYear}
-              </span>
-            </div>
-          )}
+      <p className="mt-2 text-[1.875rem] leading-tight font-bold swiss-number text-ink">
+        {formatIndicatorValue(indicator, locale)}
+      </p>
+      <p data-unit-line="" className="mt-1 text-sm text-swiss-gray-600">
+        {unitLine(indicator, locale)}
+      </p>
+      <ChangeText indicator={indicator} className="mt-2 text-sm text-swiss-gray-700" />
+      <p data-definition="" className="mt-2 text-sm leading-relaxed text-swiss-gray-700">
+        {indicator.description}
+      </p>
 
-          {/* Context */}
-          {indicator.context && (
-            <p className="text-sm text-swiss-gray-600 line-clamp-2">
-              {indicator.context}
-            </p>
-          )}
+      <MoreInfoPanel info={info} className="mt-3">
+        {indicator.acronym && <p>{indicator.acronym}</p>}
+        {indicator.context && <p>{indicator.context}</p>}
+        {related && <p>{related}</p>}
+        {howToRead && <p>{howToRead}</p>}
+      </MoreInfoPanel>
 
-          <SourceLine
-            publisher={localizeSource(indicator.source, locale)}
-            url={indicator.sourceUrl}
-            date={localizePeriod(indicator.lastUpdated, locale)}
-          />
-        </div>
-      </CardContent>
+      <div className="mt-auto">
+        <SourceLine
+          publisher={localizeSource(indicator.source, locale)}
+          url={indicator.sourceUrl}
+          date={localizePeriod(indicator.lastUpdated, locale)}
+          published={publishedText(indicator, locale)}
+        />
+        <Link
+          href={`${localePath(locale, "/statistics")}#${indicator.id}`}
+          className="inline-flex items-center min-h-[44px] text-sm font-medium text-ink underline-offset-[3px] hover:underline"
+        >
+          {t.indicatorCard.chartLink.replace("{firstYear}", String(firstYear(indicator)))}
+        </Link>
+      </div>
     </Card>
   );
 }

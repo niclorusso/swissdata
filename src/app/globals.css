@@ -119,13 +119,12 @@
 
 /* Touch targets of at least 44px on phones (--sdf-tap) */
 @media (max-width: 639px) {
-  /* the link of a source line gets 14px of touch area above and below (44px for one line of text);
-     the negative margin keeps the line where it was */
+  /* the link of a source line gets 14px of touch area above and below (44px for one line of text) */
   .sdf-source a {
-    display: inline-block;
-    min-width: var(--sdf-tap);
+    /* inline, so that a long publisher name wraps like the text around it; the vertical padding of an inline
+       element does not move the lines but makes the link easier to tap */
+    display: inline;
     padding-block: 14px;
-    margin-block: -14px;
   }
   .sdf-source a::after {
     content: none;

@@ -34,6 +34,10 @@ export default async function RootLayout({
   return (
     <html lang={lang}>
       <body className={inter.className}>
+        {/* without JavaScript the "?" panels cannot be opened: show them open */}
+        <noscript>
+          <style>{"[data-more-panel]{display:block!important}"}</style>
+        </noscript>
         <ClientLayout locale={lang}>{children}</ClientLayout>
       </body>
     </html>

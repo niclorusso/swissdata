@@ -2,6 +2,7 @@
 
 import { cn } from "@/lib/utils";
 import { useLanguage } from "@/i18n/LanguageContext";
+import { indicators } from "@/data/indicators";
 
 export type TimeRange = "5Y" | "10Y" | "20Y" | "ALL";
 
@@ -16,7 +17,7 @@ export function TimeRangeSelector({ selected, onChange }: TimeRangeSelectorProps
   const { t } = useLanguage();
 
   return (
-    <div className="flex flex-wrap items-center rounded-3xl border border-line bg-white p-1 min-w-0" role="group" aria-label={t.statistics.period}>
+    <div className="flex flex-wrap items-center self-start rounded-3xl border border-line bg-white p-1 min-w-0" role="group" aria-label={t.statistics.period}>
       {rangeValues.map((value) => (
         <button
           key={value}
@@ -37,16 +38,20 @@ export function TimeRangeSelector({ selected, onChange }: TimeRangeSelectorProps
   );
 }
 
+// Latest year with a figure in any series. The ranges count back from it, not from today's date, so that the
+// page built on the server and the page in the browser show the same years.
+const LATEST_YEAR = Math.max(...indicators.map((i) => i.historicalData?.[i.historicalData.length - 1]?.year ?? 0));
+
+/** First year shown for a range: the last 5, 10 or 20 years with figures, or the whole series. */
 export function getYearRangeFromSelection(range: TimeRange): number {
-  const currentYear = new Date().getFullYear();
   switch (range) {
     case "5Y":
-      return currentYear - 5;
+      return LATEST_YEAR - 4;
     case "10Y":
-      return currentYear - 10;
+      return LATEST_YEAR - 9;
     case "20Y":
-      return currentYear - 20;
+      return LATEST_YEAR - 19;
     case "ALL":
-      return 1980; // Start from 1980 for "all time"
+      return 0;
   }
 }

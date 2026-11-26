@@ -1,82 +1,52 @@
 "use client";
 
 import Link from "next/link";
-import { buttonVariants } from "@/components/ui/button";
 import { CategorySection } from "@/components/dashboard/CategorySection";
-import { getLocalizedIndicatorsByCategory } from "@/data/indicators";
+import { getLocalizedIndicatorsByCategory, indicators } from "@/data/indicators";
+import { DATA_CHECKED } from "@/data/meta";
 import { useLanguage } from "@/i18n/LanguageContext";
-import { ArrowRight, HelpCircle, Map, BarChart3 } from "lucide-react";
-import { indicatorSources } from "@/data/sources";
 import { localePath } from "@/i18n/routes";
+import { formatLongDate } from "@/lib/formatters";
+
+// The nine figures of the home page, three per section
+const HOME_INDICATORS = {
+  economic: ["unemployment-rate-ilo", "gdp-growth-rate", "federal-debt-gdp"],
+  demographic: ["population-total", "median-age", "life-expectancy"],
+  social: ["crime-rate-per-1000", "poverty-rate", "healthcare-cost"],
+} as const;
 
 export default function HomePage() {
   const { t, locale } = useLanguage();
-
-  // Filter to show only key indicators on dashboard
-  const economicIndicators = getLocalizedIndicatorsByCategory("economic", locale)
-    .filter(i => ["gdp-growth-rate", "unemployment-rate-ilo", "federal-debt-gdp"].includes(i.id));
-  const demographicIndicators = getLocalizedIndicatorsByCategory("demographic", locale)
-    .filter(i => ["population-total", "median-age", "life-expectancy"].includes(i.id));
-  const socialIndicators = getLocalizedIndicatorsByCategory("social", locale)
-    .filter(i => ["crime-rate-per-1000", "poverty-rate", "healthcare-cost"].includes(i.id));
+  const pick = (category: keyof typeof HOME_INDICATORS) =>
+    getLocalizedIndicatorsByCategory(category, locale).filter((i) => (HOME_INDICATORS[category] as readonly string[]).includes(i.id));
 
   return (
-    <div className="container mx-auto px-4 py-6 sm:py-8 space-y-8 sm:space-y-12">
-      {/* Title and the three ways into the site; the figures follow directly */}
-      <section className="text-center pt-4 pb-2 sm:pt-8 space-y-4 sm:space-y-6">
-        <h1 className="text-[2rem] sm:text-4xl md:text-5xl font-bold text-swiss-gray-900 max-w-3xl mx-auto leading-tight">
-          {t.home.title}{" "}
-          <span className="text-primary">{t.home.titleHighlight}</span>
-        </h1>
-        <p className="text-base sm:text-lg text-swiss-gray-600 max-w-2xl mx-auto">
-          {t.home.subtitle}
+    <div className="container mx-auto px-4 pt-6 pb-8 sm:pt-10 sm:pb-12 space-y-8 sm:space-y-12">
+      {/* What the site is, who makes it and how current the figures are; the figures follow directly */}
+      <section className="max-w-[72ch] space-y-3">
+        <h1 className="text-[1.75rem] sm:text-[2.5rem] font-bold leading-tight tracking-[-0.02em] text-ink">{t.home.title}</h1>
+        <p className="text-base sm:text-lg text-swiss-gray-600">{t.home.lead}</p>
+        <p className="text-sm text-subtle">
+          <Link href={localePath(locale, "/about")} className="underline underline-offset-[3px] hover:text-ink">
+            {t.home.independent}
+          </Link>
+          {" · "}
+          <span data-last-check="">{t.common.lastCheck.replace("{lastCheck}", formatLongDate(DATA_CHECKED, locale))}</span>
         </p>
-        <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center pt-2">
-          <Link href={localePath(locale, "/quiz")} className={buttonVariants({ size: "xl", className: "gap-2 w-full sm:w-auto" })}>
-            <HelpCircle className="h-5 w-5" aria-hidden="true" />
-            {t.home.testKnowledge}
-            <ArrowRight className="h-5 w-5" aria-hidden="true" />
-          </Link>
-          <Link href={localePath(locale, "/statistics")} className={buttonVariants({ size: "xl", variant: "outline", className: "gap-2 w-full sm:w-auto" })}>
-            <BarChart3 className="h-5 w-5" aria-hidden="true" />
-            {t.home.showStats}
-          </Link>
-          <Link href={localePath(locale, "/cantons")} className={buttonVariants({ size: "xl", variant: "outline", className: "gap-2 w-full sm:w-auto" })}>
-            <Map className="h-5 w-5" aria-hidden="true" />
-            {t.home.exploreByCanton}
-          </Link>
-        </div>
       </section>
 
-      {/* Economic Indicators */}
-      <CategorySection category="economic" indicators={economicIndicators} />
+      <CategorySection category="economic" indicators={pick("economic")} />
+      <CategorySection category="demographic" indicators={pick("demographic")} />
+      <CategorySection category="social" indicators={pick("social")} />
 
-      {/* Demographic Indicators */}
-      <CategorySection category="demographic" indicators={demographicIndicators} />
-
-      {/* Social Indicators */}
-      <CategorySection category="social" indicators={socialIndicators} />
-
-      {/* Data Sources */}
-      <section className="space-y-4">
-        <h2 className="text-lg font-semibold text-swiss-gray-900">{t.home.ourSources}</h2>
-        <div className="flex flex-wrap gap-3 sm:gap-4">
-          {indicatorSources.map((source) => (
-            <a
-              key={source.abbr}
-              href={source.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center px-4 py-3 bg-white border border-line rounded-xl hover:border-swiss-gray-400 transition-colors flex-1 min-w-[240px] min-h-[44px]"
-            >
-              <span className="text-left min-w-0">
-                <span className="block font-medium text-swiss-gray-900 text-base">{source.abbr}</span>
-                <span className="block text-sm text-swiss-gray-600">{source.name[locale]}</span>
-              </span>
-            </a>
-          ))}
-        </div>
-      </section>
+      <p>
+        <Link
+          href={localePath(locale, "/statistics")}
+          className="inline-flex items-center min-h-[44px] text-base font-medium text-ink underline underline-offset-[3px] hover:text-swiss-gray-600"
+        >
+          {t.home.allIndicators.replace("{indicatorCount}", String(indicators.length))}
+        </Link>
+      </p>
     </div>
   );
 }

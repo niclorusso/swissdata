@@ -146,5 +146,3 @@ export const dataSources: DataSource[] = [
     use: { en: "Punctuality of trains.", it: "Puntualità dei treni.", de: "Pünktlichkeit der Züge.", fr: "Ponctualité des trains." },
   },
 ];
-
-export const indicatorSources = dataSources.filter((s) => s.scope === "indicators");

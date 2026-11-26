@@ -20,6 +20,7 @@ export const translations = {
       lastCheck: "Data last checked on {lastCheck}",
       published: "published on {date}",
       publishedMonth: "published in {month}",
+      axisNotZero: "The vertical axis does not start at zero.",
     },
 
     categoryName: {
@@ -57,14 +58,10 @@ export const translations = {
     },
     // Home page
     home: {
-      title: "Switzerland",
-      titleHighlight: "in Numbers",
-      subtitle: "Statistics on Switzerland's economy, population and society, each with its source. A quiz to test what you know.",
-      testKnowledge: "Test Your Knowledge",
-      exploreByCanton: "Explore by Canton",
-      showStats: "Show Statistics",
-      // Sources
-      ourSources: "Our Sources",
+      title: "Official statistics on Switzerland",
+      lead: "The main figures in one place, each with its official source and the year it refers to.",
+      independent: "Independent site by Nicola Lo Russo, not run by the Confederation",
+      allIndicators: "All {indicatorCount} indicators year by year →",
     },
 
     // Quiz page
@@ -134,18 +131,10 @@ export const translations = {
 
     // Statistics page
     statistics: {
-      title: "Statistics & Trends",
-      subtitle: "Explore Switzerland\u2019s key indicators over time. Data spans back to 2000 for most metrics.",
-      allCategories: "All Categories",
-      economic: "Economic",
-      demographic: "Demographic",
-      social: "Social",
-      economicTrends: "Economic Trends",
-      demographicTrends: "Demographic Trends",
-      socialTrends: "Social Trends",
-      dataSources: "Data Sources",
-      whatIsIt: "What is it?",
-      whyItMatters: "Why it matters",
+      title: "Statistics year by year",
+      subtitle: "Each dot is one year's figure, as published by the source named under the chart.",
+      all: "All",
+      chartLabel: "{title}: from {firstValue} in {from} to {lastValue} in {to}",
       noData: "No data for this period",
       categories: "Categories",
       period: "Period",
@@ -243,23 +232,22 @@ export const translations = {
       ctaText: "The next time you hear a bold claim about Switzerland, check the data. Stay informed—with facts, not assumptions.",
     },
 
-    // Category section
-    category: {
-      economicTitle: "Economic Indicators",
-      economicDesc: "GDP, employment, and financial health of Switzerland",
-      demographicTitle: "Demographic Indicators",
-      demographicDesc: "Population, migration, and age structure",
-      socialTitle: "Social Indicators",
-      socialDesc: "Healthcare, education, and quality of life",
-      viewAllStatistics: "View All Statistics",
-    },
 
     // Indicator card
     indicatorCard: {
-      whatIsIt: "What is it?",
-      whyItMatters: "Why it matters",
-      vsLastYear: "vs last year",
-      vsPeriod: "vs {period}",
+      more: "More information: {title}",
+      chartLink: "Chart since {firstYear} →",
+    },
+
+    // Change against the previous figure: {delta} first ("+0,5"), then the year and the previous figure
+    change: {
+      points: "{delta} points compared with {prevYear} ({previous})",
+      pointsOne: "{delta} point compared with {prevYear} ({previous})",
+      years: "{delta} years compared with {prevYear} ({previous})",
+      yearsOne: "{delta} year compared with {prevYear} ({previous})",
+      relative: "{delta} compared with {prevYear} ({previous})",
+      previous: "{prevYear}: {previous}",
+      same: "unchanged from {prevYear}",
     },
   },
 
@@ -280,6 +268,7 @@ export const translations = {
       lastCheck: "Ultima verifica dei dati: {lastCheck}",
       published: "pubblicato il {date}",
       publishedMonth: "pubblicato {month}",
+      axisNotZero: "L'asse verticale non parte da zero.",
     },
 
     categoryName: {
@@ -317,14 +306,10 @@ export const translations = {
     },
     // Home page
     home: {
-      title: "La Svizzera",
-      titleHighlight: "in numeri",
-      subtitle: "Statistiche su economia, popolazione e società della Svizzera, ognuna con la sua fonte. Un quiz per mettere alla prova quello che sai.",
-      testKnowledge: "Testa le tue conoscenze",
-      exploreByCanton: "Esplora per Cantone",
-      showStats: "Vedi Statistiche",
-      // Sources
-      ourSources: "Le nostre fonti",
+      title: "Statistiche ufficiali sulla Svizzera",
+      lead: "Le cifre principali in un unico posto, ognuna con la fonte ufficiale e l'anno a cui si riferisce.",
+      independent: "Sito indipendente di Nicola Lo Russo, non della Confederazione",
+      allIndicators: "Tutti i {indicatorCount} indicatori anno per anno →",
     },
 
     // Quiz page
@@ -394,18 +379,10 @@ export const translations = {
 
     // Statistics page
     statistics: {
-      title: "Statistiche e tendenze",
-      subtitle: "Esplora gli indicatori chiave della Svizzera nel tempo. I dati risalgono al 2000 per la maggior parte delle metriche.",
-      allCategories: "Tutte le categorie",
-      economic: "Economici",
-      demographic: "Demografici",
-      social: "Sociali",
-      economicTrends: "Tendenze economiche",
-      demographicTrends: "Tendenze demografiche",
-      socialTrends: "Tendenze sociali",
-      dataSources: "Fonti dei dati",
-      whatIsIt: "Cos\u2019\u00E8?",
-      whyItMatters: "Perch\u00E9 \u00E8 importante",
+      title: "Statistiche anno per anno",
+      subtitle: "Ogni punto è il dato di un anno, come pubblicato dalla fonte indicata sotto il grafico.",
+      all: "Tutti",
+      chartLabel: "{title}: da {firstValue} nel {from} a {lastValue} nel {to}",
       noData: "Nessun dato per questo periodo",
       categories: "Categorie",
       period: "Periodo",
@@ -503,21 +480,21 @@ export const translations = {
       ctaText: "La prossima volta che senti un'affermazione audace sulla Svizzera, controlla i dati. Rimani informato—con i fatti, non con le supposizioni.",
     },
 
-    // Category section
-    category: {
-      economicTitle: "Indicatori economici",
-      economicDesc: "PIL, occupazione e salute finanziaria della Svizzera",
-      demographicTitle: "Indicatori demografici",
-      demographicDesc: "Popolazione, migrazione e struttura per et\u00E0",
-      socialTitle: "Indicatori sociali",
-      socialDesc: "Sanit\u00E0, istruzione e qualit\u00E0 della vita",      viewAllStatistics: "Vedi tutte le statistiche",    },
-
     // Indicator card
     indicatorCard: {
-      whatIsIt: "Cos'è?",
-      whyItMatters: "Perché è importante",
-      vsLastYear: "rispetto all'anno scorso",
-      vsPeriod: "rispetto al {period}",
+      more: "Altre informazioni: {title}",
+      chartLink: "Grafico dal {firstYear} →",
+    },
+
+    // Change against the previous figure: {delta} first ("+0,5"), then the year and the previous figure
+    change: {
+      points: "{delta} punti rispetto al {prevYear} ({previous})",
+      pointsOne: "{delta} punti rispetto al {prevYear} ({previous})",
+      years: "{delta} anni rispetto al {prevYear} ({previous})",
+      yearsOne: "{delta} anni rispetto al {prevYear} ({previous})",
+      relative: "{delta} rispetto al {prevYear} ({previous})",
+      previous: "Nel {prevYear}: {previous}",
+      same: "invariato rispetto al {prevYear}",
     },
   },
 
@@ -538,6 +515,7 @@ export const translations = {
       lastCheck: "Daten zuletzt geprüft am {lastCheck}",
       published: "veröffentlicht am {date}",
       publishedMonth: "veröffentlicht im {month}",
+      axisNotZero: "Die senkrechte Achse beginnt nicht bei null.",
     },
 
     categoryName: {
@@ -575,14 +553,10 @@ export const translations = {
     },
     // Home page
     home: {
-      title: "Die Schweiz",
-      titleHighlight: "in Zahlen",
-      subtitle: "Statistiken zu Wirtschaft, Bevölkerung und Gesellschaft der Schweiz, jede mit ihrer Quelle. Ein Quiz, um dein Wissen zu testen.",
-      testKnowledge: "Teste dein Wissen",
-      exploreByCanton: "Nach Kanton erkunden",
-      showStats: "Statistiken anzeigen",
-      // Sources
-      ourSources: "Unsere Quellen",
+      title: "Amtliche Statistiken zur Schweiz",
+      lead: "Die wichtigsten Zahlen an einem Ort, jede mit ihrer amtlichen Quelle und dem Jahr, auf das sie sich bezieht.",
+      independent: "Unabhängige Website von Nicola Lo Russo, nicht des Bundes",
+      allIndicators: "Alle {indicatorCount} Indikatoren Jahr für Jahr →",
     },
 
     // Quiz page
@@ -652,18 +626,10 @@ export const translations = {
 
     // Statistics page
     statistics: {
-      title: "Statistiken & Trends",
-      subtitle: "Entdecke die wichtigsten Indikatoren der Schweiz im Zeitverlauf. Die Daten reichen für die meisten Kennzahlen bis 2000 zurück.",
-      allCategories: "Alle Kategorien",
-      economic: "Wirtschaftlich",
-      demographic: "Demografisch",
-      social: "Sozial",
-      economicTrends: "Wirtschaftstrends",
-      demographicTrends: "Demografische Trends",
-      socialTrends: "Soziale Trends",
-      dataSources: "Datenquellen",
-      whatIsIt: "Was ist das?",
-      whyItMatters: "Warum es wichtig ist",
+      title: "Statistiken Jahr für Jahr",
+      subtitle: "Jeder Punkt ist der Wert eines Jahres, wie ihn die Quelle unter der Grafik veröffentlicht.",
+      all: "Alle",
+      chartLabel: "{title}: von {firstValue} ({from}) bis {lastValue} ({to})",
       noData: "Keine Daten für diesen Zeitraum",
       categories: "Kategorien",
       period: "Zeitraum",
@@ -761,23 +727,22 @@ export const translations = {
       ctaText: "Das nächste Mal, wenn du eine kühne Behauptung über die Schweiz hörst, überprüfe die Daten. Bleib informiert—mit Fakten, nicht mit Annahmen.",
     },
 
-    // Category section
-    category: {
-      economicTitle: "Wirtschaftsindikatoren",
-      economicDesc: "BIP, Beschäftigung und finanzielle Gesundheit der Schweiz",
-      demographicTitle: "Demografische Indikatoren",
-      demographicDesc: "Bevölkerung, Migration und Altersstruktur",
-      socialTitle: "Soziale Indikatoren",
-      socialDesc: "Gesundheit, Bildung und Lebensqualität",
-      viewAllStatistics: "Alle Statistiken anzeigen",
-    },
 
     // Indicator card
     indicatorCard: {
-      whatIsIt: "Was ist das?",
-      whyItMatters: "Warum es wichtig ist",
-      vsLastYear: "gegenüber Vorjahr",
-      vsPeriod: "gegenüber {period}",
+      more: "Mehr Informationen: {title}",
+      chartLink: "Verlauf seit {firstYear} →",
+    },
+
+    // Change against the previous figure: {delta} first ("+0,5"), then the year and the previous figure
+    change: {
+      points: "{delta} Prozentpunkte gegenüber {prevYear} ({previous})",
+      pointsOne: "{delta} Prozentpunkte gegenüber {prevYear} ({previous})",
+      years: "{delta} Jahre gegenüber {prevYear} ({previous})",
+      yearsOne: "{delta} Jahre gegenüber {prevYear} ({previous})",
+      relative: "{delta} gegenüber {prevYear} ({previous})",
+      previous: "{prevYear}: {previous}",
+      same: "unverändert gegenüber {prevYear}",
     },
   },
 
@@ -798,6 +763,7 @@ export const translations = {
       lastCheck: "Données vérifiées le {lastCheck}",
       published: "publié le {date}",
       publishedMonth: "publié en {month}",
+      axisNotZero: "L'axe vertical ne commence pas à zéro.",
     },
 
     categoryName: {
@@ -835,14 +801,10 @@ export const translations = {
     },
     // Home page
     home: {
-      title: "La Suisse",
-      titleHighlight: "en chiffres",
-      subtitle: "Des statistiques sur l'économie, la population et la société suisses, chacune avec sa source. Un quiz pour tester vos connaissances.",
-      testKnowledge: "Testez vos connaissances",
-      exploreByCanton: "Explorer par canton",
-      showStats: "Voir les statistiques",
-      // Sources
-      ourSources: "Nos sources",
+      title: "Statistiques officielles sur la Suisse",
+      lead: "Les principaux chiffres réunis en un seul endroit, chacun avec sa source officielle et l'année à laquelle il se rapporte.",
+      independent: "Site indépendant de Nicola Lo Russo, pas de la Confédération",
+      allIndicators: "Les {indicatorCount} indicateurs année par année →",
     },
 
     // Quiz page
@@ -912,18 +874,10 @@ export const translations = {
 
     // Statistics page
     statistics: {
-      title: "Statistiques et tendances",
-      subtitle: "Explorez les indicateurs clés de la Suisse dans le temps. Les données remontent à 2000 pour la plupart des métriques.",
-      allCategories: "Toutes les catégories",
-      economic: "Économiques",
-      demographic: "Démographiques",
-      social: "Sociaux",
-      economicTrends: "Tendances économiques",
-      demographicTrends: "Tendances démographiques",
-      socialTrends: "Tendances sociales",
-      dataSources: "Sources des données",
-      whatIsIt: "Qu'est-ce que c'est ?",
-      whyItMatters: "Pourquoi c'est important",
+      title: "Statistiques année par année",
+      subtitle: "Chaque point est la valeur d'une année, telle que publiée par la source indiquée sous le graphique.",
+      all: "Tous",
+      chartLabel: "{title} : de {firstValue} en {from} à {lastValue} en {to}",
       noData: "Pas de données pour cette période",
       categories: "Catégories",
       period: "Période",
@@ -1021,23 +975,22 @@ export const translations = {
       ctaText: "La prochaine fois que vous entendez une affirmation audacieuse sur la Suisse, vérifiez les données. Restez informé—avec des faits, pas des suppositions.",
     },
 
-    // Category section
-    category: {
-      economicTitle: "Indicateurs économiques",
-      economicDesc: "PIB, emploi et santé financière de la Suisse",
-      demographicTitle: "Indicateurs démographiques",
-      demographicDesc: "Population, migration et structure par âge",
-      socialTitle: "Indicateurs sociaux",
-      socialDesc: "Santé, éducation et qualité de vie",
-      viewAllStatistics: "Voir toutes les statistiques",
-    },
 
     // Indicator card
     indicatorCard: {
-      whatIsIt: "Qu'est-ce que c'est ?",
-      whyItMatters: "Pourquoi c'est important",
-      vsLastYear: "par rapport à l'année dernière",
-      vsPeriod: "par rapport à {period}",
+      more: "Plus d'informations : {title}",
+      chartLink: "Évolution depuis {firstYear} →",
+    },
+
+    // Change against the previous figure: {delta} first ("+0,5"), then the year and the previous figure
+    change: {
+      points: "{delta} points par rapport à {prevYear} ({previous})",
+      pointsOne: "{delta} point par rapport à {prevYear} ({previous})",
+      years: "{delta} ans par rapport à {prevYear} ({previous})",
+      yearsOne: "{delta} an par rapport à {prevYear} ({previous})",
+      relative: "{delta} par rapport à {prevYear} ({previous})",
+      previous: "En {prevYear} : {previous}",
+      same: "inchangé par rapport à {prevYear}",
     },
   },
 } as const;

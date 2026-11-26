@@ -1,171 +1,172 @@
 "use client";
 
-import { useState } from "react";
-import { getLocalizedIndicatorsByCategory } from "@/data/indicators";
-import { SingleIndicatorChart } from "@/components/statistics/LargeChart";
-import { indicatorSources } from "@/data/sources";
+import { useEffect, useState } from "react";
+import { getLocalizedIndicatorsByCategory, indicators } from "@/data/indicators";
+import { SingleIndicatorChart, valueAxis } from "@/components/statistics/LargeChart";
 import {
   TimeRangeSelector,
   TimeRange,
   getYearRangeFromSelection,
 } from "@/components/statistics/TimeRangeSelector";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { InfoTooltip } from "@/components/ui/tooltip";
+import { Card } from "@/components/ui/card";
+import { MoreInfoButton, MoreInfoPanel, useMoreInfo } from "@/components/ui/tooltip";
 import { SourceLine } from "@/components/ui/source-line";
 import { cn } from "@/lib/utils";
 import { useLanguage } from "@/i18n/LanguageContext";
-import { getIndicatorExplanation } from "@/i18n/indicatorExplanations";
 import { localizePeriod } from "@/i18n/periods";
 import { localizeSource } from "@/i18n/sourceNames";
-import { formatNumber, formatPercent, percentSign } from "@/lib/formatters";
+import { formatYear } from "@/lib/formatters";
+import { formatIndicatorValue, howToReadText, publishedText, relatedText, unitLine } from "@/lib/indicatorText";
 import { Indicator, IndicatorCategory } from "@/types";
-import { TrendingUp, Users, Heart, DollarSign, Calendar } from "lucide-react";
 
 type CategoryFilter = IndicatorCategory | "all";
 
 const CATEGORIES: IndicatorCategory[] = ["economic", "demographic", "social"];
 const CHART_COLOR: Record<IndicatorCategory, string> = { economic: "#2563EB", demographic: "#7C3AED", social: "#059669" };
-const TEXT_COLOR: Record<IndicatorCategory, string> = { economic: "text-economic", demographic: "text-demographic", social: "text-social" };
+
+/**
+ * One indicator: title and "?" with the value, unit line and years shown, definition, chart, notes (axis,
+ * how to read), the other official measure, source. The "?" panel holds the context.
+ */
+function ChartCard({ indicator, startYear }: { indicator: Indicator; startYear: number }) {
+  const { t, locale } = useLanguage();
+  const info = useMoreInfo();
+  const shown = (indicator.historicalData ?? []).filter((d) => d.year >= startYear);
+  const axis = shown.length ? valueAxis(indicator, shown.map((d) => d.value)) : null;
+  const howToRead = howToReadText(indicator, locale);
+  const related = relatedText(indicator, locale);
+  const years = shown.length ? ` · ${formatYear(shown[0].year)}–${formatYear(shown[shown.length - 1].year)}` : "";
+
+  return (
+    <Card id={indicator.id} data-indicator={indicator.id} className="flex flex-col p-4 sm:p-5 scroll-mt-4">
+      <div className="flex items-start justify-between gap-3">
+        <div className="flex items-start gap-1 min-w-0">
+          <h3 className="text-base font-semibold leading-snug text-ink">{indicator.shortName}</h3>
+          <MoreInfoButton info={info} label={t.indicatorCard.more.replace("{title}", indicator.shortName)} className="-ml-1.5 mr-0" />
+        </div>
+        <span className="text-xl sm:text-2xl font-bold swiss-number text-ink text-right shrink-0">
+          {formatIndicatorValue(indicator, locale)}
+        </span>
+      </div>
+      <p data-unit-line="" className="mt-1 text-sm text-swiss-gray-600">
+        {unitLine(indicator, locale)}
+        {years && (
+          <>
+            {" · "}
+            <span className="whitespace-nowrap">{years}</span>
+          </>
+        )}
+      </p>
+      <p data-definition="" className="mt-2 text-sm leading-relaxed text-swiss-gray-700">
+        {indicator.description}
+      </p>
+      <MoreInfoPanel info={info} className="mt-3">
+        {indicator.acronym && <p>{indicator.acronym}</p>}
+        {indicator.context && <p>{indicator.context}</p>}
+      </MoreInfoPanel>
+
+      <div className="mt-3 -mx-2 sm:mx-0">
+        <SingleIndicatorChart indicator={indicator} height={180} startYear={startYear} color={CHART_COLOR[indicator.category]} />
+      </div>
+
+      {(axis?.notFromZero || howToRead) && (
+        <div className="mt-1 space-y-0.5 text-source text-swiss-gray-600">
+          {axis?.notFromZero && <p data-axis-note="">{t.common.axisNotZero}</p>}
+          {howToRead && <p>{howToRead}</p>}
+        </div>
+      )}
+      {related && <p data-related="" className="mt-2 text-sm leading-relaxed text-swiss-gray-700">{related}</p>}
+
+      <div className="mt-auto">
+        <SourceLine
+          publisher={localizeSource(indicator.source, locale)}
+          url={indicator.sourceUrl}
+          date={localizePeriod(indicator.lastUpdated, locale)}
+          published={publishedText(indicator, locale)}
+        />
+      </div>
+    </Card>
+  );
+}
 
 export default function StatisticsPage() {
   const { t, locale } = useLanguage();
   const [timeRange, setTimeRange] = useState<TimeRange>("20Y");
-  // The page opens on the first category (7 charts); the others are one tap away.
+  // The page opens on the first category; the others are one tap away.
   const [categoryFilter, setCategoryFilter] = useState<CategoryFilter>("economic");
+  const [scrollTo, setScrollTo] = useState<string | null>(null);
+
+  // A link from a home card ("#unemployment-rate-ilo") opens the category of that indicator, shows the whole
+  // series (the link says "Chart since {first year}") and scrolls to its chart.
+  useEffect(() => {
+    const openFromHash = () => {
+      const id = decodeURIComponent(window.location.hash.slice(1));
+      const indicator = indicators.find((i) => i.id === id);
+      if (!indicator) return;
+      setCategoryFilter(indicator.category);
+      setTimeRange("ALL");
+      setScrollTo(id);
+    };
+    openFromHash();
+    window.addEventListener("hashchange", openFromHash);
+    return () => window.removeEventListener("hashchange", openFromHash);
+  }, []);
+
+  useEffect(() => {
+    if (!scrollTo) return;
+    document.getElementById(scrollTo)?.scrollIntoView({ block: "start" });
+    setScrollTo(null);
+  }, [scrollTo]);
 
   const startYear = getYearRangeFromSelection(timeRange);
 
-  const categoryTabs: { value: CategoryFilter; label: string; icon: typeof TrendingUp }[] = [
-    { value: "economic", label: t.statistics.economic, icon: DollarSign },
-    { value: "demographic", label: t.statistics.demographic, icon: Users },
-    { value: "social", label: t.statistics.social, icon: Heart },
-    { value: "all", label: t.statistics.allCategories, icon: TrendingUp },
+  const categoryTabs: { value: CategoryFilter; label: string }[] = [
+    { value: "economic", label: t.categoryName.economic },
+    { value: "demographic", label: t.categoryName.demographic },
+    { value: "social", label: t.categoryName.social },
+    { value: "all", label: t.statistics.all },
   ];
-  const headings: Record<IndicatorCategory, string> = {
-    economic: t.statistics.economicTrends,
-    demographic: t.statistics.demographicTrends,
-    social: t.statistics.socialTrends,
-  };
-
-  // The figure beside the title: the number with its sign for percentages, without the long unit (it is in the description).
-  const headline = (indicator: Indicator) =>
-    indicator.unit === "%"
-      ? formatPercent(indicator.value, locale)
-      : indicator.unit.startsWith("%")
-      ? formatNumber(indicator.value, locale) + percentSign(locale)
-      : formatNumber(indicator.value, locale);
 
   return (
     <div className="container mx-auto px-4 py-6 sm:py-8">
-      {/* Header */}
-      <div className="mb-6 sm:mb-8">
-        <h1 className="text-2xl sm:text-3xl font-bold text-swiss-gray-900 mb-2">
-          {t.statistics.title}
-        </h1>
-        <p className="text-sm sm:text-base text-swiss-gray-600">
-          {t.statistics.subtitle}
-        </p>
+      <div className="mb-6 sm:mb-8 max-w-[72ch]">
+        <h1 className="text-[1.75rem] sm:text-[2.5rem] font-bold leading-tight text-ink mb-2">{t.statistics.title}</h1>
+        <p className="text-base sm:text-lg text-swiss-gray-600">{t.statistics.subtitle}</p>
       </div>
 
-      {/* Controls */}
-      <div className="flex flex-col lg:flex-row gap-4 mb-6 sm:mb-8">
+      <div className="flex flex-col lg:flex-row gap-3 sm:gap-4 mb-6 sm:mb-8">
         <div className="flex flex-wrap items-center gap-1 rounded-3xl border border-line bg-white p-1 self-start max-w-full" role="group" aria-label={t.statistics.categories}>
-          {categoryTabs.map((tab) => {
-            const Icon = tab.icon;
-            return (
-              <button
-                key={tab.value}
-                type="button"
-                aria-pressed={categoryFilter === tab.value}
-                onClick={() => setCategoryFilter(tab.value)}
-                className={cn(
-                  "flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium rounded-full transition-colors whitespace-nowrap",
-                  categoryFilter === tab.value
-                    ? "bg-swiss-gray-900 text-white"
-                    : "text-swiss-gray-600 hover:text-swiss-gray-900 hover:bg-swiss-gray-50"
-                )}
-              >
-                <Icon className="hidden sm:block h-4 w-4 shrink-0" aria-hidden="true" />
-                {tab.label}
-              </button>
-            );
-          })}
+          {categoryTabs.map((tab) => (
+            <button
+              key={tab.value}
+              type="button"
+              aria-pressed={categoryFilter === tab.value}
+              onClick={() => setCategoryFilter(tab.value)}
+              className={cn(
+                "px-2 sm:px-3 py-1.5 text-sm font-medium rounded-full transition-colors whitespace-nowrap",
+                categoryFilter === tab.value
+                  ? "bg-swiss-gray-900 text-white"
+                  : "text-swiss-gray-600 hover:text-swiss-gray-900 hover:bg-swiss-gray-50"
+              )}
+            >
+              {tab.label}
+            </button>
+          ))}
         </div>
 
-        <div className="flex items-center gap-3 min-w-0">
-          <Calendar className="h-5 w-5 text-swiss-gray-500 shrink-0" aria-hidden="true" />
-          <TimeRangeSelector selected={timeRange} onChange={setTimeRange} />
-        </div>
+        <TimeRangeSelector selected={timeRange} onChange={setTimeRange} />
       </div>
 
       {CATEGORIES.filter((category) => categoryFilter === "all" || categoryFilter === category).map((category) => (
         <section key={category} className="mb-8 sm:mb-12">
-          <h2 className="text-lg sm:text-xl font-semibold text-swiss-gray-900 mb-4 sm:mb-6">
-            {headings[category]}
-          </h2>
+          <h2 className="text-xl sm:text-2xl font-bold text-ink mb-3 sm:mb-4">{t.categoryName[category]}</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-            {getLocalizedIndicatorsByCategory(category, locale).map((indicator) => {
-              const explanation = getIndicatorExplanation(indicator.id, locale, "statistics");
-              return (
-                <Card key={indicator.id}>
-                  <CardHeader className="pb-2">
-                    <div className="flex items-start justify-between gap-2">
-                      <div className="min-w-0">
-                        <CardTitle className="text-base leading-snug flex items-center gap-2">
-                          {indicator.shortName}
-                          {explanation && (
-                            <InfoTooltip
-                              label={`${t.statistics.whatIsIt} ${indicator.shortName}`}
-                              content={
-                                <div className="space-y-2">
-                                  <div>
-                                    <p className="font-medium text-swiss-gray-900 mb-1">{t.statistics.whatIsIt}</p>
-                                    <p className="text-swiss-gray-600">{explanation.what}</p>
-                                  </div>
-                                  <div>
-                                    <p className="font-medium text-swiss-gray-900 mb-1">{t.statistics.whyItMatters}</p>
-                                    <p className="text-swiss-gray-600">{explanation.why}</p>
-                                  </div>
-                                </div>
-                              }
-                            />
-                          )}
-                        </CardTitle>
-                        <p className="text-sm text-swiss-gray-600">{indicator.description}</p>
-                      </div>
-                      <span className={cn("text-xl sm:text-2xl font-bold swiss-number shrink-0", TEXT_COLOR[category])}>
-                        {headline(indicator)}
-                      </span>
-                    </div>
-                  </CardHeader>
-                  <CardContent className="px-2 sm:px-6">
-                    <SingleIndicatorChart indicator={indicator} height={170} startYear={startYear} color={CHART_COLOR[category]} />
-                    <SourceLine
-                      className="mx-4 sm:mx-0"
-                      publisher={localizeSource(indicator.source, locale)}
-                      url={indicator.sourceUrl}
-                      date={localizePeriod(indicator.lastUpdated, locale)}
-                    />
-                  </CardContent>
-                </Card>
-              );
-            })}
+            {getLocalizedIndicatorsByCategory(category, locale).map((indicator) => (
+              <ChartCard key={indicator.id} indicator={indicator} startYear={startYear} />
+            ))}
           </div>
         </section>
       ))}
-
-      {/* Data Sources Footer */}
-      <section className="border-t border-line pt-6 sm:pt-8 mt-8 sm:mt-12">
-        <h2 className="text-lg font-semibold text-swiss-gray-900 mb-4">{t.statistics.dataSources}</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 sm:gap-4">
-          {indicatorSources.map((source) => (
-            <a key={source.abbr} href={source.url} target="_blank" rel="noopener noreferrer" className="block p-4 bg-swiss-gray-50 rounded-xl hover:bg-swiss-gray-100 transition-colors min-h-[44px]">
-              <span className="block font-medium text-swiss-gray-900 text-base">{source.abbr}</span>
-              <span className="block text-sm text-swiss-gray-600">{source.name[locale]}</span>
-            </a>
-          ))}
-        </div>
-      </section>
     </div>
   );
 }
