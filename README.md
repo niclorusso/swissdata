@@ -13,10 +13,7 @@ An interactive web app for exploring real statistics about Switzerland's economy
 
 ## Data Sources
 
-- [BFS](https://www.bfs.admin.ch) — Federal Statistical Office
-- [SECO](https://www.seco.admin.ch) — State Secretariat for Economic Affairs
-- [BAG](https://www.bag.admin.ch) — Federal Office of Public Health
-- [OpenData.swiss](https://opendata.swiss) — Swiss Open Government Data
+The indicators and the canton figures come from Swiss federal offices (FSO, SECO, FFA, SFOE, FOPH, swisstopo) and Eurostat. The quiz also uses the OECD, the World Bank, the IMF, the ECB, SIPRI, the World Gold Council, the Swiss Bankers Association and SBB. The full list, with what is taken from each body, is in `src/data/sources.ts` and on the About page.
 
 ## Tech Stack
 
@@ -45,7 +42,7 @@ Open [http://localhost:3000](http://localhost:3000).
 python3 scripts/data/build_cantons.py
 ```
 
-It needs Python 3.9 or later (standard library only) and `pdftotext` (poppler), because two sources are published only as PDF.
+It needs Python 3.9 or later (standard library only) and `pdftotext` (poppler), because one source (the health premiums) is published only as PDF.
 
 ## License
 
