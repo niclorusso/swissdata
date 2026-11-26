@@ -51,6 +51,11 @@ export interface Indicator {
   trend: TrendDirection;
   trendPercentage?: number;
   changeKind: ChangeKind;
+  /**
+   * value and previousValue before rounding, where the source publishes more decimals: the difference in points
+   * is computed from these, as trendPercentage is (e.g. 5.452 against 5.210 gives +0.2, not +0.3)
+   */
+  unrounded?: { value: number; previous: number };
   source: string;
   sourceUrl: string;
   /** publication date of the latest figure by the source: ISO date, or "YYYY-MM" when only the month is known */

@@ -66,7 +66,7 @@ export const dataSources: DataSource[] = [
     url: "https://www.snb.ch",
     scope: "quiz",
     name: { en: "Swiss National Bank (SNB)", it: "Banca nazionale svizzera (BNS)", de: "Schweizerische Nationalbank (SNB)", fr: "Banque nationale suisse (BNS)" },
-    use: { en: "Number of banks, gold reserves, definition of price stability.", it: "Numero di banche, riserve d’oro, definizione di stabilità dei prezzi.", de: "Anzahl Banken, Goldreserven, Definition der Preisstabilität.", fr: "Nombre de banques, réserves d’or, définition de la stabilité des prix." },
+    use: { en: "Number of banks and gold reserves.", it: "Numero di banche e riserve d’oro.", de: "Anzahl Banken und Goldreserven.", fr: "Nombre de banques et réserves d’or." },
   },
   {
     abbr: "FOEN",

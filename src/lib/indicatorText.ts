@@ -70,8 +70,9 @@ function split(template: string, delta: string | null): ChangeLine {
 
 /**
  * "+0,5 punti rispetto al 2024 (4,3 %)", "+3,5 % rispetto al 2022 (CHF 6788)", "Nel 2024: 1,5 %".
- * Points and years are the difference of the two figures as shown; relative changes use trendPercentage,
- * which is computed from the unrounded source values.
+ * Points and years are the difference of the two figures, computed from the unrounded source values where the
+ * data give them (unrounded), else from the figures as shown; relative changes use trendPercentage, which is
+ * computed from the unrounded source values too.
  */
 export function changeLine(indicator: Indicator, locale: Locale): ChangeLine | null {
   if (indicator.previousValue === undefined) return null;
@@ -89,8 +90,9 @@ export function changeLine(indicator: Indicator, locale: Locale): ChangeLine | n
     return split(fill(t.relative), formatNumber(change, locale, { decimals: 1, sign: true }) + percentSign(locale));
   }
 
-  // points and years: difference of the figures as shown, one decimal
-  const difference = Math.round((indicator.value - indicator.previousValue) * 10) / 10;
+  // points and years: difference of the unrounded figures where known, one decimal
+  const exact = indicator.unrounded ?? { value: indicator.value, previous: indicator.previousValue };
+  const difference = Math.round((exact.value - exact.previous) * 10) / 10;
   if (difference === 0) return split(fill(t.same), null);
   const size = Math.abs(difference);
   const singular = locale === "fr" ? size < 2 : locale === "en" ? size === 1 : false;

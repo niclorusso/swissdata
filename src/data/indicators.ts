@@ -17,6 +17,7 @@ export const indicators: Indicator[] = [
     trend: "up",
     trendPercentage: 11.5,
     changeKind: "points",
+    unrounded: { value: 4.841, previous: 4.343 }, // FSO T 03.03.01.03: 4.8407 and 4.3425
     source: "FSO / UST (Federal Statistical Office)",
     sourceUrl: "https://statistik.admin.ch/de/themen/arbeit-erwerb/erwerbslosigkeit-unterbeschaeftigung",
     sourcePublished: "2026-11-12",
@@ -67,6 +68,7 @@ export const indicators: Indicator[] = [
     trend: "up",
     trendPercentage: 18.8,
     changeKind: "points",
+    unrounded: { value: 2.835, previous: 2.386 }, // FSO/SECO T 3.3.2.2: 2.8346 and 2.3862
     source: "SECO (State Secretariat for Economic Affairs)",
     sourceUrl: "https://www.seco.admin.ch/de/arbeitsmarktstatistik-berichte-rechtsgrundlagen",
     sourcePublished: "2026-02-04",
@@ -217,12 +219,12 @@ export const indicators: Indicator[] = [
     changeKind: "relative",
     source: "FSO / UST (Federal Statistical Office)",
     sourceUrl: "https://statistik.admin.ch/de/themen/arbeit-erwerb/loehne-erwerbseinkommen-arbeitskosten",
-    sourcePublished: "2025-11-25",
+    sourcePublished: "2026-04-29",
     lastUpdated: "2024",
     description: "Half of employees earn more, half earn less. Private and public sector; surveyed every two years.",
     unitLine: "gross per month, full time, {year}",
     context: "The median wage rose from CHF\u00A06,788 in 2022 to CHF\u00A07,024 in 2024 (+3.5%). Half of employees earn more, half less.",
-    // FSO Earnings Structure Survey (LSE), STAT-TAB px-x-0304010000_201, private and public sector, biennial, LSE 2024 published 25.11.2025
+    // FSO Earnings Structure Survey (LSE), STAT-TAB px-x-0304010000_201, private and public sector, biennial, LSE 2024; table updated 29.04.2026
     historicalData: [
       { year: 2012, value: 6439 },
       { year: 2014, value: 6427 },
@@ -280,12 +282,13 @@ export const indicators: Indicator[] = [
     changeKind: "relative",
     source: "FSO / UST (Federal Statistical Office)",
     sourceUrl: "https://statistik.admin.ch/de/themen/preise/immobilienpreise",
+    sourcePublished: "2026-01-30",
     lastUpdated: "2025",
     description: "Prices paid for single-family houses and condominium flats.",
     unitLine: "index, Q4 2019 = 100, {year} average",
     context: "Residential property prices rose by 4.6% on average in 2025, after 1.7% in 2024 and 2.2% in 2023. The index has existed since 2017.",
     howToRead: "{value} means prices {diff} higher than in Q4 2019.",
-    // FSO IMPI table T6, average annual indices (base Q4 2019 = 100), series starts 2017, published 2026
+    // FSO IMPI table T6, average annual indices (base Q4 2019 = 100), series starts 2017 (su-q-05.06.03.01.06, published 30.01.2026; 2025: 123.4293, 2024: 118.0461)
     historicalData: [
       { year: 2017, value: 92.2 },
       { year: 2018, value: 95.0 },
@@ -311,13 +314,14 @@ export const indicators: Indicator[] = [
     trend: "up",
     trendPercentage: 1.1,
     changeKind: "points",
+    unrounded: { value: 27.699, previous: 27.399 }, // STATPOP: 2,528,117 of 9,127,125 and 2,479,888 of 9,051,029
     source: "FSO / UST (Federal Statistical Office)",
     sourceUrl: "https://statistik.admin.ch/de/themen/bevoelkerung",
     sourcePublished: "2026-08-20",
     lastUpdated: "2025",
     description: "Permanent residents without Swiss citizenship, including those born in Switzerland.",
     unitLine: "of permanent residents, 31.12.{year}",
-    context: "At the end of 2025 Switzerland had 9,127,100 permanent residents, of whom 2,528,100 were foreign nationals. The largest groups are Italians, Germans, Portuguese and French.",
+    context: "At the end of 2025 Switzerland had 9,127,125 permanent residents, of whom 2,528,117 were foreign nationals. The largest groups are Italians, Germans, Portuguese and French.",
     // FSO STAT-TAB px-x-0102020000_101 (demographic balance), foreign share of permanent resident population at 31 December, definitive 2025 published 20.08.2026
     historicalData: [
       { year: 2000, value: 19.8 },
@@ -361,12 +365,12 @@ export const indicators: Indicator[] = [
     changeKind: "relative",
     source: "FSO (Federal Statistical Office), STATPOP",
     sourceUrl: "https://statistik.admin.ch/de/themen/bevoelkerung",
-    sourcePublished: "2026-08",
+    sourcePublished: "2026-08-20",
     lastUpdated: "2025",
     description: "People living in Switzerland; for foreign nationals, with a permit or a stay of at least 12 months.",
     unitLine: "permanent residents, 31.12.{year}",
-    context: "At the end of 2025 Switzerland had 9,127,100 permanent residents, 0.8% more than a year earlier (9,051,029). The population passed 9\u00A0million during 2024: at the end of 2023 it was 8,962,258.",
-    // FSO, permanent resident population on 31 December (STATPOP), as transmitted to Eurostat table demo_gind (extracted 12.11.2026); 2025: definitive FSO figure of August 2026.
+    context: "At the end of 2025 Switzerland had 9,127,125 permanent residents, 0.8% more than a year earlier (9,051,029). The population passed 9\u00A0million during 2024: at the end of 2023 it was 8,962,258.",
+    // FSO, permanent resident population on 31 December (STATPOP), as transmitted to Eurostat table demo_gind (extracted 12.11.2026); 2025: definitive FSO figure, 9,127,125 (STAT-TAB px-x-0102020000_101, updated 20.08.2026).
     historicalData: [
       { year: 2000, value: 7.204 },
       { year: 2001, value: 7.256 },
@@ -409,12 +413,12 @@ export const indicators: Indicator[] = [
     changeKind: "years",
     source: "Eurostat (based on FSO data)",
     sourceUrl: "https://ec.europa.eu/eurostat/databrowser/view/demo_pjanind/default/table",
-    sourcePublished: "2026-09-25",
+    sourcePublished: "2026-11-26",
     lastUpdated: "2025 (1 January)",
     description: "Half the population is younger, half is older.",
     unitLine: "1 January {year}",
     context: "The median age rose from 31.5 years in 1965 to 42.9 in 2025. On 1 January 2025 it was 45.5 years in Germany, 49.1 in Italy and 44.9 in the EU.",
-    // Eurostat, table demo_pjanind (median age of population on 1 January, FSO data), update of 25.09.2026.
+    // Eurostat, table demo_pjanind (median age of population on 1 January, FSO data), data update of 26.11.2026 (Eurostat dissemination timestamp).
     historicalData: [
       { year: 1960, value: 32.6 },
       { year: 1965, value: 31.5 },
@@ -449,12 +453,12 @@ export const indicators: Indicator[] = [
     changeKind: "years",
     source: "Eurostat (based on FSO data); FSO for figures by sex",
     sourceUrl: "https://ec.europa.eu/eurostat/databrowser/view/demo_mlexpec/default/table",
-    sourcePublished: "2026-09-25",
+    sourcePublished: "2026-11-26",
     lastUpdated: "2024",
     description: "How many years a newborn would live on average if that year's death rates stayed the same.",
     unitLine: "women and men together, {year}",
     context: "In 2024 life expectancy at birth was 82.4 years for men and 85.9 for women. FSO figures for 2025: 82.7 and 86.3 (published as provisional on 18 June 2026; the FSO table of 24 September 2026 has the same values). After the drop in 2020 (83.1) the combined figure has been above the 2019 level (83.8) since 2023.",
-    // Eurostat, table demo_mlexpec (life expectancy at birth, total, FSO data), update of 25.09.2026. The FSO itself publishes life expectancy by sex only.
+    // Eurostat, table demo_mlexpec (life expectancy at birth, total, FSO data), data update of 26.11.2026 (Eurostat dissemination timestamp). The FSO itself publishes life expectancy by sex only.
     historicalData: [
       { year: 1960, value: 71.4 },
       { year: 1970, value: 73.2 },
@@ -525,6 +529,7 @@ export const indicators: Indicator[] = [
     trend: "up",
     trendPercentage: 1.7,
     changeKind: "points",
+    unrounded: { value: 11.382, previous: 11.196 }, // FSO, 2024 and 2023: 11.3825 and 11.1957
     source: "FSO (Federal Statistical Office)",
     sourceUrl: "https://statistik.admin.ch/de/themen/gesundheit/kosten-finanzierung-gesundheitswesens",
     sourcePublished: "2026-04-24",
@@ -572,6 +577,7 @@ export const indicators: Indicator[] = [
     trend: "up",
     trendPercentage: 4.7,
     changeKind: "points",
+    unrounded: { value: 5.452, previous: 5.210 }, // FSO T 15.06.01.03, 2023 and 2022: 5.4524 and 5.2099
     source: "FSO / UST (Federal Statistical Office)",
     sourceUrl: "https://www.bfs.admin.ch/asset/de/je-d-15.06.01.03",
     sourcePublished: "2025-12-11",
@@ -618,16 +624,17 @@ export const indicators: Indicator[] = [
     trend: "up",
     trendPercentage: 3.9,
     changeKind: "points",
+    unrounded: { value: 8.425, previous: 8.105 }, // FSO T 20.03.02.01.01, 2024 and 2023: 8.4249 and 8.1052
     source: "FSO (SILC survey)",
     sourceUrl: "https://statistik.admin.ch/de/asset/36395150",
-    sourcePublished: "2025-10-24",
+    sourcePublished: "2026-02-16",
     lastUpdated: "2024",
     description: "People in households with an income below the poverty line, which is derived from social assistance standards.",
     unitLine: "of the population, {year}",
     context: "In 2024, 8.4% of the population, about 743,000 people, were income-poor. The poverty line was CHF\u00A02,388 per month for a single person and CHF\u00A04,159 for two adults with two children. The at-risk-of-poverty rate is a separate measure (income below 60% of the median): 16.4%, about 1,451,000 people. Figures before 2014 are not comparable.",
     related: { value: 16.4, unit: "%", year: 2024, text: "Not the same as the at-risk-of-poverty rate (income below 60% of the median): {value} in {year}." },
     howToRead: "Series from 2014: earlier figures are not comparable.",
-    // FSO, table T 20.03.02.01.01 (poverty rate, total population, SILC 2024, version 24.10.2025). Series starts in 2014: break in the series, earlier years are not comparable.
+    // FSO, table T 20.03.02.01.01 (poverty rate, total population, SILC 2024, data version 24.10.2025, table published 16.02.2026). Series starts in 2014: break in the series, earlier years are not comparable.
     historicalData: [
       { year: 2014, value: 6.7 },
       { year: 2015, value: 7.0 },
@@ -653,15 +660,16 @@ export const indicators: Indicator[] = [
     trend: "up",
     trendPercentage: 2.3,
     changeKind: "points",
+    unrounded: { value: 30.635, previous: 29.925 }, // FSO indicator from SFOE figures, 2025 and 2024: 30.6355 and 29.9249
     source: "SFOE (Swiss Federal Office of Energy)",
     sourceUrl: "https://www.admin.ch/de/newnsb/YQtEZcK-D9fQ",
-    sourcePublished: "2026-06",
+    sourcePublished: "2026-06-18",
     lastUpdated: "2025",
     description: "Share of the energy used by households, businesses and transport (electricity, heat, fuels) that comes from renewable sources.",
     unitLine: "of final energy consumption, {year}",
     context: "The renewable share of final energy consumption fell to 25.7% in 2022 and has risen every year since. In 2025, 68.3% of net electricity production (production minus the electricity used by storage pumps) was renewable. Of gross production, hydropower supplied 55.5% and photovoltaics 11.8%.",
     related: { value: 68.3, unit: "%", year: 2025, text: "Not the same as the renewable share of electricity: {value} of net production in {year}." },
-    // SFOE, Schweizerische Statistik der erneuerbaren Energien: 1990-2024 from the 2024 edition (September 2025), 2025 from the 2025 edition (June 2026).
+    // SFOE, Schweizerische Statistik der erneuerbaren Energien: 1990-2024 from the 2024 edition (September 2025), 2025 from the 2025 edition (SFOE press release of 18.06.2026: 30.6%).
     historicalData: [
       { year: 1990, value: 15.8 },
       { year: 1995, value: 16.7 },

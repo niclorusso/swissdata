@@ -47,7 +47,7 @@ const indicatorTranslationsIT: Record<string, IndicatorTexts> = {
     name: "Tasso di crescita del PIL",
     shortName: "Crescita del PIL",
     description: "Di quanto è cambiato il valore di beni e servizi prodotti in Svizzera, senza l’effetto dei prezzi.",
-    context: "Prima stima dell’UST per il 2025, pubblicata il 25 agosto 2026. La crescita del 2024 è stata rivista dall'1,4\u00A0% all'1,5\u00A0%.",
+    context: "Prima stima dell’UST per il 2025, pubblicata il 25 agosto 2026. La crescita del 2024 è stata rivista dall’1,4\u00A0% all’1,5\u00A0%.",
     unitLine: "in termini reali, {year}",
     howToRead: "Sotto lo zero: il PIL è diminuito rispetto all’anno prima.",
   },
@@ -79,7 +79,7 @@ const indicatorTranslationsIT: Record<string, IndicatorTexts> = {
     name: "Indice dei prezzi immobiliari (Q4 2019=100)",
     shortName: "Prezzi delle abitazioni di proprietà",
     description: "Prezzi pagati per case unifamiliari e appartamenti di proprietà.",
-    context: "Nel 2025 i prezzi delle abitazioni di proprietà sono saliti in media del 4,6\u00A0%, dopo l'1,7\u00A0% del 2024 e il 2,2\u00A0% del 2023. L’indice esiste dal 2017.",
+    context: "Nel 2025 i prezzi delle abitazioni di proprietà sono saliti in media del 4,6\u00A0%, dopo l’1,7\u00A0% del 2024 e il 2,2\u00A0% del 2023. L’indice esiste dal 2017.",
     unitLine: "indice, 4° trimestre 2019 = 100, media {year}",
     howToRead: "{value} vuol dire prezzi più alti del {diff} rispetto al 4° trimestre 2019.",
   },
@@ -87,14 +87,14 @@ const indicatorTranslationsIT: Record<string, IndicatorTexts> = {
     name: "Popolazione residente straniera",
     shortName: "Popolazione straniera",
     description: "Residenti permanenti senza cittadinanza svizzera, compresi quelli nati in Svizzera.",
-    context: "A fine 2025 la Svizzera contava 9\u202F127\u202F100 residenti permanenti, di cui 2\u202F528\u202F100 stranieri. I gruppi più numerosi sono italiani, tedeschi, portoghesi e francesi.",
+    context: "A fine 2025 la Svizzera contava 9\u202F127\u202F125 residenti permanenti, di cui 2\u202F528\u202F117 stranieri. I gruppi più numerosi sono italiani, tedeschi, portoghesi e francesi.",
     unitLine: "dei residenti permanenti, 31.12.{year}",
   },
   "population-total": {
     name: "Popolazione totale",
     shortName: "Popolazione",
     description: "Chi ha domicilio in Svizzera; per gli stranieri, con un permesso o un soggiorno di almeno 12 mesi.",
-    context: "A fine 2025 la Svizzera contava 9\u202F127\u202F100 residenti permanenti, lo 0,8\u00A0% in più rispetto a un anno prima (9\u202F051\u202F029). La soglia dei 9\u00A0milioni è stata superata nel corso del 2024: a fine 2023 i residenti erano 8\u202F962\u202F258.",
+    context: "A fine 2025 la Svizzera contava 9\u202F127\u202F125 residenti permanenti, lo 0,8\u00A0% in più rispetto a un anno prima (9\u202F051\u202F029). La soglia dei 9\u00A0milioni è stata superata nel corso del 2024: a fine 2023 i residenti erano 8\u202F962\u202F258.",
     unitLine: "di residenti permanenti, 31.12.{year}",
   },
   "median-age": {
@@ -115,7 +115,7 @@ const indicatorTranslationsIT: Record<string, IndicatorTexts> = {
     name: "Reati del Codice penale per 1000 abitanti",
     shortName: "Reati registrati dalla polizia",
     description: "Reati contro il Codice penale registrati dalla polizia, non condanne.",
-    context: "Nel 2025 la polizia ha registrato 554\u202F963 reati secondo il Codice penale, l'1,5\u00A0% in meno rispetto al 2024, dopo tre anni di aumento. I reati contro il patrimonio sono diminuiti del 3,5\u00A0%, i reati violenti gravi sono aumentati dell'8,1\u00A0%. Gli omicidi consumati sono stati 55 (0,6 ogni 100\u202F000 residenti) e i reati commessi con modalità digitali 57\u202F761.",
+    context: "Nel 2025 la polizia ha registrato 554\u202F963 reati secondo il Codice penale, l’1,5\u00A0% in meno rispetto al 2024, dopo tre anni di aumento. I reati contro il patrimonio sono diminuiti del 3,5\u00A0%, i reati violenti gravi sono aumentati dell’8,1\u00A0%. Gli omicidi consumati sono stati 55 (0,6 ogni 100\u202F000 residenti) e i reati commessi con modalità digitali 57\u202F761.",
     unitLine: "reati del Codice penale, {year}",
   },
   "healthcare-cost": {
@@ -137,7 +137,7 @@ const indicatorTranslationsIT: Record<string, IndicatorTexts> = {
     name: "Tasso di povertà (assoluta)",
     shortName: "Tasso di povertà",
     description: "Persone in economie domestiche con un reddito inferiore alla soglia di povertà, derivata dalle norme dell’aiuto sociale.",
-    context: "Nel 2024 l'8,4\u00A0% della popolazione, circa 743\u202F000 persone, era in povertà reddituale. La soglia di povertà era di 2388\u00A0franchi al mese per una persona sola e di 4159\u00A0franchi per due adulti con due figli. Il tasso di rischio di povertà è una misura distinta (reddito inferiore al 60\u00A0% della mediana): 16,4\u00A0%, circa 1\u202F451\u202F000 persone. I dati precedenti al 2014 non sono confrontabili.",
+    context: "Nel 2024 l’8,4\u00A0% della popolazione, circa 743\u202F000 persone, era in povertà reddituale. La soglia di povertà era di 2388\u00A0franchi al mese per una persona sola e di 4159\u00A0franchi per due adulti con due figli. Il tasso di rischio di povertà è una misura distinta (reddito inferiore al 60\u00A0% della mediana): 16,4\u00A0%, circa 1\u202F451\u202F000 persone. I dati precedenti al 2014 non sono confrontabili.",
     unitLine: "della popolazione, {year}",
     related: "Da non confondere con il tasso di rischio di povertà (reddito sotto il 60\u00A0% della mediana): {value} nel {year}.",
     howToRead: "Serie dal 2014: i dati precedenti non sono confrontabili.",
@@ -146,7 +146,7 @@ const indicatorTranslationsIT: Record<string, IndicatorTexts> = {
     name: "Quota rinnovabile del consumo finale di energia",
     shortName: "Energia rinnovabile",
     description: "Parte dell’energia usata da economie domestiche, imprese e trasporti (elettricità, calore, carburanti) che viene da fonti rinnovabili.",
-    context: "La quota rinnovabile del consumo finale di energia è scesa al 25,7\u00A0% nel 2022 e da allora è aumentata ogni anno. Nel 2025 era rinnovabile il 68,3\u00A0% della produzione netta di elettricità (produzione meno il consumo delle pompe di accumulazione). Della produzione lorda, l’idroelettrico ha fornito il 55,5\u00A0% e il fotovoltaico l'11,8\u00A0%.",
+    context: "La quota rinnovabile del consumo finale di energia è scesa al 25,7\u00A0% nel 2022 e da allora è aumentata ogni anno. Nel 2025 era rinnovabile il 68,3\u00A0% della produzione netta di elettricità (produzione meno il consumo delle pompe di accumulazione). Della produzione lorda, l’idroelettrico ha fornito il 55,5\u00A0% e il fotovoltaico l’11,8\u00A0%.",
     unitLine: "del consumo finale di energia, {year}",
     related: "Da non confondere con la quota rinnovabile dell’elettricità: {value} della produzione netta nel {year}.",
   },
@@ -168,14 +168,14 @@ const questionTranslationsIT: Record<
     question:
       "Qual era il tasso di disoccupazione giovanile (15-24 anni, definizione ILO) in Svizzera nel 2025?",
     explanation:
-      "Nel 2025 la disoccupazione giovanile secondo la definizione ILO era dell'8,8\u00A0% (2024: 8,2\u00A0%), più alta del tasso per tutte le età (4,9\u00A0%) ma molto sotto la media UE del 15,2\u00A0%. Fonte: rilevazione sulle forze di lavoro dell’UST, pubblicata da Eurostat.",
+      "Nel 2025 la disoccupazione giovanile secondo la definizione ILO era dell’8,8\u00A0% (2024: 8,2\u00A0%), più alta del tasso per tutte le età (4,9\u00A0%) ma molto sotto la media UE del 15,2\u00A0%. Fonte: rilevazione sulle forze di lavoro dell’UST, pubblicata da Eurostat.",
     comparisonLabel: "Tasso di disoccupazione giovanile (ILO, 15-24 anni), 2025, in % (Eurostat)",
   },
   "labor-participation": {
     question:
       "Qual era il tasso di attività in Svizzera (15-64 anni) nel 2025?",
     explanation:
-      "Nel 2025 l'84,1\u00A0% delle persone tra 15 e 64 anni in Svizzera lavorava o cercava lavoro, contro il 75,6\u00A0% nell’UE. Tra le donne il tasso era dell'80,8\u00A0%. Fonte: rilevazione sulle forze di lavoro dell’UST, pubblicata da Eurostat.",
+      "Nel 2025 l’84,1\u00A0% delle persone tra 15 e 64 anni in Svizzera lavorava o cercava lavoro, contro il 75,6\u00A0% nell’UE. Tra le donne il tasso era dell’80,8\u00A0%. Fonte: rilevazione sulle forze di lavoro dell’UST, pubblicata da Eurostat.",
     comparisonLabel: "Tasso di attività, 15-64 anni, 2025, in % (Eurostat)",
   },
   "part-time-rate": {
@@ -210,7 +210,7 @@ const questionTranslationsIT: Record<
     question:
       "Di quale percentuale il salario medio delle donne era inferiore a quello degli uomini in Svizzera nel 2024?",
     explanation:
-      "Nel 2024 le donne hanno guadagnato in media il 15,7\u00A0% in meno degli uomini nell’insieme dell’economia (2022: 16,2\u00A0%), secondo la rilevazione della struttura dei salari dell’UST. La parte non spiegata da fattori come professione, settore o formazione era il 6,5\u00A0% del salario, cioè 640\u00A0franchi al mese. Sul salario mediano la differenza era dell'8,4\u00A0%. Il grafico usa l’indicatore Eurostat per il 2024 (salario orario, senza amministrazione pubblica), con la Svizzera al 16,0\u00A0%. Da luglio 2020 i datori di lavoro con 100 o più dipendenti devono svolgere un’analisi della parità salariale.",
+      "Nel 2024 le donne hanno guadagnato in media il 15,7\u00A0% in meno degli uomini nell’insieme dell’economia (2022: 16,2\u00A0%), secondo la rilevazione della struttura dei salari dell’UST. La parte non spiegata da fattori come professione, settore o formazione era il 6,5\u00A0% del salario, cioè 640\u00A0franchi al mese. Sul salario mediano la differenza era dell’8,4\u00A0%. Il grafico usa l’indicatore Eurostat per il 2024 (salario orario, senza amministrazione pubblica), con la Svizzera al 16,0\u00A0%. Da luglio 2020 i datori di lavoro con 100 o più dipendenti devono svolgere un’analisi della parità salariale.",
     comparisonLabel: "Divario salariale tra donne e uomini sul salario orario, senza amministrazione pubblica, 2024, in % (definizione Eurostat; la risposta è il dato UST per l’insieme dell’economia)",
   },
   "gini-coefficient": {
@@ -259,7 +259,7 @@ const questionTranslationsIT: Record<
     question:
       "Quale percentuale del preventivo federale 2026 è destinata alla migrazione (asilo, rifugiati, integrazione)?",
     explanation:
-      "Il settore «Migrazione» vale circa il 4,1\u00A0% del preventivo federale 2026 (3,75\u00A0miliardi di CHF su 91,1\u00A0miliardi). La maggior parte è versata ai Cantoni per l’aiuto sociale a richiedenti l’asilo e rifugiati. Per confronto, la sicurezza assorbe l'8,6\u00A0%, formazione e ricerca il 9,9\u00A0% e i trasporti l'11,8\u00A0%.",
+      "Il settore «Migrazione» vale circa il 4,1\u00A0% del preventivo federale 2026 (3,75\u00A0miliardi di CHF su 91,1\u00A0miliardi). La maggior parte è versata ai Cantoni per l’aiuto sociale a richiedenti l’asilo e rifugiati. Per confronto, la sicurezza assorbe l’8,6\u00A0%, formazione e ricerca il 9,9\u00A0% e i trasporti l’11,8\u00A0%.",
     comparisonLabel: "Principali settori di compito in % del preventivo federale 2026 (Amministrazione federale delle finanze)",
   },
   "public-debt-gdp": {
@@ -279,14 +279,14 @@ const questionTranslationsIT: Record<
     question:
       "Quale percentuale del preventivo federale 2026 è destinata alla difesa militare?",
     explanation:
-      "La difesa militare è circa il 7,2\u00A0% del preventivo federale 2026 (6,6\u00A0miliardi di CHF su 91,1\u00A0miliardi). L’intero settore «sicurezza», che aggiunge polizia, servizio informazioni e protezione della popolazione, è l'8,6\u00A0% (7,8\u00A0miliardi). Il grafico usa un’altra misura, l’unica disponibile per tutti i Paesi: la spesa militare in rapporto al PIL nel 2025 secondo il SIPRI, che per la Svizzera indica lo 0,8\u00A0%.",
+      "La difesa militare è circa il 7,2\u00A0% del preventivo federale 2026 (6,6\u00A0miliardi di CHF su 91,1\u00A0miliardi). L’intero settore «sicurezza», che aggiunge polizia, servizio informazioni e protezione della popolazione, è l’8,6\u00A0% (7,8\u00A0miliardi). Il grafico usa un’altra misura, l’unica disponibile per tutti i Paesi: la spesa militare in rapporto al PIL nel 2025 secondo il SIPRI, che per la Svizzera indica lo 0,8\u00A0%.",
     comparisonLabel: "Spesa militare in % del PIL, 2025 (SIPRI)",
   },
   "gdp-growth-years": {
     question:
       "In quanti dei 10 anni dal 2016 al 2025 il PIL reale della Svizzera è cresciuto?",
     explanation:
-      "Il PIL reale svizzero è cresciuto in 9 dei 10 anni dal 2016 al 2025. L’unica eccezione è il 2020, quando è sceso del 2,3\u00A0%. La crescita è stata dell'1,5\u00A0% nel 2024 e dell'1,6\u00A0% nel 2025 (Ufficio federale di statistica, contabilità nazionale del 25 agosto 2026). Il confronto usa i dati Eurostat.",
+      "Il PIL reale svizzero è cresciuto in 9 dei 10 anni dal 2016 al 2025. L’unica eccezione è il 2020, quando è sceso del 2,3\u00A0%. La crescita è stata dell’1,5\u00A0% nel 2024 e dell’1,6\u00A0% nel 2025 (Ufficio federale di statistica, contabilità nazionale del 25 agosto 2026). Il confronto usa i dati Eurostat.",
     comparisonLabel: "Anni con crescita del PIL reale su dieci, 2016-2025 (Eurostat)",
   },
   "population-density": {
@@ -300,7 +300,7 @@ const questionTranslationsIT: Record<
     question:
       "Quanti abitanti contava la popolazione residente permanente della Svizzera alla fine del 2025 (in milioni)?",
     explanation:
-      "Alla fine del 2025 la Svizzera contava 9\u202F127\u202F100 residenti permanenti (Ufficio federale di statistica), contro 9\u202F051\u202F000 un anno prima. Nel 1950 erano 4,7\u00A0milioni. Il confronto riporta i dati Eurostat al 1° gennaio 2026.",
+      "Alla fine del 2025 la Svizzera contava 9\u202F127\u202F125 residenti permanenti (Ufficio federale di statistica), contro 9\u202F051\u202F029 un anno prima. Nel 1950 erano 4,7\u00A0milioni. Il confronto riporta i dati Eurostat al 1° gennaio 2026.",
     comparisonLabel: "Popolazione al 1° gennaio 2026, in milioni (Eurostat)",
   },
   "urban-population": {
@@ -384,7 +384,7 @@ const questionTranslationsIT: Record<
     question:
       "Quale percentuale del PIL ha speso la Svizzera per la sanità nel 2024?",
     explanation:
-      "Nel 2024 la Svizzera ha speso per la sanità l'11,4\u00A0% del PIL (dato provvisorio dell’Ufficio federale di statistica, ripreso dall’OCSE): 97\u00A0miliardi di franchi, pari a 10\u202F792\u00A0franchi a persona. È meno degli Stati Uniti (17,2\u00A0%) e della Germania (12,2\u00A0%) e allo stesso livello della Francia (11,3\u00A0%). Il confronto riporta i dati OCSE per il 2024.",
+      "Nel 2024 la Svizzera ha speso per la sanità l’11,4\u00A0% del PIL (dato provvisorio dell’Ufficio federale di statistica, ripreso dall’OCSE): 97\u00A0miliardi di franchi, pari a 10\u202F792\u00A0franchi a persona. È meno degli Stati Uniti (17,2\u00A0%) e della Germania (12,2\u00A0%) e allo stesso livello della Francia (11,3\u00A0%). Il confronto riporta i dati OCSE per il 2024.",
     comparisonLabel: "Spesa sanitaria in % del PIL, 2024 (OCSE)",
   },
   "university-graduation": {
@@ -425,7 +425,7 @@ const questionTranslationsIT: Record<
     question:
       "Quale quota delle abitazioni in Svizzera era sfitta il 1° giugno 2026?",
     explanation:
-      "Il 1° giugno 2026 le abitazioni sfitte erano 45\u202F493, lo 0,93\u00A0% del parco immobiliare, case unifamiliari comprese (Ufficio federale di statistica, censimento delle abitazioni vuote). Nel 2025 il tasso era dell'1,00\u00A0%; è in calo da sei anni consecutivi. Il confronto mostra i Cantoni alla stessa data: 15 Cantoni erano sotto l'1\u00A0%, Zugo aveva il tasso più basso e il Giura il più alto.",
+      "Il 1° giugno 2026 le abitazioni sfitte erano 45\u202F493, lo 0,93\u00A0% del parco immobiliare, case unifamiliari comprese (Ufficio federale di statistica, censimento delle abitazioni vuote). Nel 2025 il tasso era dell’1,00\u00A0%; è in calo da sei anni consecutivi. Il confronto mostra i Cantoni alla stessa data: 15 Cantoni erano sotto l’1\u00A0%, Zugo aveva il tasso più basso e il Giura il più alto.",
     comparisonLabel: "Abitazioni sfitte per Cantone, 1° giugno 2026, in % (UST)",
   },
   "violent-crime-change": {
@@ -453,7 +453,7 @@ const questionTranslationsIT: Record<
     question:
       "Quanti furti con scasso e con introduzione clandestina ogni 100\u202F000 abitanti ha registrato la polizia in Svizzera nel 2024?",
     explanation:
-      "Nel 2024 la polizia ha registrato 46\u202F070 furti con scasso e con introduzione clandestina, che Eurostat riporta come 514 ogni 100\u202F000 abitanti. Nel 2025 il numero è salito dell'1,2\u00A0% a 46\u202F636, circa 128 al giorno (Ufficio federale di statistica). Nel 2012 erano 73\u202F714. Il confronto mostra i dati Eurostat per il 2024; le definizioni nazionali di furto con scasso differiscono, quindi i paesi sono confrontabili solo in modo approssimativo.",
+      "Nel 2024 la polizia ha registrato 46\u202F070 furti con scasso e con introduzione clandestina, che Eurostat riporta come 514 ogni 100\u202F000 abitanti. Nel 2025 il numero è salito dell’1,2\u00A0% a 46\u202F636, circa 128 al giorno (Ufficio federale di statistica). Nel 2012 erano 73\u202F714. Il confronto mostra i dati Eurostat per il 2024; le definizioni nazionali di furto con scasso differiscono, quindi i paesi sono confrontabili solo in modo approssimativo.",
     comparisonLabel: "Furti con scasso per 100\u202F000 abitanti, 2024 (Eurostat)",
   },
   "nuclear-electricity": {
@@ -474,14 +474,14 @@ const questionTranslationsIT: Record<
     question:
       "Quale percentuale del consumo finale di energia in Svizzera veniva da fonti rinnovabili nel 2025?",
     explanation:
-      "Nel 2025 le fonti rinnovabili hanno coperto il 30,6\u00A0% del consumo finale di energia, contro il 29,9\u00A0% del 2024 (Ufficio federale dell’energia). La quota era del 19,9\u00A0% nel 2010 ed è scesa temporaneamente al 25,7\u00A0% nel 2022. Della produzione lorda di elettricità, nel 2025 l’idroelettrico ha fornito il 55,5\u00A0% e il fotovoltaico l'11,8\u00A0%. Il confronto mostra gli anni precedenti in Svizzera.",
+      "Nel 2025 le fonti rinnovabili hanno coperto il 30,6\u00A0% del consumo finale di energia, contro il 29,9\u00A0% del 2024 (Ufficio federale dell’energia). La quota era del 19,9\u00A0% nel 2010 ed è scesa temporaneamente al 25,7\u00A0% nel 2022. Della produzione lorda di elettricità, nel 2025 l’idroelettrico ha fornito il 55,5\u00A0% e il fotovoltaico l’11,8\u00A0%. Il confronto mostra gli anni precedenti in Svizzera.",
     comparisonLabel: "Quota rinnovabile del consumo finale di energia in Svizzera, in % (UFE)",
   },
   "recycling-rate": {
     question:
       "Quale percentuale dei rifiuti urbani svizzeri è stata riciclata nel 2024?",
     explanation:
-      "Nel 2024 la Svizzera ha prodotto circa 6\u00A0milioni di tonnellate di rifiuti urbani: 3,1\u00A0milioni sono stati raccolti separatamente e riciclati (52\u00A0%) e 2,9\u00A0milioni inceneriti (Ufficio federale dell’ambiente). I tassi di riciclaggio erano del 100\u00A0% per le bottiglie di vetro, del 90\u00A0% per le lattine di alluminio, dell'85\u00A0% per carta e cartone e dell'84\u00A0% per le bottiglie in PET. Il confronto mostra il tasso di riciclaggio dei rifiuti urbani di Eurostat per il 2024, che per la Svizzera indica il 51,8\u00A0%.",
+      "Nel 2024 la Svizzera ha prodotto circa 6\u00A0milioni di tonnellate di rifiuti urbani: 3,1\u00A0milioni sono stati raccolti separatamente e riciclati (52\u00A0%) e 2,9\u00A0milioni inceneriti (Ufficio federale dell’ambiente). I tassi di riciclaggio erano del 100\u00A0% per le bottiglie di vetro, del 90\u00A0% per le lattine di alluminio, dell’85\u00A0% per carta e cartone e dell’84\u00A0% per le bottiglie in PET. Il confronto mostra il tasso di riciclaggio dei rifiuti urbani di Eurostat per il 2024, che per la Svizzera indica il 51,8\u00A0%.",
     comparisonLabel: "Tasso di riciclaggio dei rifiuti urbani, 2024, in % (Eurostat; la risposta è il dato UFAM)",
   },
   "train-punctuality": {
@@ -502,7 +502,7 @@ const questionTranslationsIT: Record<
     question:
       "Quanti minuti durava in media il tragitto di sola andata verso il lavoro in Svizzera nel 2024?",
     explanation:
-      "Nel 2024 i pendolari impiegavano in media 30,2\u00A0minuti per raggiungere il posto di lavoro, su una distanza media di 14,0\u00A0km (2022: 29,6\u00A0minuti, 13,7\u00A0km). Per il 34,6\u00A0% il tragitto durava al massimo 15\u00A0minuti, per l'8,8\u00A0% più di un’ora. Dei 3,7\u00A0milioni di pendolari, il 49,4\u00A0% usava l’auto come mezzo principale, il 17,1\u00A0% il treno e il 13,6\u00A0% bus o tram (Ufficio federale di statistica, tabelle T 11.4.4.3 e T 11.4.4.4, 2024).",
+      "Nel 2024 i pendolari impiegavano in media 30,2\u00A0minuti per raggiungere il posto di lavoro, su una distanza media di 14,0\u00A0km (2022: 29,6\u00A0minuti, 13,7\u00A0km). Per il 34,6\u00A0% il tragitto durava al massimo 15\u00A0minuti, per l’8,8\u00A0% più di un’ora. Dei 3,7\u00A0milioni di pendolari, il 49,4\u00A0% usava l’auto come mezzo principale, il 17,1\u00A0% il treno e il 13,6\u00A0% bus o tram (Ufficio federale di statistica, tabelle T 11.4.4.3 e T 11.4.4.4, 2024).",
   },
   "cars-per-capita": {
     question:
@@ -521,7 +521,7 @@ const questionTranslationsIT: Record<
     question:
       "Quale percentuale della popolazione svizzera era povera in termini di reddito nel 2024 (tasso di povertà assoluto)?",
     explanation:
-      "Nel 2024 l'8,4\u00A0% della popolazione, circa 743\u202F000 persone, era povero in termini di reddito (Ufficio federale di statistica, indagine SILC). È il tasso di povertà assoluto: reddito dell’economia domestica sotto la soglia di povertà derivata dalle norme dell’aiuto sociale, in media 2388\u00A0CHF al mese per una persona sola e 4159\u00A0CHF per due adulti con due figli. Tra gli occupati il tasso era del 4,3\u00A0%. Il tasso di rischio di povertà usato nei confronti europei è un’altra misura, relativa (reddito sotto il 60\u00A0% della mediana), e in Svizzera è circa il 16\u00A0%. Il confronto mostra il tasso assoluto svizzero negli anni precedenti.",
+      "Nel 2024 l’8,4\u00A0% della popolazione, circa 743\u202F000 persone, era povero in termini di reddito (Ufficio federale di statistica, indagine SILC). È il tasso di povertà assoluto: reddito dell’economia domestica sotto la soglia di povertà derivata dalle norme dell’aiuto sociale, in media 2388\u00A0CHF al mese per una persona sola e 4159\u00A0CHF per due adulti con due figli. Tra gli occupati il tasso era del 4,3\u00A0%. Il tasso di rischio di povertà usato nei confronti europei è un’altra misura, relativa (reddito sotto il 60\u00A0% della mediana), e in Svizzera è circa il 16\u00A0%. Il confronto mostra il tasso assoluto svizzero negli anni precedenti.",
     comparisonLabel: "Tasso di povertà assoluto in Svizzera, in % (UST)",
   },
 };
@@ -588,14 +588,14 @@ const indicatorTranslationsDE: Record<string, IndicatorTexts> = {
     name: "Ständige ausländische Wohnbevölkerung",
     shortName: "Ausländische Bevölkerung",
     description: "Ständige Einwohnerinnen und Einwohner ohne Schweizer Bürgerrecht, auch wenn sie in der Schweiz geboren sind.",
-    context: "Ende 2025 zählte die Schweiz 9\u202F127\u202F100 ständige Einwohnerinnen und Einwohner, davon 2\u202F528\u202F100 Ausländerinnen und Ausländer. Die grössten Gruppen sind italienische, deutsche, portugiesische und französische Staatsangehörige.",
+    context: "Ende 2025 zählte die Schweiz 9\u202F127\u202F125 ständige Einwohnerinnen und Einwohner, davon 2\u202F528\u202F117 Ausländerinnen und Ausländer. Die grössten Gruppen sind italienische, deutsche, portugiesische und französische Staatsangehörige.",
     unitLine: "der ständigen Wohnbevölkerung, 31.12.{year}",
   },
   "population-total": {
     name: "Gesamtbevölkerung",
     shortName: "Bevölkerung",
     description: "Wer in der Schweiz wohnt; bei Ausländerinnen und Ausländern mit Bewilligung oder Aufenthalt von mindestens 12 Monaten.",
-    context: "Ende 2025 zählte die Schweiz 9\u202F127\u202F100 ständige Einwohnerinnen und Einwohner, 0,8\u00A0% mehr als ein Jahr zuvor (9\u202F051\u202F029). Die 9-Millionen-Marke wurde im Lauf des Jahres 2024 überschritten: Ende 2023 waren es 8\u202F962\u202F258.",
+    context: "Ende 2025 zählte die Schweiz 9\u202F127\u202F125 ständige Einwohnerinnen und Einwohner, 0,8\u00A0% mehr als ein Jahr zuvor (9\u202F051\u202F029). Die 9-Millionen-Marke wurde im Lauf des Jahres 2024 überschritten: Ende 2023 waren es 8\u202F962\u202F258.",
     unitLine: "ständige Wohnbevölkerung, 31.12.{year}",
   },
   "median-age": {
@@ -714,14 +714,14 @@ const indicatorTranslationsFR: Record<string, IndicatorTexts> = {
     name: "Population résidente étrangère permanente",
     shortName: "Population étrangère",
     description: "Résidents permanents sans nationalité suisse, y compris ceux nés en Suisse.",
-    context: "Fin 2025 la Suisse comptait 9\u202F127\u202F100 résidents permanents, dont 2\u202F528\u202F100 étrangers. Les groupes les plus nombreux sont les Italiens, les Allemands, les Portugais et les Français.",
+    context: "Fin 2025 la Suisse comptait 9\u202F127\u202F125 résidents permanents, dont 2\u202F528\u202F117 étrangers. Les groupes les plus nombreux sont les Italiens, les Allemands, les Portugais et les Français.",
     unitLine: "de la population résidante permanente, 31.12.{year}",
   },
   "population-total": {
     name: "Population totale",
     shortName: "Population",
     description: "Personnes domiciliées en Suisse\u202F; pour les étrangers, avec un permis ou un séjour d’au moins 12 mois.",
-    context: "Fin 2025 la Suisse comptait 9\u202F127\u202F100 résidents permanents, 0,8\u202F% de plus qu’un an plus tôt (9\u202F051\u202F029). Le seuil des 9\u00A0millions a été franchi au cours de l’année 2024\u202F: fin 2023 ils étaient 8\u202F962\u202F258.",
+    context: "Fin 2025 la Suisse comptait 9\u202F127\u202F125 résidents permanents, 0,8\u202F% de plus qu’un an plus tôt (9\u202F051\u202F029). Le seuil des 9\u00A0millions a été franchi au cours de l’année 2024\u202F: fin 2023 ils étaient 8\u202F962\u202F258.",
     unitLine: "de résidents permanents, 31.12.{year}",
   },
   "median-age": {

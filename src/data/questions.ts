@@ -628,7 +628,7 @@ export const questions: QuizQuestion[] = [
     maxValue: 12,
     actualValue: 9.1,
     explanation:
-      "At the end of 2025 Switzerland had 9,127,100 permanent residents (Federal Statistical Office), up from 9,051,000 a year earlier. In 1950 the population was 4.7\u00A0million. The comparison shows Eurostat figures for 1 January 2026.",
+      "At the end of 2025 Switzerland had 9,127,125 permanent residents (Federal Statistical Office), up from 9,051,029 a year earlier. In 1950 the population was 4.7\u00A0million. The comparison shows Eurostat figures for 1 January 2026.",
     source: {
       en: "Federal Statistical Office (FSO); Eurostat (demo_gind) for the comparison",
       it: "Ufficio federale di statistica (UST); Eurostat (demo_gind) per il confronto",

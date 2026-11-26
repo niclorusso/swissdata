@@ -18,6 +18,7 @@ export const translations = {
     common: {
       source: "Source",
       lastCheck: "Data last checked on {lastCheck}",
+      dataPeriod: "data {period}",
       published: "published on {date}",
       publishedMonth: "published in {month}",
       axisNotZero: "The vertical axis does not start at zero.",
@@ -41,7 +42,7 @@ export const translations = {
     // Data changes page
     changes: {
       title: "Data changes",
-      intro: "Corrections and updates to the figures and texts of the site, with their date. Data last checked on {lastCheck}.",
+      intro: "Corrections and updates to the figures and texts of the site from 26 November 2026, with their date, and a summary of the full check of 12 November 2026. Data last checked on {lastCheck}.",
       update: "Update",
       correction: "Correction",
       source: "Source",
@@ -212,7 +213,7 @@ export const translations = {
       limit3: "The figures show how much, not why.",
       limit4: "The quiz questions exist only in Italian and English.",
       quizScoreTitle: "The quiz score",
-      quizScore: "The score of an answer is 100% minus the distance between your guess and the actual value, measured as a share of the slider's range. A guess off by a tenth of the range scores 90%.",
+      quizScore: "The score of an answer is 100% minus the distance between the guess and the actual value, measured as a share of the slider's range. A guess off by a tenth of the range scores 90%.",
       sourcesTitle: "Sources",
     },
 
@@ -250,6 +251,7 @@ export const translations = {
     common: {
       source: "Fonte",
       lastCheck: "Ultima verifica dei dati: {lastCheck}",
+      dataPeriod: "dati {period}",
       published: "pubblicato il {date}",
       publishedMonth: "pubblicato {month}",
       axisNotZero: "L’asse verticale non parte da zero.",
@@ -273,7 +275,7 @@ export const translations = {
     // Data changes page
     changes: {
       title: "Modifiche ai dati",
-      intro: "Correzioni e aggiornamenti delle cifre e dei testi del sito, con la data. Ultima verifica dei dati: {lastCheck}.",
+      intro: "Correzioni e aggiornamenti delle cifre e dei testi del sito dal 26 novembre 2026, con la data, e una sintesi della verifica completa del 12 novembre 2026. Ultima verifica dei dati: {lastCheck}.",
       update: "Aggiornamento",
       correction: "Correzione",
       source: "Fonte",
@@ -444,7 +446,7 @@ export const translations = {
       limit3: "Le cifre mostrano quanto, non perché.",
       limit4: "Le domande del quiz esistono solo in italiano e in inglese.",
       quizScoreTitle: "Il punteggio del quiz",
-      quizScore: "Il punteggio di una risposta è 100\u00A0% meno la distanza tra la tua stima e il valore reale, misurata in rapporto all’ampiezza del cursore. Una stima che sbaglia di un decimo dell’ampiezza vale 90\u00A0%.",
+      quizScore: "Il punteggio di una risposta è 100\u00A0% meno la distanza tra la stima e il valore reale, misurata in rapporto all’ampiezza del cursore. Una stima che sbaglia di un decimo dell’ampiezza vale 90\u00A0%.",
       sourcesTitle: "Fonti",
     },
 
@@ -481,6 +483,7 @@ export const translations = {
     common: {
       source: "Quelle",
       lastCheck: "Daten zuletzt geprüft am {lastCheck}",
+      dataPeriod: "Daten {period}",
       published: "veröffentlicht am {date}",
       publishedMonth: "veröffentlicht im {month}",
       axisNotZero: "Die senkrechte Achse beginnt nicht bei null.",
@@ -504,7 +507,7 @@ export const translations = {
     // Data changes page
     changes: {
       title: "Datenänderungen",
-      intro: "Korrekturen und Aktualisierungen der Zahlen und Texte der Website, mit Datum. Daten zuletzt geprüft am {lastCheck}.",
+      intro: "Korrekturen und Aktualisierungen der Zahlen und Texte der Website ab dem 26. November 2026, mit Datum, und eine Zusammenfassung der vollständigen Prüfung vom 12. November 2026. Daten zuletzt geprüft am {lastCheck}.",
       update: "Aktualisierung",
       correction: "Korrektur",
       source: "Quelle",
@@ -675,7 +678,7 @@ export const translations = {
       limit3: "Die Zahlen zeigen, wie viel, nicht warum.",
       limit4: "Die Quizfragen gibt es nur auf Italienisch und Englisch.",
       quizScoreTitle: "Die Punktzahl im Quiz",
-      quizScore: "Die Punktzahl einer Antwort ist 100\u00A0% minus der Abstand zwischen deiner Schätzung und dem tatsächlichen Wert, gemessen am Bereich des Schiebereglers. Eine Schätzung, die um einen Zehntel des Bereichs danebenliegt, ergibt 90\u00A0%.",
+      quizScore: "Die Punktzahl einer Antwort ist 100\u00A0% minus der Abstand zwischen der Schätzung und dem tatsächlichen Wert, gemessen am Bereich des Schiebereglers. Eine Schätzung, die um einen Zehntel des Bereichs danebenliegt, ergibt 90\u00A0%.",
       sourcesTitle: "Quellen",
     },
 
@@ -713,6 +716,7 @@ export const translations = {
     common: {
       source: "Source",
       lastCheck: "Données vérifiées le {lastCheck}",
+      dataPeriod: "données {period}",
       published: "publié le {date}",
       publishedMonth: "publié en {month}",
       axisNotZero: "L’axe vertical ne commence pas à zéro.",
@@ -736,7 +740,7 @@ export const translations = {
     // Data changes page
     changes: {
       title: "Modifications des données",
-      intro: "Corrections et mises à jour des chiffres et des textes du site, avec leur date. Données vérifiées le {lastCheck}.",
+      intro: "Corrections et mises à jour des chiffres et des textes du site depuis le 26 novembre 2026, avec leur date, et un résumé de la vérification complète du 12 novembre 2026. Données vérifiées le {lastCheck}.",
       update: "Mise à jour",
       correction: "Correction",
       source: "Source",
@@ -907,7 +911,7 @@ export const translations = {
       limit3: "Les chiffres montrent combien, pas pourquoi.",
       limit4: "Les questions du quiz n’existent qu’en italien et en anglais.",
       quizScoreTitle: "Le score du quiz",
-      quizScore: "Le score d’une réponse est 100\u202F% moins l’écart entre votre estimation et la valeur réelle, mesuré par rapport à l’étendue du curseur. Une estimation qui s’écarte d’un dixième de l’étendue vaut 90\u202F%.",
+      quizScore: "Le score d’une réponse est 100\u202F% moins l’écart entre l’estimation et la valeur réelle, mesuré par rapport à l’étendue du curseur. Une estimation qui s’écarte d’un dixième de l’étendue vaut 90\u202F%.",
       sourcesTitle: "Sources",
     },
 
