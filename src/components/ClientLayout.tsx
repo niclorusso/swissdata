@@ -7,7 +7,7 @@ import { BrandMark, Wordmark } from "@/components/family/BrandMark";
 import { CURRENT_SITE, FAMILY_INDEPENDENT, FAMILY_SITES, familySiteHref } from "@/lib/family";
 import { localePath } from "@/i18n/routes";
 import { CONTACT_LABEL, CONTACT_URL, DATA_CHECKED } from "@/data/meta";
-import { formatLongDate } from "@/lib/formatters";
+import { colon, formatLongDate } from "@/lib/formatters";
 
 /** Family footer: the three SwissData sites and the line on independence first, then this site's own links. */
 function Footer() {
@@ -41,7 +41,7 @@ function Footer() {
           {[
             { href: localePath(locale, "/about"), label: t.footer.about, external: false },
             { href: localePath(locale, "/changes"), label: t.footer.changeLog, external: false },
-            { href: CONTACT_URL, label: `${t.footer.contact}: ${CONTACT_LABEL}`, external: true },
+            { href: CONTACT_URL, label: `${t.footer.contact}${colon(locale)} ${CONTACT_LABEL}`, external: true },
           ].map((link) => (
             <a
               key={link.href}

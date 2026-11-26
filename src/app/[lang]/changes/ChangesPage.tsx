@@ -3,7 +3,7 @@
 import { useLanguage } from "@/i18n/LanguageContext";
 import { changeLog } from "@/data/changeLog";
 import { DATA_CHECKED } from "@/data/meta";
-import { formatLongDate } from "@/lib/formatters";
+import { colon, formatLongDate } from "@/lib/formatters";
 import { ReportError } from "@/components/ReportError";
 
 /** Dated corrections and updates of the figures, newest first, grouped by day. */
@@ -44,7 +44,7 @@ export default function ChangesPage() {
                     )}
                     {entry.source && (
                       <p className="sdf-source !border-0 !pt-0 !mt-1">
-                        {t.changes.source}:{" "}
+                        {t.changes.source + colon(locale)}{" "}
                         <a href={entry.source.url} target="_blank" rel="noopener noreferrer">
                           {entry.source.name[locale]}
                         </a>

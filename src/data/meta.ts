@@ -24,8 +24,8 @@ const REPORT_TEMPLATE: Record<Locale, { title: string; body: string }> = {
     body: "Seite (Adresse):\n\nZahl:\n\nWas scheint falsch:\n\nQuelle (falls bekannt):\n",
   },
   fr: {
-    title: "Erreur dans les données : ",
-    body: "Page (adresse) :\n\nChiffre :\n\nCe qui semble faux :\n\nSource (si connue) :\n",
+    title: "Erreur dans les données\u202F: ",
+    body: "Page (adresse)\u202F:\n\nChiffre\u202F:\n\nCe qui semble faux\u202F:\n\nSource (si connue)\u202F:\n",
   },
   en: {
     title: "Data error: ",

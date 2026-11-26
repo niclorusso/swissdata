@@ -5,7 +5,7 @@ const notes: Record<string, Record<Locale, string>> = {
   "(provisional)": { en: "(provisional)", it: "(provvisorio)", de: "(provisorisch)", fr: "(provisoire)" },
   "(first estimate)": { en: "(first estimate)", it: "(prima stima)", de: "(erste Schätzung)", fr: "(première estimation)" },
   "(1 January)": { en: "(1 January)", it: "(1° gennaio)", de: "(1. Januar)", fr: "(1er janvier)" },
-  "(end of year)": { en: "(end of year)", it: "(fine anno)", de: "(Jahresende)", fr: "(fin d'année)" },
+  "(end of year)": { en: "(end of year)", it: "(fine anno)", de: "(Jahresende)", fr: "(fin d’année)" },
 };
 
 /** "2024 (provisional)" -> "2024 (provvisorio)" */

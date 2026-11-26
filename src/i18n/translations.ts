@@ -252,7 +252,7 @@ export const translations = {
       lastCheck: "Ultima verifica dei dati: {lastCheck}",
       published: "pubblicato il {date}",
       publishedMonth: "pubblicato {month}",
-      axisNotZero: "L'asse verticale non parte da zero.",
+      axisNotZero: "L’asse verticale non parte da zero.",
     },
 
     categoryName: {
@@ -298,7 +298,7 @@ export const translations = {
     // Home page
     home: {
       title: "Statistiche ufficiali sulla Svizzera",
-      lead: "Le cifre principali in un unico posto, ognuna con la fonte ufficiale e l'anno a cui si riferisce.",
+      lead: "Le cifre principali in un unico posto, ognuna con la fonte ufficiale e l’anno a cui si riferisce.",
       independent: "Sito indipendente di Nicola Lo Russo, non della Confederazione",
       allIndicators: "Tutti i {indicatorCount} indicatori anno per anno →",
     },
@@ -405,13 +405,13 @@ export const translations = {
       readout: "{canton}: {value} · Svizzera: {national}",
       readoutEmpty: "Selezionare un Cantone sulla mappa o nella tabella.",
       allFigures: "Tutte le cifre del Cantone ↓",
-      compareHint: "Per confrontare due Cantoni: cercarli nella tabella, ordinata per l'indicatore scelto.",
+      compareHint: "Per confrontare due Cantoni: cercarli nella tabella, ordinata per l’indicatore scelto.",
       unemploymentNote: "Qui la disoccupazione registrata (SECO). Il tasso ILO conta anche chi non è iscritto a un URC ed è più alto (Svizzera {year}: {ilo}).",
       dataSources: "Fonti dei dati",
       provisional: "provvisorio",
       bordersSummary: "Confini cantonali (Moutier)",
-      territoryNote: "Popolazione, superficie e quota di stranieri seguono i confini cantonali del 1° gennaio 2026: Moutier, nel Canton Berna fino al 31 dicembre 2025, è contata nel Canton Giura. La quota di stranieri è ricalcolata per questi confini dai dati STATPOP del 31 dicembre 2025; per Giura e Berna è quindi diversa da quella che l'UST pubblica per i confini del 2025.",
-      oldBordersNote: "Il premio di cassa malati è quello del 2026, sui confini del 2026 (le regioni di premio 2026 dell'UFSP elencano Moutier nel Giura). Questi indicatori si riferiscono ai confini precedenti al 2026, con Moutier nel Canton Berna: {list}.",
+      territoryNote: "Popolazione, superficie e quota di stranieri seguono i confini cantonali del 1° gennaio 2026: Moutier, nel Canton Berna fino al 31 dicembre 2025, è contata nel Canton Giura. La quota di stranieri è ricalcolata per questi confini dai dati STATPOP del 31 dicembre 2025; per Giura e Berna è quindi diversa da quella che l’UST pubblica per i confini del 2025.",
+      oldBordersNote: "Il premio di cassa malati è quello del 2026, sui confini del 2026 (le regioni di premio 2026 dell’UFSP elencano Moutier nel Giura). Questi indicatori si riferiscono ai confini precedenti al 2026, con Moutier nel Canton Berna: {list}.",
       clickToSelect: "Seleziona per vedere i dati",
     },
 
@@ -427,24 +427,24 @@ export const translations = {
     // About page
     about: {
       title: "Il progetto SwissData",
-      whatTitle: "Che cos'è",
-      what: "SwissData riunisce statistiche ufficiali sulla Svizzera: {indicatorCount} indicatori nazionali con le loro serie annuali, sei indicatori per Cantone e {questionCount} domande di quiz. Ogni cifra indica la fonte, l'anno a cui si riferisce e il link alla fonte. Il quiz usa anche altre fonti, per esempio OCSE, FFS e Associazione svizzera dei banchieri, sempre indicate.",
+      whatTitle: "Che cos’è",
+      what: "SwissData riunisce statistiche ufficiali sulla Svizzera: {indicatorCount} indicatori nazionali con le loro serie annuali, sei indicatori per Cantone e {questionCount} domande di quiz. Ogni cifra indica la fonte, l’anno a cui si riferisce e il link alla fonte. Il quiz usa anche altre fonti, per esempio OCSE, FFS e Associazione svizzera dei banchieri, sempre indicate.",
       whoTitle: "Chi lo fa",
       who: "Nicola Lo Russo, come progetto indipendente. SwissData non è un sito della Confederazione né di un ufficio federale e non pubblica dati ufficiali propri: fanno fede le fonti indicate. Con i siti Parlamento e Spesa pubblica fa parte di SwissData. Contatto: {contactLink}.",
       whyTitle: "Perché",
       why: "Le statistiche ufficiali sono pubbliche ma sparse tra molti uffici e tabelle, e di rado spiegate a chi non è del mestiere. Qui le principali stanno insieme, ognuna con una definizione in parole semplici.",
       checkTitle: "Come sono controllate le cifre",
-      check: "Ogni cifra è presa dalla tabella o dalla pubblicazione dell'ente indicato come fonte, mai da articoli di stampa. Il {lastCheck} tutte le cifre del sito sono state confrontate una per una con le loro fonti. Ogni correzione è annotata, con la data, tra le modifiche ai dati.",
+      check: "Ogni cifra è presa dalla tabella o dalla pubblicazione dell’ente indicato come fonte, mai da articoli di stampa. Il {lastCheck} tutte le cifre del sito sono state confrontate una per una con le loro fonti. Ogni correzione è annotata, con la data, tra le modifiche ai dati.",
       changeLogLink: "Modifiche ai dati →",
       reportTitle: "Segnalare un errore",
       report: "Chi trova una cifra sbagliata o superata può segnalarla con il link qui sotto, indicando la pagina, la cifra e, se possibile, la fonte corretta. Le correzioni compaiono tra le modifiche ai dati.",
       limitsTitle: "Limiti",
-      limit1: "Le statistiche escono con ritardo: l'anno indicato è quello a cui si riferisce la cifra, non quello della pubblicazione.",
-      limit2: "Misure diverse dello stesso fenomeno danno cifre diverse, per esempio la disoccupazione secondo l'ILO e quella registrata. Il sito le indica entrambe, con la definizione.",
+      limit1: "Le statistiche escono con ritardo: l’anno indicato è quello a cui si riferisce la cifra, non quello della pubblicazione.",
+      limit2: "Misure diverse dello stesso fenomeno danno cifre diverse, per esempio la disoccupazione secondo l’ILO e quella registrata. Il sito le indica entrambe, con la definizione.",
       limit3: "Le cifre mostrano quanto, non perché.",
       limit4: "Le domande del quiz esistono solo in italiano e in inglese.",
       quizScoreTitle: "Il punteggio del quiz",
-      quizScore: "Il punteggio di una risposta è 100\u00A0% meno la distanza tra la tua stima e il valore reale, misurata in rapporto all'ampiezza del cursore. Una stima che sbaglia di un decimo dell'ampiezza vale 90\u00A0%.",
+      quizScore: "Il punteggio di una risposta è 100\u00A0% meno la distanza tra la tua stima e il valore reale, misurata in rapporto all’ampiezza del cursore. Una stima che sbaglia di un decimo dell’ampiezza vale 90\u00A0%.",
       sourcesTitle: "Fonti",
     },
 
@@ -715,7 +715,7 @@ export const translations = {
       lastCheck: "Données vérifiées le {lastCheck}",
       published: "publié le {date}",
       publishedMonth: "publié en {month}",
-      axisNotZero: "L'axe vertical ne commence pas à zéro.",
+      axisNotZero: "L’axe vertical ne commence pas à zéro.",
     },
 
     categoryName: {
@@ -726,7 +726,7 @@ export const translations = {
 
     // Footer
     footer: {
-      disclaimer: "Chaque chiffre renvoie à sa source ; pour un usage officiel, seule la source fait foi.",
+      disclaimer: "Chaque chiffre renvoie à sa source\u202F; pour un usage officiel, seule la source fait foi.",
       about: "À propos",
       changeLog: "Modifications des données",
       contact: "Contact",
@@ -742,7 +742,7 @@ export const translations = {
       source: "Source",
       reportTitle: "Signaler une erreur",
       reportLink: "Signaler une erreur",
-      reportNote: "Le lien ouvre un court formulaire sur GitHub ; il faut un compte GitHub pour l'utiliser.",
+      reportNote: "Le lien ouvre un court formulaire sur GitHub\u202F; il faut un compte GitHub pour l’utiliser.",
     },
 
     // Titles and description of the pages (link previews, search results)
@@ -754,14 +754,14 @@ export const translations = {
     // Page shown for an address that does not exist
     notFound: {
       title: "Page introuvable",
-      text: "Cette adresse ne mène à aucune page de SwissData. Les pages du site :",
-      home: "Page d'accueil",
+      text: "Cette adresse ne mène à aucune page de SwissData. Les pages du site\u202F:",
+      home: "Page d’accueil",
     },
 
     // Home page
     home: {
       title: "Statistiques officielles sur la Suisse",
-      lead: "Les principaux chiffres réunis en un seul endroit, chacun avec sa source officielle et l'année à laquelle il se rapporte.",
+      lead: "Les principaux chiffres réunis en un seul endroit, chacun avec sa source officielle et l’année à laquelle il se rapporte.",
       independent: "Site indépendant de Nicola Lo Russo, pas de la Confédération",
       allIndicators: "Les {indicatorCount} indicateurs année par année →",
     },
@@ -769,9 +769,9 @@ export const translations = {
     // Quiz page
     quiz: {
       title: "Quiz sur la statistique suisse",
-      intro: "{questionCount} questions dont la réponse est un chiffre : on l'estime avec un curseur, puis s'affichent le chiffre exact, la source et une comparaison. Les réponses proviennent d'offices fédéraux, d'Eurostat, de l'OCDE et d'autres organismes, indiqués sous chaque réponse.",
-      languageNote: "Les questions n'existent qu'en italien et en anglais ; elles s'affichent ici en anglais.",
-      chooseLength: "Nombre de questions :",
+      intro: "{questionCount} questions dont la réponse est un chiffre\u202F: on l’estime avec un curseur, puis s’affichent le chiffre exact, la source et une comparaison. Les réponses proviennent d’offices fédéraux, d’Eurostat, de l’OCDE et d’autres organismes, indiqués sous chaque réponse.",
+      languageNote: "Les questions n’existent qu’en italien et en anglais\u202F; elles s’affichent ici en anglais.",
+      chooseLength: "Nombre de questions\u202F:",
       length: "{n} questions",
       revealAnswer: "Afficher la réponse",
       nextQuestion: "Question suivante",
@@ -789,19 +789,19 @@ export const translations = {
     // Quiz - Score Card
     scoreCard: {
       title: "Résultat",
-      averageAccuracy: "Précision moyenne : {value}",
+      averageAccuracy: "Précision moyenne\u202F: {value}",
       newQuiz: "Nouveau quiz",
       shareResult: "Partager le résultat",
       shareTitle: "Quiz SwissData",
-      shareText: "Quiz SwissData sur la statistique suisse : précision moyenne de {score} sur {n} questions.",
+      shareText: "Quiz SwissData sur la statistique suisse\u202F: précision moyenne de {score} sur {n} questions.",
       answers: "Réponses",
-      estimateAnswer: "Estimation : {guess} · Réponse : {answer}",
+      estimateAnswer: "Estimation\u202F: {guess} · Réponse\u202F: {answer}",
       unknownQuestion: "Question inconnue",
     },
 
     // Quiz - Reveal Animation
     reveal: {
-      accuracy: "Précision : {value}",
+      accuracy: "Précision\u202F: {value}",
       yourGuess: "Estimation",
       actualValue: "Réponse",
       context: "Contexte",
@@ -811,9 +811,9 @@ export const translations = {
     // Statistics page
     statistics: {
       title: "Statistiques année par année",
-      subtitle: "Chaque point est la valeur d'une année, telle que publiée par la source indiquée sous le graphique.",
+      subtitle: "Chaque point est la valeur d’une année, telle que publiée par la source indiquée sous le graphique.",
       all: "Tous",
-      chartLabel: "{title} : de {firstValue} en {from} à {lastValue} en {to}",
+      chartLabel: "{title}\u202F: de {firstValue} en {from} à {lastValue} en {to}",
       noData: "Pas de données pour cette période",
       categories: "Catégories",
       period: "Période",
@@ -830,11 +830,11 @@ export const translations = {
     // Cantons page
     cantons: {
       title: "Comparaison des cantons",
-      subtitle: "Six indicateurs pour les 26 cantons : plus la couleur est foncée, plus la valeur est élevée. Sélectionner un canton affiche ses chiffres ; le tableau ci-dessous les classe tous.",
-      colorBy: "Indicateur :",
+      subtitle: "Six indicateurs pour les 26 cantons\u202F: plus la couleur est foncée, plus la valeur est élevée. Sélectionner un canton affiche ses chiffres\u202F; le tableau ci-dessous les classe tous.",
+      colorBy: "Indicateur\u202F:",
       unemployment: "Chômage enregistré",
       foreignPopulation: "Population étrangère",
-      healthPremium: "Prime d'assurance-maladie",
+      healthPremium: "Prime d’assurance-maladie",
       gdpPerCapita: "PIB par habitant",
       averageRent: "Loyer moyen",
       crimeRate: "Infractions pour 1000 habitants",
@@ -842,7 +842,7 @@ export const translations = {
       unitPhrases: {
         "unemployment-rate": "% de la population active, moyenne {year}",
         "foreign-population": "% de la population résidante permanente, 31.12.{year}",
-        "health-premium": "francs par mois, moyenne de toutes les classes d'âge, {year}",
+        "health-premium": "francs par mois, moyenne de toutes les classes d’âge, {year}",
         "gdp-per-capita": "francs par habitant, prix courants, {year}",
         "average-rent": "francs par mois, loyer net moyen, {year}",
         "crime-rate-per-1000": "infractions au Code pénal pour 1000 habitants, {year}",
@@ -859,22 +859,22 @@ export const translations = {
       canton: "Canton",
       population: "Population",
       area: "Superficie (km²)",
-      legendRange: "de {from} à moins de {to} : {count}",
-      legendRangeLast: "de {from} à {to} : {count}",
+      legendRange: "de {from} à moins de {to}\u202F: {count}",
+      legendRangeLast: "de {from} à {to}\u202F: {count}",
       legendCount: "{n} cantons",
       legendCountOne: "1 canton",
       legendNoCanton: "aucun canton",
       legendHint: "Sélectionner une tranche pour mettre ses cantons en évidence.",
-      readout: "{canton} : {value} · Suisse : {national}",
+      readout: "{canton}\u202F: {value} · Suisse\u202F: {national}",
       readoutEmpty: "Sélectionner un canton sur la carte ou dans le tableau.",
       allFigures: "Tous les chiffres du canton ↓",
-      compareHint: "Pour comparer deux cantons : les chercher dans le tableau, classé selon l'indicateur choisi.",
-      unemploymentNote: "Ici le chômage enregistré (SECO). Le taux au sens du BIT compte aussi les personnes non inscrites dans un ORP et il est plus élevé (Suisse {year} : {ilo}).",
+      compareHint: "Pour comparer deux cantons\u202F: les chercher dans le tableau, classé selon l’indicateur choisi.",
+      unemploymentNote: "Ici le chômage enregistré (SECO). Le taux au sens du BIT compte aussi les personnes non inscrites dans un ORP et il est plus élevé (Suisse {year}\u202F: {ilo}).",
       dataSources: "Sources des données",
       provisional: "provisoire",
       bordersSummary: "Frontières cantonales (Moutier)",
-      territoryNote: "La population, la superficie et la part d'étrangers se rapportent aux frontières cantonales du 1er janvier 2026 : Moutier, dans le canton de Berne jusqu'au 31 décembre 2025, est comptée dans le canton du Jura. La part d'étrangers est recalculée pour ces frontières à partir des chiffres STATPOP du 31 décembre 2025 ; pour le Jura et Berne, elle diffère donc de celle que l'OFS publie pour les frontières de 2025.",
-      oldBordersNote: "La prime d'assurance-maladie est celle de 2026, sur les frontières de 2026 (les régions de primes 2026 de l'OFSP classent Moutier dans le Jura). Ces indicateurs se rapportent aux frontières d'avant 2026, avec Moutier dans le canton de Berne : {list}.",
+      territoryNote: "La population, la superficie et la part d’étrangers se rapportent aux frontières cantonales du 1er janvier 2026\u202F: Moutier, dans le canton de Berne jusqu’au 31 décembre 2025, est comptée dans le canton du Jura. La part d’étrangers est recalculée pour ces frontières à partir des chiffres STATPOP du 31 décembre 2025\u202F; pour le Jura et Berne, elle diffère donc de celle que l’OFS publie pour les frontières de 2025.",
+      oldBordersNote: "La prime d’assurance-maladie est celle de 2026, sur les frontières de 2026 (les régions de primes 2026 de l’OFSP classent Moutier dans le Jura). Ces indicateurs se rapportent aux frontières d’avant 2026, avec Moutier dans le canton de Berne\u202F: {list}.",
       clickToSelect: "Sélectionner pour voir les chiffres",
     },
 
@@ -883,38 +883,38 @@ export const translations = {
       population: "Population",
       area: "Superficie",
       populationDensity: "Densité de population",
-      nationalValue: "Suisse : {value}",
+      nationalValue: "Suisse\u202F: {value}",
       close: "Fermer",
     },
 
     // About page
     about: {
       title: "Le projet SwissData",
-      whatTitle: "Ce que c'est",
-      what: "SwissData réunit des statistiques officielles sur la Suisse : {indicatorCount} indicateurs nationaux avec leurs séries annuelles, six indicateurs par canton et {questionCount} questions de quiz. Chaque chiffre indique sa source, l'année à laquelle il se rapporte et le lien vers la source. Le quiz utilise aussi d'autres sources, par exemple l'OCDE, les CFF et l'Association suisse des banquiers, toujours indiquées.",
+      whatTitle: "Ce que c’est",
+      what: "SwissData réunit des statistiques officielles sur la Suisse\u202F: {indicatorCount} indicateurs nationaux avec leurs séries annuelles, six indicateurs par canton et {questionCount} questions de quiz. Chaque chiffre indique sa source, l’année à laquelle il se rapporte et le lien vers la source. Le quiz utilise aussi d’autres sources, par exemple l’OCDE, les CFF et l’Association suisse des banquiers, toujours indiquées.",
       whoTitle: "Qui le fait",
-      who: "Nicola Lo Russo, en tant que projet indépendant. SwissData n'est pas un site de la Confédération ni d'un office fédéral et ne publie pas de données officielles propres : seules les sources indiquées font foi. Avec les sites Parlement et Dépenses publiques, il fait partie de SwissData. Contact : {contactLink}.",
+      who: "Nicola Lo Russo, en tant que projet indépendant. SwissData n’est pas un site de la Confédération ni d’un office fédéral et ne publie pas de données officielles propres\u202F: seules les sources indiquées font foi. Avec les sites Parlement et Dépenses publiques, il fait partie de SwissData. Contact\u202F: {contactLink}.",
       whyTitle: "Pourquoi",
       why: "Les statistiques officielles sont publiques mais dispersées entre de nombreux offices et tableaux, et rarement expliquées aux non-spécialistes. Ici, les principales sont réunies, chacune avec une définition en mots simples.",
       checkTitle: "Comment les chiffres sont vérifiés",
-      check: "Chaque chiffre provient du tableau ou de la publication de l'organisme indiqué comme source, jamais d'articles de presse. Le {lastCheck}, tous les chiffres du site ont été comparés un à un avec leurs sources. Chaque correction est notée, avec sa date, dans les modifications des données.",
+      check: "Chaque chiffre provient du tableau ou de la publication de l’organisme indiqué comme source, jamais d’articles de presse. Le {lastCheck}, tous les chiffres du site ont été comparés un à un avec leurs sources. Chaque correction est notée, avec sa date, dans les modifications des données.",
       changeLogLink: "Modifications des données →",
       reportTitle: "Signaler une erreur",
       report: "Toute personne qui trouve un chiffre faux ou dépassé peut le signaler avec le lien ci-dessous, en indiquant la page, le chiffre et si possible la bonne source. Les corrections figurent dans les modifications des données.",
       limitsTitle: "Limites",
-      limit1: "Les statistiques paraissent avec retard : l'année indiquée est celle à laquelle se rapporte le chiffre, pas celle de sa publication.",
-      limit2: "Des mesures différentes d'un même phénomène donnent des chiffres différents, par exemple le chômage au sens du BIT et le chômage enregistré. Le site indique les deux, avec leur définition.",
+      limit1: "Les statistiques paraissent avec retard\u202F: l’année indiquée est celle à laquelle se rapporte le chiffre, pas celle de sa publication.",
+      limit2: "Des mesures différentes d’un même phénomène donnent des chiffres différents, par exemple le chômage au sens du BIT et le chômage enregistré. Le site indique les deux, avec leur définition.",
       limit3: "Les chiffres montrent combien, pas pourquoi.",
-      limit4: "Les questions du quiz n'existent qu'en italien et en anglais.",
+      limit4: "Les questions du quiz n’existent qu’en italien et en anglais.",
       quizScoreTitle: "Le score du quiz",
-      quizScore: "Le score d'une réponse est 100\u202F% moins l'écart entre votre estimation et la valeur réelle, mesuré par rapport à l'étendue du curseur. Une estimation qui s'écarte d'un dixième de l'étendue vaut 90\u202F%.",
+      quizScore: "Le score d’une réponse est 100\u202F% moins l’écart entre votre estimation et la valeur réelle, mesuré par rapport à l’étendue du curseur. Une estimation qui s’écarte d’un dixième de l’étendue vaut 90\u202F%.",
       sourcesTitle: "Sources",
     },
 
 
     // Indicator card
     indicatorCard: {
-      more: "Plus d'informations : {title}",
+      more: "Plus d’informations\u202F: {title}",
       chartLink: "Évolution depuis {firstYear} →",
     },
 
@@ -925,7 +925,7 @@ export const translations = {
       years: "{delta} ans par rapport à {prevYear} ({previous})",
       yearsOne: "{delta} an par rapport à {prevYear} ({previous})",
       relative: "{delta} par rapport à {prevYear} ({previous})",
-      previous: "En {prevYear} : {previous}",
+      previous: "En {prevYear}\u202F: {previous}",
       same: "inchangé par rapport à {prevYear}",
     },
   },

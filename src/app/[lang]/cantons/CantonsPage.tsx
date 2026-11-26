@@ -9,7 +9,7 @@ import { Badge } from "@/components/ui/badge";
 import { cantons, getCantonById, cantonIndicatorMeta, cantonPopulationMeta, cantonAreaMeta } from "@/data/cantons";
 import { indicators } from "@/data/indicators";
 import { Canton, CantonIndicatorMeta } from "@/types";
-import { formatNumber, formatSwissDate, percentSign, NBSP } from "@/lib/formatters";
+import { colon, formatNumber, formatSwissDate, percentSign, NBSP } from "@/lib/formatters";
 import { cantonDecimals, formatCantonValue } from "@/lib/cantonValues";
 import { formatIndicatorValue, latestYear } from "@/lib/indicatorText";
 import { SourceLine } from "@/components/ui/source-line";
@@ -248,7 +248,7 @@ export default function CantonsPage() {
                     // Each band shows the colours of its own range, so the five bands together are the scale of the map.
                     // A band without cantons stays in the scale but does nothing.
                     // The ::after of the band extends the tap area to 44px in height; the visible size stays 16px.
-                    <button key={index} type="button" aria-label={`${meta.name}: ${getLegendStepText(index)}`}
+                    <button key={index} type="button" aria-label={`${meta.name}${colon(locale)} ${getLegendStepText(index)}`}
                       aria-pressed={pinnedStep === index} aria-disabled={isEmpty || undefined}
                       onPointerEnter={(e) => { if (e.pointerType === "mouse") setHoveredStep(index); }}
                       onClick={() => { if (!isEmpty) setPinnedStep(pinnedStep === index ? null : index); }}
@@ -389,7 +389,7 @@ export default function CantonsPage() {
           {cantonIndicators.map((indicator) => (
             <li key={indicator.id}>
               <span className="font-medium text-swiss-gray-700">{indicator.name}</span>
-              {": "}
+              {colon(locale) + " "}
               {yearText(indicator)}
               {" · "}
               <a href={indicator.sourceUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center min-h-[44px] sm:min-h-0 underline underline-offset-[3px] hover:text-swiss-gray-900">
@@ -403,7 +403,7 @@ export default function CantonsPage() {
           ].map(({ name, meta: base }) => (
             <li key={name}>
               <span className="font-medium text-swiss-gray-700">{name}</span>
-              {": "}
+              {colon(locale) + " "}
               {formatSwissDate(base.referenceDate)}
               {" · "}
               <a href={base.sourceUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center min-h-[44px] sm:min-h-0 underline underline-offset-[3px] hover:text-swiss-gray-900">

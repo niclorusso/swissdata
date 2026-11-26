@@ -98,6 +98,11 @@ export function formatYear(value: Numeric): string {
   return isNumber(value) ? String(Math.round(value)) : MISSING;
 }
 
+/** A colon as the language writes it: French puts a narrow no-break space before it ("Source :"). */
+export function colon(locale: NumberLocale = "en"): string {
+  return locale === "fr" ? NNBSP + ":" : ":";
+}
+
 /** "%" with the space the language asks for: none in English, U+00A0 in Italian and German, U+202F in French. */
 export function percentSign(locale: NumberLocale = "en"): string {
   return locale === "en" ? "%" : (locale === "fr" ? NNBSP : NBSP) + "%";
@@ -179,7 +184,7 @@ const unitTranslations: Record<NumberLocale, Record<string, string>> = {
     "per 100k": "per 100 000",
     "hours": "ore",
     "tonnes": "tonnellate",
-    "CHF bn": "mld CHF",
+    "CHF bn": "mld\u00A0CHF",
     "minutes": "minuti",
     "km": "km",
   },
@@ -197,7 +202,7 @@ const unitTranslations: Record<NumberLocale, Record<string, string>> = {
     "per 100k": "pro 100 000",
     "hours": "Stunden",
     "tonnes": "Tonnen",
-    "CHF bn": "Mrd. CHF",
+    "CHF bn": "Mrd.\u00A0CHF",
     "minutes": "Minuten",
     "km": "km",
   },
@@ -215,7 +220,7 @@ const unitTranslations: Record<NumberLocale, Record<string, string>> = {
     "per 100k": "pour 100 000",
     "hours": "heures",
     "tonnes": "tonnes",
-    "CHF bn": "mrd CHF",
+    "CHF bn": "mrd\u00A0CHF",
     "minutes": "minutes",
     "km": "km",
   },
@@ -233,7 +238,8 @@ export function formatWithUnit(value: Numeric, unit: string, locale: NumberLocal
   if (unit === "%") return formatPercent(value, locale, { decimals: Math.max(1, ownDecimals(value)), ...options });
   if (unit === "CHF") return formatCHF(value, locale, options);
   if (unit === "CHF/month") return formatCHF(value, locale, options) + "/" + unitText.split("/")[1];
-  if (unit === "CHF bn") return locale === "en" ? `CHF${NBSP}${formatNumber(value, locale, options)} bn` : `${formatNumber(value, locale, options)}${NBSP}${unitText}`;
+  // "103 mld CHF", "103 Mrd. CHF", "103 mrd CHF", "CHF 103 bn": number and unit never split
+  if (unit === "CHF bn") return locale === "en" ? `CHF${NBSP}${formatNumber(value, locale, options)}${NBSP}bn` : `${formatNumber(value, locale, options)}${NBSP}${unitText}`;
   if (unit === "rank") return "#" + formatNumber(value, locale, { decimals: 0 });
   if (unit === "year") return formatYear(value);
   if (unit === "count" || unit === "index" || unit === "rate") return formatNumber(value, locale, options);

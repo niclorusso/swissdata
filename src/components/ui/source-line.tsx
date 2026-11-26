@@ -1,7 +1,7 @@
 "use client";
 
 import { useLanguage } from "@/i18n/LanguageContext";
-import { NNBSP } from "@/lib/formatters";
+import { colon } from "@/lib/formatters";
 import { cn } from "@/lib/utils";
 
 interface SourceLineProps {
@@ -23,7 +23,7 @@ interface SourceLineProps {
  */
 export function SourceLine({ publisher, url, date, published, className }: SourceLineProps) {
   const { t, locale } = useLanguage();
-  const label = `${t.common.source}${locale === "fr" ? NNBSP : ""}:`;
+  const label = t.common.source + colon(locale);
   return (
     <p className={cn("sdf-source", className)}>
       {label}{" "}

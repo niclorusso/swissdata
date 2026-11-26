@@ -26,7 +26,7 @@ export const FAMILY_SITES: FamilySite[] = [
       it: "Indicatori su economia, popolazione e società, con quiz e confronto tra Cantoni.",
       en: "Indicators on the economy, population and society, with a quiz and a comparison of cantons.",
       de: "Indikatoren zu Wirtschaft, Bevölkerung und Gesellschaft, mit Quiz und Kantonsvergleich.",
-      fr: "Indicateurs sur l'économie, la population et la société, avec un quiz et une comparaison des cantons.",
+      fr: "Indicateurs sur l’économie, la population et la société, avec un quiz et une comparaison des cantons.",
     },
   },
   {
@@ -72,7 +72,7 @@ export const FAMILY_INDEPENDENT: LocalizedText = {
   it: "Progetto indipendente di Nicola Lo Russo. Non è un sito ufficiale della Confederazione.",
   en: "Independent project by Nicola Lo Russo. Not an official website of the Confederation.",
   de: "Unabhängiges Projekt von Nicola Lo Russo. Keine offizielle Website des Bundes.",
-  fr: "Projet indépendant de Nicola Lo Russo. Ce n'est pas un site officiel de la Confédération.",
+  fr: "Projet indépendant de Nicola Lo Russo. Ce n’est pas un site officiel de la Confédération.",
 };
 
 /** The languages in the header menu, in the order of the three SwissData sites. */

@@ -4,6 +4,7 @@ import { useCallback, useEffect, useId, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
+import { colon } from "@/lib/formatters";
 import { rememberLocale, useLanguage } from "@/i18n/LanguageContext";
 import { localePath, switchLocalePath } from "@/i18n/routes";
 import { BrandMark, Wordmark, Chevron } from "@/components/family/BrandMark";
@@ -64,7 +65,7 @@ function SectionSwitcher() {
         type="button"
         aria-expanded={open}
         aria-controls={id}
-        aria-label={`${t.nav.switchSite}: ${current.short[locale]}`}
+        aria-label={`${t.nav.switchSite}${colon(locale)} ${current.short[locale]}`}
         onClick={() => setOpen(!open)}
         className="inline-flex items-center gap-[3px] min-h-[44px] font-semibold text-swiss-gray-600 hover:text-ink"
       >
@@ -110,7 +111,7 @@ function LanguageMenu() {
         type="button"
         aria-expanded={open}
         aria-controls={id}
-        aria-label={`${t.nav.language}: ${LANGUAGES.find((l) => l.code === locale)?.label}`}
+        aria-label={`${t.nav.language}${colon(locale)} ${LANGUAGES.find((l) => l.code === locale)?.label}`}
         onClick={() => setOpen(!open)}
         className="inline-flex items-center gap-1 h-11 lg:h-9 px-2.5 max-[359px]:px-2 lg:px-3 border border-swiss-gray-300 rounded-full bg-white text-ink text-sm font-semibold"
       >
