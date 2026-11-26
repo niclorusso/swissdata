@@ -105,7 +105,7 @@ export const translations = {
       yourGuess: "Your guess",
       actualValue: "Actual value",
       context: "Context",
-      internationalComparison: "International Comparison",
+      internationalComparison: "Comparison",
       viewSource: "View source",
     },
 
@@ -350,7 +350,7 @@ export const translations = {
       yourGuess: "La tua stima",
       actualValue: "Valore reale",
       context: "Contesto",
-      internationalComparison: "Confronto internazionale",
+      internationalComparison: "Confronto",
       viewSource: "Vedi fonte",
     },
 
@@ -593,7 +593,7 @@ export const translations = {
       yourGuess: "Deine Schätzung",
       actualValue: "Tatsächlicher Wert",
       context: "Kontext",
-      internationalComparison: "Internationaler Vergleich",
+      internationalComparison: "Vergleich",
       viewSource: "Quelle anzeigen",
     },
 
@@ -838,7 +838,7 @@ export const translations = {
       yourGuess: "Votre estimation",
       actualValue: "Valeur réelle",
       context: "Contexte",
-      internationalComparison: "Comparaison internationale",
+      internationalComparison: "Comparaison",
       viewSource: "Voir la source",
     },
 

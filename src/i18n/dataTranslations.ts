@@ -140,101 +140,118 @@ const questionTranslationsIT: Record<
       "Qual era il tasso di disoccupazione registrato in Svizzera nel 2025 (SECO, media annua)?",
     explanation:
       "Nel 2025 il tasso di disoccupazione registrato è stato in media del 2,8%, contro il 2,4% del 2024 (SECO). Conta solo le persone iscritte a un ufficio regionale di collocamento. Il grafico usa la definizione ILO, basata su un'indagine e confrontabile tra Paesi: con questa misura la Svizzera era al 4,9% nel 2025 e l'UE al 6,0% (Eurostat).",
+    comparisonLabel: "Tasso di disoccupazione ILO, 2025, in % (Eurostat; la risposta è il tasso SECO dei disoccupati iscritti)",
   },
   "youth-unemployment": {
     question:
       "Qual era il tasso di disoccupazione giovanile (15-24 anni, definizione ILO) in Svizzera nel 2025?",
     explanation:
       "Nel 2025 la disoccupazione giovanile secondo la definizione ILO era dell'8,8% (2024: 8,2%), più alta del tasso per tutte le età (4,9%) ma molto sotto la media UE del 15,2%. Fonte: rilevazione sulle forze di lavoro dell'UST, pubblicata da Eurostat.",
+    comparisonLabel: "Tasso di disoccupazione giovanile (ILO, 15-24 anni), 2025, in % (Eurostat)",
   },
   "labor-participation": {
     question:
       "Qual era il tasso di attività in Svizzera (15-64 anni) nel 2025?",
     explanation:
       "Nel 2025 l'84,1% delle persone tra 15 e 64 anni in Svizzera lavorava o cercava lavoro, contro il 75,6% nell'UE. Tra le donne il tasso era dell'80,8%. Fonte: rilevazione sulle forze di lavoro dell'UST, pubblicata da Eurostat.",
+    comparisonLabel: "Tasso di attività, 15-64 anni, 2025, in % (Eurostat)",
   },
   "part-time-rate": {
     question:
       "Quale percentuale degli occupati in Svizzera lavorava a tempo parziale nel 2025 (15-64 anni, definizione Eurostat)?",
     explanation:
       "Nel 2025 il 39,8% degli occupati tra 15 e 64 anni in Svizzera lavorava a tempo parziale, la seconda quota più alta del confronto dopo i Paesi Bassi (42,2%). La media UE era del 17,7%. Tra le donne occupate in Svizzera la quota era del 61,3%. È la definizione di Eurostat, che conta chi dichiara di lavorare a tempo parziale (fonte: rilevazione sulle forze di lavoro dell'UST, pubblicata da Eurostat). La definizione dell'UST conta invece tutti gli occupati dai 15 anni in su con un grado d'occupazione inferiore al 90% e dà il 38,7% per il 2025.",
+    comparisonLabel: "Quota di occupati a tempo parziale, 15-64 anni, 2025, in % (Eurostat)",
   },
   "weekly-work-hours": {
     question:
       "Quante ore alla settimana hanno effettivamente lavorato i dipendenti a tempo pieno in Svizzera nel 2025?",
     explanation:
       "Nel 2025 i dipendenti a tempo pieno in Svizzera hanno lavorato effettivamente 40 ore e 3 minuti alla settimana (2019: 40 ore e 54 minuti), secondo la statistica del volume di lavoro dell'UST. Il grafico usa un'altra misura, l'unica disponibile per tutti i Paesi: le ore settimanali abituali degli occupati a tempo pieno (Eurostat, 2025), con la Svizzera a 43,2 ore e l'UE a 40,2.",
+    comparisonLabel: "Ore settimanali abituali degli occupati a tempo pieno, 2025 (Eurostat; la risposta sono le ore effettive dei dipendenti a tempo pieno, UST)",
   },
   "purchasing-power-rank": {
     question:
       "In che posizione era la Svizzera tra i Paesi OCSE per salario medio annuo a parità di potere d'acquisto nel 2025?",
     explanation:
       "A parità di potere d'acquisto, nel 2025 il salario medio annuo in Svizzera era di 92'285 dollari: secondo posto tra i 33 Paesi OCSE con un dato per il 2025, dietro al Lussemburgo (98'530 dollari) e davanti agli Stati Uniti (86'977 dollari). Il grafico mostra la posizione dei primi otto di questi Paesi. Per l'Islanda, quarta nel 2024, il dato del 2025 non c'è ancora.",
+    comparisonLabel: "Posizione per salario medio annuo a parità di potere d'acquisto, 2025 (OCSE)",
   },
   "median-salary": {
     question:
       "Qual era il salario mediano lordo mensile in Svizzera nel 2024 (tempo pieno)?",
     explanation:
       "Nel 2024 il salario mediano lordo per un posto a tempo pieno era di 7'024 franchi al mese (2022: 6'788 franchi), secondo la rilevazione della struttura dei salari dell'UST. Metà dei dipendenti guadagna di più, metà di meno. Tra le grandi regioni, Zurigo era la più alta con 7'502 franchi e il Ticino la più bassa con 5'708 franchi.",
+    comparisonLabel: "Salario mediano lordo mensile, tempo pieno, 2024, in CHF (UST)",
   },
   "gender-pay-gap": {
     question:
       "Di quale percentuale il salario medio delle donne era inferiore a quello degli uomini in Svizzera nel 2024?",
     explanation:
       "Nel 2024 le donne hanno guadagnato in media il 15,7% in meno degli uomini nell'insieme dell'economia (2022: 16,2%), secondo la rilevazione della struttura dei salari dell'UST. La parte non spiegata da fattori come professione, settore o formazione era il 6,5% del salario, cioè 640 franchi al mese. Sul salario mediano la differenza era dell'8,4%. Il grafico usa l'indicatore Eurostat per il 2024 (salario orario, senza amministrazione pubblica), con la Svizzera al 16,0%. Da luglio 2020 i datori di lavoro con 100 o più dipendenti devono svolgere un'analisi della parità salariale.",
+    comparisonLabel: "Divario salariale tra donne e uomini sul salario orario, senza amministrazione pubblica, 2024, in % (definizione Eurostat; la risposta è il dato UST per l'insieme dell'economia)",
   },
   "gini-coefficient": {
     question:
       "Qual era il coefficiente di Gini del reddito disponibile in Svizzera nel 2024 (indice di disuguaglianza, 0-100)?",
     explanation:
       "Nel 2024 il coefficiente di Gini del reddito disponibile equivalente in Svizzera era 31,0 (2023: 31,5), poco sopra la media UE di 29,4 e vicino a Francia (30,0) e Germania (29,5). Il valore 0 significa che tutti hanno lo stesso reddito, 100 che una sola persona ha tutto. Fonte: indagine SILC dell'UST, pubblicata da Eurostat.",
+    comparisonLabel: "Coefficiente di Gini del reddito disponibile, 2024 (Eurostat)",
   },
   "snb-shock": {
     question:
       "Di quale percentuale è sceso l'euro rispetto al franco il 15 gennaio 2015 (tasso di riferimento BCE), quando la BNS ha abolito il cambio minimo?",
     explanation:
       "Il 15 gennaio 2015 la Banca nazionale svizzera ha abolito il cambio minimo di 1.20 franchi per euro e ha abbassato il tasso d'interesse a -0,75%. Il tasso di riferimento della BCE è sceso da 1.2010 il 14 gennaio a 1.0280 il 15 gennaio: un calo del 14,4%. Nei giorni seguenti è sceso ancora, fino a 0.9816 il 23 gennaio (-18,3% rispetto al 14 gennaio).",
+    comparisonLabel: "Calo dell'euro rispetto al franco in confronto al 14 gennaio 2015, in % (tassi di riferimento BCE)",
   },
   "export-gdp-share": {
     question:
       "A quale percentuale del PIL corrispondevano le esportazioni svizzere di beni e servizi nel 2025?",
     explanation:
       "Nel 2025 le esportazioni di beni e servizi corrispondevano al 78,1% del PIL svizzero (2024: 71,2%), secondo i dati di contabilità nazionale pubblicati dalla Banca mondiale. Le esportazioni sono contate al valore di vendita intero, il PIL solo al valore aggiunto: per questo il rapporto può superare il 100%, come a Singapore e in Irlanda.",
+    comparisonLabel: "Esportazioni di beni e servizi in % del PIL, 2025 (Banca mondiale)",
   },
   "snb-gold-reserves": {
     question:
       "Quante tonnellate d'oro possiede la Banca nazionale svizzera?",
     explanation:
       "La BNS possiede 1'040 tonnellate d'oro (1'039,9 nei dati del FMI per settembre 2026). Nella tabella del World Gold Council di febbraio 2026 era l'ottava riserva ufficiale, contando anche il FMI. Circa il 70% è custodito in Svizzera, il 20% presso la Banca d'Inghilterra e il 10% presso la Banca del Canada. Nel 2014 il popolo ha respinto un'iniziativa che avrebbe obbligato la BNS a tenere in oro almeno il 20% dei suoi attivi. Il grafico mostra i dati del FMI per settembre e ottobre 2026 (Russia: novembre 2025, ultimo dato comunicato): la riserva della Cina ora supera quella della Russia.",
+    comparisonLabel: "Riserve ufficiali d'oro in tonnellate, settembre-ottobre 2026 (FMI)",
   },
   "wealth-managed": {
     question:
       "Quanto patrimonio transfrontaliero di clienti privati era gestito in Svizzera nel 2025 (miliardi di franchi)?",
     explanation:
       "Nel 2025 le banche in Svizzera gestivano 2'358 miliardi di franchi di patrimoni transfrontalieri di clienti privati, secondo il Barometro bancario 2026 dell'Associazione svizzera dei banchieri, che indica la Svizzera tra le principali piazze mondiali in questo settore. Il totale dei patrimoni gestiti dalle banche in Svizzera era di 9'729 miliardi di franchi a fine 2025.",
+    comparisonLabel: "Patrimoni gestiti dalle banche in Svizzera, 2025, in miliardi di CHF (Associazione svizzera dei banchieri)",
   },
   "number-of-banks": {
     question:
       "Quante banche c'erano in Svizzera alla fine del 2025?",
     explanation:
       "A fine 2025 la Svizzera aveva 225 banche (2024: 230), contro 375 nel 2000 e 275 nel 2014 (BNS). Il totale del 2025 comprende 24 banche cantonali, 2 grandi banche, 58 banche regionali e casse di risparmio, il gruppo Raiffeisen (contato una volta), 37 banche borsistiche, 15 altri istituti bancari, 5 banchieri privati, 61 banche in mani straniere e 22 succursali di banche estere.",
+    comparisonLabel: "Numero di banche in Svizzera a fine anno (BNS)",
   },
   "asylum-budget": {
     question:
       "Quale percentuale del bilancio federale è destinata alla migrazione (asilo, rifugiati, integrazione)?",
     explanation:
       "Il settore «Migrazione» vale circa il 4,1% del preventivo federale 2026 (3,75 miliardi di CHF su 91,1 miliardi). La maggior parte è versata ai Cantoni per l'aiuto sociale a richiedenti l'asilo e rifugiati. Per confronto, la sicurezza assorbe l'8,6%, formazione e ricerca il 9,9% e i trasporti l'11,8%.",
+    comparisonLabel: "Principali settori di compito in % del preventivo federale 2026 (Amministrazione federale delle finanze)",
   },
   "public-debt-gdp": {
     question: "Qual era il debito pubblico svizzero in percentuale del PIL nel 2025 (debito lordo, definizione FMI)?",
     explanation:
       "Secondo la definizione di debito lordo del FMI, il debito di Confederazione, Cantoni, Comuni e assicurazioni sociali insieme era il 40,1% del PIL nel 2025 (stima dell'Amministrazione federale delle finanze, settembre 2026), uno dei più bassi tra i paesi sviluppati. Secondo la definizione di Maastricht, più ristretta e usata nell'UE, era il 23,4%. La norma costituzionale del 'freno all'indebitamento', in vigore dal 2003, impone bilanci federali in pareggio nell'arco del ciclo economico.",
+    comparisonLabel: "Debito pubblico lordo in % del PIL, 2025 (AFF; altri Paesi da OECD Economic Outlook 119)",
   },
   "tax-revenue-gdp": {
     question:
       "A quale percentuale del PIL corrispondevano le entrate fiscali totali della Svizzera nel 2024?",
     explanation:
       "Nel 2024 imposte e contributi sociali corrispondevano al 27,2% del PIL in Svizzera (dato provvisorio; 2023: 26,9%), contro una media OCSE del 34,1%. Fonte: OCSE, Revenue Statistics 2025. I premi dell'assicurazione malattia obbligatoria sono pagati ad assicuratori privati e non sono contati in questa cifra.",
+    comparisonLabel: "Imposte e contributi sociali in % del PIL, 2024 (OCSE, Revenue Statistics 2025)",
   },
   "defense-spending": {
     question:
@@ -248,96 +265,112 @@ const questionTranslationsIT: Record<
       "In quanti dei 10 anni dal 2016 al 2025 il PIL reale della Svizzera è cresciuto?",
     explanation:
       "Il PIL reale svizzero è cresciuto in 9 dei 10 anni dal 2016 al 2025. L'unica eccezione è il 2020, quando è sceso del 2,3%. La crescita è stata dell'1,5% nel 2024 e dell'1,6% nel 2025 (Ufficio federale di statistica, contabilità nazionale del 25 agosto 2026). Il confronto usa i dati Eurostat.",
+    comparisonLabel: "Anni con crescita del PIL reale su dieci, 2016-2025 (Eurostat)",
   },
   "population-density": {
     question:
       "Qual è la densità di popolazione della Svizzera (abitanti per km² di superficie terrestre, 2024)?",
     explanation:
       "Nel 2024 la Svizzera contava 226 abitanti per km² di superficie terrestre, secondo Eurostat. È circa il doppio della densità di Austria o Francia e meno della metà di quella dei Paesi Bassi.",
+    comparisonLabel: "Abitanti per km² di superficie terrestre, 2024 (Eurostat)",
   },
   "total-population": {
     question:
       "Quanti abitanti contava la popolazione residente permanente della Svizzera alla fine del 2025 (in milioni)?",
     explanation:
       "Alla fine del 2025 la Svizzera contava 9 127 100 residenti permanenti (Ufficio federale di statistica), contro 9 051 000 un anno prima. Nel 1950 erano 4,7 milioni. Il confronto riporta i dati Eurostat al 1° gennaio 2026.",
+    comparisonLabel: "Popolazione al 1° gennaio 2026, in milioni (Eurostat)",
   },
   "urban-population": {
     question:
       "Quale percentuale della popolazione svizzera viveva in aree urbane nel 2025 (tipologia urbano/rurale dell'UST)?",
     explanation:
       "Alla fine del 2025, 7,88 milioni dei 9,13 milioni di residenti permanenti (86,3%) vivevano in aree urbane, secondo l'Ufficio federale di statistica. La tipologia dell'UST conta i comuni intermedi tra quelli urbani; il 13,7% viveva in aree rurali. Le fonti internazionali usano altre definizioni e danno valori diversi.",
+    comparisonLabel: "Residenti permanenti per tipo di area, fine 2025, in % (UST)",
   },
   "number-municipalities": {
     question:
       "Quanti comuni contava la Svizzera al 1° gennaio 2026?",
     explanation:
       "Al 1° gennaio 2026 la Svizzera contava 2110 comuni, secondo l'elenco ufficiale dei comuni dell'Ufficio federale di statistica. Erano 2131 nel 2024 e 3021 nel 1990: il numero continua a scendere a causa delle fusioni.",
+    comparisonLabel: "Numero di comuni al 1° gennaio (UST)",
   },
   "net-migration-rate": {
     question:
       "Qual è stato il saldo migratorio della Svizzera nel 2025 (per 1000 abitanti)?",
     explanation:
       "Nel 2025 il saldo migratorio della popolazione residente permanente è stato di 70 400 persone, pari a 7,7 per 1000 abitanti (Ufficio federale di statistica). Il tasso era 15,7 nel 2023, quando i rifugiati ucraini sono entrati nella popolazione permanente, e 9,2 nel 2024. Il confronto usa il tasso Eurostat 2025, che include le correzioni statistiche e per la Svizzera indica 7,4.",
+    comparisonLabel: "Saldo migratorio per 1000 abitanti, 2025 (Eurostat, con correzioni statistiche; la risposta è il dato UST)",
   },
   "foreign-population": {
     question:
       "Quale percentuale dei residenti permanenti in Svizzera era di nazionalità straniera alla fine del 2025?",
     explanation:
       "Alla fine del 2025 il 27,7% dei residenti permanenti (2,53 milioni di persone) era di nazionalità straniera (Ufficio federale di statistica). I gruppi più numerosi erano italiani (346 100), tedeschi (336 400), portoghesi (258 100) e francesi (179 400). Il confronto è calcolato sui dati Eurostat al 1° gennaio 2025, quando la quota svizzera era del 27,4%.",
+    comparisonLabel: "Stranieri in % della popolazione, 1° gennaio 2025 (Eurostat; la risposta è per la fine del 2025)",
   },
   "cross-border-commuters": {
     question:
       "Quanti frontalieri (permesso G) lavoravano in Svizzera nel terzo trimestre 2026?",
     explanation:
       "Nel terzo trimestre 2026 lavoravano in Svizzera 414 488 frontalieri con permesso G (Ufficio federale di statistica, dato provvisorio). La maggior parte risiedeva in Francia (241 012), seguita da Italia (92 509), Germania (67 681) e Austria (9014).",
+    comparisonLabel: "Frontalieri per Paese di residenza, 3° trimestre 2026 (UST)",
   },
   "fertility-rate": {
     question:
       "Qual è stato il tasso di fecondità totale della Svizzera nel 2025 (figli per donna)?",
     explanation:
       "Nel 2025 il tasso di fecondità totale è stato di 1,28 figli per donna (Ufficio federale di statistica), contro 1,52 nel 2021 e 1,50 nel 2000. Le madri sposate avevano in media 31,4 anni alla nascita del primo figlio. Il confronto riporta i dati Eurostat del 2024, quando il tasso svizzero era 1,29.",
+    comparisonLabel: "Figli per donna, 2024 (Eurostat; la risposta è per il 2025)",
   },
   "average-marriage-age": {
     question:
       "Qual era l'età media delle donne al primo matrimonio in Svizzera nel 2025?",
     explanation:
       "Nel 2025 le donne nubili si sono sposate per la prima volta in media a 30,7 anni e gli uomini celibi a 32,4 (Ufficio federale di statistica, persone sotto i 50 anni). Nel 1990 le medie erano 26,7 e 29,1. Il confronto riporta i dati Eurostat per le donne nel 2024; Eurostat usa un metodo diverso e per la Svizzera indica 31,3.",
+    comparisonLabel: "Età media delle donne al primo matrimonio, 2024 (metodo Eurostat; la risposta è il dato UST per il 2025)",
   },
   "population-over-65": {
     question:
       "Quale percentuale della popolazione svizzera aveva 65 anni o più alla fine del 2025?",
     explanation:
       "Alla fine del 2025 il 19,8% della popolazione residente permanente aveva 65 anni o più (Ufficio federale di statistica), contro il 15,4% nel 2000 e il 9,6% nel 1950. Il confronto riporta i dati Eurostat al 1° gennaio 2025, quando la quota svizzera era del 19,5%.",
+    comparisonLabel: "Popolazione di 65 anni o più in %, 1° gennaio 2025 (Eurostat; la risposta è per la fine del 2025)",
   },
   "health-subsidies": {
     question:
       "Quale percentuale degli assicurati in Svizzera ha ricevuto riduzioni dei premi di cassa malati nel 2025?",
     explanation:
       "Nel 2025 2,64 milioni di persone hanno ricevuto una riduzione dei premi: il 29,1% degli assicurati, secondo l'Ufficio federale della sanità pubblica. I sussidi hanno totalizzato 7,3 miliardi di franchi. Il premio medio mensile per gli adulti è di 465.30 franchi nel 2026.",
+    comparisonLabel: "Assicurati con riduzione dei premi in Svizzera, in % (UFSP)",
   },
   "life-expectancy": {
     question:
       "Qual era la speranza di vita alla nascita in Svizzera nel 2024?",
     explanation:
       "Nel 2024 la speranza di vita alla nascita era di 84,2 anni per i due sessi insieme (Eurostat, su dati dell'Ufficio federale di statistica): 85,9 per le donne e 82,4 per gli uomini. I dati del 2025 sono 86,3 e 82,7 (pubblicati come provvisori il 18 giugno 2026; la tabella dell'UST del 24 settembre 2026 riporta gli stessi valori). Nel 1990 erano 80,8 e 74,0: il divario tra donne e uomini è sceso da 6,8 a 3,6 anni. Il confronto riporta i dati OCSE del 2023, quando la Svizzera era a 84,3.",
+    comparisonLabel: "Speranza di vita alla nascita in anni, 2023 (OCSE, Health at a Glance 2025; la risposta è il dato Eurostat per il 2024)",
   },
   "hospital-beds": {
     question:
       "Quanti letti ospedalieri aveva la Svizzera ogni 1000 abitanti nel 2024?",
     explanation:
       "Nel 2024 la Svizzera aveva 4,2 letti ospedalieri ogni 1000 abitanti, secondo Eurostat. È meno della media UE (5,1) e molto meno di Germania (7,6) e Austria (6,6).",
+    comparisonLabel: "Letti ospedalieri per 1000 abitanti, 2024 (Eurostat)",
   },
   "health-spending-gdp": {
     question:
       "Quale percentuale del PIL ha speso la Svizzera per la sanità nel 2024?",
     explanation:
       "Nel 2024 la Svizzera ha speso per la sanità l'11,4% del PIL (dato provvisorio dell'Ufficio federale di statistica, ripreso dall'OCSE): 97 miliardi di franchi, pari a 10 792 franchi a persona. È meno degli Stati Uniti (17,2%) e della Germania (12,2%) e allo stesso livello della Francia (11,3%). Il confronto riporta i dati OCSE per il 2024.",
+    comparisonLabel: "Spesa sanitaria in % del PIL, 2024 (OCSE)",
   },
   "university-graduation": {
     question:
       "Quale percentuale dei 25-34enni in Svizzera aveva un titolo di livello terziario nel 2025?",
     explanation:
       "Nel 2025 il 51% dei 25-34enni in Svizzera aveva un titolo terziario (università o formazione professionale superiore), secondo l'OCSE. La media OCSE era del 49%; la Corea arrivava al 71% e l'Italia al 31%.",
+    comparisonLabel: "25-34enni con un titolo terziario, 2025, in % (OCSE)",
   },
   "apprenticeship-rate": {
     question:
@@ -350,84 +383,98 @@ const questionTranslationsIT: Record<
       "A quale percentuale del PIL corrispondeva la spesa pubblica per l'istruzione in Svizzera nel 2023?",
     explanation:
       "Nel 2023 la spesa pubblica per l'istruzione era il 5,5% del PIL (45,5 miliardi di CHF), dopo il 5,2% nel 2022, secondo l'Ufficio federale di statistica. La maggior parte dei fondi viene da Cantoni e Comuni (scuola dell'obbligo) e da Confederazione e Cantoni per università e formazione professionale. Il confronto usa un'altra misura: la spesa delle amministrazioni pubbliche per l'istruzione, dal livello primario al terziario, nel 2023 secondo l'OCSE, che per la Svizzera indica il 4,4%.",
+    comparisonLabel: "Spesa delle amministrazioni pubbliche per l'istruzione, dal primario al terziario, in % del PIL, 2023 (definizione OCSE; la risposta è il dato UST)",
   },
   "homeownership-rate": {
     question:
       "Quale quota delle abitazioni occupate in Svizzera era abitata dal proprietario nel 2024?",
     explanation:
       "Nel 2024 il 35,7% delle abitazioni occupate era abitato dal proprietario (Ufficio federale di statistica, rilevazione strutturale). Il tasso era del 38,4% nel 2015, del 36,2% nel 2020 e del 35,9% nel 2022. Il confronto usa un'altra misura: la quota della popolazione che vive in un'abitazione di proprietà nel 2024 secondo Eurostat, pari al 42,0% per la Svizzera e al 68,4% nell'UE.",
+    comparisonLabel: "Popolazione che vive in un'abitazione di proprietà, 2024, in % (Eurostat; la risposta conta le abitazioni, non le persone)",
   },
   "average-rent": {
     question:
       "Qual era l'affitto netto mensile medio di un appartamento di 3 locali in Svizzera nel 2024?",
     explanation:
       "Nel 2024 un appartamento in affitto di 3 locali costava in media 1'446 CHF al mese, senza spese accessorie e di riscaldamento (Ufficio federale di statistica, rilevazione strutturale). La media di tutte le abitazioni in affitto era di 1'485 CHF. Il confronto mostra le medie cantonali per i 3 locali nel 2024: Zugo era il Cantone più caro (1'875 CHF), il Giura il meno caro (926 CHF).",
+    comparisonLabel: "Affitto netto mensile medio di un 3 locali per Cantone, 2024, in CHF (UST)",
   },
   "vacancy-rate": {
     question:
       "Quale quota delle abitazioni in Svizzera era sfitta il 1° giugno 2026?",
     explanation:
       "Il 1° giugno 2026 le abitazioni sfitte erano 45'493, lo 0,93% del parco immobiliare, case unifamiliari comprese (Ufficio federale di statistica, censimento delle abitazioni vuote). Nel 2025 il tasso era dell'1,00%; è in calo da sei anni consecutivi. Il confronto mostra i Cantoni alla stessa data: 15 Cantoni erano sotto l'1%, Zugo aveva il tasso più basso e il Giura il più alto.",
+    comparisonLabel: "Abitazioni sfitte per Cantone, 1° giugno 2026, in % (UST)",
   },
   "violent-crime-change": {
     question:
       "Di quale percentuale è variato il numero di reati violenti registrati dalla polizia in Svizzera tra il 2012 e il 2025?",
     explanation:
       "La polizia ha registrato 46'509 reati violenti nel 2012 e 49'915 nel 2025, un aumento del 7,3% (Ufficio federale di statistica, statistica criminale di polizia). Il numero è sceso a 42'266 nel 2015 ed è in aumento ogni anno dal 2021. I reati violenti gravi erano 2'654 nel 2025. Il confronto mostra la variazione rispetto al 2012 per altri anni. Sono numeri assoluti: nel periodo è cresciuta anche la popolazione.",
+    comparisonLabel: "Reati violenti registrati dalla polizia in Svizzera, variazione rispetto al 2012, in % (UST)",
   },
   "homicide-rate": {
     question:
       "Quanti omicidi consumati ogni 100'000 abitanti ha registrato la polizia in Svizzera nel 2025?",
     explanation:
       "Nel 2025 la polizia ha registrato 55 omicidi consumati, 0,6 ogni 100'000 abitanti (Ufficio federale di statistica, statistica criminale di polizia). Nel 2024 erano 45; la media dal 2009 è di 48 all'anno. Nel 2025, 34 dei 55 (61,8%) sono avvenuti nella coppia o in famiglia. Il confronto mostra i dati Eurostat sugli omicidi intenzionali nel 2024, quando la Svizzera era a 0,50.",
+    comparisonLabel: "Omicidi intenzionali per 100 000 abitanti, 2024 (Eurostat; la risposta è il dato UST per il 2025)",
   },
   "prison-population": {
     question:
       "Quante persone erano detenute ogni 100'000 abitanti in Svizzera nel 2024?",
     explanation:
       "Secondo Eurostat, nel 2024 in Svizzera erano detenute 75,0 persone ogni 100'000 abitanti. Tutti i paesi del confronto vengono dalla stessa tabella Eurostat per il 2024. L'Ufficio federale di statistica ha contato 7'119 detenuti il 31 gennaio 2026, il numero più alto dal 1988, con il 97% dei posti occupati.",
+    comparisonLabel: "Detenuti per 100 000 abitanti, 2024 (Eurostat)",
   },
   "burglary-rate": {
     question:
       "Quanti furti con scasso e con introduzione clandestina ogni 100'000 abitanti ha registrato la polizia in Svizzera nel 2024?",
     explanation:
       "Nel 2024 la polizia ha registrato 46'070 furti con scasso e con introduzione clandestina, che Eurostat riporta come 514 ogni 100'000 abitanti. Nel 2025 il numero è salito dell'1,2% a 46'636, circa 128 al giorno (Ufficio federale di statistica). Nel 2012 erano 73'714. Il confronto mostra i dati Eurostat per il 2024; le definizioni nazionali di furto con scasso differiscono, quindi i paesi sono confrontabili solo in modo approssimativo.",
+    comparisonLabel: "Furti con scasso per 100 000 abitanti, 2024 (Eurostat)",
   },
   "nuclear-electricity": {
     question:
       "Quale percentuale della produzione svizzera di elettricità veniva dal nucleare nel 2025?",
     explanation:
       "Nel 2025 le centrali nucleari hanno fornito il 27,2% della produzione svizzera di elettricità (18,4 TWh su 67,5 TWh), sotto la media decennale del 32,0%; era il 28,4% nel 2024 e il 32,1% nel 2023 (Ufficio federale dell'energia). Il confronto mostra il mix di produzione del 2025: idroelettrico 55,5%, fotovoltaico 11,8%. I reattori in esercizio sono quattro: Beznau 1 e 2, Gösgen e Leibstadt.",
+    comparisonLabel: "Produzione lorda di elettricità in Svizzera per fonte, 2025, in % (UFE)",
   },
   "co2-per-capita": {
     question:
       "Quante tonnellate di CO2 pro capite ha emesso la Svizzera sul proprio territorio nel 2024?",
     explanation:
       "Nel 2024 la Svizzera ha emesso sul proprio territorio 3,5 tonnellate di CO2 pro capite, 4,5 tonnellate di CO2 equivalenti contando tutti i gas serra (Ufficio federale dell'ambiente, inventario dei gas serra). Nel 1990 erano 8,3 tonnellate di CO2 equivalenti. Il traffico aereo internazionale e i beni importati non sono compresi: l'impronta legata ai consumi era di circa 15 tonnellate di CO2 equivalenti pro capite nel 2023. Il confronto usa un'altra misura: i dati AIE sulla CO2 da uso di energia nel 2023, quando la Svizzera era a 3,4 tonnellate.",
+    comparisonLabel: "CO2 da uso di energia pro capite, 2023, in tonnellate (AIE; la risposta è l'inventario UFAM per il 2024)",
   },
   "renewable-energy-share": {
     question:
       "Quale percentuale del consumo finale di energia in Svizzera veniva da fonti rinnovabili nel 2025?",
     explanation:
       "Nel 2025 le fonti rinnovabili hanno coperto il 30,6% del consumo finale di energia, contro il 29,9% del 2024 (Ufficio federale dell'energia). La quota era del 19,9% nel 2010 ed è scesa temporaneamente al 25,7% nel 2022. Della produzione lorda di elettricità, nel 2025 l'idroelettrico ha fornito il 55,5% e il fotovoltaico l'11,8%. Il confronto mostra gli anni precedenti in Svizzera.",
+    comparisonLabel: "Quota rinnovabile del consumo finale di energia in Svizzera, in % (UFE)",
   },
   "recycling-rate": {
     question:
       "Quale percentuale dei rifiuti urbani svizzeri è stata riciclata nel 2024?",
     explanation:
       "Nel 2024 la Svizzera ha prodotto circa 6 milioni di tonnellate di rifiuti urbani: 3,1 milioni sono stati raccolti separatamente e riciclati (52%) e 2,9 milioni inceneriti (Ufficio federale dell'ambiente). I tassi di riciclaggio erano del 100% per le bottiglie di vetro, del 90% per le lattine di alluminio, dell'85% per carta e cartone e dell'84% per le bottiglie in PET. Il confronto mostra il tasso di riciclaggio dei rifiuti urbani di Eurostat per il 2024, che per la Svizzera indica il 51,8%.",
+    comparisonLabel: "Tasso di riciclaggio dei rifiuti urbani, 2024, in % (Eurostat; la risposta è il dato UFAM)",
   },
   "train-punctuality": {
     question:
       "Quale percentuale dei treni viaggiatori FFS era puntuale (meno di 3 minuti di ritardo) nel 2025?",
     explanation:
       "Nel 2025 il 94,1% dei treni viaggiatori FFS era puntuale, il valore annuo più alto comunicato dalle FFS; nel 2024 era il 93,2%. Per le FFS un treno è puntuale se arriva con meno di 3 minuti di ritardo. La puntualità era del 93,4% nella Svizzera romanda e del 92,1% in Ticino. Nel 2025 le FFS hanno trasportato 1,43 milioni di viaggiatori al giorno.",
+    comparisonLabel: "Treni viaggiatori FFS puntuali, in % (FFS)",
   },
   "train-track-km": {
     question:
       "Quanti chilometri di linee ferroviarie erano in esercizio in Svizzera nel 2024?",
     explanation:
       "Nel 2024 la Svizzera aveva 5'307 km di linee ferroviarie secondo Eurostat; l'ultimo dato dell'Ufficio federale di statistica è di 5'317 km (2020). È la lunghezza delle linee: una linea a doppio binario conta una volta sola. Tutti i paesi del confronto vengono dalla stessa tabella Eurostat per il 2024. La rete comprende la galleria di base del San Gottardo, lunga 57 km.",
+    comparisonLabel: "Linee ferroviarie in km, 2024 (Eurostat)",
   },
   "average-commute": {
     question:
@@ -440,6 +487,7 @@ const questionTranslationsIT: Record<
       "Quante automobili erano immatricolate ogni 1'000 abitanti in Svizzera nel 2025?",
     explanation:
       "Nel 2025 in Svizzera erano immatricolate 4'839'465 automobili, 535 ogni 1'000 abitanti (Ufficio federale di statistica; il dato del 2024 è stato rivisto a 536). Le auto elettriche a batteria erano il 22,7% delle nuove immatricolazioni nel 2025 e il 5,2% del parco circolante (2024: 4,2%). Il confronto mostra i dati Eurostat per il 2024, che usano un metodo leggermente diverso e per la Svizzera indicano 542.",
+    comparisonLabel: "Automobili per 1000 abitanti, 2024 (metodo Eurostat; la risposta è il dato UST per il 2025)",
   },
   "ahv-funding": {
     question:
@@ -452,6 +500,7 @@ const questionTranslationsIT: Record<
       "Quale percentuale della popolazione svizzera era povera in termini di reddito nel 2024 (tasso di povertà assoluto)?",
     explanation:
       "Nel 2024 l'8,4% della popolazione, circa 743'000 persone, era povero in termini di reddito (Ufficio federale di statistica, indagine SILC). È il tasso di povertà assoluto: reddito dell'economia domestica sotto la soglia di povertà derivata dalle norme dell'aiuto sociale, in media 2'388 CHF al mese per una persona sola e 4'159 CHF per due adulti con due figli. Tra gli occupati il tasso era del 4,3%. Il tasso di rischio di povertà usato nei confronti europei è un'altra misura, relativa (reddito sotto il 60% della mediana), e in Svizzera è circa il 16%. Il confronto mostra il tasso assoluto svizzero negli anni precedenti.",
+    comparisonLabel: "Tasso di povertà assoluto in Svizzera, in % (UST)",
   },
 };
 
