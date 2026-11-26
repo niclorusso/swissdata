@@ -105,7 +105,7 @@ export const translations = {
       yourGuess: "Your guess",
       actualValue: "Actual value",
       context: "Context",
-      internationalComparison: "International Comparison",
+      internationalComparison: "Comparison",
     },
 
     // Statistics page
@@ -168,7 +168,7 @@ export const translations = {
       dataSources: "Data sources",
       provisional: "provisional",
       territoryNote: "Population, area and foreign share use the cantonal borders of 1 January 2026: Moutier, in the canton of Bern until 31 December 2025, is counted in the canton of Jura. The foreign share is recomputed for these borders from the STATPOP figures of 31 December 2025, so for Jura and Bern it differs from the share the FSO publishes for the 2025 borders.",
-      oldBordersNote: "These indicators refer to the borders before 2026, with Moutier in the canton of Bern: {list}.",
+      oldBordersNote: "The health premium is the 2026 premium, on the 2026 borders (the FOPH premium regions for 2026 list Moutier under Jura). These indicators refer to the borders before 2026, with Moutier in the canton of Bern: {list}.",
       clickToSelect: "Select to see the figures",
     },
 
@@ -348,7 +348,7 @@ export const translations = {
       yourGuess: "La tua stima",
       actualValue: "Valore reale",
       context: "Contesto",
-      internationalComparison: "Confronto internazionale",
+      internationalComparison: "Confronto",
     },
 
     // Statistics page
@@ -411,7 +411,7 @@ export const translations = {
       dataSources: "Fonti dei dati",
       provisional: "provvisorio",
       territoryNote: "Popolazione, superficie e quota di stranieri seguono i confini cantonali del 1° gennaio 2026: Moutier, nel Canton Berna fino al 31 dicembre 2025, è contata nel Canton Giura. La quota di stranieri è ricalcolata per questi confini dai dati STATPOP del 31 dicembre 2025; per Giura e Berna è quindi diversa da quella che l'UST pubblica per i confini del 2025.",
-      oldBordersNote: "Questi indicatori si riferiscono ai confini precedenti al 2026, con Moutier nel Canton Berna: {list}.",
+      oldBordersNote: "Il premio di cassa malati è quello del 2026, sui confini del 2026 (le regioni di premio 2026 dell'UFSP elencano Moutier nel Giura). Questi indicatori si riferiscono ai confini precedenti al 2026, con Moutier nel Canton Berna: {list}.",
       clickToSelect: "Seleziona per vedere i dati",
     },
 
@@ -451,7 +451,7 @@ export const translations = {
       questionSelectionTitle: "Selezione delle domande",
       questionSelectionDesc: "Le domande del nostro quiz coprono le principali statistiche svizzere nei settori economico, demografico e sociale. Selezioniamo argomenti rilevanti per una cittadinanza informata e verificabili con fonti ufficiali.",
       accuracyScoringTitle: "Calcolo della precisione",
-      accuracyScoringDesc: "Il punteggio di una risposta è 100\u00A0% meno la distanza tra la tua stima e il valore reale, misurata in rapporto all'ampiezza del cursore. Una stima che sbaglia di un decimo dell'ampiezza vale 90\u00A0%.",
+      accuracyScoringDesc: "Il punteggio di una risposta è 100\u00A0\u00A0% meno la distanza tra la tua stima e il valore reale, misurata in rapporto all'ampiezza del cursore. Una stima che sbaglia di un decimo dell'ampiezza vale 90\u00A0\u00A0%.",
       updateFrequencyTitle: "Frequenza di aggiornamento",
       updateFrequencyDesc: "Aggiorniamo gli indicatori non appena vengono rilasciati nuovi dati ufficiali. La maggior parte degli indicatori economici viene aggiornata trimestralmente; i dati demografici annualmente. Ogni indicatore mostra la data dell\u2019ultimo aggiornamento.",
       // Limitations
@@ -589,7 +589,7 @@ export const translations = {
       yourGuess: "Deine Schätzung",
       actualValue: "Tatsächlicher Wert",
       context: "Kontext",
-      internationalComparison: "Internationaler Vergleich",
+      internationalComparison: "Vergleich",
     },
 
     // Statistics page
@@ -652,7 +652,7 @@ export const translations = {
       dataSources: "Datenquellen",
       provisional: "provisorisch",
       territoryNote: "Bevölkerung, Fläche und Ausländeranteil beziehen sich auf die Kantonsgrenzen vom 1. Januar 2026: Moutier, bis 31. Dezember 2025 im Kanton Bern, wird zum Kanton Jura gezählt. Der Ausländeranteil ist aus den STATPOP-Zahlen vom 31. Dezember 2025 für diese Grenzen neu berechnet und weicht deshalb für Jura und Bern vom Anteil ab, den das BFS für die Grenzen von 2025 veröffentlicht.",
-      oldBordersNote: "Diese Indikatoren beziehen sich auf die Grenzen vor 2026, mit Moutier im Kanton Bern: {list}.",
+      oldBordersNote: "Die Krankenkassenprämie ist jene von 2026, auf den Grenzen von 2026 (die Prämienregionen 2026 des BAG führen Moutier unter Jura). Diese Indikatoren beziehen sich auf die Grenzen vor 2026, mit Moutier im Kanton Bern: {list}.",
       clickToSelect: "Auswählen, um die Zahlen zu sehen",
     },
 
@@ -692,7 +692,7 @@ export const translations = {
       questionSelectionTitle: "Fragenauswahl",
       questionSelectionDesc: "Die Fragen in unserem Quiz decken wichtige Schweizer Statistiken aus den Bereichen Wirtschaft, Demografie und Gesellschaft ab. Wir wählen Themen, die für informierte Bürger relevant und mit offiziellen Datenquellen überprüfbar sind.",
       accuracyScoringTitle: "Genauigkeitsbewertung",
-      accuracyScoringDesc: "Die Punktzahl einer Antwort ist 100\u00A0% minus der Abstand zwischen deiner Schätzung und dem tatsächlichen Wert, gemessen am Bereich des Schiebereglers. Eine Schätzung, die um einen Zehntel des Bereichs danebenliegt, ergibt 90\u00A0%.",
+      accuracyScoringDesc: "Die Punktzahl einer Antwort ist 100\u00A0\u00A0% minus der Abstand zwischen deiner Schätzung und dem tatsächlichen Wert, gemessen am Bereich des Schiebereglers. Eine Schätzung, die um einen Zehntel des Bereichs danebenliegt, ergibt 90\u00A0\u00A0%.",
       updateFrequencyTitle: "Aktualisierungshäufigkeit",
       updateFrequencyDesc: "Wir aktualisieren Indikatoren, sobald neue offizielle Daten veröffentlicht werden. Die meisten Wirtschaftsindikatoren werden vierteljährlich aktualisiert; demografische Daten jährlich. Jeder Indikator zeigt sein letztes Aktualisierungsdatum.",
       // Limitations
@@ -832,7 +832,7 @@ export const translations = {
       yourGuess: "Votre estimation",
       actualValue: "Valeur réelle",
       context: "Contexte",
-      internationalComparison: "Comparaison internationale",
+      internationalComparison: "Comparaison",
     },
 
     // Statistics page
@@ -895,7 +895,7 @@ export const translations = {
       dataSources: "Sources des données",
       provisional: "provisoire",
       territoryNote: "La population, la superficie et la part d'étrangers se rapportent aux frontières cantonales du 1er janvier 2026 : Moutier, dans le canton de Berne jusqu'au 31 décembre 2025, est comptée dans le canton du Jura. La part d'étrangers est recalculée pour ces frontières à partir des chiffres STATPOP du 31 décembre 2025 ; pour le Jura et Berne, elle diffère donc de celle que l'OFS publie pour les frontières de 2025.",
-      oldBordersNote: "Ces indicateurs se rapportent aux frontières d'avant 2026, avec Moutier dans le canton de Berne : {list}.",
+      oldBordersNote: "La prime d'assurance-maladie est celle de 2026, sur les frontières de 2026 (les régions de primes 2026 de l'OFSP classent Moutier dans le Jura). Ces indicateurs se rapportent aux frontières d'avant 2026, avec Moutier dans le canton de Berne : {list}.",
       clickToSelect: "Sélectionner pour voir les chiffres",
     },
 
@@ -935,7 +935,7 @@ export const translations = {
       questionSelectionTitle: "Sélection des questions",
       questionSelectionDesc: "Les questions de notre quiz couvrent les principales statistiques suisses dans les domaines économique, démographique et social. Nous sélectionnons des sujets pertinents pour une citoyenneté informée et vérifiables avec des sources officielles.",
       accuracyScoringTitle: "Calcul de la précision",
-      accuracyScoringDesc: "Le score d'une réponse est 100\u00A0% moins l'écart entre votre estimation et la valeur réelle, mesuré par rapport à l'étendue du curseur. Une estimation qui s'écarte d'un dixième de l'étendue vaut 90\u00A0%.",
+      accuracyScoringDesc: "Le score d'une réponse est 100\u00A0\u00A0% moins l'écart entre votre estimation et la valeur réelle, mesuré par rapport à l'étendue du curseur. Une estimation qui s'écarte d'un dixième de l'étendue vaut 90\u00A0\u00A0%.",
       updateFrequencyTitle: "Fréquence de mise à jour",
       updateFrequencyDesc: "Nous mettons à jour les indicateurs dès que de nouvelles données officielles sont publiées. La plupart des indicateurs économiques sont mis à jour trimestriellement ; les données démographiques annuellement. Chaque indicateur affiche sa date de dernière mise à jour.",
       // Limitations

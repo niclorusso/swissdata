@@ -2,6 +2,8 @@ import { Indicator } from "@/types";
 import { Locale } from "@/i18n/translations";
 import { getLocalizedIndicator } from "@/i18n/dataTranslations";
 
+// trendPercentage is the change between previousValue and value, computed from the figures of the source
+// before rounding where the source publishes them (e.g. 5.452 against 5.210), otherwise from the published ones.
 export const indicators: Indicator[] = [
   // Economic Indicators
   {
@@ -13,7 +15,7 @@ export const indicators: Indicator[] = [
     unit: "%",
     previousValue: 4.3,
     trend: "up",
-    trendPercentage: 11.6,
+    trendPercentage: 11.5,
     source: "FSO / UST (Federal Statistical Office)",
     sourceUrl: "https://statistik.admin.ch/de/themen/arbeit-erwerb/erwerbslosigkeit-unterbeschaeftigung",
     lastUpdated: "2025",
@@ -58,7 +60,7 @@ export const indicators: Indicator[] = [
     unit: "%",
     previousValue: 2.4,
     trend: "up",
-    trendPercentage: 16.7,
+    trendPercentage: 18.8,
     source: "SECO (State Secretariat for Economic Affairs)",
     sourceUrl: "https://www.seco.admin.ch/de/arbeitsmarktstatistik-berichte-rechtsgrundlagen",
     lastUpdated: "2025",
@@ -103,7 +105,7 @@ export const indicators: Indicator[] = [
     unit: "%",
     previousValue: 1.5,
     trend: "up",
-    trendPercentage: 6.7,
+    trendPercentage: 6.1,
     source: "FSO / UST (National Accounts)",
     sourceUrl: "https://statistik.admin.ch/de/themen/volkswirtschaft/wachstum-produktivitaet",
     lastUpdated: "2025",
@@ -222,11 +224,11 @@ export const indicators: Indicator[] = [
     trend: "down",
     trendPercentage: -3.0,
     source: "FFA / AFF (Federal Finance Administration)",
-    sourceUrl: "https://www.efv.admin.ch/en/debt",
+    sourceUrl: "https://www.efv.admin.ch/dam/en/sd-web/bjAPAViEZor6/Taschenstatistik-2025-e-web.pdf",
     lastUpdated: "2025 (end of year)",
     description: "Net debt of the Swiss Confederation as percentage of GDP (excluding Cantons/Municipalities)",
     context: "This figure tracks the debt managed by the 'Debt Brake' (Schuldenbremse). Net debt rose from CHF 103 bn (2019) to CHF 142 bn (2023) with the pandemic expenditures and stood at CHF 140 bn at the end of 2025.",
-    // FFA key figures of the federal budget (net debt ratio), data status February 2026, after the GDP revision.
+    // FFA pocket statistics "Public finances 2025" (key figures of the Confederation, net debt in % of GDP: 2023 17.0, 2024 16.6, 2025 16.1), data status February 2026, after the GDP revision.
     historicalData: [
       { year: 2010, value: 16.3 },
       { year: 2012, value: 15.5 },
@@ -413,7 +415,7 @@ export const indicators: Indicator[] = [
     sourceUrl: "https://ec.europa.eu/eurostat/databrowser/view/demo_mlexpec/default/table",
     lastUpdated: "2024",
     description: "Life expectancy at birth, both sexes combined",
-    context: "In 2024 life expectancy at birth was 82.4 years for men and 85.9 for women. FSO figures for 2025: 82.7 and 86.3. After the drop in 2020 (83.1) the combined figure has been above the 2019 level (83.8) since 2023.",
+    context: "In 2024 life expectancy at birth was 82.4 years for men and 85.9 for women. FSO figures for 2025: 82.7 and 86.3 (published as provisional on 18 June 2026; the FSO table of 24 September 2026 has the same values). After the drop in 2020 (83.1) the combined figure has been above the 2019 level (83.8) since 2023.",
     // Eurostat, table demo_mlexpec (life expectancy at birth, total, FSO data), update of 25.09.2026. The FSO itself publishes life expectancy by sex only.
     historicalData: [
       { year: 1960, value: 71.4 },
@@ -480,7 +482,7 @@ export const indicators: Indicator[] = [
     unit: "% of GDP",
     previousValue: 11.2,
     trend: "up",
-    trendPercentage: 1.8,
+    trendPercentage: 1.7,
     source: "FSO (Federal Statistical Office)",
     sourceUrl: "https://statistik.admin.ch/de/themen/gesundheit/kosten-finanzierung-gesundheitswesens",
     lastUpdated: "2024 (provisional)",
@@ -524,7 +526,7 @@ export const indicators: Indicator[] = [
     unit: "%",
     previousValue: 5.2,
     trend: "up",
-    trendPercentage: 5.8,
+    trendPercentage: 4.7,
     source: "FSO / UST (Federal Statistical Office)",
     sourceUrl: "https://www.bfs.admin.ch/asset/de/je-d-15.06.01.03",
     lastUpdated: "2023",
@@ -567,7 +569,7 @@ export const indicators: Indicator[] = [
     unit: "%",
     previousValue: 8.1,
     trend: "up",
-    trendPercentage: 3.7,
+    trendPercentage: 3.9,
     source: "FSO (SILC survey)",
     sourceUrl: "https://statistik.admin.ch/de/asset/36395150",
     lastUpdated: "2024",
