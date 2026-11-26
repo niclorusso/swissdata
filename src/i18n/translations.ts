@@ -134,7 +134,7 @@ export const translations = {
 
     // Cantons page
     cantons: {
-      title: "Canton Comparison",
+      title: "Comparing the cantons",
       subtitle: "Six indicators for the 26 cantons: the darker the colour, the higher the value. Selecting a canton shows its figures; the table below ranks them all.",
       colorBy: "Indicator:",
       unemployment: "Registered unemployment",
