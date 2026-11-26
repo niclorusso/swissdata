@@ -4,6 +4,8 @@ import { useState } from "react";
 import { cantons } from "@/data/cantons";
 import { cantonPaths, cantonCenters } from "@/data/swiss-map-paths";
 import { Canton } from "@/types";
+import { useLanguage } from "@/i18n/LanguageContext";
+import { cantonName } from "@/lib/utils";
 
 interface SwitzerlandMapProps {
   selectedCanton: string | null;
@@ -19,6 +21,7 @@ export function SwitzerlandMap({
   getCantonColor,
 }: SwitzerlandMapProps) {
   const [hoveredCanton, setHoveredCanton] = useState<string | null>(null);
+  const { t, locale } = useLanguage();
 
   const defaultGetColor = (canton: Canton) => {
     if (selectedCanton === canton.id) return "#DC2626";
@@ -37,9 +40,11 @@ export function SwitzerlandMap({
         className="w-full h-full"
         style={{ maxHeight: "600px" }}
         preserveAspectRatio="xMidYMid meet"
+        role="img"
+        aria-label={t.cantons.title}
       >
         {/* Background */}
-        <rect width="1052.361" height="744.094" fill="#FAFAFA" rx="8" />
+        <rect width="1052.361" height="744.094" fill="#F5F4EF" rx="8" />
 
         {/* Canton paths */}
         {cantons.map((canton) => {
@@ -63,32 +68,20 @@ export function SwitzerlandMap({
                 onCantonSelect(selectedCanton === canton.id ? null : canton.id)
               }
             >
-              <title>{canton.name}</title>
+              <title>{cantonName(canton, locale)}</title>
             </path>
           );
         })}
 
-        {/* Country label */}
-        <text
-          x="526"
-          y="710"
-          textAnchor="middle"
-          className="pointer-events-none select-none"
-          fill="#A3A3A3"
-          fontSize="20"
-          fontWeight="500"
-        >
-          SWITZERLAND
-        </text>
       </svg>
 
       {/* Hover tooltip */}
       {hoveredCanton && !selectedCanton && (
         <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-white border border-swiss-gray-200 rounded-lg shadow-lg px-4 py-2 z-10">
           <p className="font-medium text-swiss-gray-900">
-            {getCantonById(hoveredCanton)?.name}
+            {getCantonById(hoveredCanton) ? cantonName(getCantonById(hoveredCanton)!, locale) : ""}
           </p>
-          <p className="text-xs text-swiss-gray-500">Click to select</p>
+          <p className="text-sm text-swiss-gray-600">{t.cantons.clickToSelect}</p>
         </div>
       )}
     </div>

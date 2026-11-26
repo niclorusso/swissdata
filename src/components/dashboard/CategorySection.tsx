@@ -3,8 +3,7 @@
 import Link from "next/link";
 import { Indicator, IndicatorCategory } from "@/types";
 import { IndicatorCard } from "./IndicatorCard";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { TrendingUp, Users, Heart, ArrowRight } from "lucide-react";
 
@@ -48,11 +47,11 @@ export function CategorySection({ category, indicators }: CategorySectionProps) 
       {/* Category Header */}
       <div className="flex items-center gap-3 sm:gap-4">
         <div className={`p-2.5 sm:p-3 rounded-lg ${config.bgColor}`}>
-          <Icon className={`h-5 w-5 sm:h-6 sm:w-6 ${config.color}`} />
+          <Icon className={`h-5 w-5 sm:h-6 sm:w-6 ${config.color}`} aria-hidden="true" />
         </div>
         <div>
           <h2 className="text-xl sm:text-2xl font-bold text-swiss-gray-900">{config.title}</h2>
-          <p className="text-xs sm:text-sm text-swiss-gray-500">{config.description}</p>
+          <p className="text-sm text-swiss-gray-500">{config.description}</p>
         </div>
       </div>
 
@@ -65,11 +64,9 @@ export function CategorySection({ category, indicators }: CategorySectionProps) 
 
       {/* Link to Statistics */}
       <div className="flex justify-end">
-        <Link href="/statistics">
-          <Button variant="outline" size="sm" className="gap-2">
-            {t.category.viewAllStatistics}
-            <ArrowRight className="h-4 w-4" />
-          </Button>
+        <Link href="/statistics" className={buttonVariants({ variant: "outline", size: "default", className: "gap-2 h-11" })}>
+          {t.category.viewAllStatistics}
+          <ArrowRight className="h-4 w-4" aria-hidden="true" />
         </Link>
       </div>
     </section>

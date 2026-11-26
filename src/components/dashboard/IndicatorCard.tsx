@@ -1,13 +1,14 @@
 "use client";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import { InfoTooltip } from "@/components/ui/tooltip";
+import { SourceLine } from "@/components/ui/source-line";
 import { Indicator } from "@/types";
-import { formatWithUnit, getTrendDisplay } from "@/lib/formatters";
+import { formatNumber, formatWithUnit, percentSign } from "@/lib/formatters";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { getIndicatorExplanation } from "@/i18n/indicatorExplanations";
-import { TrendingUp, TrendingDown, Minus, ExternalLink } from "lucide-react";
+import { localizePeriod } from "@/i18n/periods";
+import { TrendingUp, TrendingDown, Minus } from "lucide-react";
 
 interface IndicatorCardProps {
   indicator: Indicator;
@@ -16,11 +17,6 @@ interface IndicatorCardProps {
 export function IndicatorCard({ indicator }: IndicatorCardProps) {
   const { t, locale } = useLanguage();
 
-  const { color } = getTrendDisplay(
-    indicator.trend,
-    indicator.id !== "crime-rate" && indicator.id !== "inflation-rate"
-  );
-
   const TrendIcon =
     indicator.trend === "up"
       ? TrendingUp
@@ -28,53 +24,31 @@ export function IndicatorCard({ indicator }: IndicatorCardProps) {
       ? TrendingDown
       : Minus;
 
-  const categoryVariant =
-    indicator.category === "economic"
-      ? "economic"
-      : indicator.category === "demographic"
-      ? "demographic"
-      : "social";
-
   const explanation = getIndicatorExplanation(indicator.id, locale, "card");
 
   return (
     <Card className="card-hover">
       <CardHeader className="pb-2">
-        <div className="flex items-start justify-between">
-          <div className="space-y-1">
-            <Badge variant={categoryVariant} className="mb-2">
-              {indicator.category}
-            </Badge>
-            <CardTitle className="text-sm sm:text-base font-medium flex items-center gap-1">
-              {indicator.shortName}
-              {explanation && (
-                <InfoTooltip
-                  content={
-                    <div className="space-y-2">
-                      <div>
-                        <p className="font-medium text-swiss-gray-900 mb-1">{t.indicatorCard.whatIsIt}</p>
-                        <p className="text-swiss-gray-600">{explanation.what}</p>
-                      </div>
-                      <div>
-                        <p className="font-medium text-swiss-gray-900 mb-1">{t.indicatorCard.whyItMatters}</p>
-                        <p className="text-swiss-gray-600">{explanation.why}</p>
-                      </div>
-                    </div>
-                  }
-                />
-              )}
-            </CardTitle>
-          </div>
-          <a
-            href={indicator.sourceUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-swiss-gray-400 hover:text-swiss-gray-600 transition-colors"
-            title={`Source: ${indicator.source}`}
-          >
-            <ExternalLink className="h-4 w-4" />
-          </a>
-        </div>
+        <CardTitle className="text-base font-medium flex items-center gap-1">
+          {indicator.shortName}
+          {explanation && (
+            <InfoTooltip
+              label={`${t.indicatorCard.whatIsIt} ${indicator.shortName}`}
+              content={
+                <div className="space-y-2">
+                  <div>
+                    <p className="font-medium text-swiss-gray-900 mb-1">{t.indicatorCard.whatIsIt}</p>
+                    <p className="text-swiss-gray-600">{explanation.what}</p>
+                  </div>
+                  <div>
+                    <p className="font-medium text-swiss-gray-900 mb-1">{t.indicatorCard.whyItMatters}</p>
+                    <p className="text-swiss-gray-600">{explanation.why}</p>
+                  </div>
+                </div>
+              }
+            />
+          )}
+        </CardTitle>
       </CardHeader>
       <CardContent>
         <div className="space-y-3">
@@ -85,13 +59,13 @@ export function IndicatorCard({ indicator }: IndicatorCardProps) {
             </span>
           </div>
 
-          {/* Trend */}
+          {/* Change against the previous period: direction only, no good/bad colour */}
           {indicator.trendPercentage !== undefined && (
-            <div className={`flex items-center gap-1 text-sm ${color}`}>
-              <TrendIcon className="h-4 w-4" />
-              <span className="font-medium">
-                {indicator.trendPercentage > 0 ? "+" : ""}
-                {indicator.trendPercentage}%
+            <div className="flex items-center gap-1 text-sm text-swiss-gray-700">
+              <TrendIcon className="h-4 w-4" aria-hidden="true" />
+              <span className="font-medium swiss-number">
+                {formatNumber(indicator.trendPercentage, locale, { sign: true })}
+                {percentSign(locale)}
               </span>
               <span className="text-swiss-gray-500">
                 {indicator.previousPeriod
@@ -103,16 +77,16 @@ export function IndicatorCard({ indicator }: IndicatorCardProps) {
 
           {/* Context */}
           {indicator.context && (
-            <p className="text-xs sm:text-sm text-swiss-gray-600 line-clamp-2">
+            <p className="text-sm text-swiss-gray-600 line-clamp-2">
               {indicator.context}
             </p>
           )}
 
-          {/* Source and date */}
-          <div className="flex items-center justify-between text-xs text-swiss-gray-400 pt-2 border-t border-swiss-gray-100">
-            <span>{indicator.source}</span>
-            <span>{indicator.lastUpdated}</span>
-          </div>
+          <SourceLine
+            publisher={indicator.source}
+            url={indicator.sourceUrl}
+            date={localizePeriod(indicator.lastUpdated, locale)}
+          />
         </div>
       </CardContent>
     </Card>

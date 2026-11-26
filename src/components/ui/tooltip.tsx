@@ -89,33 +89,46 @@ export function Tooltip({ content, children, className, side = "top" }: TooltipP
 interface InfoTooltipProps {
   content: ReactNode;
   className?: string;
+  /** what the button explains, for screen readers */
+  label?: string;
 }
 
-export function InfoTooltip({ content, className }: InfoTooltipProps) {
+export function InfoTooltip({ content, className, label }: InfoTooltipProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
     <div className="relative inline-flex items-center">
+      {/* the visible circle is small; the button around it is 44px on phones so that it can be tapped */}
       <button
+        type="button"
         onClick={() => setIsOpen(!isOpen)}
         onBlur={() => setTimeout(() => setIsOpen(false), 150)}
+        onKeyDown={(event) => event.key === "Escape" && setIsOpen(false)}
+        aria-expanded={isOpen}
+        aria-label={label ?? "?"}
         className={cn(
-          "inline-flex items-center justify-center w-3.5 h-3.5 sm:w-4 sm:h-4 rounded-full",
-          "bg-swiss-gray-200 text-swiss-gray-500 hover:bg-swiss-gray-300 hover:text-swiss-gray-700",
-          "transition-colors focus:outline-none focus:ring-2 focus:ring-primary/20",
-          "text-[9px] sm:text-[10px] font-semibold leading-none",
+          "group inline-flex items-center justify-center -my-3 sm:my-0 min-w-[44px] min-h-[44px] sm:min-w-[24px] sm:min-h-[24px]",
+          "focus:outline-none",
           className
         )}
-        aria-label="More information"
       >
-        ?
+        <span
+          aria-hidden="true"
+          className={cn(
+            "inline-flex items-center justify-center w-5 h-5 rounded-full",
+            "bg-swiss-gray-200 text-swiss-gray-700 group-hover:bg-swiss-gray-300 group-focus-visible:ring-2 group-focus-visible:ring-primary",
+            "text-sm font-semibold leading-none"
+          )}
+        >
+          ?
+        </span>
       </button>
       {isOpen && (
         <div
           className={cn(
-            "absolute z-50 w-64 p-3 mt-2 right-0",
-            "bg-white border border-swiss-gray-200 rounded-lg shadow-lg",
-            "text-sm text-swiss-gray-700",
+            "absolute z-50 w-64 p-3 top-full right-0",
+            "bg-white border border-line rounded-xl shadow-lg",
+            "text-sm font-normal text-swiss-gray-700",
             "animate-in fade-in-0 zoom-in-95 duration-150"
           )}
         >

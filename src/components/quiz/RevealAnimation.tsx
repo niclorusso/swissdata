@@ -3,7 +3,9 @@
 import { motion } from "framer-motion";
 import { QuizQuestion, QuizResult } from "@/types";
 import { useLanguage } from "@/i18n/LanguageContext";
-import { ExternalLink, BarChart3, Info } from "lucide-react";
+import { BarChart3, Info } from "lucide-react";
+import { formatNumber, formatPercent, formatWithUnit, ownDecimals } from "@/lib/formatters";
+import { SourceLine } from "@/components/ui/source-line";
 import {
   BarChart,
   Bar,
@@ -11,6 +13,7 @@ import {
   YAxis,
   ResponsiveContainer,
   Cell,
+  LabelList,
 } from "recharts";
 
 interface RevealAnimationProps {
@@ -19,18 +22,12 @@ interface RevealAnimationProps {
 }
 
 export function RevealAnimation({ question, result }: RevealAnimationProps) {
-  const { t } = useLanguage();
+  const { t, locale } = useLanguage();
   const isGoodGuess = result.accuracy >= 70;
-  const formatValue = (val: number) => {
-    if (question.unit === "%") return `${val}%`;
-    if (question.unit === "per 1000") return `${val} per 1'000`;
-    if (question.unit === "per km²") return `${val}/km²`;
-    if (question.unit === "rank") return `#${val}`;
-    if (question.unit === "year") return val.toString();
-    if (question.unit === "years") return `${val} years`;
-    if (question.unit === "hours") return `${val}h`;
-    return `${val} ${question.unit}`;
-  };
+  const formatValue = (val: number) => formatWithUnit(val, question.unit, locale);
+
+  // every bar label with the decimals of the most precise value (16.0 beside 17.6, not 16)
+  const chartDecimals = Math.max(0, ...(question.comparisonData ?? []).map((point) => ownDecimals(point.value)));
 
   // Calculate chart height based on number of items
   const chartHeight = question.comparisonData
@@ -56,7 +53,7 @@ export function RevealAnimation({ question, result }: RevealAnimationProps) {
               : "bg-orange-100 text-orange-800"
           }`}
         >
-          {result.accuracy}% {t.reveal.accurate}
+          {formatPercent(result.accuracy, locale, { decimals: 0 })} {t.reveal.accurate}
         </motion.div>
       </div>
 
@@ -68,7 +65,7 @@ export function RevealAnimation({ question, result }: RevealAnimationProps) {
           transition={{ delay: 0.3 }}
           className="bg-swiss-gray-50 rounded-lg p-3 sm:p-4 text-center"
         >
-          <p className="text-xs sm:text-sm text-swiss-gray-500 mb-1">{t.reveal.yourGuess}</p>
+          <p className="text-sm text-swiss-gray-600 mb-1">{t.reveal.yourGuess}</p>
           <p className="text-xl sm:text-2xl font-bold swiss-number text-swiss-gray-700">
             {formatValue(result.userGuess)}
           </p>
@@ -79,8 +76,8 @@ export function RevealAnimation({ question, result }: RevealAnimationProps) {
           transition={{ delay: 0.4 }}
           className="bg-primary/10 rounded-lg p-3 sm:p-4 text-center"
         >
-          <p className="text-xs sm:text-sm text-primary/80 mb-1">{t.reveal.actualValue}</p>
-          <p className="text-xl sm:text-2xl font-bold swiss-number text-primary">
+          <p className="text-sm text-accent-foreground mb-1">{t.reveal.actualValue}</p>
+          <p className="text-xl sm:text-2xl font-bold swiss-number text-accent-foreground">
             {formatValue(result.actualValue)}
           </p>
         </motion.div>
@@ -102,7 +99,7 @@ export function RevealAnimation({ question, result }: RevealAnimationProps) {
         {/* Comparison chart if available */}
         {question.comparisonData && question.comparisonData.length > 0 && (
           <div className="mt-4 sm:mt-6">
-            <p className="text-xs sm:text-sm font-medium text-swiss-gray-500 mb-3 flex items-center gap-2">
+            <p className="text-sm font-medium text-swiss-gray-600 mb-3 flex items-center gap-2">
               <BarChart3 className="h-4 w-4" />
               {question.comparisonLabel ?? t.reveal.internationalComparison}
             </p>
@@ -111,7 +108,7 @@ export function RevealAnimation({ question, result }: RevealAnimationProps) {
                 <BarChart
                   data={question.comparisonData}
                   layout="vertical"
-                  margin={{ top: 0, right: 20, left: 80, bottom: 0 }}
+                  margin={{ top: 0, right: 56, left: 8, bottom: 0 }}
                 >
                   <XAxis type="number" hide />
                   <YAxis
@@ -119,10 +116,11 @@ export function RevealAnimation({ question, result }: RevealAnimationProps) {
                     dataKey="label"
                     axisLine={false}
                     tickLine={false}
-                    tick={{ fill: "#525252", fontSize: 11 }}
-                    width={75}
+                    tick={{ fill: "#4B5058", fontSize: 14 }}
+                    width={96}
                   />
-                  <Bar dataKey="value" radius={[0, 4, 4, 0]}>
+                  <Bar dataKey="value" radius={[0, 4, 4, 0]} isAnimationActive={false}>
+                    <LabelList dataKey="value" position="right" fill="#4B5058" fontSize={14} formatter={(value: number) => formatNumber(value, locale, { decimals: chartDecimals })} />
                     {question.comparisonData.map((entry, index) => (
                       <Cell
                         key={`cell-${index}`}
@@ -130,7 +128,7 @@ export function RevealAnimation({ question, result }: RevealAnimationProps) {
                           entry.label === "Switzerland" ||
                           entry.label.includes("Swiss")
                             ? "#DC2626"
-                            : "#D4D4D4"
+                            : "#A9A69C"
                         }
                       />
                     ))}
@@ -141,19 +139,7 @@ export function RevealAnimation({ question, result }: RevealAnimationProps) {
           </div>
         )}
 
-        {/* Source */}
-        <div className="mt-4 pt-4 border-t border-swiss-gray-100 flex items-center justify-between">
-          <span className="text-xs sm:text-sm text-swiss-gray-500">{question.source}</span>
-          <a
-            href={question.sourceUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-1 text-xs sm:text-sm text-primary hover:underline"
-          >
-            {t.reveal.viewSource}
-            <ExternalLink className="h-3 w-3" />
-          </a>
-        </div>
+        <SourceLine publisher={question.source} url={question.sourceUrl} />
       </motion.div>
     </motion.div>
   );

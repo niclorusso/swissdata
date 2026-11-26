@@ -1,9 +1,8 @@
 "use client";
 
-import { useState, useMemo } from "react";
-import { indicators, getIndicatorsByCategory, getLocalizedIndicators, getLocalizedIndicatorsByCategory } from "@/data/indicators";
-import { LargeChart, SingleIndicatorChart } from "@/components/statistics/LargeChart";
-import { SPENDING_URL } from "@/lib/utils";
+import { useState } from "react";
+import { getLocalizedIndicatorsByCategory } from "@/data/indicators";
+import { SingleIndicatorChart } from "@/components/statistics/LargeChart";
 import { indicatorSources } from "@/data/sources";
 import {
   TimeRangeSelector,
@@ -12,49 +11,48 @@ import {
 } from "@/components/statistics/TimeRangeSelector";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { InfoTooltip } from "@/components/ui/tooltip";
+import { SourceLine } from "@/components/ui/source-line";
 import { cn } from "@/lib/utils";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { getIndicatorExplanation } from "@/i18n/indicatorExplanations";
-import {
-  TrendingUp,
-  Users,
-  Heart,
-  DollarSign,
-  ExternalLink,
-  Calendar,
-  PieChart as PieChartIcon,
-} from "lucide-react";
+import { localizePeriod } from "@/i18n/periods";
+import { formatNumber, formatPercent, percentSign } from "@/lib/formatters";
+import { Indicator, IndicatorCategory } from "@/types";
+import { TrendingUp, Users, Heart, DollarSign, Calendar } from "lucide-react";
 
-type CategoryFilter = "all" | "economic" | "demographic" | "social";
+type CategoryFilter = IndicatorCategory | "all";
+
+const CATEGORIES: IndicatorCategory[] = ["economic", "demographic", "social"];
+const CHART_COLOR: Record<IndicatorCategory, string> = { economic: "#2563EB", demographic: "#7C3AED", social: "#059669" };
+const TEXT_COLOR: Record<IndicatorCategory, string> = { economic: "text-economic", demographic: "text-demographic", social: "text-social" };
 
 export default function StatisticsPage() {
   const { t, locale } = useLanguage();
   const [timeRange, setTimeRange] = useState<TimeRange>("20Y");
-  const [categoryFilter, setCategoryFilter] = useState<CategoryFilter>("all");
+  // The page opens on the first category (7 charts); the others are one tap away.
+  const [categoryFilter, setCategoryFilter] = useState<CategoryFilter>("economic");
 
   const startYear = getYearRangeFromSelection(timeRange);
 
-  const categoryTabs: { value: CategoryFilter; label: string; icon: any }[] = [
-    { value: "all", label: t.statistics.allCategories, icon: TrendingUp },
+  const categoryTabs: { value: CategoryFilter; label: string; icon: typeof TrendingUp }[] = [
     { value: "economic", label: t.statistics.economic, icon: DollarSign },
     { value: "demographic", label: t.statistics.demographic, icon: Users },
     { value: "social", label: t.statistics.social, icon: Heart },
+    { value: "all", label: t.statistics.allCategories, icon: TrendingUp },
   ];
+  const headings: Record<IndicatorCategory, string> = {
+    economic: t.statistics.economicTrends,
+    demographic: t.statistics.demographicTrends,
+    social: t.statistics.socialTrends,
+  };
 
-  const historicalEvents = [
-    { year: 2008, label: t.events.financialCrisis },
-    { year: 2015, label: t.events.snbShock },
-    { year: 2020, label: t.events.covid },
-  ];
-
-  const filteredIndicators = useMemo(() => {
-    if (categoryFilter === "all") return getLocalizedIndicators(locale);
-    return getLocalizedIndicatorsByCategory(categoryFilter, locale);
-  }, [categoryFilter, locale]);
-
-  const economicIndicators = getLocalizedIndicatorsByCategory("economic", locale);
-  const demographicIndicators = getLocalizedIndicatorsByCategory("demographic", locale);
-  const socialIndicators = getLocalizedIndicatorsByCategory("social", locale);
+  // The figure beside the title: the number with its sign for percentages, without the long unit (it is in the description).
+  const headline = (indicator: Indicator) =>
+    indicator.unit === "%"
+      ? formatPercent(indicator.value, locale)
+      : indicator.unit.startsWith("%")
+      ? formatNumber(indicator.value, locale) + percentSign(locale)
+      : formatNumber(indicator.value, locale);
 
   return (
     <div className="container mx-auto px-4 py-6 sm:py-8">
@@ -69,206 +67,100 @@ export default function StatisticsPage() {
       </div>
 
       {/* Controls */}
-      <div className="flex flex-col sm:flex-row gap-4 mb-6 sm:mb-8">
-        <div className="flex items-center gap-3">
-          <Calendar className="h-5 w-5 text-swiss-gray-500 shrink-0" />
-          <TimeRangeSelector selected={timeRange} onChange={setTimeRange} />
-        </div>
-
-        <div className="flex items-center gap-1 rounded-lg border border-swiss-gray-200 bg-white p-1 overflow-x-auto">
+      <div className="flex flex-col lg:flex-row gap-4 mb-6 sm:mb-8">
+        <div className="flex flex-wrap items-center gap-1 rounded-3xl border border-line bg-white p-1 self-start max-w-full" role="group" aria-label={t.statistics.categories}>
           {categoryTabs.map((tab) => {
             const Icon = tab.icon;
             return (
               <button
                 key={tab.value}
+                type="button"
+                aria-pressed={categoryFilter === tab.value}
                 onClick={() => setCategoryFilter(tab.value)}
                 className={cn(
-                  "flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3 py-1.5 text-xs sm:text-sm font-medium rounded-md transition-colors whitespace-nowrap",
+                  "flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium rounded-full transition-colors whitespace-nowrap",
                   categoryFilter === tab.value
                     ? "bg-swiss-gray-900 text-white"
                     : "text-swiss-gray-600 hover:text-swiss-gray-900 hover:bg-swiss-gray-50"
                 )}
               >
-                <Icon className="h-4 w-4 shrink-0" />
-                <span className="hidden sm:inline">{tab.label}</span>
+                <Icon className="hidden sm:block h-4 w-4 shrink-0" aria-hidden="true" />
+                {tab.label}
               </button>
             );
           })}
         </div>
+
+        <div className="flex items-center gap-3">
+          <Calendar className="h-5 w-5 text-swiss-gray-500 shrink-0" aria-hidden="true" />
+          <TimeRangeSelector selected={timeRange} onChange={setTimeRange} />
+        </div>
       </div>
 
-      {/* Federal Budget Breakdown - only show on "All" view */}
-      {categoryFilter === "all" && (
-        <section className="mb-8 sm:mb-12">
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2 text-base sm:text-lg">
-                <PieChartIcon className="h-5 w-5 text-blue-600" />
-                {t.statistics.federalBudget}
-              </CardTitle>
-              <p className="text-sm text-swiss-gray-500">
-                {t.statistics.federalBudgetSubtitle}
-              </p>
-            </CardHeader>
-            <CardContent>
-              <a
-                href={locale === "it" ? SPENDING_URL : `${SPENDING_URL}/en/`}
-                className="inline-flex items-center gap-2 rounded-md bg-primary px-4 py-2 text-sm font-medium text-white hover:bg-primary/90 transition-colors"
-              >
-                {t.statistics.openSpending}
-                <ExternalLink className="h-4 w-4" />
-              </a>
-            </CardContent>
-          </Card>
-        </section>
-      )}
-
-      {/* Economic Indicators Detail */}
-      {(categoryFilter === "all" || categoryFilter === "economic") && (
-        <section className="mb-8 sm:mb-12">
-          <h2 className="text-lg sm:text-xl font-semibold text-swiss-gray-900 mb-4 sm:mb-6 flex items-center gap-2">
-            <DollarSign className="h-5 w-5 text-blue-600" />
-            {t.statistics.economicTrends}
+      {CATEGORIES.filter((category) => categoryFilter === "all" || categoryFilter === category).map((category) => (
+        <section key={category} className="mb-8 sm:mb-12">
+          <h2 className="text-lg sm:text-xl font-semibold text-swiss-gray-900 mb-4 sm:mb-6">
+            {headings[category]}
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-            {economicIndicators.map((indicator) => {
+            {getLocalizedIndicatorsByCategory(category, locale).map((indicator) => {
               const explanation = getIndicatorExplanation(indicator.id, locale, "statistics");
               return (
-              <Card key={indicator.id}>
-                <CardHeader className="pb-2">
-                  <div className="flex items-start justify-between gap-2">
-                    <div className="min-w-0">
-                      <CardTitle className="text-sm sm:text-base flex items-center gap-2">
-                        {indicator.shortName}
-                        {explanation && (
-                          <InfoTooltip
-                            content={
-                              <div className="space-y-2">
-                                <div>
-                                  <p className="font-medium text-swiss-gray-900 mb-1">{t.statistics.whatIsIt}</p>
-                                  <p className="text-swiss-gray-600">{explanation.what}</p>
+                <Card key={indicator.id}>
+                  <CardHeader className="pb-2">
+                    <div className="flex items-start justify-between gap-2">
+                      <div className="min-w-0">
+                        <CardTitle className="text-base leading-snug flex items-center gap-2">
+                          {indicator.shortName}
+                          {explanation && (
+                            <InfoTooltip
+                              label={`${t.statistics.whatIsIt} ${indicator.shortName}`}
+                              content={
+                                <div className="space-y-2">
+                                  <div>
+                                    <p className="font-medium text-swiss-gray-900 mb-1">{t.statistics.whatIsIt}</p>
+                                    <p className="text-swiss-gray-600">{explanation.what}</p>
+                                  </div>
+                                  <div>
+                                    <p className="font-medium text-swiss-gray-900 mb-1">{t.statistics.whyItMatters}</p>
+                                    <p className="text-swiss-gray-600">{explanation.why}</p>
+                                  </div>
                                 </div>
-                                <div>
-                                  <p className="font-medium text-swiss-gray-900 mb-1">{t.statistics.whyItMatters}</p>
-                                  <p className="text-swiss-gray-600">{explanation.why}</p>
-                                </div>
-                              </div>
-                            }
-                          />
-                        )}
-                      </CardTitle>
-                      <p className="text-xs sm:text-sm text-swiss-gray-500">{indicator.description}</p>
+                              }
+                            />
+                          )}
+                        </CardTitle>
+                        <p className="text-sm text-swiss-gray-600">{indicator.description}</p>
+                      </div>
+                      <span className={cn("text-xl sm:text-2xl font-bold swiss-number shrink-0", TEXT_COLOR[category])}>
+                        {headline(indicator)}
+                      </span>
                     </div>
-                    <span className="text-xl sm:text-2xl font-bold text-blue-600 swiss-number shrink-0">
-                      {indicator.unit === "people"
-                        ? (indicator.value / 1000000).toFixed(1) + "M"
-                        : indicator.unit === "CHF"
-                        ? `${indicator.value.toLocaleString("de-CH")}`
-                        : indicator.unit === "CHF/month"
-                        ? `${indicator.value}`
-                        : `${indicator.value}${indicator.unit === "%" ? "%" : ""}`}
-                    </span>
-                  </div>
-                </CardHeader>
-                <CardContent className="px-2 sm:px-6">
-                  <SingleIndicatorChart indicator={indicator} height={160} startYear={startYear} color="#2563EB" />
-                  <div className="flex items-center justify-between mt-2 sm:mt-3 pt-2 sm:pt-3 border-t border-swiss-gray-100">
-                    <span className="text-xs text-swiss-gray-500">{t.statistics.source} {indicator.source}</span>
-                    <a href={indicator.sourceUrl} target="_blank" rel="noopener noreferrer" className="text-xs text-blue-600 hover:underline flex items-center gap-1">
-                      {t.statistics.viewSource}
-                      <ExternalLink className="h-3 w-3" />
-                    </a>
-                  </div>
-                </CardContent>
-              </Card>
+                  </CardHeader>
+                  <CardContent className="px-2 sm:px-6">
+                    <SingleIndicatorChart indicator={indicator} height={170} startYear={startYear} color={CHART_COLOR[category]} />
+                    <SourceLine
+                      className="mx-4 sm:mx-0"
+                      publisher={indicator.source}
+                      url={indicator.sourceUrl}
+                      date={localizePeriod(indicator.lastUpdated, locale)}
+                    />
+                  </CardContent>
+                </Card>
               );
             })}
           </div>
         </section>
-      )}
-
-      {/* Demographic Indicators */}
-      {(categoryFilter === "all" || categoryFilter === "demographic") && (
-        <section className="mb-8 sm:mb-12">
-          <h2 className="text-lg sm:text-xl font-semibold text-swiss-gray-900 mb-4 sm:mb-6 flex items-center gap-2">
-            <Users className="h-5 w-5 text-purple-600" />
-            {t.statistics.demographicTrends}
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-            {demographicIndicators.map((indicator) => (
-              <Card key={indicator.id}>
-                <CardHeader className="pb-2">
-                  <div className="flex items-start justify-between gap-2">
-                    <div className="min-w-0">
-                      <CardTitle className="text-sm sm:text-base">{indicator.shortName}</CardTitle>
-                      <p className="text-xs sm:text-sm text-swiss-gray-500">{indicator.description}</p>
-                    </div>
-                    <span className="text-xl sm:text-2xl font-bold text-purple-600 swiss-number shrink-0">
-                      {indicator.unit === "people" ? (indicator.value / 1000000).toFixed(1) + "M" : indicator.unit === "years" ? `${indicator.value}` : `${indicator.value}${indicator.unit === "%" ? "%" : ""}`}
-                    </span>
-                  </div>
-                </CardHeader>
-                <CardContent className="px-2 sm:px-6">
-                  <SingleIndicatorChart indicator={indicator} height={160} startYear={startYear} color="#7C3AED" />
-                  <div className="flex items-center justify-between mt-2 sm:mt-3 pt-2 sm:pt-3 border-t border-swiss-gray-100">
-                    <span className="text-xs text-swiss-gray-500">{t.statistics.source} {indicator.source}</span>
-                    <a href={indicator.sourceUrl} target="_blank" rel="noopener noreferrer" className="text-xs text-purple-600 hover:underline flex items-center gap-1">
-                      {t.statistics.viewSource}
-                      <ExternalLink className="h-3 w-3" />
-                    </a>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </section>
-      )}
-
-      {/* Social Indicators */}
-      {(categoryFilter === "all" || categoryFilter === "social") && (
-        <section className="mb-8 sm:mb-12">
-          <h2 className="text-lg sm:text-xl font-semibold text-swiss-gray-900 mb-4 sm:mb-6 flex items-center gap-2">
-            <Heart className="h-5 w-5 text-green-600" />
-            {t.statistics.socialTrends}
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-            {socialIndicators.map((indicator) => (
-              <Card key={indicator.id}>
-                <CardHeader className="pb-2">
-                  <div className="flex items-start justify-between gap-2">
-                    <div className="min-w-0">
-                      <CardTitle className="text-sm sm:text-base">{indicator.shortName}</CardTitle>
-                      <p className="text-xs sm:text-sm text-swiss-gray-500">{indicator.description}</p>
-                    </div>
-                    <span className="text-xl sm:text-2xl font-bold text-green-600 swiss-number shrink-0">
-                      {indicator.unit === "CHF/month" ? `${indicator.value}` : indicator.unit === "per 100k" ? indicator.value.toLocaleString("de-CH") : `${indicator.value}${indicator.unit === "%" ? "%" : ""}`}
-                    </span>
-                  </div>
-                </CardHeader>
-                <CardContent className="px-2 sm:px-6">
-                  <SingleIndicatorChart indicator={indicator} height={160} startYear={startYear} color="#059669" />
-                  <div className="flex items-center justify-between mt-2 sm:mt-3 pt-2 sm:pt-3 border-t border-swiss-gray-100">
-                    <span className="text-xs text-swiss-gray-500">{t.statistics.source} {indicator.source}</span>
-                    <a href={indicator.sourceUrl} target="_blank" rel="noopener noreferrer" className="text-xs text-green-600 hover:underline flex items-center gap-1">
-                      {t.statistics.viewSource}
-                      <ExternalLink className="h-3 w-3" />
-                    </a>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </section>
-      )}
+      ))}
 
       {/* Data Sources Footer */}
-      <section className="border-t border-swiss-gray-200 pt-6 sm:pt-8 mt-8 sm:mt-12">
-        <h3 className="text-lg font-semibold text-swiss-gray-900 mb-4">{t.statistics.dataSources}</h3>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
-          {indicatorSources.map((s) => ({ name: s.abbr, url: s.url, desc: s.name[locale] })).map((source) => (
-            <a key={source.name} href={source.url} target="_blank" rel="noopener noreferrer" className="p-3 sm:p-4 bg-swiss-gray-50 rounded-lg hover:bg-swiss-gray-100 transition-colors">
-              <p className="font-medium text-swiss-gray-900 text-sm sm:text-base">{source.name}</p>
-              <p className="text-xs sm:text-sm text-swiss-gray-500">{source.desc}</p>
+      <section className="border-t border-line pt-6 sm:pt-8 mt-8 sm:mt-12">
+        <h2 className="text-lg font-semibold text-swiss-gray-900 mb-4">{t.statistics.dataSources}</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 sm:gap-4">
+          {indicatorSources.map((source) => (
+            <a key={source.abbr} href={source.url} target="_blank" rel="noopener noreferrer" className="block p-4 bg-swiss-gray-50 rounded-xl hover:bg-swiss-gray-100 transition-colors min-h-[44px]">
+              <span className="block font-medium text-swiss-gray-900 text-base">{source.abbr}</span>
+              <span className="block text-sm text-swiss-gray-600">{source.name[locale]}</span>
             </a>
           ))}
         </div>

@@ -2,6 +2,8 @@
 
 import { Slider } from "@/components/ui/slider";
 import { QuizQuestion } from "@/types";
+import { formatWithUnit } from "@/lib/formatters";
+import { useLanguage } from "@/i18n/LanguageContext";
 
 interface GuessSliderProps {
   question: QuizQuestion;
@@ -11,15 +13,8 @@ interface GuessSliderProps {
 }
 
 export function GuessSlider({ question, value, onChange, disabled }: GuessSliderProps) {
-  const formatValue = (val: number) => {
-    if (question.unit === "%") return `${val}%`;
-    if (question.unit === "per 1000") return `${val} per 1'000`;
-    if (question.unit === "per km²") return `${val}/km²`;
-    if (question.unit === "rank") return `#${val}`;
-    if (question.unit === "year") return val.toString();
-    if (question.unit === "years") return `${val} years`;
-    return `${val} ${question.unit}`;
-  };
+  const { locale } = useLanguage();
+  const formatValue = (val: number) => formatWithUnit(val, question.unit, locale);
 
   // Calculate step based on range and unit type
   // Rankings and years should always use whole numbers
@@ -37,6 +32,7 @@ export function GuessSlider({ question, value, onChange, disabled }: GuessSlider
         step={step}
         disabled={disabled}
         formatValue={formatValue}
+        label={question.question}
         className="mt-4"
       />
     </div>

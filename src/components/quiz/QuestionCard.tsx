@@ -29,11 +29,11 @@ export function QuestionCard({ question, questionNumber, totalQuestions }: Quest
       className="space-y-4 sm:space-y-6"
     >
       {/* Progress indicator */}
-      <div className="flex items-center justify-between text-sm text-swiss-gray-500">
+      <div className="flex items-center justify-between text-sm text-swiss-gray-600">
         <span>
           {t.questionCard.question} {questionNumber} {t.questionCard.of} {totalQuestions}
         </span>
-        <Badge variant={categoryVariant}>{question.category}</Badge>
+        <Badge variant={categoryVariant}>{t.categoryName[question.category]}</Badge>
       </div>
 
       {/* Question display */}
@@ -43,7 +43,7 @@ export function QuestionCard({ question, questionNumber, totalQuestions }: Quest
             <HelpCircle className="h-6 w-6 sm:h-8 sm:w-8 text-swiss-gray-600" />
           </div>
           <div>
-            <p className="text-xs font-medium text-swiss-gray-500 uppercase tracking-wide mb-2 sm:mb-3">
+            <p className="text-sm font-medium text-swiss-gray-600 mb-2 sm:mb-3">
               {t.questionCard.testKnowledge}
             </p>
             <p className="text-lg sm:text-xl font-semibold text-swiss-gray-900 leading-relaxed">
@@ -55,7 +55,7 @@ export function QuestionCard({ question, questionNumber, totalQuestions }: Quest
 
       {/* Hint about what they're guessing */}
       <div className="text-center">
-        <p className="text-xs sm:text-sm text-swiss-gray-500">
+        <p className="text-sm text-swiss-gray-600">
           {t.questionCard.sliderHint}
         </p>
       </div>

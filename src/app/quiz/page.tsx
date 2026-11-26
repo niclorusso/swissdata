@@ -68,40 +68,40 @@ export default function QuizPage() {
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="flex items-start gap-4">
-                <div className="flex items-center justify-center w-8 h-8 rounded-full bg-primary/10 text-primary font-semibold shrink-0">
+                <div className="flex items-center justify-center w-8 h-8 rounded-full bg-accent text-accent-foreground font-semibold shrink-0">
                   1
                 </div>
                 <div>
                   <p className="font-medium text-swiss-gray-900">
                     {t.quiz.step1Title}
                   </p>
-                  <p className="text-sm text-swiss-gray-500">
+                  <p className="text-sm text-swiss-gray-600">
                     {t.quiz.step1Desc}
                   </p>
                 </div>
               </div>
               <div className="flex items-start gap-4">
-                <div className="flex items-center justify-center w-8 h-8 rounded-full bg-primary/10 text-primary font-semibold shrink-0">
+                <div className="flex items-center justify-center w-8 h-8 rounded-full bg-accent text-accent-foreground font-semibold shrink-0">
                   2
                 </div>
                 <div>
                   <p className="font-medium text-swiss-gray-900">
                     {t.quiz.step2Title}
                   </p>
-                  <p className="text-sm text-swiss-gray-500">
+                  <p className="text-sm text-swiss-gray-600">
                     {t.quiz.step2Desc}
                   </p>
                 </div>
               </div>
               <div className="flex items-start gap-4">
-                <div className="flex items-center justify-center w-8 h-8 rounded-full bg-primary/10 text-primary font-semibold shrink-0">
+                <div className="flex items-center justify-center w-8 h-8 rounded-full bg-accent text-accent-foreground font-semibold shrink-0">
                   3
                 </div>
                 <div>
                   <p className="font-medium text-swiss-gray-900">
                     {t.quiz.step3Title}
                   </p>
-                  <p className="text-sm text-swiss-gray-500">
+                  <p className="text-sm text-swiss-gray-600">
                     {t.quiz.step3Desc}
                   </p>
                 </div>
@@ -111,7 +111,7 @@ export default function QuizPage() {
 
           {/* Quiz options */}
           <div className="space-y-4">
-            <p className="text-center text-swiss-gray-500 text-sm sm:text-base">
+            <p className="text-center text-swiss-gray-600 text-sm sm:text-base">
               {t.quiz.chooseLength} {questions.length} {t.quiz.questionsAvailable}
             </p>
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center flex-wrap">
@@ -195,7 +195,7 @@ export default function QuizPage() {
         {/* Progress bar */}
         <div className="space-y-2">
           <div className="flex items-center justify-between text-sm">
-            <span className="text-swiss-gray-500">{t.quiz.progress}</span>
+            <span className="text-swiss-gray-600">{t.quiz.progress}</span>
             <span className="font-medium text-swiss-gray-700">
               {currentIndex + 1} / {selectedQuestions.length}
             </span>
@@ -282,7 +282,7 @@ export default function QuizPage() {
             onClick={resetQuiz}
             variant="ghost"
             size="sm"
-            className="text-swiss-gray-500 gap-2"
+            className="text-swiss-gray-600 gap-2 h-11"
           >
             <RotateCcw className="h-4 w-4" />
             {t.quiz.restartQuiz}

@@ -8,6 +8,7 @@ import { Progress } from "@/components/ui/progress";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { Trophy, Target, RefreshCcw, Share2, CheckCircle2, XCircle } from "lucide-react";
 import { getLocalizedQuestions } from "@/data/questions";
+import { formatPercent, formatWithUnit } from "@/lib/formatters";
 
 interface ScoreCardProps {
   results: QuizResult[];
@@ -20,12 +21,12 @@ export function ScoreCard({ results, totalScore, onRestart }: ScoreCardProps) {
   const averageAccuracy = Math.round(totalScore / results.length);
 
   const getGrade = (accuracy: number) => {
-    if (accuracy >= 90) return { grade: "A+", message: t.scoreCard.dataExpert, color: "text-green-600" };
-    if (accuracy >= 80) return { grade: "A", message: t.scoreCard.wellInformed, color: "text-green-600" };
-    if (accuracy >= 70) return { grade: "B", message: t.scoreCard.goodKnowledge, color: "text-blue-600" };
-    if (accuracy >= 60) return { grade: "C", message: t.scoreCard.roomToLearn, color: "text-yellow-600" };
-    if (accuracy >= 50) return { grade: "D", message: t.scoreCard.keepExploring, color: "text-orange-600" };
-    return { grade: "F", message: t.scoreCard.timeToFactCheck, color: "text-red-600" };
+    if (accuracy >= 90) return { grade: "A+", message: t.scoreCard.dataExpert, color: "text-green-800" };
+    if (accuracy >= 80) return { grade: "A", message: t.scoreCard.wellInformed, color: "text-green-800" };
+    if (accuracy >= 70) return { grade: "B", message: t.scoreCard.goodKnowledge, color: "text-blue-800" };
+    if (accuracy >= 60) return { grade: "C", message: t.scoreCard.roomToLearn, color: "text-yellow-800" };
+    if (accuracy >= 50) return { grade: "D", message: t.scoreCard.keepExploring, color: "text-orange-800" };
+    return { grade: "F", message: t.scoreCard.timeToFactCheck, color: "text-red-700" };
   };
 
   const { grade, message, color } = getGrade(averageAccuracy);
@@ -71,7 +72,7 @@ export function ScoreCard({ results, totalScore, onRestart }: ScoreCardProps) {
               <Target className="h-5 w-5" />
               <span className="font-medium">{t.scoreCard.averageAccuracy}</span>
             </div>
-            <div className="text-3xl sm:text-4xl font-bold swiss-number">{averageAccuracy}%</div>
+            <div className="text-3xl sm:text-4xl font-bold swiss-number">{formatPercent(averageAccuracy, locale, { decimals: 0 })}</div>
             <Progress value={averageAccuracy} className="max-w-xs mx-auto mt-2" />
           </div>
 
@@ -124,25 +125,25 @@ export function ScoreCard({ results, totalScore, onRestart }: ScoreCardProps) {
                     }`}
                   >
                     {isGood ? (
-                      <CheckCircle2 className="h-4 w-4 text-green-600" />
+                      <CheckCircle2 className="h-4 w-4 text-green-800" aria-hidden="true" />
                     ) : (
-                      <XCircle className="h-4 w-4 text-orange-600" />
+                      <XCircle className="h-4 w-4 text-orange-800" aria-hidden="true" />
                     )}
                   </div>
                   <div className="flex-1 min-w-0">
-                    <p className="text-xs sm:text-sm font-medium text-swiss-gray-900 truncate">
+                    <p className="text-sm font-medium text-swiss-gray-900">
                       {question?.question || t.scoreCard.unknownQuestion}
                     </p>
-                    <p className="text-xs text-swiss-gray-500">
-                      {t.scoreCard.yourGuess} {result.userGuess} | {t.scoreCard.actual} {result.actualValue}
+                    <p className="text-sm text-swiss-gray-600 swiss-number">
+                      {t.scoreCard.yourGuess} {question ? formatWithUnit(result.userGuess, question.unit, locale) : result.userGuess} | {t.scoreCard.actual} {question ? formatWithUnit(result.actualValue, question.unit, locale) : result.actualValue}
                     </p>
                   </div>
                   <div
-                    className={`text-xs sm:text-sm font-semibold shrink-0 ${
-                      isGood ? "text-green-600" : "text-orange-600"
+                    className={`text-sm font-semibold shrink-0 swiss-number ${
+                      isGood ? "text-green-800" : "text-orange-800"
                     }`}
                   >
-                    {result.accuracy}%
+                    {formatPercent(result.accuracy, locale, { decimals: 0 })}
                   </div>
                 </motion.div>
               );

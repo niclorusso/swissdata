@@ -4,7 +4,8 @@ import { motion } from "framer-motion";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Canton } from "@/types";
-import { formatSwissNumber, formatPercentage } from "@/lib/formatters";
+import { formatNumber, formatWithUnit, getTranslatedUnit, NBSP } from "@/lib/formatters";
+import { cantonName } from "@/lib/utils";
 import { cantonIndicatorMeta } from "@/data/cantons";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { MapPin, Users, Ruler, X } from "lucide-react";
@@ -15,7 +16,7 @@ interface CantonTooltipProps {
 }
 
 export function CantonTooltip({ canton, onClose }: CantonTooltipProps) {
-  const { t } = useLanguage();
+  const { t, locale } = useLanguage();
 
   // Labels of the canton indicators (ids, units and Swiss figures come from src/data/cantons.ts)
   const indicatorNames: Record<string, string> = {
@@ -27,24 +28,12 @@ export function CantonTooltip({ canton, onClose }: CantonTooltipProps) {
     "crime-rate-per-1000": t.cantons.crimeRate,
   };
 
-  const formatIndicatorValue = (unit: string, value: number) => {
-    switch (unit) {
-      case "%":
-        return formatPercentage(value);
-      case "CHF/month":
-        return `CHF ${formatSwissNumber(Math.round(value))}/mo`;
-      case "CHF":
-        return `CHF ${formatSwissNumber(Math.round(value))}`;
-      default:
-        return formatSwissNumber(value, { decimals: 1 });
-    }
-  };
+  const decimalsOf = (unit: string) => (unit === "CHF" || unit === "CHF/month" ? 0 : 1);
+  const formatIndicatorValue = (unit: string, value: number) =>
+    formatWithUnit(value, unit === "per 1,000 inhabitants" ? "count" : unit, locale, { decimals: decimalsOf(unit) });
 
   // Difference to the Swiss figure of the same table and year
-  const formatDiff = (unit: string, diff: number) =>
-    unit === "CHF" || unit === "CHF/month"
-      ? formatSwissNumber(Math.round(diff))
-      : diff.toFixed(1);
+  const formatDiff = (unit: string, diff: number) => formatNumber(diff, locale, { decimals: decimalsOf(unit), sign: true });
 
   return (
     <motion.div
@@ -60,18 +49,20 @@ export function CantonTooltip({ canton, onClose }: CantonTooltipProps) {
                 {canton.abbreviation}
               </Badge>
               <div>
-                <CardTitle className="text-lg sm:text-xl">{canton.name}</CardTitle>
-                <p className="text-xs sm:text-sm text-swiss-gray-500 flex items-center gap-1 mt-1">
+                <CardTitle className="text-lg sm:text-xl">{cantonName(canton, locale)}</CardTitle>
+                <p className="text-sm text-swiss-gray-600 flex items-center gap-1 mt-1">
                   <MapPin className="h-3 w-3" />
                   {canton.capital}
                 </p>
               </div>
             </div>
             <button
+              type="button"
               onClick={onClose}
-              className="p-1 hover:bg-swiss-gray-100 rounded transition-colors"
+              aria-label={t.cantonTooltip.close}
+              className="inline-flex items-center justify-center w-11 h-11 -mt-2 -mr-2 hover:bg-swiss-gray-100 rounded-full transition-colors"
             >
-              <X className="h-5 w-5 text-swiss-gray-400" />
+              <X className="h-5 w-5 text-swiss-gray-600" aria-hidden="true" />
             </button>
           </div>
         </CardHeader>
@@ -83,7 +74,7 @@ export function CantonTooltip({ canton, onClose }: CantonTooltipProps) {
               <div>
                 <p className="text-swiss-gray-500">{t.cantonTooltip.population}</p>
                 <p className="font-semibold swiss-number">
-                  {formatSwissNumber(canton.population)}
+                  {formatNumber(canton.population, locale)}
                 </p>
               </div>
             </div>
@@ -92,7 +83,7 @@ export function CantonTooltip({ canton, onClose }: CantonTooltipProps) {
               <div>
                 <p className="text-swiss-gray-500">{t.cantonTooltip.area}</p>
                 <p className="font-semibold swiss-number">
-                  {formatSwissNumber(canton.area)} km²
+                  {formatNumber(canton.area, locale)}{NBSP}km²
                 </p>
               </div>
             </div>
@@ -100,7 +91,7 @@ export function CantonTooltip({ canton, onClose }: CantonTooltipProps) {
 
           {/* Indicators */}
           <div className="space-y-3 pt-3 border-t border-swiss-gray-100">
-            <p className="text-xs font-medium text-swiss-gray-500 uppercase tracking-wide">
+            <p className="text-sm font-semibold text-swiss-gray-700">
               {t.cantonTooltip.keyIndicators}
             </p>
             {canton.indicators.map((cantonInd) => {
@@ -111,23 +102,21 @@ export function CantonTooltip({ canton, onClose }: CantonTooltipProps) {
 
               const cantonValue = cantonInd.value;
               const diff = cantonValue - indicator.national;
-              const isHigher = diff > 0;
 
               return (
                 <div
                   key={cantonInd.indicatorId}
                   className="flex items-center justify-between"
                 >
-                  <span className="text-xs sm:text-sm text-swiss-gray-700">
+                  <span className="text-sm text-swiss-gray-700">
                     {indicatorNames[indicator.id] ?? indicator.id}{" "}
-                    <span className="text-swiss-gray-400">{indicator.year}</span>
+                    <span className="text-swiss-gray-500">{indicator.year}</span>
                   </span>
                   <div className="text-right">
                     <span className="font-semibold swiss-number text-sm">
                       {formatIndicatorValue(indicator.unit, cantonValue)}
                     </span>
-                    <span className="text-xs ml-2 text-swiss-gray-500">
-                      {isHigher ? "+" : ""}
+                    <span className="block text-source text-swiss-gray-600 swiss-number">
                       {formatDiff(indicator.unit, diff)} {t.cantonTooltip.vsCH}
                     </span>
                   </div>
@@ -141,8 +130,8 @@ export function CantonTooltip({ canton, onClose }: CantonTooltipProps) {
             <div className="flex items-center justify-between text-sm">
               <span className="text-swiss-gray-500">{t.cantonTooltip.populationDensity}</span>
               <span className="font-semibold swiss-number">
-                {formatSwissNumber(Math.round(canton.population / canton.area))}{" "}
-                per km²
+                {formatNumber(Math.round(canton.population / canton.area), locale)}{NBSP}
+                {getTranslatedUnit("per km²", locale)}
               </span>
             </div>
           </div>

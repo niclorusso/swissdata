@@ -223,7 +223,7 @@ export const indicators: Indicator[] = [
     trendPercentage: -3.0,
     source: "FFA / AFF (Federal Finance Administration)",
     sourceUrl: "https://www.efv.admin.ch/en/debt",
-    lastUpdated: "2026 (Refers to End-2025)",
+    lastUpdated: "2025 (end of year)",
     description: "Net debt of the Swiss Confederation as percentage of GDP (excluding Cantons/Municipalities)",
     context: "This figure tracks the debt managed by the 'Debt Brake' (Schuldenbremse). Net debt rose from CHF 103 bn (2019) to CHF 142 bn (2023) with the pandemic expenditures and stood at CHF 140 bn at the end of 2025.",
     // FFA key figures of the federal budget (net debt ratio), data status February 2026, after the GDP revision.

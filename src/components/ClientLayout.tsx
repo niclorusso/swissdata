@@ -1,91 +1,65 @@
 "use client";
 
-import { useState, useEffect } from "react";
 import { LanguageProvider, useLanguage } from "@/i18n/LanguageContext";
 import { Navigation } from "@/components/Navigation";
-import { SplashScreen } from "@/components/SplashScreen";
+import { BrandMark, Wordmark } from "@/components/family/BrandMark";
+import { CURRENT_SITE, FAMILY_INDEPENDENT, FAMILY_SITES } from "@/lib/family";
 
+/** Family footer: the three SwissData sites and the line on independence first, then this site's own links. */
 function Footer() {
-  const { t } = useLanguage();
+  const { t, locale } = useLanguage();
 
   return (
-    <footer className="border-t border-swiss-gray-200 py-6 sm:py-8 mt-12">
+    <footer className="mt-12 pt-9 pb-7 text-[#b9bdc3]" style={{ background: "var(--sdf-footer)" }}>
       <div className="container mx-auto px-4">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-          <div className="flex items-center gap-2">
-            <div className="grid grid-cols-2 w-6 h-6 bg-primary rounded">
-              <span className="flex items-center justify-center text-white font-bold text-[9px] leading-none">+</span>
-              <span className="flex items-center justify-center text-white font-bold text-[9px] leading-none">−</span>
-              <span className="flex items-center justify-center text-white font-bold text-[9px] leading-none">×</span>
-              <span className="flex items-center justify-center text-white font-bold text-[9px] leading-none">÷</span>
-            </div>
-            <span className="font-semibold text-swiss-gray-900">
-              SwissData
-            </span>
+        <div className="pb-7 mb-7 border-b border-white/[0.12]">
+          <div className="flex items-center gap-2 text-lg mb-[18px]">
+            <BrandMark size={26} />
+            <Wordmark onDark />
           </div>
-          <p className="text-xs sm:text-sm text-swiss-gray-500 text-center px-4">
-            {t.footer.disclaimer}
-          </p>
-          <div className="flex items-center gap-4 text-sm text-swiss-gray-500">
-            <a href="/about" className="hover:text-swiss-gray-900">
-              {t.footer.about}
-            </a>
-            <a
-              href="https://www.bfs.admin.ch"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-swiss-gray-900"
-            >
-              BFS
-            </a>
-            <a
-              href="https://opendata.swiss"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-swiss-gray-900"
-            >
-              OpenData
-            </a>
-            <a
-              href="https://www.netlify.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-swiss-gray-900"
-            >
-              Powered by Netlify
-            </a>
-          </div>
+          <nav aria-label="SwissData" className="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-3">
+            {FAMILY_SITES.map((site) => (
+              <a
+                key={site.id}
+                href={site.url}
+                aria-current={site.id === CURRENT_SITE ? "true" : undefined}
+                className={`block px-3.5 py-3 border border-white/[0.14] rounded-xl min-h-[44px] hover:border-white/40 ${site.id === CURRENT_SITE ? "bg-white/[0.07]" : ""}`}
+              >
+                <strong className="block text-white text-[15px] font-semibold mb-0.5">{site.name[locale]}</strong>
+                <span className="block text-source leading-[1.45]">{site.text[locale]}</span>
+              </a>
+            ))}
+          </nav>
+          <p className="mt-4 text-source">{FAMILY_INDEPENDENT[locale]}</p>
         </div>
+
+        <div className="flex flex-wrap gap-x-5 gap-y-1.5 text-sm">
+          {[
+            { href: "/about", label: t.footer.about, external: false },
+            { href: "https://www.bfs.admin.ch", label: "BFS", external: true },
+            { href: "https://opendata.swiss", label: "OpenData", external: true },
+            { href: "https://www.netlify.com", label: "Powered by Netlify", external: true },
+          ].map((link) => (
+            <a
+              key={link.href}
+              href={link.href}
+              {...(link.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+              className="inline-flex items-center min-h-[44px] min-w-[44px] text-[#d7dade] hover:text-white hover:underline"
+            >
+              {link.label}
+            </a>
+          ))}
+        </div>
+        <p className="mt-2 text-source max-w-[60ch]">{t.footer.disclaimer}</p>
       </div>
     </footer>
   );
 }
 
 export function ClientLayout({ children }: { children: React.ReactNode }) {
-  const [showSplash, setShowSplash] = useState(true);
-  const [hasSeenSplash, setHasSeenSplash] = useState(false);
-
-  useEffect(() => {
-    // Check if user has already seen the splash in this session
-    const seen = sessionStorage.getItem("swissdata-splash-seen");
-    if (seen) {
-      setShowSplash(false);
-      setHasSeenSplash(true);
-    }
-  }, []);
-
-  const handleSplashComplete = () => {
-    setShowSplash(false);
-    setHasSeenSplash(true);
-    sessionStorage.setItem("swissdata-splash-seen", "true");
-  };
-
   return (
     <LanguageProvider>
-      {showSplash && !hasSeenSplash && (
-        <SplashScreen onComplete={handleSplashComplete} />
-      )}
-      <div className={`min-h-screen flex flex-col ${showSplash && !hasSeenSplash ? "opacity-0" : "opacity-100"} transition-opacity duration-300`}>
+      <div className="min-h-screen flex flex-col">
         <Navigation />
         <main className="flex-1">{children}</main>
         <Footer />

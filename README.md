@@ -9,7 +9,7 @@ An interactive web app for exploring real statistics about Switzerland's economy
 - **Canton Map** (`/cantons`) — SVG map of the 26 cantons, coloured by a selectable indicator, with a detail panel and a sortable table
 - **Quiz** (`/quiz`) — 53 questions on Swiss statistics, answered with a slider, with a score
 - **About** (`/about`)
-- **Four languages** — English, Italian, German and French. The texts are in `src/i18n/`; the chosen language is stored in the browser
+- **Four languages** — English, Italian, German and French. The texts are in `src/i18n/`. The site opens in the browser's language when it is one of the four (otherwise English); a language chosen in the header is stored in the browser and wins from then on
 
 ## Data Sources
 

@@ -1,44 +1,74 @@
+@import "../styles/family-tokens.css";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-@layer base {
-  :root {
-    --background: 0 0% 100%;
-    --foreground: 0 0% 9%;
-    --card: 0 0% 100%;
-    --card-foreground: 0 0% 9%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 9%;
-    --primary: 0 84% 50%;
-    --primary-foreground: 0 0% 100%;
-    --secondary: 0 0% 96%;
-    --secondary-foreground: 0 0% 9%;
-    --muted: 0 0% 96%;
-    --muted-foreground: 0 0% 45%;
-    --accent: 0 93% 94%;
-    --accent-foreground: 0 62% 35%;
-    --border: 0 0% 90%;
-    --input: 0 0% 90%;
-    --ring: 0 84% 50%;
-    --radius: 0.5rem;
-  }
+/* This site's accent in the SwissData family (the tokens file is shared, the accent is not). */
+:root {
+  --sdf-accent: #dc2626;
 }
 
 @layer base {
   * {
-    @apply border-swiss-gray-200;
+    border-color: var(--sdf-line);
+  }
+  html {
+    background: var(--sdf-paper);
   }
   body {
-    @apply bg-white text-swiss-gray-900 antialiased;
+    background: var(--sdf-paper);
+    color: var(--sdf-ink);
+    font-family: var(--sdf-font);
+    @apply antialiased;
     font-feature-settings: "rlig" 1, "calt" 1;
+  }
+  @media (max-width: 639px) {
+    main h1 {
+      font-size: var(--sdf-h1-phone);
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+    }
   }
 }
 
-/* Swiss number formatting */
+/* The language is chosen before the first paint (script in layout.tsx). While the page
+   still shows the prerendered English text for another language, it stays hidden.
+   (Outside @layer: the class is set by a script, Tailwind must not drop the rule.) */
+html.sd-lang-pending body {
+  visibility: hidden;
+}
+
+/* Figures: digits of equal width */
 .swiss-number {
   font-variant-numeric: tabular-nums;
   letter-spacing: -0.01em;
+}
+
+/* Source line under a figure or chart, the same in the three SwissData sites */
+.sdf-source {
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px solid var(--sdf-line);
+  font: 400 var(--sdf-text-small) / 1.5 var(--sdf-font);
+  color: var(--sdf-subtle);
+  text-align: left;
+  display: block;
+}
+.sdf-source a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  position: relative;
+}
+/* larger touch area for the link without changing the line */
+.sdf-source a::after {
+  content: "";
+  position: absolute;
+  inset: -13px -4px;
+}
+.sdf-source a:hover {
+  color: var(--sdf-ink);
 }
 
 /* Smooth animations */
@@ -67,11 +97,6 @@
   filter: brightness(0.95);
 }
 
-/* Quiz slider track */
-.slider-track {
-  background: linear-gradient(to right, #DC2626, #2563EB);
-}
-
 /* Card hover effect */
 .card-hover {
   transition: box-shadow 0.2s ease, transform 0.2s ease;
@@ -82,29 +107,46 @@
   transform: translateY(-2px);
 }
 
-/* Mobile improvements */
-@supports (padding: env(safe-area-inset-bottom)) {
-  .pb-safe {
-    padding-bottom: env(safe-area-inset-bottom);
+/* Row of page links in the header: scrolls sideways on phones, no scrollbar */
+.sdf-navrow {
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+.sdf-navrow::-webkit-scrollbar {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-in,
+  .card-hover {
+    animation: none;
+    transition: none;
   }
 }
 
-/* Ensure touch targets are at least 44px */
-@media (max-width: 640px) {
-  button,
-  a,
-  [role="button"] {
-    min-height: 44px;
-    min-width: 44px;
+/* Touch targets of at least 44px on phones (--sdf-tap) */
+@media (max-width: 639px) {
+  /* the link of a source line gets 14px of touch area above and below (44px for one line of text);
+     the negative margin keeps the line where it was */
+  .sdf-source a {
+    display: inline-block;
+    min-width: var(--sdf-tap);
+    padding-block: 14px;
+    margin-block: -14px;
+  }
+  .sdf-source a::after {
+    content: none;
   }
 
-  /* Disable hover effects on touch devices */
+  button,
+  a.sd-tap,
+  [role="button"] {
+    min-height: var(--sdf-tap);
+    min-width: var(--sdf-tap);
+  }
+
   .card-hover:hover {
     transform: none;
     box-shadow: none;
-  }
-
-  .card-hover:active {
-    transform: scale(0.98);
   }
 }

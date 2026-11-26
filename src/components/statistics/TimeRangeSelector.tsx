@@ -16,13 +16,15 @@ export function TimeRangeSelector({ selected, onChange }: TimeRangeSelectorProps
   const { t } = useLanguage();
 
   return (
-    <div className="inline-flex items-center rounded-lg border border-swiss-gray-200 bg-white p-1">
+    <div className="inline-flex items-center rounded-full border border-line bg-white p-1" role="group" aria-label={t.statistics.period}>
       {rangeValues.map((value) => (
         <button
           key={value}
+          type="button"
+          aria-pressed={selected === value}
           onClick={() => onChange(value)}
           className={cn(
-            "px-2.5 sm:px-3 py-1.5 text-xs sm:text-sm font-medium rounded-md transition-colors whitespace-nowrap",
+            "px-3 py-1.5 text-sm font-medium rounded-full transition-colors whitespace-nowrap",
             selected === value
               ? "bg-primary text-white"
               : "text-swiss-gray-600 hover:text-swiss-gray-900 hover:bg-swiss-gray-50"

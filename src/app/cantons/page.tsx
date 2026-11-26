@@ -9,8 +9,10 @@ import { Badge } from "@/components/ui/badge";
 import { cantons, getCantonById, cantonIndicatorMeta, cantonPopulationMeta, cantonAreaMeta } from "@/data/cantons";
 import { indicators } from "@/data/indicators";
 import { Canton } from "@/types";
-import { formatSwissNumber, formatPercentage, formatSwissDate, getTranslatedUnit } from "@/lib/formatters";
+import { formatNumber, formatWithUnit, formatSwissDate } from "@/lib/formatters";
+import { SourceLine } from "@/components/ui/source-line";
 import { useLanguage } from "@/i18n/LanguageContext";
+import { cantonName } from "@/lib/utils";
 import { Map, TrendingUp, Users, Heart, ArrowUpDown, Info } from "lucide-react";
 
 type SortKey = "name" | "population" | "area" | "density";
@@ -62,7 +64,7 @@ export default function CantonsPage() {
   const sortedCantons = [...cantons].sort((a, b) => {
     let aVal: number, bVal: number;
     switch (sortKey) {
-      case "name": return sortDirection === "asc" ? a.name.localeCompare(b.name) : b.name.localeCompare(a.name);
+      case "name": return sortDirection === "asc" ? cantonName(a, locale).localeCompare(cantonName(b, locale)) : cantonName(b, locale).localeCompare(cantonName(a, locale));
       case "population": aVal = a.population; bVal = b.population; break;
       case "area": aVal = a.area; bVal = b.area; break;
       case "density": aVal = a.population / a.area; bVal = b.population / b.area; break;
@@ -89,10 +91,10 @@ export default function CantonsPage() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8">
         <div className="lg:col-span-2 space-y-4">
           <div className="flex flex-wrap gap-2 pb-1">
-            <span className="text-sm text-swiss-gray-500 self-center mr-2 shrink-0">{t.cantons.colorBy}</span>
+            <span className="text-sm text-swiss-gray-600 self-center mr-2 shrink-0">{t.cantons.colorBy}</span>
             {cantonIndicators.map((indicator) => (
-              <button key={indicator.id} onClick={() => setSelectedIndicator(indicator.id)}
-                className={`px-3 py-1.5 rounded-full text-xs sm:text-sm font-medium transition-colors whitespace-nowrap ${selectedIndicator === indicator.id ? "bg-primary text-white" : "bg-swiss-gray-100 text-swiss-gray-700 hover:bg-swiss-gray-200"}`}>
+              <button key={indicator.id} type="button" aria-pressed={selectedIndicator === indicator.id} onClick={() => setSelectedIndicator(indicator.id)}
+                className={`px-3 py-1.5 rounded-full text-sm font-medium transition-colors ${selectedIndicator === indicator.id ? "bg-primary text-white" : "bg-swiss-gray-100 text-swiss-gray-700 hover:bg-swiss-gray-200"}`}>
                 {indicator.name}
               </button>
             ))}
@@ -104,7 +106,7 @@ export default function CantonsPage() {
             </CardContent>
           </Card>
 
-          <div className="flex items-center justify-center gap-4 text-xs sm:text-sm">
+          <div className="flex items-center justify-center gap-4 text-sm">
             <span className="text-swiss-gray-500">{t.cantons.lower}</span>
             <div className="flex h-4 rounded overflow-hidden">
               {[0.2, 0.4, 0.6, 0.8, 1].map((val) => {
@@ -134,7 +136,7 @@ export default function CantonsPage() {
           {selectedIndicatorMeta && (
             <Card>
               <CardHeader className="pb-2">
-                <CardTitle className="text-sm text-swiss-gray-500">{t.cantons.switzerland}</CardTitle>
+                <CardTitle className="text-sm text-swiss-gray-600">{t.cantons.switzerland}</CardTitle>
               </CardHeader>
               <CardContent>
                 {(() => {
@@ -144,23 +146,16 @@ export default function CantonsPage() {
                   return (
                     <>
                       <div className="text-2xl font-bold swiss-number">
-                        {unit === "%"
-                          ? formatPercentage(displayValue)
-                          : unit === "per 1,000 inhabitants"
-                            ? `${formatSwissNumber(displayValue, { decimals: 1 })} ${getTranslatedUnit(unit, locale)}`
-                            : `${formatSwissNumber(Math.round(displayValue))} ${getTranslatedUnit(unit, locale)}`}
+                        {formatWithUnit(displayValue, unit, locale, { decimals: unit === "CHF" || unit === "CHF/month" ? 0 : 1 })}
                       </div>
-                      <p className="text-sm text-swiss-gray-500 mt-1">{selectedIndicatorMeta.name}</p>
-                      <p className="text-xs text-swiss-gray-500 mt-1">
-                        {selectedIndicatorMeta.year}
-                        {selectedIndicatorMeta.provisional ? ` (${t.cantons.provisional})` : ""}
-                        {" \u00B7 "}
-                        <a href={selectedIndicatorMeta.sourceUrl} target="_blank" rel="noopener noreferrer" className="underline hover:text-swiss-gray-700">
-                          {selectedIndicatorMeta.source[locale]}
-                        </a>
-                      </p>
+                      <p className="text-sm text-swiss-gray-600 mt-1">{selectedIndicatorMeta.name}</p>
+                      <SourceLine
+                        publisher={selectedIndicatorMeta.source[locale]}
+                        url={selectedIndicatorMeta.sourceUrl}
+                        date={`${selectedIndicatorMeta.year}${selectedIndicatorMeta.provisional ? ` (${t.cantons.provisional})` : ""}`}
+                      />
                       {selectedIndicator === "unemployment-rate" && (
-                        <div className="mt-3 p-3 bg-blue-50 rounded-lg flex gap-2 text-xs text-blue-700">
+                        <div className="mt-3 p-3 bg-blue-50 rounded-lg flex gap-2 text-sm text-blue-900">
                           <Info className="h-4 w-4 shrink-0 mt-0.5" />
                           <span>{t.cantons.unemploymentNote}</span>
                         </div>
@@ -184,22 +179,22 @@ export default function CantonsPage() {
               <thead>
                 <tr className="border-b border-swiss-gray-200">
                   <th className="text-left py-3 px-3 sm:px-4">
-                    <button onClick={() => handleSort("name")} className="flex items-center gap-1 text-xs sm:text-sm font-semibold text-swiss-gray-700 hover:text-swiss-gray-900">
+                    <button onClick={() => handleSort("name")} className="flex items-center gap-1 text-sm font-semibold text-swiss-gray-700 hover:text-swiss-gray-900">
                       {t.cantons.canton} <ArrowUpDown className="h-3 w-3" />
                     </button>
                   </th>
                   <th className="text-right py-3 px-3 sm:px-4">
-                    <button onClick={() => handleSort("population")} className="flex items-center gap-1 text-xs sm:text-sm font-semibold text-swiss-gray-700 hover:text-swiss-gray-900 ml-auto">
+                    <button onClick={() => handleSort("population")} className="flex items-center gap-1 text-sm font-semibold text-swiss-gray-700 hover:text-swiss-gray-900 ml-auto">
                       {t.cantons.population} <ArrowUpDown className="h-3 w-3" />
                     </button>
                   </th>
                   <th className="text-right py-3 px-3 sm:px-4 hidden sm:table-cell">
-                    <button onClick={() => handleSort("area")} className="flex items-center gap-1 text-xs sm:text-sm font-semibold text-swiss-gray-700 hover:text-swiss-gray-900 ml-auto">
+                    <button onClick={() => handleSort("area")} className="flex items-center gap-1 text-sm font-semibold text-swiss-gray-700 hover:text-swiss-gray-900 ml-auto">
                       {t.cantons.area} <ArrowUpDown className="h-3 w-3" />
                     </button>
                   </th>
                   <th className="text-right py-3 px-3 sm:px-4">
-                    <button onClick={() => handleSort("density")} className="flex items-center gap-1 text-xs sm:text-sm font-semibold text-swiss-gray-700 hover:text-swiss-gray-900 ml-auto">
+                    <button onClick={() => handleSort("density")} className="flex items-center gap-1 text-sm font-semibold text-swiss-gray-700 hover:text-swiss-gray-900 ml-auto">
                       {t.cantons.density} <ArrowUpDown className="h-3 w-3" />
                     </button>
                   </th>
@@ -207,17 +202,17 @@ export default function CantonsPage() {
               </thead>
               <tbody>
                 {sortedCantons.map((canton) => (
-                  <tr key={canton.id} onClick={() => setSelectedCantonId(canton.id)}
+                  <tr key={canton.id} onClick={() => setSelectedCantonId(canton.id)} tabIndex={0} onKeyDown={(event) => { if (event.key === "Enter" || event.key === " ") { event.preventDefault(); setSelectedCantonId(canton.id); } }}
                     className={`border-b border-swiss-gray-100 cursor-pointer transition-colors ${selectedCantonId === canton.id ? "bg-primary/5" : "hover:bg-swiss-gray-50"}`}>
                     <td className="py-3 px-3 sm:px-4">
                       <div className="flex items-center gap-2 sm:gap-3">
                         <Badge variant="outline" className="font-mono text-xs">{canton.abbreviation}</Badge>
-                        <span className="font-medium text-sm sm:text-base">{canton.name}</span>
+                        <span className="font-medium text-sm sm:text-base">{cantonName(canton, locale)}</span>
                       </div>
                     </td>
-                    <td className="text-right py-3 px-3 sm:px-4 swiss-number text-sm">{formatSwissNumber(canton.population)}</td>
-                    <td className="text-right py-3 px-3 sm:px-4 swiss-number text-sm hidden sm:table-cell">{formatSwissNumber(canton.area)}</td>
-                    <td className="text-right py-3 px-3 sm:px-4 swiss-number text-sm">{formatSwissNumber(Math.round(canton.population / canton.area))}</td>
+                    <td className="text-right py-3 px-3 sm:px-4 swiss-number text-sm">{formatNumber(canton.population, locale)}</td>
+                    <td className="text-right py-3 px-3 sm:px-4 swiss-number text-sm hidden sm:table-cell">{formatNumber(canton.area, locale)}</td>
+                    <td className="text-right py-3 px-3 sm:px-4 swiss-number text-sm">{formatNumber(Math.round(canton.population / canton.area), locale)}</td>
                   </tr>
                 ))}
               </tbody>
@@ -228,10 +223,10 @@ export default function CantonsPage() {
 
       <Card>
         <CardHeader className="pb-2">
-          <CardTitle className="text-sm text-swiss-gray-500">{t.cantons.dataSources}</CardTitle>
+          <CardTitle className="text-sm text-swiss-gray-600">{t.cantons.dataSources}</CardTitle>
         </CardHeader>
         <CardContent>
-          <ul className="space-y-1 text-xs sm:text-sm text-swiss-gray-600">
+          <ul className="space-y-1 text-sm text-swiss-gray-600">
             {cantonIndicators.map((indicator) => (
               <li key={indicator.id}>
                 <span className="font-medium text-swiss-gray-700">{indicator.name}</span>
@@ -239,7 +234,7 @@ export default function CantonsPage() {
                 {indicator.year}
                 {indicator.provisional ? ` (${t.cantons.provisional})` : ""}
                 {" \u00B7 "}
-                <a href={indicator.sourceUrl} target="_blank" rel="noopener noreferrer" className="underline hover:text-swiss-gray-900">
+                <a href={indicator.sourceUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center min-h-[44px] sm:min-h-0 underline underline-offset-[3px] hover:text-swiss-gray-900">
                   {indicator.source[locale]}
                 </a>
               </li>
@@ -253,13 +248,13 @@ export default function CantonsPage() {
                 {": "}
                 {formatSwissDate(meta.referenceDate)}
                 {" \u00B7 "}
-                <a href={meta.sourceUrl} target="_blank" rel="noopener noreferrer" className="underline hover:text-swiss-gray-900">
+                <a href={meta.sourceUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center min-h-[44px] sm:min-h-0 underline underline-offset-[3px] hover:text-swiss-gray-900">
                   {meta.source[locale]}
                 </a>
               </li>
             ))}
           </ul>
-          <p className="text-xs text-swiss-gray-500 mt-3">
+          <p className="text-sm text-swiss-gray-600 mt-3">
             {t.cantons.territoryNote}{" "}
             {t.cantons.oldBordersNote.replace(
               "{list}",

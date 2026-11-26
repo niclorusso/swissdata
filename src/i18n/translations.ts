@@ -11,7 +11,19 @@ export const translations = {
       quiz: "Quiz",
       cantons: "Cantons",
       about: "About",
-      spending: "Spending",
+      switchSite: "SwissData sections",
+      language: "Language",
+      pages: "Pages",
+    },
+
+    common: {
+      source: "Source",
+    },
+
+    categoryName: {
+      economic: "Economy",
+      demographic: "Population",
+      social: "Society",
     },
 
     // Footer
@@ -22,24 +34,12 @@ export const translations = {
 
     // Home page
     home: {
-      spendingTitle: "Public spending",
-      spendingText: "How much the Confederation, the cantons and the municipalities spend, and on what: federal budget, revenue, debt, federal contracts and the accounts of every municipality in Ticino and Zurich. In English and Italian.",
-      badge: "100% sourced from official Swiss statistics",
       title: "Switzerland",
       titleHighlight: "in Numbers",
       subtitle: "Statistics on Switzerland's economy, population and society, each with its source. A quiz to test what you know.",
       testKnowledge: "Test Your Knowledge",
       exploreByCanton: "Explore by Canton",
       showStats: "Show Statistics",
-      // Quick stats
-      indicatorsTracked: "indicators tracked",
-      officialSources: "official sources",
-      cantonsCovered: "cantons covered",
-      questionsInQuiz: "questions in quiz",
-      // CTA
-      ctaTitle: "Think you know Swiss statistics?",
-      ctaText: "Take our Knowledge Quiz and see how your assumptions compare to reality. You might be surprised!",
-      startQuiz: "Start the Quiz",
       // Sources
       ourSources: "Our Sources",
     },
@@ -106,7 +106,6 @@ export const translations = {
       actualValue: "Actual value",
       context: "Context",
       internationalComparison: "International Comparison",
-      viewSource: "View source",
     },
 
     // Statistics page
@@ -122,14 +121,12 @@ export const translations = {
       demographicTrends: "Demographic Trends",
       socialTrends: "Social Trends",
       comparingChart: "Comparing unemployment rate, GDP growth, and inflation over time. Vertical lines mark major economic events.",
-      federalBudget: "Public spending",
-      federalBudgetSubtitle: "The 2026 federal budget is CHF 91.1 billion. Spending by area, revenue, debt, cantons, municipalities and federal contracts are on the SwissData spending site (in English and Italian).",
-      openSpending: "Open public spending",
-      source: "Source:",
-      viewSource: "View source",
       dataSources: "Data Sources",
       whatIsIt: "What is it?",
       whyItMatters: "Why it matters",
+      noData: "No data for this period",
+      categories: "Categories",
+      period: "Period",
     },
 
     // Time range
@@ -172,6 +169,7 @@ export const translations = {
       provisional: "provisional",
       territoryNote: "Population, area and foreign share use the cantonal borders of 1 January 2026: Moutier, in the canton of Bern until 31 December 2025, is counted in the canton of Jura. The foreign share is recomputed for these borders from the STATPOP figures of 31 December 2025, so for Jura and Bern it differs from the share the FSO publishes for the 2025 borders.",
       oldBordersNote: "These indicators refer to the borders before 2026, with Moutier in the canton of Bern: {list}.",
+      clickToSelect: "Select to see the figures",
     },
 
     // Canton tooltip
@@ -181,6 +179,7 @@ export const translations = {
       keyIndicators: "Key Indicators",
       populationDensity: "Population Density",
       vsCH: "vs CH",
+      close: "Close",
     },
 
     // About page
@@ -222,7 +221,6 @@ export const translations = {
       limitation3Desc: "We show data, not explanations. The reasons behind trends are complex and often debated.",
       limitation4: "Data can have delays.",
       limitation4Desc: "Official statistics take time to compile. The most recent data may be from months or years ago.",
-      // CTA
       ctaTitle: "Knowledge is power. Use it wisely.",
       ctaText: "The next time you hear a bold claim about Switzerland, check the data. Stay informed—with facts, not assumptions.",
     },
@@ -256,7 +254,19 @@ export const translations = {
       quiz: "Quiz",
       cantons: "Cantoni",
       about: "Chi siamo",
-      spending: "Spesa pubblica",
+      switchSite: "Sezioni di SwissData",
+      language: "Lingua",
+      pages: "Pagine",
+    },
+
+    common: {
+      source: "Fonte",
+    },
+
+    categoryName: {
+      economic: "Economia",
+      demographic: "Popolazione",
+      social: "Società",
     },
 
     // Footer
@@ -267,24 +277,12 @@ export const translations = {
 
     // Home page
     home: {
-      spendingTitle: "Spesa pubblica",
-      spendingText: "Quanto spendono Confederazione, Cantoni e Comuni, e per che cosa: bilancio federale, entrate, debito, appalti federali e i conti di tutti i Comuni di Ticino e Zurigo.",
-      badge: "100% basato su statistiche ufficiali svizzere",
       title: "La Svizzera",
       titleHighlight: "in numeri",
       subtitle: "Statistiche su economia, popolazione e società della Svizzera, ognuna con la sua fonte. Un quiz per mettere alla prova quello che sai.",
       testKnowledge: "Testa le tue conoscenze",
       exploreByCanton: "Esplora per Cantone",
       showStats: "Vedi Statistiche",
-      // Quick stats
-      indicatorsTracked: "indicatori monitorati",
-      officialSources: "fonti ufficiali",
-      cantonsCovered: "cantoni coperti",
-      questionsInQuiz: "domande nel quiz",
-      // CTA
-      ctaTitle: "Pensi di conoscere le statistiche svizzere?",
-      ctaText: "Fai il nostro Quiz e scopri come le tue supposizioni si confrontano con la realt\u00E0. Potresti sorprenderti!",
-      startQuiz: "Inizia il Quiz",
       // Sources
       ourSources: "Le nostre fonti",
     },
@@ -351,7 +349,6 @@ export const translations = {
       actualValue: "Valore reale",
       context: "Contesto",
       internationalComparison: "Confronto internazionale",
-      viewSource: "Vedi fonte",
     },
 
     // Statistics page
@@ -367,14 +364,12 @@ export const translations = {
       demographicTrends: "Tendenze demografiche",
       socialTrends: "Tendenze sociali",
       comparingChart: "Confronto tra tasso di disoccupazione, crescita del PIL e inflazione nel tempo. Le linee verticali indicano eventi economici importanti.",
-      federalBudget: "Spesa pubblica",
-      federalBudgetSubtitle: "Il preventivo federale 2026 è di 91,1 miliardi di CHF. Spese per settore, entrate, debito, Cantoni, Comuni e appalti federali sono nel sito SwissData sulla spesa pubblica.",
-      openSpending: "Apri la spesa pubblica",
-      source: "Fonte:",
-      viewSource: "Vedi fonte",
       dataSources: "Fonti dei dati",
       whatIsIt: "Cos\u2019\u00E8?",
       whyItMatters: "Perch\u00E9 \u00E8 importante",
+      noData: "Nessun dato per questo periodo",
+      categories: "Categorie",
+      period: "Periodo",
     },
 
     // Time range
@@ -417,6 +412,7 @@ export const translations = {
       provisional: "provvisorio",
       territoryNote: "Popolazione, superficie e quota di stranieri seguono i confini cantonali del 1° gennaio 2026: Moutier, nel Canton Berna fino al 31 dicembre 2025, è contata nel Canton Giura. La quota di stranieri è ricalcolata per questi confini dai dati STATPOP del 31 dicembre 2025; per Giura e Berna è quindi diversa da quella che l'UST pubblica per i confini del 2025.",
       oldBordersNote: "Questi indicatori si riferiscono ai confini precedenti al 2026, con Moutier nel Canton Berna: {list}.",
+      clickToSelect: "Seleziona per vedere i dati",
     },
 
     // Canton tooltip
@@ -426,6 +422,7 @@ export const translations = {
       keyIndicators: "Indicatori chiave",
       populationDensity: "Densit\u00E0 di popolazione",
       vsCH: "vs CH",
+      close: "Chiudi",
     },
 
     // About page
@@ -454,7 +451,7 @@ export const translations = {
       questionSelectionTitle: "Selezione delle domande",
       questionSelectionDesc: "Le domande del nostro quiz coprono le principali statistiche svizzere nei settori economico, demografico e sociale. Selezioniamo argomenti rilevanti per una cittadinanza informata e verificabili con fonti ufficiali.",
       accuracyScoringTitle: "Calcolo della precisione",
-      accuracyScoringDesc: "Il punteggio di una risposta è 100% meno la distanza tra la tua stima e il valore reale, misurata in rapporto all'ampiezza del cursore. Una stima che sbaglia di un decimo dell'ampiezza vale 90%.",
+      accuracyScoringDesc: "Il punteggio di una risposta è 100\u00A0% meno la distanza tra la tua stima e il valore reale, misurata in rapporto all'ampiezza del cursore. Una stima che sbaglia di un decimo dell'ampiezza vale 90\u00A0%.",
       updateFrequencyTitle: "Frequenza di aggiornamento",
       updateFrequencyDesc: "Aggiorniamo gli indicatori non appena vengono rilasciati nuovi dati ufficiali. La maggior parte degli indicatori economici viene aggiornata trimestralmente; i dati demografici annualmente. Ogni indicatore mostra la data dell\u2019ultimo aggiornamento.",
       // Limitations
@@ -467,7 +464,6 @@ export const translations = {
       limitation3Desc: "Mostriamo dati, non spiegazioni. Le ragioni dietro le tendenze sono complesse e spesso dibattute.",
       limitation4: "I dati possono avere ritardi.",
       limitation4Desc: "Le statistiche ufficiali richiedono tempo per essere compilate. I dati pi\u00F9 recenti potrebbero risalire a mesi o anni fa.",
-      // CTA
       ctaTitle: "La conoscenza è potere. Usala saggiamente.",
       ctaText: "La prossima volta che senti un'affermazione audace sulla Svizzera, controlla i dati. Rimani informato—con i fatti, non con le supposizioni.",
     },
@@ -499,7 +495,19 @@ export const translations = {
       quiz: "Quiz",
       cantons: "Kantone",
       about: "Über uns",
-      spending: "Staatsausgaben",
+      switchSite: "Bereiche von SwissData",
+      language: "Sprache",
+      pages: "Seiten",
+    },
+
+    common: {
+      source: "Quelle",
+    },
+
+    categoryName: {
+      economic: "Wirtschaft",
+      demographic: "Bevölkerung",
+      social: "Gesellschaft",
     },
 
     // Footer
@@ -510,24 +518,12 @@ export const translations = {
 
     // Home page
     home: {
-      spendingTitle: "Staatsausgaben",
-      spendingText: "Wie viel Bund, Kantone und Gemeinden ausgeben und wofür: Bundeshaushalt, Einnahmen, Schulden, Beschaffungen des Bundes und die Rechnungen aller Gemeinden der Kantone Tessin und Zürich. Auf Englisch und Italienisch.",
-      badge: "100% aus offiziellen Schweizer Statistiken",
       title: "Die Schweiz",
       titleHighlight: "in Zahlen",
       subtitle: "Statistiken zu Wirtschaft, Bevölkerung und Gesellschaft der Schweiz, jede mit ihrer Quelle. Ein Quiz, um dein Wissen zu testen.",
       testKnowledge: "Teste dein Wissen",
       exploreByCanton: "Nach Kanton erkunden",
       showStats: "Statistiken anzeigen",
-      // Quick stats
-      indicatorsTracked: "erfasste Indikatoren",
-      officialSources: "offizielle Quellen",
-      cantonsCovered: "abgedeckte Kantone",
-      questionsInQuiz: "Fragen im Quiz",
-      // CTA
-      ctaTitle: "Glaubst du, die Schweizer Statistiken zu kennen?",
-      ctaText: "Mach unser Wissensquiz und finde heraus, wie deine Annahmen mit der Realität übereinstimmen. Du könntest überrascht sein!",
-      startQuiz: "Quiz starten",
       // Sources
       ourSources: "Unsere Quellen",
     },
@@ -594,7 +590,6 @@ export const translations = {
       actualValue: "Tatsächlicher Wert",
       context: "Kontext",
       internationalComparison: "Internationaler Vergleich",
-      viewSource: "Quelle anzeigen",
     },
 
     // Statistics page
@@ -610,14 +605,12 @@ export const translations = {
       demographicTrends: "Demografische Trends",
       socialTrends: "Soziale Trends",
       comparingChart: "Vergleich von Arbeitslosenquote, BIP-Wachstum und Inflation im Zeitverlauf. Vertikale Linien markieren wichtige wirtschaftliche Ereignisse.",
-      federalBudget: "Staatsausgaben",
-      federalBudgetSubtitle: "Der Voranschlag 2026 des Bundes beträgt 91,1 Milliarden CHF. Ausgaben nach Aufgabengebiet, Einnahmen, Schulden, Kantone, Gemeinden und Beschaffungen des Bundes stehen auf der SwissData-Seite zu den Staatsausgaben (auf Englisch und Italienisch).",
-      openSpending: "Staatsausgaben öffnen",
-      source: "Quelle:",
-      viewSource: "Quelle anzeigen",
       dataSources: "Datenquellen",
       whatIsIt: "Was ist das?",
       whyItMatters: "Warum es wichtig ist",
+      noData: "Keine Daten für diesen Zeitraum",
+      categories: "Kategorien",
+      period: "Zeitraum",
     },
 
     // Time range
@@ -660,6 +653,7 @@ export const translations = {
       provisional: "provisorisch",
       territoryNote: "Bevölkerung, Fläche und Ausländeranteil beziehen sich auf die Kantonsgrenzen vom 1. Januar 2026: Moutier, bis 31. Dezember 2025 im Kanton Bern, wird zum Kanton Jura gezählt. Der Ausländeranteil ist aus den STATPOP-Zahlen vom 31. Dezember 2025 für diese Grenzen neu berechnet und weicht deshalb für Jura und Bern vom Anteil ab, den das BFS für die Grenzen von 2025 veröffentlicht.",
       oldBordersNote: "Diese Indikatoren beziehen sich auf die Grenzen vor 2026, mit Moutier im Kanton Bern: {list}.",
+      clickToSelect: "Auswählen, um die Zahlen zu sehen",
     },
 
     // Canton tooltip
@@ -669,6 +663,7 @@ export const translations = {
       keyIndicators: "Wichtige Indikatoren",
       populationDensity: "Bevölkerungsdichte",
       vsCH: "vs CH",
+      close: "Schliessen",
     },
 
     // About page
@@ -697,7 +692,7 @@ export const translations = {
       questionSelectionTitle: "Fragenauswahl",
       questionSelectionDesc: "Die Fragen in unserem Quiz decken wichtige Schweizer Statistiken aus den Bereichen Wirtschaft, Demografie und Gesellschaft ab. Wir wählen Themen, die für informierte Bürger relevant und mit offiziellen Datenquellen überprüfbar sind.",
       accuracyScoringTitle: "Genauigkeitsbewertung",
-      accuracyScoringDesc: "Die Punktzahl einer Antwort ist 100% minus der Abstand zwischen deiner Schätzung und dem tatsächlichen Wert, gemessen am Bereich des Schiebereglers. Eine Schätzung, die um einen Zehntel des Bereichs danebenliegt, ergibt 90%.",
+      accuracyScoringDesc: "Die Punktzahl einer Antwort ist 100\u00A0% minus der Abstand zwischen deiner Schätzung und dem tatsächlichen Wert, gemessen am Bereich des Schiebereglers. Eine Schätzung, die um einen Zehntel des Bereichs danebenliegt, ergibt 90\u00A0%.",
       updateFrequencyTitle: "Aktualisierungshäufigkeit",
       updateFrequencyDesc: "Wir aktualisieren Indikatoren, sobald neue offizielle Daten veröffentlicht werden. Die meisten Wirtschaftsindikatoren werden vierteljährlich aktualisiert; demografische Daten jährlich. Jeder Indikator zeigt sein letztes Aktualisierungsdatum.",
       // Limitations
@@ -710,7 +705,6 @@ export const translations = {
       limitation3Desc: "Wir zeigen Daten, keine Erklärungen. Die Gründe hinter Trends sind komplex und oft umstritten.",
       limitation4: "Daten können verzögert sein.",
       limitation4Desc: "Offizielle Statistiken brauchen Zeit zur Zusammenstellung. Die neuesten Daten können Monate oder Jahre alt sein.",
-      // CTA
       ctaTitle: "Wissen ist Macht. Nutze es weise.",
       ctaText: "Das nächste Mal, wenn du eine kühne Behauptung über die Schweiz hörst, überprüfe die Daten. Bleib informiert—mit Fakten, nicht mit Annahmen.",
     },
@@ -744,7 +738,19 @@ export const translations = {
       quiz: "Quiz",
       cantons: "Cantons",
       about: "À propos",
-      spending: "Dépenses publiques",
+      switchSite: "Sections de SwissData",
+      language: "Langue",
+      pages: "Pages",
+    },
+
+    common: {
+      source: "Source",
+    },
+
+    categoryName: {
+      economic: "Économie",
+      demographic: "Population",
+      social: "Société",
     },
 
     // Footer
@@ -755,24 +761,12 @@ export const translations = {
 
     // Home page
     home: {
-      spendingTitle: "Dépenses publiques",
-      spendingText: "Combien dépensent la Confédération, les cantons et les communes, et pour quoi : budget fédéral, recettes, dette, marchés publics fédéraux et comptes de toutes les communes du Tessin et de Zurich. En anglais et en italien.",
-      badge: "100% basé sur les statistiques officielles suisses",
       title: "La Suisse",
       titleHighlight: "en chiffres",
       subtitle: "Des statistiques sur l'économie, la population et la société suisses, chacune avec sa source. Un quiz pour tester vos connaissances.",
       testKnowledge: "Testez vos connaissances",
       exploreByCanton: "Explorer par canton",
       showStats: "Voir les statistiques",
-      // Quick stats
-      indicatorsTracked: "indicateurs suivis",
-      officialSources: "sources officielles",
-      cantonsCovered: "cantons couverts",
-      questionsInQuiz: "questions dans le quiz",
-      // CTA
-      ctaTitle: "Pensez-vous connaître les statistiques suisses ?",
-      ctaText: "Faites notre quiz et découvrez comment vos suppositions se comparent à la réalité. Vous pourriez être surpris !",
-      startQuiz: "Commencer le quiz",
       // Sources
       ourSources: "Nos sources",
     },
@@ -839,7 +833,6 @@ export const translations = {
       actualValue: "Valeur réelle",
       context: "Contexte",
       internationalComparison: "Comparaison internationale",
-      viewSource: "Voir la source",
     },
 
     // Statistics page
@@ -855,14 +848,12 @@ export const translations = {
       demographicTrends: "Tendances démographiques",
       socialTrends: "Tendances sociales",
       comparingChart: "Comparaison du taux de chômage, de la croissance du PIB et de l'inflation au fil du temps. Les lignes verticales marquent les événements économiques majeurs.",
-      federalBudget: "Dépenses publiques",
-      federalBudgetSubtitle: "Le budget 2026 de la Confédération est de 91,1 milliards de CHF. Dépenses par domaine, recettes, dette, cantons, communes et marchés publics fédéraux se trouvent sur le site SwissData des dépenses publiques (en anglais et en italien).",
-      openSpending: "Ouvrir les dépenses publiques",
-      source: "Source :",
-      viewSource: "Voir la source",
       dataSources: "Sources des données",
       whatIsIt: "Qu'est-ce que c'est ?",
       whyItMatters: "Pourquoi c'est important",
+      noData: "Pas de données pour cette période",
+      categories: "Catégories",
+      period: "Période",
     },
 
     // Time range
@@ -905,6 +896,7 @@ export const translations = {
       provisional: "provisoire",
       territoryNote: "La population, la superficie et la part d'étrangers se rapportent aux frontières cantonales du 1er janvier 2026 : Moutier, dans le canton de Berne jusqu'au 31 décembre 2025, est comptée dans le canton du Jura. La part d'étrangers est recalculée pour ces frontières à partir des chiffres STATPOP du 31 décembre 2025 ; pour le Jura et Berne, elle diffère donc de celle que l'OFS publie pour les frontières de 2025.",
       oldBordersNote: "Ces indicateurs se rapportent aux frontières d'avant 2026, avec Moutier dans le canton de Berne : {list}.",
+      clickToSelect: "Sélectionner pour voir les chiffres",
     },
 
     // Canton tooltip
@@ -914,6 +906,7 @@ export const translations = {
       keyIndicators: "Indicateurs clés",
       populationDensity: "Densité de population",
       vsCH: "vs CH",
+      close: "Fermer",
     },
 
     // About page
@@ -942,7 +935,7 @@ export const translations = {
       questionSelectionTitle: "Sélection des questions",
       questionSelectionDesc: "Les questions de notre quiz couvrent les principales statistiques suisses dans les domaines économique, démographique et social. Nous sélectionnons des sujets pertinents pour une citoyenneté informée et vérifiables avec des sources officielles.",
       accuracyScoringTitle: "Calcul de la précision",
-      accuracyScoringDesc: "Le score d'une réponse est 100% moins l'écart entre votre estimation et la valeur réelle, mesuré par rapport à l'étendue du curseur. Une estimation qui s'écarte d'un dixième de l'étendue vaut 90%.",
+      accuracyScoringDesc: "Le score d'une réponse est 100\u00A0% moins l'écart entre votre estimation et la valeur réelle, mesuré par rapport à l'étendue du curseur. Une estimation qui s'écarte d'un dixième de l'étendue vaut 90\u00A0%.",
       updateFrequencyTitle: "Fréquence de mise à jour",
       updateFrequencyDesc: "Nous mettons à jour les indicateurs dès que de nouvelles données officielles sont publiées. La plupart des indicateurs économiques sont mis à jour trimestriellement ; les données démographiques annuellement. Chaque indicateur affiche sa date de dernière mise à jour.",
       // Limitations
@@ -955,7 +948,6 @@ export const translations = {
       limitation3Desc: "Nous montrons des données, pas des explications. Les raisons derrière les tendances sont complexes et souvent débattues.",
       limitation4: "Les données peuvent avoir des délais.",
       limitation4Desc: "Les statistiques officielles prennent du temps à compiler. Les données les plus récentes peuvent dater de plusieurs mois ou années.",
-      // CTA
       ctaTitle: "La connaissance est un pouvoir. Utilisez-la sagement.",
       ctaText: "La prochaine fois que vous entendez une affirmation audacieuse sur la Suisse, vérifiez les données. Restez informé—avec des faits, pas des suppositions.",
     },
