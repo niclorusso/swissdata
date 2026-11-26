@@ -52,43 +52,42 @@ function SectionSwitcher() {
   const current = FAMILY_SITES.find((site) => site.id === CURRENT_SITE)!;
 
   return (
-    <div className="flex items-center gap-1.5 sm:gap-2 text-base sm:text-lg leading-none whitespace-nowrap min-w-0 max-[359px]:text-sm max-[359px]:gap-1">
+    // the panel opens under the lockup, aligned with the mark
+    <div ref={root} onBlur={onBlur} className="relative flex items-center gap-1.5 sm:gap-2 text-base sm:text-lg leading-none whitespace-nowrap min-w-0 max-[359px]:gap-1">
       <Link href={localePath(locale)} className="inline-flex items-center gap-1.5 max-[359px]:gap-1 sm:gap-2 min-h-[44px]" aria-label="SwissData">
         <BrandMark size={28} className="w-6 h-6 sm:w-7 sm:h-7" />
         <Wordmark />
       </Link>
       <span aria-hidden="true" className="font-normal text-[#a9a69c]">/</span>
-      <div ref={root} className="relative max-[379px]:static" onBlur={onBlur}>
-        <button
-          ref={button}
-          type="button"
-          aria-expanded={open}
-          aria-controls={id}
-          aria-label={`${t.nav.switchSite}: ${current.short[locale]}`}
-          onClick={() => setOpen(!open)}
-          className="inline-flex items-center gap-[3px] min-h-[44px] font-semibold text-swiss-gray-600 hover:text-ink"
-        >
-          {current.short[locale]}
-          <Chevron className={cn("transition-transform", open && "rotate-180")} />
-        </button>
-        <div id={id} hidden={!open} className={cn(panel, "-left-3 max-[379px]:left-0 min-w-[230px] max-w-[calc(100vw-32px)]")}>
-          <ul aria-label={t.nav.switchSite}>
-            {FAMILY_SITES.map((site) => (
-              <li key={site.id}>
-                <a
-                  href={familySiteHref(site, locale)}
-                  aria-current={site.id === CURRENT_SITE ? "true" : undefined}
-                  className={cn(
-                    "flex items-center gap-1.5 min-h-[44px] px-2.5 rounded-lg text-[15px] hover:bg-paper",
-                    site.id === CURRENT_SITE ? "bg-paper text-ink font-semibold" : "text-swiss-gray-600 font-medium"
-                  )}
-                >
-                  <Wordmark /> <span>/ {site.short[locale]}</span>
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
+      <button
+        ref={button}
+        type="button"
+        aria-expanded={open}
+        aria-controls={id}
+        aria-label={`${t.nav.switchSite}: ${current.short[locale]}`}
+        onClick={() => setOpen(!open)}
+        className="inline-flex items-center gap-[3px] min-h-[44px] font-semibold text-swiss-gray-600 hover:text-ink"
+      >
+        {current.short[locale]}
+        <Chevron className={cn("transition-transform", open && "rotate-180")} />
+      </button>
+      <div id={id} hidden={!open} className={cn(panel, "left-0 min-w-[230px] max-w-[calc(100vw-32px)]")}>
+        <ul aria-label={t.nav.switchSite}>
+          {FAMILY_SITES.map((site) => (
+            <li key={site.id}>
+              <a
+                href={familySiteHref(site, locale)}
+                aria-current={site.id === CURRENT_SITE ? "true" : undefined}
+                className={cn(
+                  "flex items-center gap-1.5 min-h-[44px] px-2.5 rounded-lg text-[15px] hover:bg-paper",
+                  site.id === CURRENT_SITE ? "bg-paper text-ink font-[650]" : "text-swiss-gray-600 font-medium"
+                )}
+              >
+                <Wordmark /> <span>/ {site.short[locale]}</span>
+              </a>
+            </li>
+          ))}
+        </ul>
       </div>
     </div>
   );
@@ -129,12 +128,12 @@ function LanguageMenu() {
                 aria-current={language.code === locale ? "true" : undefined}
                 onClick={() => rememberLocale(language.code)}
                 className={cn(
-                  "flex w-full items-center justify-between gap-4 min-h-[44px] px-2.5 rounded-lg text-[15px] hover:bg-paper",
+                  "flex w-full items-center gap-2.5 min-h-[44px] px-2.5 rounded-lg text-[15px] hover:bg-paper",
                   language.code === locale ? "bg-paper text-ink font-semibold" : "text-swiss-gray-600 font-medium"
                 )}
               >
+                <span className="w-6 font-semibold">{language.code.toUpperCase()}</span>
                 {language.label}
-                <span className="text-sm">{language.code.toUpperCase()}</span>
               </a>
             </li>
           ))}
@@ -152,10 +151,9 @@ function PageRow() {
   const [more, setMore] = useState({ left: false, right: false });
 
   const pages = [
-    { href: localePath(locale), label: t.nav.dashboard },
     { href: localePath(locale, "/statistics"), label: t.nav.statistics },
-    { href: localePath(locale, "/quiz"), label: t.nav.quiz },
     { href: localePath(locale, "/cantons"), label: t.nav.cantons },
+    { href: localePath(locale, "/quiz"), label: t.nav.quiz },
     { href: localePath(locale, "/about"), label: t.nav.about },
   ];
 
@@ -194,7 +192,7 @@ function PageRow() {
                 href={page.href}
                 aria-current={active ? "page" : undefined}
                 className={cn(
-                  "flex-none inline-flex items-center min-h-[44px] px-2.5 text-[15px] font-medium whitespace-nowrap",
+                  "flex-none inline-flex items-center min-h-[44px] px-2.5 text-[15px] font-[550] whitespace-nowrap",
                   active ? "text-ink shadow-[inset_0_-3px_0_var(--sdf-accent)]" : "text-swiss-gray-600 hover:text-ink"
                 )}
               >
@@ -218,10 +216,13 @@ function PageRow() {
   );
 }
 
-/** Family header: mark + "SwissData / Section" at the left, the language pill at the right, the pages as one row of words. */
+/**
+ * Family header: mark + "SwissData / Section" at the left, the language pill at the right, the pages as one row
+ * of words. On the paper background and not sticky, as on the other two sites: more room for the content on phones.
+ */
 export function Navigation() {
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-line bg-[rgba(245,244,239,0.92)] backdrop-blur">
+    <header className="relative z-50 w-full border-b border-line bg-paper">
       <div className="container mx-auto px-4">
         {/* below 1024px: two rows (lockup and language, then the pages); from 1024px: one row */}
         <div className="relative flex flex-wrap items-center gap-x-2 sm:gap-x-4 min-h-[52px] lg:min-h-[60px]">

@@ -121,6 +121,30 @@ export function formatSwissDate(iso: string): string {
   return match ? `${match[3]}.${match[2]}.${match[1]}` : iso;
 }
 
+const MONTHS: Record<NumberLocale, string[]> = {
+  it: ["gennaio", "febbraio", "marzo", "aprile", "maggio", "giugno", "luglio", "agosto", "settembre", "ottobre", "novembre", "dicembre"],
+  de: ["Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember"],
+  fr: ["janvier", "février", "mars", "avril", "mai", "juin", "juillet", "août", "septembre", "octobre", "novembre", "décembre"],
+  en: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+};
+
+/**
+ * ISO date written out, without Date or Intl: "2026-11-26" -> it "26 novembre 2026", de "26. November 2026",
+ * fr "26 novembre 2026", en "26 November 2026". The first of the month: it "1° ottobre", fr "1er octobre".
+ * A month only ("2026-08") -> "agosto 2026", "August 2026".
+ */
+export function formatLongDate(iso: string, locale: NumberLocale = "en"): string {
+  const match = /^(\d{4})-(\d{2})(?:-(\d{2}))?$/.exec(iso);
+  if (!match) return iso;
+  const year = match[1];
+  const month = MONTHS[locale][Number(match[2]) - 1];
+  if (!month) return iso;
+  if (!match[3]) return `${month} ${year}`;
+  const day = Number(match[3]);
+  const dayText = day === 1 && locale === "it" ? "1°" : day === 1 && locale === "fr" ? "1er" : locale === "de" ? `${day}.` : String(day);
+  return `${dayText}${NBSP}${month} ${year}`;
+}
+
 // Units as they are written in the data files -> unit shown in each language
 const unitTranslations: Record<NumberLocale, Record<string, string>> = {
   en: {

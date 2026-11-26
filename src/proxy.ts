@@ -3,7 +3,7 @@ import { DEFAULT_LOCALE, LOCALE_COOKIE, isLocale, localeFromAcceptLanguage } fro
 
 /**
  * The addresses without a language (/, /cantons, /statistics, /quiz, /about: the addresses of the site
- * before each language had its own) send the visitor to the same page in a language: the one chosen in
+ * before each language had its own; /changes as well) send the visitor to the same page in a language: the one chosen in
  * the header (cookie swissdata-locale), else the first of the browser's languages that the site has
  * (Accept-Language, by q value), else English. Only a redirect: the pages themselves are static HTML,
  * prerendered in each language, and this code does not run for them.
@@ -28,7 +28,7 @@ export function proxy(request: NextRequest) {
   return response;
 }
 
-// Only the old addresses; every address that starts with /it, /de, /fr or /en goes straight to its page.
+// Only the addresses without a language; every address that starts with /it, /de, /fr or /en goes straight to its page.
 export const config = {
-  matcher: ["/", "/cantons", "/statistics", "/quiz", "/about"],
+  matcher: ["/", "/cantons", "/statistics", "/quiz", "/about", "/changes"],
 };

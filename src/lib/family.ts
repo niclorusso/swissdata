@@ -38,7 +38,7 @@ export const FAMILY_SITES: FamilySite[] = [
       it: "Il Consiglio nazionale, votazione per votazione.",
       en: "The National Council, vote by vote.",
       de: "Der Nationalrat, Abstimmung für Abstimmung.",
-      fr: "Le Conseil national, vote par vote.",
+      fr: "Le Conseil national, vote après vote.",
     },
   },
   {
@@ -75,9 +75,10 @@ export const FAMILY_INDEPENDENT: LocalizedText = {
   fr: "Projet indépendant de Nicola Lo Russo. Ce n'est pas un site officiel de la Confédération.",
 };
 
+/** The languages in the header menu, in the order of the three SwissData sites. */
 export const LANGUAGES: { code: "it" | "de" | "fr" | "en"; label: string }[] = [
-  { code: "it", label: "Italiano" },
   { code: "de", label: "Deutsch" },
   { code: "fr", label: "Français" },
+  { code: "it", label: "Italiano" },
   { code: "en", label: "English" },
 ];

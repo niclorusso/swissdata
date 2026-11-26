@@ -6,7 +6,6 @@ export const translations = {
   en: {
     // Navigation
     nav: {
-      dashboard: "Dashboard",
       statistics: "Statistics",
       quiz: "Quiz",
       cantons: "Cantons",
@@ -18,6 +17,9 @@ export const translations = {
 
     common: {
       source: "Source",
+      lastCheck: "Data last checked on {lastCheck}",
+      published: "published on {date}",
+      publishedMonth: "published in {month}",
     },
 
     categoryName: {
@@ -28,10 +30,31 @@ export const translations = {
 
     // Footer
     footer: {
-      disclaimer: "Each figure names its source: Swiss federal offices, Eurostat, the OECD and others. Check the source before relying on a figure.",
+      disclaimer: "Every figure links to its source; for official use, rely on the source.",
       about: "About",
+      changeLog: "Data changes",
+      contact: "Contact",
     },
 
+
+    // Data changes page
+    changes: {
+      title: "Data changes",
+      intro: "Corrections and updates to the figures and texts of the site, with their date. Data last checked on {lastCheck}.",
+      update: "Update",
+      correction: "Correction",
+      source: "Source",
+      reportTitle: "Report an error",
+      reportLink: "Report an error",
+      reportNote: "The link opens a short form on GitHub; a GitHub account is needed for it.",
+    },
+
+    // Titles and description of the pages (link previews, search results)
+    meta: {
+      homeTitle: "SwissData – Official statistics on Switzerland",
+      aboutTitle: "About SwissData",
+      description: "Official statistics on Switzerland in one place, each with its source and year. Independent site by Nicola Lo Russo, not run by the Confederation.",
+    },
     // Home page
     home: {
       title: "Switzerland",
@@ -243,11 +266,10 @@ export const translations = {
   it: {
     // Navigation
     nav: {
-      dashboard: "Dashboard",
       statistics: "Statistiche",
       quiz: "Quiz",
       cantons: "Cantoni",
-      about: "Chi siamo",
+      about: "Il progetto",
       switchSite: "Sezioni di SwissData",
       language: "Lingua",
       pages: "Pagine",
@@ -255,6 +277,9 @@ export const translations = {
 
     common: {
       source: "Fonte",
+      lastCheck: "Ultima verifica dei dati: {lastCheck}",
+      published: "pubblicato il {date}",
+      publishedMonth: "pubblicato {month}",
     },
 
     categoryName: {
@@ -265,10 +290,31 @@ export const translations = {
 
     // Footer
     footer: {
-      disclaimer: "Ogni cifra indica la sua fonte: uffici federali svizzeri, Eurostat, OCSE e altre. Verifica la fonte prima di basarti su una cifra.",
-      about: "Chi siamo",
+      disclaimer: "Ogni cifra rimanda alla sua fonte; per un uso ufficiale fa fede la fonte.",
+      about: "Il progetto",
+      changeLog: "Modifiche ai dati",
+      contact: "Contatto",
     },
 
+
+    // Data changes page
+    changes: {
+      title: "Modifiche ai dati",
+      intro: "Correzioni e aggiornamenti delle cifre e dei testi del sito, con la data. Ultima verifica dei dati: {lastCheck}.",
+      update: "Aggiornamento",
+      correction: "Correzione",
+      source: "Fonte",
+      reportTitle: "Segnalare un errore",
+      reportLink: "Segnala un errore",
+      reportNote: "Il link apre un breve modulo su GitHub; per usarlo serve un account GitHub.",
+    },
+
+    // Titles and description of the pages (link previews, search results)
+    meta: {
+      homeTitle: "SwissData – Statistiche ufficiali sulla Svizzera",
+      aboutTitle: "Il progetto SwissData",
+      description: "Statistiche ufficiali sulla Svizzera in un unico posto, ognuna con fonte e anno. Sito indipendente di Nicola Lo Russo, non della Confederazione.",
+    },
     // Home page
     home: {
       title: "La Svizzera",
@@ -478,11 +524,10 @@ export const translations = {
   de: {
     // Navigation
     nav: {
-      dashboard: "Dashboard",
       statistics: "Statistiken",
       quiz: "Quiz",
       cantons: "Kantone",
-      about: "Über uns",
+      about: "Das Projekt",
       switchSite: "Bereiche von SwissData",
       language: "Sprache",
       pages: "Seiten",
@@ -490,6 +535,9 @@ export const translations = {
 
     common: {
       source: "Quelle",
+      lastCheck: "Daten zuletzt geprüft am {lastCheck}",
+      published: "veröffentlicht am {date}",
+      publishedMonth: "veröffentlicht im {month}",
     },
 
     categoryName: {
@@ -500,10 +548,31 @@ export const translations = {
 
     // Footer
     footer: {
-      disclaimer: "Jede Zahl nennt ihre Quelle: Schweizer Bundesämter, Eurostat, OECD und weitere. Prüfe die Quelle, bevor du dich auf eine Zahl stützt.",
-      about: "Über uns",
+      disclaimer: "Jede Zahl verweist auf ihre Quelle; für amtliche Zwecke gilt die Quelle.",
+      about: "Das Projekt",
+      changeLog: "Datenänderungen",
+      contact: "Kontakt",
     },
 
+
+    // Data changes page
+    changes: {
+      title: "Datenänderungen",
+      intro: "Korrekturen und Aktualisierungen der Zahlen und Texte der Website, mit Datum. Daten zuletzt geprüft am {lastCheck}.",
+      update: "Aktualisierung",
+      correction: "Korrektur",
+      source: "Quelle",
+      reportTitle: "Einen Fehler melden",
+      reportLink: "Fehler melden",
+      reportNote: "Der Link öffnet ein kurzes Formular auf GitHub; dafür braucht es ein GitHub-Konto.",
+    },
+
+    // Titles and description of the pages (link previews, search results)
+    meta: {
+      homeTitle: "SwissData – Amtliche Statistiken zur Schweiz",
+      aboutTitle: "Das Projekt SwissData",
+      description: "Amtliche Statistiken zur Schweiz an einem Ort, jede mit Quelle und Jahr. Unabhängige Website von Nicola Lo Russo, nicht des Bundes.",
+    },
     // Home page
     home: {
       title: "Die Schweiz",
@@ -715,7 +784,6 @@ export const translations = {
   fr: {
     // Navigation
     nav: {
-      dashboard: "Tableau de bord",
       statistics: "Statistiques",
       quiz: "Quiz",
       cantons: "Cantons",
@@ -727,6 +795,9 @@ export const translations = {
 
     common: {
       source: "Source",
+      lastCheck: "Données vérifiées le {lastCheck}",
+      published: "publié le {date}",
+      publishedMonth: "publié en {month}",
     },
 
     categoryName: {
@@ -737,10 +808,31 @@ export const translations = {
 
     // Footer
     footer: {
-      disclaimer: "Chaque chiffre indique sa source : offices fédéraux suisses, Eurostat, OCDE et autres. Vérifiez la source avant de vous appuyer sur un chiffre.",
+      disclaimer: "Chaque chiffre renvoie à sa source ; pour un usage officiel, seule la source fait foi.",
       about: "À propos",
+      changeLog: "Modifications des données",
+      contact: "Contact",
     },
 
+
+    // Data changes page
+    changes: {
+      title: "Modifications des données",
+      intro: "Corrections et mises à jour des chiffres et des textes du site, avec leur date. Données vérifiées le {lastCheck}.",
+      update: "Mise à jour",
+      correction: "Correction",
+      source: "Source",
+      reportTitle: "Signaler une erreur",
+      reportLink: "Signaler une erreur",
+      reportNote: "Le lien ouvre un court formulaire sur GitHub ; il faut un compte GitHub pour l'utiliser.",
+    },
+
+    // Titles and description of the pages (link previews, search results)
+    meta: {
+      homeTitle: "SwissData – Statistiques officielles sur la Suisse",
+      aboutTitle: "Le projet SwissData",
+      description: "Statistiques officielles sur la Suisse réunies en un seul endroit, chacune avec sa source et son année. Site indépendant de Nicola Lo Russo, pas de la Confédération.",
+    },
     // Home page
     home: {
       title: "La Suisse",

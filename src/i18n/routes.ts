@@ -6,7 +6,7 @@ export const SITE_URL = "https://swissdata-platform.ch";
  * The pages of the site, without the language ("" is the home page). Each one exists four times,
  * at /it…, /de…, /fr… and /en…, prerendered at build time.
  */
-export const PAGE_PATHS = ["", "/statistics", "/quiz", "/cantons", "/about"] as const;
+export const PAGE_PATHS = ["", "/statistics", "/quiz", "/cantons", "/about", "/changes"] as const;
 export type PagePath = (typeof PAGE_PATHS)[number];
 
 /** Order of the languages in the hreflang links and in the sitemap. */

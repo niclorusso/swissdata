@@ -6,6 +6,8 @@ import { Navigation } from "@/components/Navigation";
 import { BrandMark, Wordmark } from "@/components/family/BrandMark";
 import { CURRENT_SITE, FAMILY_INDEPENDENT, FAMILY_SITES, familySiteHref } from "@/lib/family";
 import { localePath } from "@/i18n/routes";
+import { CONTACT_LABEL, CONTACT_URL, DATA_CHECKED } from "@/data/meta";
+import { formatLongDate } from "@/lib/formatters";
 
 /** Family footer: the three SwissData sites and the line on independence first, then this site's own links. */
 function Footer() {
@@ -27,7 +29,7 @@ function Footer() {
                 aria-current={site.id === CURRENT_SITE ? "true" : undefined}
                 className={`block px-3.5 py-3 border border-white/[0.14] rounded-xl min-h-[44px] hover:border-white/40 ${site.id === CURRENT_SITE ? "bg-white/[0.07]" : ""}`}
               >
-                <strong className="block text-white text-[15px] font-semibold mb-0.5">{site.name[locale]}</strong>
+                <strong className="block text-white text-[15px] font-[650] mb-0.5">{site.name[locale]}</strong>
                 <span className="block text-source leading-[1.45]">{site.text[locale]}</span>
               </a>
             ))}
@@ -38,9 +40,8 @@ function Footer() {
         <div className="flex flex-wrap gap-x-5 gap-y-1.5 text-sm">
           {[
             { href: localePath(locale, "/about"), label: t.footer.about, external: false },
-            { href: "https://www.bfs.admin.ch", label: "BFS", external: true },
-            { href: "https://opendata.swiss", label: "OpenData", external: true },
-            { href: "https://www.netlify.com", label: "Powered by Netlify", external: true },
+            { href: localePath(locale, "/changes"), label: t.footer.changeLog, external: false },
+            { href: CONTACT_URL, label: `${t.footer.contact}: ${CONTACT_LABEL}`, external: true },
           ].map((link) => (
             <a
               key={link.href}
@@ -52,7 +53,21 @@ function Footer() {
             </a>
           ))}
         </div>
+        <p className="mt-1 text-sm text-[#d7dade]">
+          {t.common.lastCheck.replace("{lastCheck}", formatLongDate(DATA_CHECKED, locale))}
+        </p>
         <p className="mt-2 text-source max-w-[60ch]">{t.footer.disclaimer}</p>
+        {/* Netlify's open-source plan asks for this link; the owner will confirm whether the site is on that plan */}
+        <p className="mt-4 text-source">
+          <a
+            href="https://www.netlify.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center min-h-[44px] text-[#b9bdc3] hover:text-white hover:underline"
+          >
+            Powered by Netlify
+          </a>
+        </p>
       </div>
     </footer>
   );
