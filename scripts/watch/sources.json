@@ -10,7 +10,7 @@
     "http-regex": "A page that lists the editions: the set of matches of a pattern (e.g. file names with a year). Optional period: the highest year in the matches.",
     "calendar-year": "No request. The figure is defined per calendar year (premium of the year, budget of the year, state on 1 January): flags when the site shows an earlier year than today's.",
     "options": "compare_period: false = do not compare periods for this probe (why says why); period_offset: -1 = the site is expected to show the year before the newest one (e.g. the newest is only an estimate); edition: 'annual' = for a monthly or quarterly FSO table, only a new complete year counts as a new publication.",
-    "shown": "Where the period shown on the site is read: from indicators (src/data/indicators.ts, latest year in the chart), questions (src/data/questions.ts, year in the question), cantons (src/data/cantons.ts, year shown on the canton page), explanations (src/i18n/indicatorExplanations.ts, latest year in the English info text). A list checks several places."
+    "shown": "Where the period shown on the site is read: from indicators (src/data/indicators.ts, latest year in the chart), questions (src/data/questions.ts, year in the question), cantons (src/data/cantons.ts, year shown on the canton page), context (src/data/indicators.ts, latest year in the English info text of the card: context and the year of related; the same texts in it/de/fr are in src/i18n/dataTranslations.ts). A list checks several places."
   },
   "redirect_rules": [
     {"from": "^https://www\\.bfs\\.admin\\.ch/asset/(de|en|fr|it)/[^/]+$", "to": "^https://statistik\\.admin\\.ch/(de|en|fr|it)/asset/\\d+$", "why": "FSO asset links by order number resolve to the page of the current asset"},
@@ -62,8 +62,8 @@
       "id": "indicator/inflation-rate",
       "label": "Inflation rate, CPI annual average (indicator)",
       "publisher": "FSO",
-      "used_in": {"file": "src/data/indicators.ts", "key": "inflation-rate: value, previousValue, trendPercentage, lastUpdated, context, historicalData", "also": "src/i18n/dataTranslations.ts (it, de, fr) and src/i18n/indicatorExplanations.ts (inflation-rate, four languages)"},
-      "shown": [{"from": "indicators", "id": "inflation-rate"}, {"from": "explanations", "id": "inflation-rate"}],
+      "used_in": {"file": "src/data/indicators.ts", "key": "inflation-rate: value, previousValue, trendPercentage, lastUpdated, context, historicalData", "also": "src/i18n/dataTranslations.ts (it, de, fr)"},
+      "shown": [{"from": "indicators", "id": "inflation-rate"}, {"from": "context", "id": "inflation-rate"}],
       "url": "https://statistik.admin.ch/de/konsumentenpreise",
       "probes": [{"kind": "fso-dam", "orderNr": "cc-d-05.02.08", "edition": "annual", "why": "monthly table; only a new complete year (December in) counts, the site shows annual averages"}]
     },
@@ -138,8 +138,8 @@
       "id": "indicator/crime-rate-per-1000",
       "label": "Criminal Code offences per 1,000 inhabitants (indicator)",
       "publisher": "FSO",
-      "used_in": {"file": "src/data/indicators.ts", "key": "crime-rate-per-1000: value, previousValue, trendPercentage, lastUpdated, context, historicalData", "also": "src/i18n/dataTranslations.ts (it, de, fr) and src/i18n/indicatorExplanations.ts (crime-rate-per-1000, four languages)"},
-      "shown": [{"from": "indicators", "id": "crime-rate-per-1000"}, {"from": "explanations", "id": "crime-rate-per-1000"}],
+      "used_in": {"file": "src/data/indicators.ts", "key": "crime-rate-per-1000: value, previousValue, trendPercentage, lastUpdated, context, historicalData", "also": "src/i18n/dataTranslations.ts (it, de, fr)"},
+      "shown": [{"from": "indicators", "id": "crime-rate-per-1000"}, {"from": "context", "id": "crime-rate-per-1000"}],
       "url": "https://statistik.admin.ch/de/themen/kriminalitaet-strafrecht",
       "probes": [{"kind": "fso-pxweb", "cube": "px-x-1903020100_101"}]
     },
@@ -147,8 +147,8 @@
       "id": "indicator/healthcare-cost",
       "label": "Healthcare costs, % of GDP (indicator)",
       "publisher": "FSO",
-      "used_in": {"file": "src/data/indicators.ts", "key": "healthcare-cost: value, previousValue, trendPercentage, lastUpdated, context, historicalData", "also": "src/i18n/dataTranslations.ts (it, de, fr) and src/i18n/indicatorExplanations.ts (healthcare-cost, four languages)"},
-      "shown": [{"from": "indicators", "id": "healthcare-cost"}, {"from": "explanations", "id": "healthcare-cost"}],
+      "used_in": {"file": "src/data/indicators.ts", "key": "healthcare-cost: value, previousValue, trendPercentage, lastUpdated, context, historicalData", "also": "src/i18n/dataTranslations.ts (it, de, fr)"},
+      "shown": [{"from": "indicators", "id": "healthcare-cost"}, {"from": "context", "id": "healthcare-cost"}],
       "url": "https://statistik.admin.ch/de/themen/gesundheit/kosten-finanzierung-gesundheitswesens",
       "probes": [{"kind": "fso-dam", "orderNr": "je-d-14.05.01.01", "period_offset": -1, "why": "the last year of this table is an FSO estimate (2025 in the edition of 24.04.2026); the site shows the provisional year before it"}]
     },
@@ -165,8 +165,8 @@
       "id": "indicator/poverty-rate",
       "label": "Poverty rate, absolute (indicator)",
       "publisher": "FSO",
-      "used_in": {"file": "src/data/indicators.ts", "key": "poverty-rate: value, previousValue, trendPercentage, lastUpdated, context, historicalData", "also": "src/i18n/dataTranslations.ts (it, de, fr) and src/i18n/indicatorExplanations.ts (poverty-rate, four languages)"},
-      "shown": [{"from": "indicators", "id": "poverty-rate"}, {"from": "explanations", "id": "poverty-rate"}],
+      "used_in": {"file": "src/data/indicators.ts", "key": "poverty-rate: value, previousValue, trendPercentage, lastUpdated, context, historicalData", "also": "src/i18n/dataTranslations.ts (it, de, fr)"},
+      "shown": [{"from": "indicators", "id": "poverty-rate"}, {"from": "context", "id": "poverty-rate"}],
       "url": "https://statistik.admin.ch/de/asset/36395150",
       "probes": [{"kind": "fso-dam", "orderNr": "je-d-20.03.02.01.01"}]
     },
@@ -174,8 +174,8 @@
       "id": "indicator/renewable-energy",
       "label": "Renewable share of final energy consumption (indicator)",
       "publisher": "SFOE",
-      "used_in": {"file": "src/data/indicators.ts", "key": "renewable-energy: value, previousValue, trendPercentage, lastUpdated, context, historicalData", "also": "src/i18n/dataTranslations.ts (it, de, fr) and src/i18n/indicatorExplanations.ts (renewable-energy, four languages)"},
-      "shown": [{"from": "indicators", "id": "renewable-energy"}, {"from": "explanations", "id": "renewable-energy"}],
+      "used_in": {"file": "src/data/indicators.ts", "key": "renewable-energy: value, previousValue, trendPercentage, lastUpdated, context, historicalData", "also": "src/i18n/dataTranslations.ts (it, de, fr)"},
+      "shown": [{"from": "indicators", "id": "renewable-energy"}, {"from": "context", "id": "renewable-energy"}],
       "url": "https://www.admin.ch/de/newnsb/YQtEZcK-D9fQ",
       "probes": [{"kind": "fso-dam", "orderNr": "ind-d-21.02.30.0702.02.01", "why": "FSO indicator table built on the SFOE renewable energy statistics; it follows the SFOE edition by a few months"}]
     },

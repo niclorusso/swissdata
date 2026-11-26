@@ -81,7 +81,7 @@ PROBE_KEYS = {
     "calendar-year": (),
 }
 KINDS = set(PROBE_KEYS)
-SHOWN_FROM = {"indicators", "questions", "cantons", "build_cantons", "explanations", "static"}
+SHOWN_FROM = {"indicators", "questions", "cantons", "build_cantons", "context", "static"}
 
 
 # ---------------------------------------------------------------------------
@@ -648,10 +648,10 @@ def parse_cantons_ts(text):
     return out
 
 
-def parse_explanations(text):
-    """id -> English text of the indicator explanations (src/i18n/indicatorExplanations.ts)."""
-    parts = re.split(r'\n  "([a-z0-9-]+)": \{', text)
-    return {name: body.split("\n    it:")[0] for name, body in zip(parts[1::2], parts[2::2])}
+def ts_related_year(block):
+    """Year of the other official measure named on the card (`related: { ..., year: 2024, ... }`), or None."""
+    m = re.search(r"\n\s*related:\s*\{[^\n]*?\byear:\s*(\d{4})", block or "")
+    return int(m.group(1)) if m else None
 
 
 class SiteData:
@@ -662,7 +662,6 @@ class SiteData:
         self.questions = self._parse("src/data/questions.ts", ts_blocks, {})
         self.cantons = self._parse("src/data/cantons.ts", parse_cantons_ts, {})
         self.cantons_py = self._parse("scripts/data/build_cantons.py", py_constants, {})
-        self.explanations = self._parse("src/i18n/indicatorExplanations.ts", parse_explanations, {})
         sources_ts = self._read("src/data/sources.ts") or ""
         self.about = dict(re.findall(r'abbr:\s*"([^"]+)",\s*\n\s*url:\s*"([^"]+)"', sources_ts))
 
@@ -713,15 +712,21 @@ class SiteData:
                 out["err"] = f"no constant {spec['year_const']} in scripts/data/build_cantons.py"
                 return out
             out.update(year=int(str(raw)[:4]), url=self.cantons_py.get(spec.get("url_const")), how=f"{spec['year_const']} = {raw}")
-        elif src == "explanations":
-            text = self.explanations.get(spec["id"])
-            out.update(where="src/i18n/indicatorExplanations.ts",
-                       edit=f"`src/i18n/indicatorExplanations.ts` → `{spec['id']}` (what/why texts, four languages)")
-            if text is None:
-                out["err"] = f"no explanation {spec['id']} in src/i18n/indicatorExplanations.ts"
+        elif src == "context":
+            # the info text of a card: `context` (English) and the year of the `related` measure;
+            # the same texts in Italian, German and French are in src/i18n/dataTranslations.ts
+            b = self.indicators.get(spec["id"])
+            out.update(where="src/data/indicators.ts (context)",
+                       edit=f"`src/data/indicators.ts` → `{spec['id']}`: `context` and `related` (English), "
+                            f"and `src/i18n/dataTranslations.ts` → `{spec['id']}` (it, de, fr)")
+            if b is None:
+                out["err"] = f"no indicator with id {spec['id']} in src/data/indicators.ts"
                 return out
-            ys = years_in(text)
-            out.update(year=max(ys) if ys else None, how="latest year named in the info text")
+            ys = years_in(ts_field(b, "context"))
+            related = ts_related_year(b)
+            if related:
+                ys.append(related)
+            out.update(year=max(ys) if ys else None, how="latest year named in the info text (context and related)")
         elif src == "static":
             out.update(where="registry", edit="the registry", year=spec.get("period"), url=spec.get("url"),
                        how="period set in the registry")
@@ -771,7 +776,7 @@ def check_shown(spec):
     src = spec.get("from")
     if src not in SHOWN_FROM:
         return f"'shown.from' must be one of {', '.join(sorted(SHOWN_FROM))}"
-    need = {"indicators": ("id",), "questions": ("id",), "explanations": ("id",), "build_cantons": ("year_const",),
+    need = {"indicators": ("id",), "questions": ("id",), "context": ("id",), "build_cantons": ("year_const",),
             "static": ("period",), "cantons": ()}[src]
     for key in need:
         if key not in spec:
@@ -1318,7 +1323,7 @@ def render_source(L, e, open_only=False):
         L.append("- Behind the source:")
         for it, pl, expected in gaps:
             L.append(f"  - {it['label']}: {pl['where']} shows {pl['year']}, the source has {expected}. "
-                     f"Edit {where(it['used_in']) if pl['where'] != 'src/i18n/indicatorExplanations.ts' else pl['edit']}; "
+                     f"Edit {pl['edit'] if pl['spec'].get('from') == 'context' else where(it['used_in'])}; "
                      f"link on the site: {it['_url']}")
     others = [it for it in e.get("users", []) if it["id"] not in {g[0]["id"] for g in gaps}]
     if others:
