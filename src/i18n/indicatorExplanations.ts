@@ -182,8 +182,8 @@ const indicatorExplanations: Record<string, Record<Locale, { what: ExplanationTe
         statistics: "Il tasso a cui i prezzi aumentano nel tempo, misurato dall'Indice dei Prezzi al Consumo (IPC).",
       },
       why: {
-        card: "La BNS definisce la stabilità dei prezzi come un aumento dei prezzi al consumo inferiore al 2% all'anno; anche un calo duraturo dei prezzi (deflazione) la viola. Dal 2000 al 2025 il rincaro in Svizzera è stato in media dello 0,6% all'anno.",
-        statistics: "La BNS definisce la stabilità dei prezzi come un aumento dei prezzi al consumo inferiore al 2% all'anno. Dal 2000 al 2025 il rincaro in Svizzera è stato in media dello 0,6% all'anno.",
+        card: "La BNS definisce la stabilità dei prezzi come un aumento dei prezzi al consumo inferiore al 2\u00A0% all'anno; anche un calo duraturo dei prezzi (deflazione) la viola. Dal 2000 al 2025 il rincaro in Svizzera è stato in media dello 0,6\u00A0% all'anno.",
+        statistics: "La BNS definisce la stabilità dei prezzi come un aumento dei prezzi al consumo inferiore al 2\u00A0% all'anno. Dal 2000 al 2025 il rincaro in Svizzera è stato in media dello 0,6\u00A0% all'anno.",
       },
     },
     de: {
@@ -192,8 +192,8 @@ const indicatorExplanations: Record<string, Record<Locale, { what: ExplanationTe
         statistics: "Die Rate, mit der die Preise im Laufe der Zeit steigen, gemessen am Konsumentenpreisindex (KPI).",
       },
       why: {
-        card: "Die SNB versteht unter Preisstabilität einen Anstieg der Konsumentenpreise von weniger als 2% pro Jahr; auch ein anhaltender Rückgang des Preisniveaus (Deflation) verletzt sie. Von 2000 bis 2025 betrug die Teuerung in der Schweiz im Durchschnitt 0,6% pro Jahr.",
-        statistics: "Die SNB versteht unter Preisstabilität einen Anstieg der Konsumentenpreise von weniger als 2% pro Jahr. Von 2000 bis 2025 betrug die Teuerung in der Schweiz im Durchschnitt 0,6% pro Jahr.",
+        card: "Die SNB versteht unter Preisstabilität einen Anstieg der Konsumentenpreise von weniger als 2\u00A0% pro Jahr; auch ein anhaltender Rückgang des Preisniveaus (Deflation) verletzt sie. Von 2000 bis 2025 betrug die Teuerung in der Schweiz im Durchschnitt 0,6\u00A0% pro Jahr.",
+        statistics: "Die SNB versteht unter Preisstabilität einen Anstieg der Konsumentenpreise von weniger als 2\u00A0% pro Jahr. Von 2000 bis 2025 betrug die Teuerung in der Schweiz im Durchschnitt 0,6\u00A0% pro Jahr.",
       },
     },
     fr: {
@@ -202,8 +202,8 @@ const indicatorExplanations: Record<string, Record<Locale, { what: ExplanationTe
         statistics: "Le taux auquel les prix augmentent au fil du temps, mesuré par l'Indice des Prix à la Consommation (IPC).",
       },
       why: {
-        card: "La BNS assimile la stabilité des prix à une hausse des prix à la consommation de moins de 2% par an ; une baisse durable des prix (déflation) y contrevient aussi. De 2000 à 2025, le renchérissement en Suisse a été en moyenne de 0,6% par an.",
-        statistics: "La BNS assimile la stabilité des prix à une hausse des prix à la consommation de moins de 2% par an. De 2000 à 2025, le renchérissement en Suisse a été en moyenne de 0,6% par an.",
+        card: "La BNS assimile la stabilité des prix à une hausse des prix à la consommation de moins de 2\u00A0% par an ; une baisse durable des prix (déflation) y contrevient aussi. De 2000 à 2025, le renchérissement en Suisse a été en moyenne de 0,6\u00A0% par an.",
+        statistics: "La BNS assimile la stabilité des prix à une hausse des prix à la consommation de moins de 2\u00A0% par an. De 2000 à 2025, le renchérissement en Suisse a été en moyenne de 0,6\u00A0% par an.",
       },
     },
   },
@@ -535,8 +535,8 @@ const indicatorExplanations: Record<string, Record<Locale, { what: ExplanationTe
     },
     it: {
       what: {
-        card: "Numero di reati denunciati ogni 100'000 abitanti.",
-        statistics: "Reati denunciati ogni 100'000 abitanti.",
+        card: "Numero di reati denunciati ogni 100\u202F000 abitanti.",
+        statistics: "Reati denunciati ogni 100\u202F000 abitanti.",
       },
       why: {
         card: "Misura la sicurezza pubblica. Nota: i tassi di denuncia variano, quindi confronta le tendenze nel tempo.",
@@ -545,8 +545,8 @@ const indicatorExplanations: Record<string, Record<Locale, { what: ExplanationTe
     },
     de: {
       what: {
-        card: "Anzahl gemeldeter Straftaten pro 100'000 Einwohner.",
-        statistics: "Gemeldete Straftaten pro 100'000 Einwohner.",
+        card: "Anzahl gemeldeter Straftaten pro 100\u202F000 Einwohner.",
+        statistics: "Gemeldete Straftaten pro 100\u202F000 Einwohner.",
       },
       why: {
         card: "Misst die öffentliche Sicherheit. Hinweis: Anzeigequoten variieren, daher besser Trends im Zeitverlauf vergleichen.",
@@ -555,8 +555,8 @@ const indicatorExplanations: Record<string, Record<Locale, { what: ExplanationTe
     },
     fr: {
       what: {
-        card: "Nombre d'infractions pénales signalées pour 100'000 habitants.",
-        statistics: "Infractions pénales signalées pour 100'000 habitants.",
+        card: "Nombre d'infractions pénales signalées pour 100\u202F000 habitants.",
+        statistics: "Infractions pénales signalées pour 100\u202F000 habitants.",
       },
       why: {
         card: "Mesure la sécurité publique. Note : les taux de signalement varient, comparez donc les tendances dans le temps plutôt que les chiffres absolus.",
@@ -570,16 +570,16 @@ const indicatorExplanations: Record<string, Record<Locale, { what: ExplanationTe
       why: "Measures public safety. In 2025 recorded offences fell by 1.5% after three years of increases.",
     },
     it: {
-      what: "Reati secondo il Codice penale svizzero (CP) registrati dalla polizia per 1'000 residenti permanenti.",
-      why: "Misura la sicurezza pubblica. Nel 2025 i reati registrati sono diminuiti dell'1,5% dopo tre anni di aumento.",
+      what: "Reati secondo il Codice penale svizzero (CP) registrati dalla polizia per 1000 residenti permanenti.",
+      why: "Misura la sicurezza pubblica. Nel 2025 i reati registrati sono diminuiti dell'1,5\u00A0% dopo tre anni di aumento.",
     },
     de: {
-      what: "Polizeilich registrierte Straftaten nach Schweizer Strafgesetzbuch (StGB) pro 1'000 ständige Einwohner.",
-      why: "Misst die öffentliche Sicherheit. 2025 gingen die registrierten Straftaten um 1,5% zurück, nach drei Jahren mit Zunahmen.",
+      what: "Polizeilich registrierte Straftaten nach Schweizer Strafgesetzbuch (StGB) pro 1000 ständige Einwohner.",
+      why: "Misst die öffentliche Sicherheit. 2025 gingen die registrierten Straftaten um 1,5\u00A0% zurück, nach drei Jahren mit Zunahmen.",
     },
     fr: {
-      what: "Infractions au Code pénal suisse (CP) enregistrées par la police pour 1'000 résidents permanents.",
-      why: "Mesure la sécurité publique. En 2025 les infractions enregistrées ont reculé de 1,5% après trois années de hausse.",
+      what: "Infractions au Code pénal suisse (CP) enregistrées par la police pour 1000 résidents permanents.",
+      why: "Mesure la sécurité publique. En 2025 les infractions enregistrées ont reculé de 1,5\u00A0% après trois années de hausse.",
     },
   },
   "healthcare-cost": {
@@ -649,15 +649,15 @@ const indicatorExplanations: Record<string, Record<Locale, { what: ExplanationTe
     },
     it: {
       what: "Tasso di povertà (assoluta): quota della popolazione con un reddito inferiore alla soglia di povertà.",
-      why: "Nel 2024 la soglia di povertà era di 2388 franchi al mese per una persona sola. Il tasso di rischio di povertà (reddito inferiore al 60% della mediana) è un dato distinto: 16,4%.",
+      why: "Nel 2024 la soglia di povertà era di 2388 franchi al mese per una persona sola. Il tasso di rischio di povertà (reddito inferiore al 60\u00A0% della mediana) è un dato distinto: 16,4\u00A0%.",
     },
     de: {
       what: "Armutsquote (absolut): Anteil der Bevölkerung mit einem Einkommen unter der Armutsgrenze.",
-      why: "2024 lag die Armutsgrenze bei 2388 Franken pro Monat für eine Einzelperson. Die Armutsgefährdungsquote (Einkommen unter 60% des Medians) ist eine eigene Zahl: 16,4%.",
+      why: "2024 lag die Armutsgrenze bei 2388 Franken pro Monat für eine Einzelperson. Die Armutsgefährdungsquote (Einkommen unter 60\u00A0% des Medians) ist eine eigene Zahl: 16,4\u00A0%.",
     },
     fr: {
       what: "Taux de pauvreté (absolue) : part de la population dont le revenu est inférieur au seuil de pauvreté.",
-      why: "En 2024 le seuil de pauvreté était de 2388 francs par mois pour une personne seule. Le taux de risque de pauvreté (revenu inférieur à 60% de la médiane) est un chiffre distinct : 16,4%.",
+      why: "En 2024 le seuil de pauvreté était de 2388 francs par mois pour une personne seule. Le taux de risque de pauvreté (revenu inférieur à 60\u00A0% de la médiane) est un chiffre distinct : 16,4\u00A0%.",
     },
   },
   "renewable-energy": {
@@ -667,15 +667,15 @@ const indicatorExplanations: Record<string, Record<Locale, { what: ExplanationTe
     },
     it: {
       what: "Quota del consumo finale totale di energia coperta da fonti rinnovabili (idrico, solare, eolico, biomassa).",
-      why: "Indica i progressi verso gli obiettivi climatici. Nel 2025 era rinnovabile il 68,3% della produzione netta di elettricità, contro il 30,6% del consumo finale totale di energia.",
+      why: "Indica i progressi verso gli obiettivi climatici. Nel 2025 era rinnovabile il 68,3\u00A0% della produzione netta di elettricità, contro il 30,6\u00A0% del consumo finale totale di energia.",
     },
     de: {
       what: "Anteil des gesamten Endenergieverbrauchs aus erneuerbaren Quellen (Wasser, Solar, Wind, Biomasse).",
-      why: "Zeigt Fortschritte bei den Klimazielen. 2025 waren 68,3% der Netto-Stromproduktion erneuerbar, gegenüber 30,6% des gesamten Endenergieverbrauchs.",
+      why: "Zeigt Fortschritte bei den Klimazielen. 2025 waren 68,3\u00A0% der Netto-Stromproduktion erneuerbar, gegenüber 30,6\u00A0% des gesamten Endenergieverbrauchs.",
     },
     fr: {
       what: "Part de la consommation finale totale d'énergie provenant de sources renouvelables (hydraulique, solaire, éolien, biomasse).",
-      why: "Indique les progrès vers les objectifs climatiques. En 2025, 68,3% de la production nette d'électricité était renouvelable, contre 30,6% de la consommation finale totale d'énergie.",
+      why: "Indique les progrès vers les objectifs climatiques. En 2025, 68,3\u00A0% de la production nette d'électricité était renouvelable, contre 30,6\u00A0% de la consommation finale totale d'énergie.",
     },
   },
 };
