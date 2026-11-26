@@ -214,9 +214,9 @@ const questionTranslationsIT: Record<
   },
   "snb-gold-reserves": {
     question:
-      "Quante tonnellate d'oro possiede la Banca nazionale svizzera?",
+      "Quante tonnellate d'oro possedeva la Banca nazionale svizzera a settembre 2026?",
     explanation:
-      "La BNS possiede 1'040 tonnellate d'oro (1'039,9 nei dati del FMI per settembre 2026). Nella tabella del World Gold Council di febbraio 2026 era l'ottava riserva ufficiale, contando anche il FMI. Circa il 70% è custodito in Svizzera, il 20% presso la Banca d'Inghilterra e il 10% presso la Banca del Canada. Nel 2014 il popolo ha respinto un'iniziativa che avrebbe obbligato la BNS a tenere in oro almeno il 20% dei suoi attivi. Il grafico mostra i dati del FMI per settembre e ottobre 2026 (Russia: novembre 2025, ultimo dato comunicato): la riserva della Cina ora supera quella della Russia.",
+      "La BNS possiede 1'040 tonnellate d'oro (1'039,9 nei dati del FMI per settembre 2026). Nella tabella del World Gold Council di febbraio 2026 era l'ottava riserva ufficiale, contando anche il FMI. Circa il 70% è custodito in Svizzera, il 20% presso la Banca d'Inghilterra e il 10% presso la Banca del Canada. Nel 2014 il popolo ha respinto un'iniziativa che avrebbe obbligato la BNS a tenere in oro almeno il 20% dei suoi attivi. Il grafico mostra i dati del FMI per settembre e ottobre 2026 (Russia: novembre 2025, ultimo mese presente nei dati del FMI): la riserva della Cina ora supera quella della Russia.",
     comparisonLabel: "Riserve ufficiali d'oro in tonnellate, settembre-ottobre 2026 (FMI)",
   },
   "wealth-managed": {
@@ -235,7 +235,7 @@ const questionTranslationsIT: Record<
   },
   "asylum-budget": {
     question:
-      "Quale percentuale del bilancio federale è destinata alla migrazione (asilo, rifugiati, integrazione)?",
+      "Quale percentuale del preventivo federale 2026 è destinata alla migrazione (asilo, rifugiati, integrazione)?",
     explanation:
       "Il settore «Migrazione» vale circa il 4,1% del preventivo federale 2026 (3,75 miliardi di CHF su 91,1 miliardi). La maggior parte è versata ai Cantoni per l'aiuto sociale a richiedenti l'asilo e rifugiati. Per confronto, la sicurezza assorbe l'8,6%, formazione e ricerca il 9,9% e i trasporti l'11,8%.",
     comparisonLabel: "Principali settori di compito in % del preventivo federale 2026 (Amministrazione federale delle finanze)",
@@ -374,7 +374,7 @@ const questionTranslationsIT: Record<
   },
   "apprenticeship-rate": {
     question:
-      "Quale percentuale dei giovani in Svizzera segue una formazione professionale di base (apprendistato)?",
+      "Secondo i dati 2025 della SEFRI, quale percentuale dei giovani in Svizzera segue una formazione professionale di base (apprendistato)?",
     explanation:
       "Circa due terzi dei giovani in Svizzera seguono una formazione professionale di base, secondo la Segreteria di Stato per la formazione, la ricerca e l'innovazione (Fatti e cifre 2025). Le professioni che si possono imparare così sono circa 250.",
   },
@@ -480,7 +480,7 @@ const questionTranslationsIT: Record<
     question:
       "Quanti minuti durava in media il tragitto di sola andata verso il lavoro in Svizzera nel 2024?",
     explanation:
-      "Nel 2024 i pendolari impiegavano in media 30,2 minuti per raggiungere il posto di lavoro, su una distanza media di 14,0 km (2022: 29,6 minuti, 13,7 km). Per il 34,6% il tragitto durava al massimo 15 minuti, per l'8,8% più di un'ora (Ufficio federale di statistica, tabella T 11.4.4.3).",
+      "Nel 2024 i pendolari impiegavano in media 30,2 minuti per raggiungere il posto di lavoro, su una distanza media di 14,0 km (2022: 29,6 minuti, 13,7 km). Per il 34,6% il tragitto durava al massimo 15 minuti, per l'8,8% più di un'ora. Dei 3,7 milioni di pendolari, il 49,4% usava l'auto come mezzo principale, il 17,1% il treno e il 13,6% bus o tram (Ufficio federale di statistica, tabelle T 11.4.4.3 e T 11.4.4.4, 2024).",
   },
   "cars-per-capita": {
     question:

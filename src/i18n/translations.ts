@@ -171,7 +171,7 @@ export const translations = {
       dataSources: "Data sources",
       provisional: "provisional",
       territoryNote: "Population, area and foreign share use the cantonal borders of 1 January 2026: Moutier, in the canton of Bern until 31 December 2025, is counted in the canton of Jura. The foreign share is recomputed for these borders from the STATPOP figures of 31 December 2025, so for Jura and Bern it differs from the share the FSO publishes for the 2025 borders.",
-      oldBordersNote: "These indicators refer to the borders before 2026, with Moutier in the canton of Bern: {list}.",
+      oldBordersNote: "The health premium is the 2026 premium, on the 2026 borders (the FOPH premium regions for 2026 list Moutier under Jura). These indicators refer to the borders before 2026, with Moutier in the canton of Bern: {list}.",
     },
 
     // Canton tooltip
@@ -416,7 +416,7 @@ export const translations = {
       dataSources: "Fonti dei dati",
       provisional: "provvisorio",
       territoryNote: "Popolazione, superficie e quota di stranieri seguono i confini cantonali del 1° gennaio 2026: Moutier, nel Canton Berna fino al 31 dicembre 2025, è contata nel Canton Giura. La quota di stranieri è ricalcolata per questi confini dai dati STATPOP del 31 dicembre 2025; per Giura e Berna è quindi diversa da quella che l'UST pubblica per i confini del 2025.",
-      oldBordersNote: "Questi indicatori si riferiscono ai confini precedenti al 2026, con Moutier nel Canton Berna: {list}.",
+      oldBordersNote: "Il premio di cassa malati è quello del 2026, sui confini del 2026 (le regioni di premio 2026 dell'UFSP elencano Moutier nel Giura). Questi indicatori si riferiscono ai confini precedenti al 2026, con Moutier nel Canton Berna: {list}.",
     },
 
     // Canton tooltip
@@ -659,7 +659,7 @@ export const translations = {
       dataSources: "Datenquellen",
       provisional: "provisorisch",
       territoryNote: "Bevölkerung, Fläche und Ausländeranteil beziehen sich auf die Kantonsgrenzen vom 1. Januar 2026: Moutier, bis 31. Dezember 2025 im Kanton Bern, wird zum Kanton Jura gezählt. Der Ausländeranteil ist aus den STATPOP-Zahlen vom 31. Dezember 2025 für diese Grenzen neu berechnet und weicht deshalb für Jura und Bern vom Anteil ab, den das BFS für die Grenzen von 2025 veröffentlicht.",
-      oldBordersNote: "Diese Indikatoren beziehen sich auf die Grenzen vor 2026, mit Moutier im Kanton Bern: {list}.",
+      oldBordersNote: "Die Krankenkassenprämie ist jene von 2026, auf den Grenzen von 2026 (die Prämienregionen 2026 des BAG führen Moutier unter Jura). Diese Indikatoren beziehen sich auf die Grenzen vor 2026, mit Moutier im Kanton Bern: {list}.",
     },
 
     // Canton tooltip
@@ -904,7 +904,7 @@ export const translations = {
       dataSources: "Sources des données",
       provisional: "provisoire",
       territoryNote: "La population, la superficie et la part d'étrangers se rapportent aux frontières cantonales du 1er janvier 2026 : Moutier, dans le canton de Berne jusqu'au 31 décembre 2025, est comptée dans le canton du Jura. La part d'étrangers est recalculée pour ces frontières à partir des chiffres STATPOP du 31 décembre 2025 ; pour le Jura et Berne, elle diffère donc de celle que l'OFS publie pour les frontières de 2025.",
-      oldBordersNote: "Ces indicateurs se rapportent aux frontières d'avant 2026, avec Moutier dans le canton de Berne : {list}.",
+      oldBordersNote: "La prime d'assurance-maladie est celle de 2026, sur les frontières de 2026 (les régions de primes 2026 de l'OFSP classent Moutier dans le Jura). Ces indicateurs se rapportent aux frontières d'avant 2026, avec Moutier dans le canton de Berne : {list}.",
     },
 
     // Canton tooltip
