@@ -50,7 +50,8 @@ export function SwitzerlandMap({
 
           const isSelected = selectedCanton === canton.id;
           const isHovered = hoveredCanton === canton.id;
-          const isDimmed = isCantonDimmed ? isCantonDimmed(canton) : false;
+          // A faded canton keeps its border at full strength; the selected canton is never faded
+          const isDimmed = !isSelected && isCantonDimmed ? isCantonDimmed(canton) : false;
 
           return (
             <path
@@ -59,10 +60,10 @@ export function SwitzerlandMap({
               fill={colorFn(canton)}
               stroke={isSelected ? "#991B1B" : isHovered ? "#DC2626" : "#525252"}
               strokeWidth={isSelected ? 2 : isHovered ? 1.5 : 0.5}
-              opacity={isDimmed ? 0.2 : 1}
+              fillOpacity={isDimmed ? 0.2 : 1}
               data-canton={canton.id}
               data-dimmed={isDimmed ? "true" : undefined}
-              className="cursor-pointer transition-[fill,stroke,opacity] duration-200 motion-reduce:transition-none"
+              className="cursor-pointer transition-[fill,stroke,fill-opacity] duration-200 motion-reduce:transition-none"
               onMouseEnter={() => setHoveredCanton(canton.id)}
               onMouseLeave={() => setHoveredCanton(null)}
               onClick={() =>
