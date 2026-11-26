@@ -437,8 +437,8 @@ export const indicators: Indicator[] = [
   // Social Indicators
 {
     id: "crime-rate-per-1000",
-    name: "Crime Rate (Offences per 1,000 inhabitants)",
-    shortName: "Crime Rate",
+    name: "Criminal Code Offences per 1,000 Inhabitants",
+    shortName: "Criminal Code Offences",
     category: "social",
     value: 61.3,
     unit: "per 1,000 inhabitants",
@@ -590,8 +590,8 @@ export const indicators: Indicator[] = [
   },
   {
     id: "renewable-energy",
-    name: "Renewable Energy Share",
-    shortName: "Renewables",
+    name: "Renewable Share of Final Energy Consumption",
+    shortName: "Renewables (Final Energy Use)",
     category: "social",
     value: 30.6,
     unit: "%",

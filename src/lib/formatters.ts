@@ -122,6 +122,16 @@ export function formatSwissDate(date: Date | string): string {
 }
 
 /**
+ * Decimals of a figure as it is written in the data (9.127 -> 3, 61.3 -> 1, 7024 -> 0),
+ * so that a card shows the same precision as the statistics page and the source.
+ */
+export function ownDecimals(value: number): number {
+  const text = String(value);
+  const dot = text.indexOf(".");
+  return dot < 0 || text.includes("e") ? 0 : Math.min(3, text.length - dot - 1);
+}
+
+/**
  * Format a value with its unit (locale-aware)
  */
 export function formatWithUnit(value: number, unit: string, locale: "en" | "it" | "de" | "fr" = "en"): string {
@@ -146,7 +156,7 @@ export function formatWithUnit(value: number, unit: string, locale: "en" | "it" 
       const perWord = locale === "de" ? "pro" : locale === "fr" ? "par" : "per";
       return `${formatSwissNumber(value)} ${perWord} km²`;
     default:
-      return `${formatSwissNumber(value)} ${translatedUnit}`;
+      return `${formatSwissNumber(value, { decimals: ownDecimals(value) })} ${translatedUnit}`;
   }
 }
 
