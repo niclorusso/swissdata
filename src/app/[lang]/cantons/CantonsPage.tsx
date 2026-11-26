@@ -38,7 +38,8 @@ export default function CantonsPage() {
   const legendRef = useRef<HTMLDivElement>(null);
   const mapRef = useRef<HTMLDivElement>(null);
   const labelsRef = useRef<HTMLDivElement>(null);
-  // When a boundary label is wider than its band, only the lowest and the highest value are printed
+  // When an inner boundary label is wider than its band, or two labels would touch, only the lowest and the
+  // highest value are printed
   const [compactLabels, setCompactLabels] = useState(false);
   const readoutRef = useRef<HTMLDivElement>(null);
   const [revealReadout, setRevealReadout] = useState(false);
@@ -165,14 +166,19 @@ export default function CantonsPage() {
       .replace("{count}", countText);
   };
 
-  // Measure the boundary labels: if one is wider than a band, print only the lowest and the highest value
+  // Measure the boundary labels (all six stay in the layout; in compact mode the inner four are only hidden).
+  // Only the four inner labels are compared with the width of a band: the first and the last sit at the ends of
+  // the bar, and the last one is wider because it carries the unit. All six are checked for touching.
   useLayoutEffect(() => {
     const measure = () => {
       const row = labelsRef.current;
       if (!row) return;
       const band = row.clientWidth / LEGEND_STEP_COUNT;
-      const widths = Array.from(row.querySelectorAll<HTMLElement>("[data-bound]")).map((el) => el.scrollWidth);
-      setCompactLabels(widths.some((width) => width > band - 6));
+      const labels = Array.from(row.querySelectorAll<HTMLElement>("[data-bound]"));
+      const innerTooWide = labels.slice(1, -1).some((el) => el.scrollWidth > band - 6);
+      const boxes = labels.map((el) => el.getBoundingClientRect());
+      const touching = boxes.some((box, k) => k > 0 && boxes[k - 1].right + 4 > box.left);
+      setCompactLabels(innerTooWide || touching);
     };
     measure();
     window.addEventListener("resize", measure);
@@ -262,12 +268,12 @@ export default function CantonsPage() {
               {/* the six bounds; the unit after the last one */}
               <div ref={labelsRef} className="relative h-5 mt-1 text-source text-swiss-gray-600 swiss-number" data-legend-labels="">
                 {scale.bounds.map((bound, k) => {
-                  if (compactLabels && k > 0 && k < LEGEND_STEP_COUNT) return null;
+                  const hidden = compactLabels && k > 0 && k < LEGEND_STEP_COUNT;
                   const text = k === LEGEND_STEP_COUNT ? withUnit(formatBound(bound)) : formatBound(bound);
                   const position =
                     k === 0 ? { left: 0 } : k === LEGEND_STEP_COUNT ? { right: 0 } : { left: `${(k * 100) / LEGEND_STEP_COUNT}%`, transform: "translateX(-50%)" };
                   return (
-                    <span key={k} data-bound={k} className="absolute top-0 whitespace-nowrap" style={position}>
+                    <span key={k} data-bound={k} aria-hidden={hidden || undefined} className={cn("absolute top-0 whitespace-nowrap", hidden && "invisible")} style={position}>
                       {text}
                     </span>
                   );
@@ -308,7 +314,7 @@ export default function CantonsPage() {
             <p className="mt-1 text-sm text-swiss-gray-600">
               {meta.name}, {meta.unitPhrase}
             </p>
-            <SourceLine publisher={cantonPublisher(meta.source.en, locale)} url={meta.sourceUrl} date={yearText(meta)} />
+            <SourceLine publisher={cantonPublisher(meta.source.en, locale)} url={meta.sourceUrl} />
             {selectedIndicator === "unemployment-rate" && ilo && (
               <p className="mt-3 text-sm text-swiss-gray-700">
                 {t.cantons.unemploymentNote.replace("{year}", String(latestYear(ilo))).replace("{ilo}", formatIndicatorValue(ilo, locale))}
@@ -390,11 +396,11 @@ export default function CantonsPage() {
             <li key={indicator.id}>
               <span className="font-medium text-swiss-gray-700">{indicator.name}</span>
               {colon(locale) + " "}
-              {yearText(indicator)}
-              {" · "}
               <a href={indicator.sourceUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center min-h-[44px] sm:min-h-0 underline underline-offset-[3px] hover:text-swiss-gray-900">
                 {indicator.source[locale]}
               </a>
+              {" · "}
+              {t.common.dataPeriod.replace("{period}", yearText(indicator))}
             </li>
           ))}
           {[
@@ -404,11 +410,11 @@ export default function CantonsPage() {
             <li key={name}>
               <span className="font-medium text-swiss-gray-700">{name}</span>
               {colon(locale) + " "}
-              {formatSwissDate(base.referenceDate)}
-              {" · "}
               <a href={base.sourceUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center min-h-[44px] sm:min-h-0 underline underline-offset-[3px] hover:text-swiss-gray-900">
                 {base.source[locale]}
               </a>
+              {" · "}
+              {t.common.dataPeriod.replace("{period}", formatSwissDate(base.referenceDate))}
             </li>
           ))}
         </ul>

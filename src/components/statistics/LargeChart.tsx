@@ -13,7 +13,7 @@ import {
 } from "recharts";
 import { Indicator } from "@/types";
 import { useLanguage } from "@/i18n/LanguageContext";
-import { formatNumber, formatWithUnit, formatYear } from "@/lib/formatters";
+import { formatNumber, formatYear } from "@/lib/formatters";
 import { formatIndicatorValue } from "@/lib/indicatorText";
 import { niceTicks } from "@/lib/ticks";
 
@@ -110,7 +110,7 @@ export function SingleIndicatorChart({
         <div className="bg-white border border-line rounded-lg shadow-lg p-3">
           <p className="font-semibold text-swiss-gray-900">{formatYear(Number(year))}</p>
           <p className="text-sm text-swiss-gray-900 swiss-number">
-            {formatWithUnit(payload[0].value, indicator.unit, locale)}
+            {formatIndicatorValue(indicator, locale, Number(payload[0].value))}
           </p>
         </div>
       );

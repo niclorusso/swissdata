@@ -6,7 +6,6 @@ import { MoreInfoButton, MoreInfoPanel, useMoreInfo } from "@/components/ui/tool
 import { SourceLine } from "@/components/ui/source-line";
 import { Indicator } from "@/types";
 import { useLanguage } from "@/i18n/LanguageContext";
-import { localizePeriod } from "@/i18n/periods";
 import { localizeSource } from "@/i18n/sourceNames";
 import { localePath } from "@/i18n/routes";
 import {
@@ -72,7 +71,6 @@ export function IndicatorCard({ indicator }: { indicator: Indicator }) {
         <SourceLine
           publisher={localizeSource(indicator.source, locale)}
           url={indicator.sourceUrl}
-          date={localizePeriod(indicator.lastUpdated, locale)}
           published={publishedText(indicator, locale)}
         />
         <Link

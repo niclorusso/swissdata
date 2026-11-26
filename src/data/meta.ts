@@ -17,24 +17,25 @@ const ISSUES_NEW_URL = "https://github.com/niclorusso/swissdata/issues/new";
 const REPORT_TEMPLATE: Record<Locale, { title: string; body: string }> = {
   it: {
     title: "Errore nei dati: ",
-    body: "Pagina (indirizzo):\n\nCifra:\n\nChe cosa sembra sbagliato:\n\nFonte (se nota):\n",
+    body: "Pagina (indirizzo): {page}\n\nCifra:\n\nChe cosa sembra sbagliato:\n\nFonte (se nota):\n",
   },
   de: {
     title: "Fehler in den Daten: ",
-    body: "Seite (Adresse):\n\nZahl:\n\nWas scheint falsch:\n\nQuelle (falls bekannt):\n",
+    body: "Seite (Adresse): {page}\n\nZahl:\n\nWas scheint falsch:\n\nQuelle (falls bekannt):\n",
   },
   fr: {
     title: "Erreur dans les données\u202F: ",
-    body: "Page (adresse)\u202F:\n\nChiffre\u202F:\n\nCe qui semble faux\u202F:\n\nSource (si connue)\u202F:\n",
+    body: "Page (adresse)\u202F: {page}\n\nChiffre\u202F:\n\nCe qui semble faux\u202F:\n\nSource (si connue)\u202F:\n",
   },
   en: {
     title: "Data error: ",
-    body: "Page (address):\n\nFigure:\n\nWhat seems wrong:\n\nSource (if known):\n",
+    body: "Page (address): {page}\n\nFigure:\n\nWhat seems wrong:\n\nSource (if known):\n",
   },
 };
 
-/** Address that opens a new issue with a short template in the language of the page. */
-export function reportErrorUrl(locale: Locale): string {
+/** Address that opens a new issue with a short template in the language of the page, with the address of the page filled in. */
+export function reportErrorUrl(locale: Locale, page: string): string {
   const { title, body } = REPORT_TEMPLATE[locale];
-  return `${ISSUES_NEW_URL}?title=${encodeURIComponent(title)}&body=${encodeURIComponent(body)}`;
+  const filled = body.replace("{page}", page);
+  return `${ISSUES_NEW_URL}?title=${encodeURIComponent(title)}&body=${encodeURIComponent(filled)}`;
 }

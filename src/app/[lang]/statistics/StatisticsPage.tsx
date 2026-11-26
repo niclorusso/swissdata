@@ -13,7 +13,6 @@ import { MoreInfoButton, MoreInfoPanel, useMoreInfo } from "@/components/ui/tool
 import { SourceLine } from "@/components/ui/source-line";
 import { cn } from "@/lib/utils";
 import { useLanguage } from "@/i18n/LanguageContext";
-import { localizePeriod } from "@/i18n/periods";
 import { localizeSource } from "@/i18n/sourceNames";
 import { formatYear } from "@/lib/formatters";
 import { formatIndicatorValue, howToReadText, publishedText, relatedText, unitLine } from "@/lib/indicatorText";
@@ -82,7 +81,6 @@ function ChartCard({ indicator, startYear }: { indicator: Indicator; startYear: 
         <SourceLine
           publisher={localizeSource(indicator.source, locale)}
           url={indicator.sourceUrl}
-          date={localizePeriod(indicator.lastUpdated, locale)}
           published={publishedText(indicator, locale)}
         />
       </div>
@@ -136,7 +134,8 @@ export default function StatisticsPage() {
       </div>
 
       <div className="flex flex-col lg:flex-row gap-3 sm:gap-4 mb-6 sm:mb-8">
-        <div className="flex flex-wrap items-center gap-1 rounded-3xl border border-line bg-white p-1 self-start max-w-full" role="group" aria-label={t.statistics.categories}>
+        {/* one row; on a narrow phone it scrolls sideways instead of wrapping */}
+        <div className="sdf-navrow flex flex-nowrap items-center gap-1 overflow-x-auto rounded-3xl border border-line bg-white p-1 self-start max-w-full" role="group" aria-label={t.statistics.categories}>
           {categoryTabs.map((tab) => (
             <button
               key={tab.value}
@@ -144,7 +143,7 @@ export default function StatisticsPage() {
               aria-pressed={categoryFilter === tab.value}
               onClick={() => setCategoryFilter(tab.value)}
               className={cn(
-                "px-2 sm:px-3 py-1.5 text-sm font-medium rounded-full transition-colors whitespace-nowrap",
+                "flex-none px-2 sm:px-3 py-1.5 text-sm font-medium rounded-full transition-colors whitespace-nowrap",
                 categoryFilter === tab.value
                   ? "bg-swiss-gray-900 text-white"
                   : "text-swiss-gray-600 hover:text-swiss-gray-900 hover:bg-swiss-gray-50"

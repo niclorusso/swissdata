@@ -226,7 +226,7 @@ export function Navigation() {
     <header className="relative z-50 w-full border-b border-line bg-paper">
       <div className="container mx-auto px-4">
         {/* below 1024px: two rows (lockup and language, then the pages); from 1024px: one row */}
-        <div className="relative flex flex-wrap items-center gap-x-2 sm:gap-x-4 min-h-[52px] lg:min-h-[60px]">
+        <div className="relative flex flex-wrap items-center gap-x-2 max-[359px]:gap-x-1 sm:gap-x-4 min-h-[52px] lg:min-h-[60px]">
           <div className="order-1 flex items-center min-h-[52px]">
             <SectionSwitcher />
           </div>
