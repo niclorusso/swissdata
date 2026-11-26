@@ -2,7 +2,7 @@ import type { Locale } from "./translations";
 
 export const LOCALES: Locale[] = ["en", "it", "de", "fr"];
 export const DEFAULT_LOCALE: Locale = "en";
-/** Cookie that holds the language the visitor chose in the header. The server reads it to render the page. */
+/** Cookie that holds the language the visitor chose in the header. src/proxy.ts reads it for the addresses without a language. */
 export const LOCALE_COOKIE = "swissdata-locale";
 
 export function isLocale(value: unknown): value is Locale {

@@ -7,6 +7,7 @@ import { getLocalizedIndicatorsByCategory } from "@/data/indicators";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { ArrowRight, HelpCircle, Map, BarChart3 } from "lucide-react";
 import { indicatorSources } from "@/data/sources";
+import { localePath } from "@/i18n/routes";
 
 export default function HomePage() {
   const { t, locale } = useLanguage();
@@ -31,16 +32,16 @@ export default function HomePage() {
           {t.home.subtitle}
         </p>
         <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center pt-2">
-          <Link href="/quiz" className={buttonVariants({ size: "xl", className: "gap-2 w-full sm:w-auto" })}>
+          <Link href={localePath(locale, "/quiz")} className={buttonVariants({ size: "xl", className: "gap-2 w-full sm:w-auto" })}>
             <HelpCircle className="h-5 w-5" aria-hidden="true" />
             {t.home.testKnowledge}
             <ArrowRight className="h-5 w-5" aria-hidden="true" />
           </Link>
-          <Link href="/statistics" className={buttonVariants({ size: "xl", variant: "outline", className: "gap-2 w-full sm:w-auto" })}>
+          <Link href={localePath(locale, "/statistics")} className={buttonVariants({ size: "xl", variant: "outline", className: "gap-2 w-full sm:w-auto" })}>
             <BarChart3 className="h-5 w-5" aria-hidden="true" />
             {t.home.showStats}
           </Link>
-          <Link href="/cantons" className={buttonVariants({ size: "xl", variant: "outline", className: "gap-2 w-full sm:w-auto" })}>
+          <Link href={localePath(locale, "/cantons")} className={buttonVariants({ size: "xl", variant: "outline", className: "gap-2 w-full sm:w-auto" })}>
             <Map className="h-5 w-5" aria-hidden="true" />
             {t.home.exploreByCanton}
           </Link>

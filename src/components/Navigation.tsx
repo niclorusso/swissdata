@@ -4,7 +4,8 @@ import { useCallback, useEffect, useId, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
-import { useLanguage } from "@/i18n/LanguageContext";
+import { rememberLocale, useLanguage } from "@/i18n/LanguageContext";
+import { localePath, switchLocalePath } from "@/i18n/routes";
 import { BrandMark, Wordmark, Chevron } from "@/components/family/BrandMark";
 import { CURRENT_SITE, FAMILY_SITES, LANGUAGES, familySiteHref } from "@/lib/family";
 
@@ -52,7 +53,7 @@ function SectionSwitcher() {
 
   return (
     <div className="flex items-center gap-1.5 sm:gap-2 text-base sm:text-lg leading-none whitespace-nowrap min-w-0 max-[359px]:text-sm max-[359px]:gap-1">
-      <Link href="/" className="inline-flex items-center gap-1.5 max-[359px]:gap-1 sm:gap-2 min-h-[44px]" aria-label="SwissData">
+      <Link href={localePath(locale)} className="inline-flex items-center gap-1.5 max-[359px]:gap-1 sm:gap-2 min-h-[44px]" aria-label="SwissData">
         <BrandMark size={28} className="w-6 h-6 sm:w-7 sm:h-7" />
         <Wordmark />
       </Link>
@@ -93,9 +94,13 @@ function SectionSwitcher() {
   );
 }
 
-/** The language as one pill ("IT ▾") that opens the four languages. */
+/**
+ * The language as one pill ("IT ▾") that opens the four languages, each a link to the same page in that
+ * language. A click also remembers the choice for the addresses without a language (/, /cantons, …).
+ */
 function LanguageMenu() {
-  const { locale, setLocale, t } = useLanguage();
+  const { locale, t } = useLanguage();
+  const pathname = usePathname();
   const { open, setOpen, root, button, onBlur } = useDisclosure();
   const id = useId();
 
@@ -117,15 +122,12 @@ function LanguageMenu() {
         <ul aria-label={t.nav.language}>
           {LANGUAGES.map((language) => (
             <li key={language.code}>
-              <button
-                type="button"
+              <a
+                href={switchLocalePath(pathname, language.code)}
+                hrefLang={language.code}
                 lang={language.code}
                 aria-current={language.code === locale ? "true" : undefined}
-                onClick={() => {
-                  setLocale(language.code);
-                  setOpen(false);
-                  button.current?.focus();
-                }}
+                onClick={() => rememberLocale(language.code)}
                 className={cn(
                   "flex w-full items-center justify-between gap-4 min-h-[44px] px-2.5 rounded-lg text-[15px] hover:bg-paper",
                   language.code === locale ? "bg-paper text-ink font-semibold" : "text-swiss-gray-600 font-medium"
@@ -133,7 +135,7 @@ function LanguageMenu() {
               >
                 {language.label}
                 <span className="text-sm">{language.code.toUpperCase()}</span>
-              </button>
+              </a>
             </li>
           ))}
         </ul>
@@ -145,16 +147,16 @@ function LanguageMenu() {
 /** The pages of this site as one row of words. On phones the row scrolls sideways and a fade with an arrow shows that there is more. */
 function PageRow() {
   const pathname = usePathname();
-  const { t } = useLanguage();
+  const { t, locale } = useLanguage();
   const row = useRef<HTMLDivElement>(null);
   const [more, setMore] = useState({ left: false, right: false });
 
   const pages = [
-    { href: "/", label: t.nav.dashboard },
-    { href: "/statistics", label: t.nav.statistics },
-    { href: "/quiz", label: t.nav.quiz },
-    { href: "/cantons", label: t.nav.cantons },
-    { href: "/about", label: t.nav.about },
+    { href: localePath(locale), label: t.nav.dashboard },
+    { href: localePath(locale, "/statistics"), label: t.nav.statistics },
+    { href: localePath(locale, "/quiz"), label: t.nav.quiz },
+    { href: localePath(locale, "/cantons"), label: t.nav.cantons },
+    { href: localePath(locale, "/about"), label: t.nav.about },
   ];
 
   const measure = useCallback(() => {

@@ -5,6 +5,7 @@ import { Indicator, IndicatorCategory } from "@/types";
 import { IndicatorCard } from "./IndicatorCard";
 import { buttonVariants } from "@/components/ui/button";
 import { useLanguage } from "@/i18n/LanguageContext";
+import { localePath } from "@/i18n/routes";
 import { TrendingUp, Users, Heart, ArrowRight } from "lucide-react";
 
 interface CategorySectionProps {
@@ -13,7 +14,7 @@ interface CategorySectionProps {
 }
 
 export function CategorySection({ category, indicators }: CategorySectionProps) {
-  const { t } = useLanguage();
+  const { t, locale } = useLanguage();
 
   const categoryConfig = {
     economic: {
@@ -64,7 +65,7 @@ export function CategorySection({ category, indicators }: CategorySectionProps) 
 
       {/* Link to Statistics */}
       <div className="flex justify-end">
-        <Link href="/statistics" className={buttonVariants({ variant: "outline", size: "default", className: "gap-2 h-11" })}>
+        <Link href={localePath(locale, "/statistics")} className={buttonVariants({ variant: "outline", size: "default", className: "gap-2 h-11" })}>
           {t.category.viewAllStatistics}
           <ArrowRight className="h-4 w-4" aria-hidden="true" />
         </Link>

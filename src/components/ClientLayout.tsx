@@ -5,6 +5,7 @@ import type { Locale } from "@/i18n/translations";
 import { Navigation } from "@/components/Navigation";
 import { BrandMark, Wordmark } from "@/components/family/BrandMark";
 import { CURRENT_SITE, FAMILY_INDEPENDENT, FAMILY_SITES, familySiteHref } from "@/lib/family";
+import { localePath } from "@/i18n/routes";
 
 /** Family footer: the three SwissData sites and the line on independence first, then this site's own links. */
 function Footer() {
@@ -36,7 +37,7 @@ function Footer() {
 
         <div className="flex flex-wrap gap-x-5 gap-y-1.5 text-sm">
           {[
-            { href: "/about", label: t.footer.about, external: false },
+            { href: localePath(locale, "/about"), label: t.footer.about, external: false },
             { href: "https://www.bfs.admin.ch", label: "BFS", external: true },
             { href: "https://opendata.swiss", label: "OpenData", external: true },
             { href: "https://www.netlify.com", label: "Powered by Netlify", external: true },
@@ -57,9 +58,9 @@ function Footer() {
   );
 }
 
-export function ClientLayout({ initialLocale, children }: { initialLocale: Locale; children: React.ReactNode }) {
+export function ClientLayout({ locale, children }: { locale: Locale; children: React.ReactNode }) {
   return (
-    <LanguageProvider initialLocale={initialLocale}>
+    <LanguageProvider locale={locale}>
       <div className="min-h-screen flex flex-col">
         <Navigation />
         <main className="flex-1">{children}</main>

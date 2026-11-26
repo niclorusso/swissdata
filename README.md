@@ -4,12 +4,12 @@ An interactive web app for exploring real statistics about Switzerland's economy
 
 ## Features
 
-- **Dashboard** (`/`) — Key indicators in three categories: economic, demographic and social
-- **Statistics** (`/statistics`) — One chart per indicator with a selectable time range, a category filter and the source of each series
-- **Canton Map** (`/cantons`) — SVG map of the 26 cantons, coloured by a selectable indicator, with a detail panel and a sortable table
-- **Quiz** (`/quiz`) — 53 questions on Swiss statistics, answered with a slider, with a score
-- **About** (`/about`)
-- **Four languages** — English, Italian, German and French. The texts are in `src/i18n/`. The language is decided on the server for each request: the language chosen in the header (cookie `swissdata-locale`), otherwise the first of the browser's languages (`Accept-Language`) that the site has, otherwise English. The HTML arrives in that language (`<html lang>`, title, texts), so the pages are rendered on demand and need a host that runs Next.js on the server (not a static export)
+- **Dashboard** (`/<lang>`) — Key indicators in three categories: economic, demographic and social
+- **Statistics** (`/<lang>/statistics`) — One chart per indicator with a selectable time range, a category filter and the source of each series
+- **Canton Map** (`/<lang>/cantons`) — SVG map of the 26 cantons, coloured by a selectable indicator, with a detail panel and a sortable table
+- **Quiz** (`/<lang>/quiz`) — 53 questions on Swiss statistics, answered with a slider, with a score
+- **About** (`/<lang>/about`)
+- **Four languages** — Italian, German, French and English, each at its own address: `/it/…`, `/de/…`, `/fr/…`, `/en/…` (`src/app/[lang]/`). Every page is prerendered at build time in each language as static HTML, with `<html lang>`, title, description, canonical address and hreflang links in that language; `/sitemap.xml` lists the four versions of every page. The texts are in `src/i18n/`. The addresses without a language (`/`, `/cantons`, `/statistics`, `/quiz`, `/about`) redirect (302) to the same page in a language: the one chosen in the header (cookie `swissdata-locale`, set by the language menu), otherwise the first of the browser's languages (`Accept-Language`) that the site has, otherwise English. That redirect is `src/proxy.ts`, which runs only for those addresses. Links from other sites should name the language: `https://swissdata-platform.ch/<lang>` (`it`, `de`, `fr`, `en`)
 
 ## Data Sources
 
