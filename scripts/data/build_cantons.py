@@ -11,23 +11,33 @@ all 26 cantons. To update: change the year constants / asset URLs below and
 re-run. The script stops if a table does not yield exactly 26 cantons.
 
 Needs Python 3.9+ (standard library only) and `pdftotext` (poppler) for the
-two sources that exist only as PDF (SECO annual averages, BAG premiums).
+one source that exists only as PDF (BAG premiums).
 
 Sources
   population, foreign share   BFS STATPOP, demographic balance, px-x-0102020000_201
   area                        swisstopo swissBOUNDARIES3D, canton areas
-  unemployment rate           SECO, "Arbeitslosigkeit in der Schweiz", table TA2d
+  unemployment rate           SECO unemployment statistics, annual averages by
+                              canton, as published in BFS table T 3.3.2.3
   health premium              BAG, cantonal mean monthly premiums over all ages
   GDP per capita              BFS, cantonal GDP per capita (je-e-04.02.06.03)
   average rent                BFS, T 09.03.03.01 (structural survey)
   crime rate                  BFS police crime statistics, px-x-1903020100_101,
                               divided by the STATPOP population at the end of
                               the previous year (BFS "Häufigkeitszahl" method)
+
+Cantonal borders
+  Moutier moved from the canton of Bern to the canton of Jura on 1.1.2026.
+  Population, area and foreign share are given for the borders of 1.1.2026
+  (see MOUTIER_TO_JURA). The 2026 health premium is the premium of that year.
+  The other indicators come from tables for years before 2026 and keep the
+  borders of their year (Moutier in Bern): the output marks them with
+  currentBorders: false and the page says so.
 """
 
 from __future__ import annotations
 
 import argparse
+import decimal
 import html
 import json
 import re
@@ -66,11 +76,14 @@ SWISSTOPO_API = (
 )
 SWISSTOPO_PAGE = "https://www.swisstopo.admin.ch/de/landschaftsmodell-swissboundaries3d"
 
-# Unemployment: SECO registered unemployment, annual average, table TA2d of the
-# yearly publication. 2024 is the latest edition with annual averages by canton.
-UNEMP_YEAR = 2024
-UNEMP_PDF = "https://dam-api.bfs.admin.ch/hub/api/dam/assets/36301409/master"
-UNEMP_PAGE = "https://www.bfs.admin.ch/asset/de/36301409"
+# Unemployment: SECO registered unemployment, annual average by canton, as
+# published by the BFS in table T 3.3.2.3 (je-d-03.03.02.03, sheet "ab 2014",
+# published 04.02.2026 with the 2025 averages; rates are unrounded in the file).
+# The national 2025 average (2.8%) was announced by SECO on 09.01.2026.
+UNEMP_YEAR = 2025
+UNEMP_XLSX = "https://dam-api.bfs.admin.ch/hub/api/dam/assets/36341046/master"
+UNEMP_SHEET = "ab 2014"
+UNEMP_PAGE = "https://www.bfs.admin.ch/asset/de/je-d-03.03.02.03"
 
 # Health premium: BAG mean monthly premium over all ages (incl. optional
 # deductibles and models). Column 2026 of the table published in September 2026.
@@ -160,14 +173,14 @@ RENT_NAMES = {
     "Aargau": "AG", "Thurgau": "TG", "Tessin": "TI", "Waadt": "VD", "Wallis": "VS",
     "Neuenburg": "NE", "Genf": "GE", "Jura": "JU", "Schweiz": "CH",
 }
-# French labels of SECO table TA2d, normalised (lower case, letters only).
+# German labels of BFS table T 3.3.2.3, normalised (lower case, letters only).
 UNEMP_NAMES = {
-    "zurich": "ZH", "berne": "BE", "lucerne": "LU", "uri": "UR", "schwytz": "SZ", "obwald": "OW",
-    "nidwald": "NW", "glaris": "GL", "zoug": "ZG", "fribourg": "FR", "soleure": "SO",
-    "bâleville": "BS", "bâlecampagne": "BL", "schaffhouse": "SH", "appenzellrhext": "AR",
-    "appenzellrhint": "AI", "saintgall": "SG", "grisons": "GR", "argovie": "AG",
-    "thurgovie": "TG", "tessin": "TI", "vaud": "VD", "valais": "VS", "neuchâtel": "NE",
-    "genève": "GE", "jura": "JU", "total": "CH",
+    "zürich": "ZH", "bern": "BE", "luzern": "LU", "uri": "UR", "schwyz": "SZ", "obwalden": "OW",
+    "nidwalden": "NW", "glarus": "GL", "zug": "ZG", "freiburg": "FR", "solothurn": "SO",
+    "baselstadt": "BS", "basellandschaft": "BL", "schaffhausen": "SH", "appenzellarh": "AR",
+    "appenzellirh": "AI", "stgallen": "SG", "graubünden": "GR", "aargau": "AG",
+    "thurgau": "TG", "tessin": "TI", "waadt": "VD", "wallis": "VS", "neuenburg": "NE",
+    "genf": "GE", "jura": "JU", "total": "CH",
 }
 
 
@@ -218,8 +231,11 @@ def codes_by_text(variable: dict, wanted) -> dict[str, str]:
     return out
 
 
-def xlsx_sheets(path: Path) -> dict[str, list[list[str]]]:
-    """Minimal .xlsx reader: sheet name -> rows of non-empty cell values (as text)."""
+def xlsx_sheets(path: Path, with_columns: bool = False):
+    """Minimal .xlsx reader: sheet name -> rows of non-empty cell values (as text).
+
+    With with_columns=True each row is a dict {column letter: value} instead of a list.
+    """
     z = zipfile.ZipFile(path)
     shared = []
     if "xl/sharedStrings.xml" in z.namelist():
@@ -249,13 +265,14 @@ def xlsx_sheets(path: Path) -> dict[str, list[list[str]]]:
         xml = z.read(target).decode("utf-8")
         rows = []
         for row in re.findall(r"<row[^>]*>(.*?)</row>", xml, flags=re.S):
-            cells = []
+            cells = {}
             for attrs, inner in re.findall(r"<c ([^>]*?)(?:/>|>(.*?)</c>)", row, flags=re.S):
                 m = re.search(r"<v>([^<]*)</v>", inner or "")
-                if m:
-                    cells.append(shared[int(m.group(1))] if 't="s"' in attrs else m.group(1))
+                col = re.search(r'r="([A-Z]+)\d+"', attrs)
+                if m and col:
+                    cells[col.group(1)] = shared[int(m.group(1))] if 't="s"' in attrs else m.group(1)
             if cells:
-                rows.append(cells)
+                rows.append(cells if with_columns else list(cells.values()))
         sheets[name] = rows
     return sheets
 
@@ -313,23 +330,25 @@ def read_areas(cache: Path, refresh: bool) -> dict[str, float]:
 
 
 def read_unemployment(cache: Path, refresh: bool) -> dict[str, float]:
-    text = pdf_text(fetch(UNEMP_PDF, cache / "seco_unemployment.pdf", refresh))
-    pages = [p for p in text.split("\f") if f"Durchschnitt {UNEMP_YEAR}" in p and "TA 2d" in p]
-    if len(pages) != 1:
-        sys.exit(f"unemployment: table TA2d with 'Durchschnitt {UNEMP_YEAR}' not found")
-    page = pages[0]
-    header = next(line for line in page.splitlines() if "Durchschnitt" in line)
-    if not re.search(rf"Durchschnitt {UNEMP_YEAR}\s+Erwerbspersonen", header):
-        sys.exit("unemployment: the requested year is not the last rate column of TA2d")
+    sheets = xlsx_sheets(fetch(UNEMP_XLSX, cache / "bfs_unemployment_cantons.xlsx", refresh), with_columns=True)
+    if UNEMP_SHEET not in sheets:
+        sys.exit(f"unemployment: sheet {UNEMP_SHEET!r} not found")
+    rows = sheets[UNEMP_SHEET]
+    # header: the year stands above its "Quote" (rate) column, the count is one column to the left
+    col = None
+    for i, cells in enumerate(rows):
+        hits = [c for c, v in cells.items() if v.strip() == str(UNEMP_YEAR)]
+        if hits and i + 1 < len(rows) and rows[i + 1].get(hits[0], "").strip() == "Quote":
+            col = hits[0]
+            break
+    if col is None:
+        sys.exit(f"unemployment: column 'Quote' for {UNEMP_YEAR} not found")
     out = {}
-    # "... 0,4   2,1   892 401   A   Zurich": last rate, labour force, CV class, name
-    for line in page.splitlines():
-        m = re.search(r"(\d+,\d)\s+(\d[\d ]*\d)\s+[A-G]\s+(\S.*?)\s*$", line)
-        if not m:
-            continue
-        key = re.sub(r"[^a-zà-ÿ]", "", m.group(3).lower())
-        if key in UNEMP_NAMES:
-            out[UNEMP_NAMES[key]] = float(m.group(1).replace(",", "."))
+    for cells in rows:
+        key = re.sub(r"[^a-zà-ÿ]", "", cells.get("A", "").lower())
+        if key in UNEMP_NAMES and re.fullmatch(r"\d+(\.\d+)?", cells.get(col, "").strip()):
+            # the first match wins: "Tessin" appears as a canton and as a major region with the same value
+            out.setdefault(UNEMP_NAMES[key], float(cells[col]))
     return out
 
 
@@ -446,49 +465,51 @@ def main() -> None:
     ]:
         require_all(label, values)
 
-    bfs = lambda suffix: ts_localized(f"FSO, {suffix}", f"BFS, {suffix}", f"OFS, {suffix}", f"UST, {suffix}")
+    borders_year = int(AREA_DATE[:4])
     indicators = [
-        # id, unit, year, provisional, source, url, values, decimals
+        # id, unit, year, provisional, source, url, values, decimals, current borders
         ("unemployment-rate", "%", UNEMP_YEAR, False,
-         ts_localized("SECO, registered unemployment, annual average",
-                      "SECO, registrierte Arbeitslose, Jahresdurchschnitt",
-                      "SECO, chômeurs inscrits, moyenne annuelle",
-                      "SECO, disoccupati registrati, media annua"),
-         UNEMP_PAGE, unemployment, 1),
+         ts_localized("SECO, registered unemployment, annual average (FSO table T 3.3.2.3)",
+                      "SECO, registrierte Arbeitslose, Jahresdurchschnitt (BFS-Tabelle T 3.3.2.3)",
+                      "SECO, chômeurs inscrits, moyenne annuelle (tableau OFS T 3.3.2.3)",
+                      "SECO, disoccupati registrati, media annua (tabella UST T 3.3.2.3)"),
+         UNEMP_PAGE, unemployment, 1, UNEMP_YEAR >= borders_year),
         ("foreign-population", "%", POP_YEAR, False,
          ts_localized("FSO, STATPOP, permanent resident population on 31 December",
                       "BFS, STATPOP, ständige Wohnbevölkerung am 31. Dezember",
                       "OFS, STATPOP, population résidante permanente au 31 décembre",
                       "UST, STATPOP, popolazione residente permanente al 31 dicembre"),
-         STATPOP_PAGE, foreign_share, 1),
+         STATPOP_PAGE, foreign_share, 1, MOUTIER_TO_JURA or POP_YEAR >= borders_year),
         ("health-premium", "CHF/month", PREMIUM_YEAR, False,
          ts_localized("FOPH, mean monthly premium of compulsory health insurance, all ages",
                       "BAG, mittlere Monatsprämie der obligatorischen Krankenpflegeversicherung, alle Altersklassen",
                       "OFSP, prime mensuelle moyenne de l'assurance obligatoire des soins, toutes classes d'âge",
                       "UFSP, premio medio mensile dell'assicurazione obbligatoria delle cure, tutte le classi di età"),
-         PREMIUM_PAGE, premium, 1),
+         PREMIUM_PAGE, premium, 1, PREMIUM_YEAR >= borders_year),
         ("gdp-per-capita", "CHF", GDP_YEAR, gdp_provisional,
          ts_localized("FSO, cantonal GDP per capita at current prices",
                       "BFS, kantonales BIP pro Einwohner zu laufenden Preisen",
                       "OFS, PIB cantonal par habitant à prix courants",
                       "UST, PIL cantonale per abitante a prezzi correnti"),
-         GDP_PAGE, gdp, 0),
+         GDP_PAGE, gdp, 0, GDP_YEAR >= borders_year),
         ("average-rent", "CHF/month", RENT_YEAR, False,
          ts_localized("FSO, structural survey, average monthly net rent, all dwelling sizes",
                       "BFS, Strukturerhebung, durchschnittlicher Netto-Mietzins pro Monat, alle Wohnungsgrössen",
                       "OFS, relevé structurel, loyer mensuel net moyen, toutes tailles de logement",
                       "UST, rilevazione strutturale, affitto mensile netto medio, tutte le dimensioni"),
-         RENT_PAGE, rent, 0),
+         RENT_PAGE, rent, 0, RENT_YEAR >= borders_year),
         ("crime-rate-per-1000", "per 1,000 inhabitants", CRIME_YEAR, False,
          ts_localized("FSO, police crime statistics, Criminal Code offences per 1,000 inhabitants",
                       "BFS, polizeiliche Kriminalstatistik, Straftaten gemäss Strafgesetzbuch pro 1000 Einwohner",
                       "OFS, statistique policière de la criminalité, infractions au code pénal pour 1000 habitants",
                       "UST, statistica criminale di polizia, reati secondo il Codice penale per 1000 abitanti"),
-         PKS_PAGE, crime, 1),
+         PKS_PAGE, crime, 1, CRIME_YEAR - 1 >= borders_year),
     ]
 
     def num(value: float, decimals: int) -> str:
-        return str(int(round(value))) if decimals == 0 else f"{value:.{decimals}f}"
+        # round half up on the decimal expansion of the value, as the offices do
+        q = decimal.Decimal(1).scaleb(-decimals)
+        return str(decimal.Decimal(repr(value)).quantize(q, rounding=decimal.ROUND_HALF_UP))
 
     moutier_en = " Moutier (BE until 31.12.2025) is counted in JU, as in the area figures." if MOUTIER_TO_JURA else ""
     L: list[str] = []
@@ -498,13 +519,17 @@ def main() -> None:
     L.append("//")
     L.append(f"// population          {POP_YEAR}  BFS STATPOP, permanent resident population on 31.12.{POP_YEAR}.{moutier_en}")
     L.append(f"// area                {AREA_DATE[:4]}  swisstopo swissBOUNDARIES3D, canton areas as of 1.1.{AREA_DATE[:4]} (km², rounded)")
-    L.append(f"// unemployment-rate   {UNEMP_YEAR}  SECO registered unemployment rate, annual average (%)")
-    L.append(f"// foreign-population  {POP_YEAR}  BFS STATPOP, foreign share of the permanent resident population on 31.12.{POP_YEAR} (%)")
+    L.append(f"// unemployment-rate   {UNEMP_YEAR}  SECO registered unemployment rate, annual average, BFS table T 3.3.2.3 (%)")
+    L.append(f"// foreign-population  {POP_YEAR}  BFS STATPOP, foreign share of the permanent resident population on 31.12.{POP_YEAR} (%)"
+             + (f", recomputed for the borders of 1.1.{borders_year} (Moutier in JU)" if MOUTIER_TO_JURA else ""))
     L.append(f"// health-premium      {PREMIUM_YEAR}  BAG mean monthly premium, compulsory health insurance, all ages (CHF/month)")
     L.append(f"// gdp-per-capita      {GDP_YEAR}  BFS cantonal GDP per capita, current prices (CHF){', provisional' if gdp_provisional else ''}")
     L.append(f"// average-rent        {RENT_YEAR}  BFS structural survey, average monthly net rent, all sizes (CHF/month)")
     L.append(f"// crime-rate-per-1000 {CRIME_YEAR}  BFS police crime statistics: Criminal Code offences {CRIME_YEAR} per 1,000")
     L.append(f"//                           permanent residents on 31.12.{CRIME_YEAR - 1} (BFS method)")
+    L.append("//")
+    L.append(f"// Borders: population, area and the indicators with currentBorders: true use the cantonal borders of 1.1.{borders_year};")
+    L.append("// the others use the borders of their reference year (Moutier in BE).")
     L.append("//")
     L.append("// name and capital use the English form; nameDE / nameFR / nameIT the official-language forms.")
     L.append("")
@@ -521,20 +546,24 @@ def main() -> None:
     L.append("")
     L.append("export const cantonAreaMeta: CantonBaseMeta = {")
     L.append(f'  referenceDate: "{AREA_DATE}",')
-    L.append(f"  national: {int(round(area['CH']))},")
+    L.append(f"  national: {num(area['CH'], 0)},")
     L.append("  source: " + ts_localized(*["swisstopo, swissBOUNDARIES3D"] * 4) + ",")
     L.append(f"  sourceUrl: {ts_str(SWISSTOPO_PAGE)},")
     L.append("};")
     L.append("")
+    L.append("// Date of the cantonal borders used for population, area and the indicators with currentBorders: true.")
+    L.append(f'export const cantonBordersDate = "{AREA_DATE}";')
+    L.append("")
     L.append("// One reference year per indicator, the same for all 26 cantons.")
     L.append("// `national` is the figure for Switzerland from the same table and year.")
     L.append("export const cantonIndicatorMeta: CantonIndicatorMeta[] = [")
-    for ind_id, unit, year, provisional, source, url, values, dec in indicators:
+    for ind_id, unit, year, provisional, source, url, values, dec, current in indicators:
         L.append("  {")
         L.append(f"    id: {ts_str(ind_id)},")
         L.append(f"    unit: {ts_str(unit)},")
         L.append(f"    year: {year},")
         L.append(f"    provisional: {'true' if provisional else 'false'},")
+        L.append(f"    currentBorders: {'true' if current else 'false'},")
         L.append(f"    national: {num(values['CH'], dec)},")
         L.append(f"    source: {source},")
         L.append(f"    sourceUrl: {ts_str(url)},")
@@ -552,9 +581,9 @@ def main() -> None:
         L.append(f"    abbreviation: {ts_str(abbr)},")
         L.append(f"    capital: {ts_str(capital)},")
         L.append(f"    population: {pop[abbr]},")
-        L.append(f"    area: {int(round(area[abbr]))},")
+        L.append(f"    area: {num(area[abbr], 0)},")
         L.append("    indicators: [")
-        for ind_id, _unit, _year, _prov, _source, _url, values, dec in indicators:
+        for ind_id, _unit, _year, _prov, _source, _url, values, dec, _cur in indicators:
             L.append(f"      {{ indicatorId: {ts_str(ind_id)}, value: {num(values[abbr], dec)} }},")
         L.append("    ],")
         L.append("  },")
@@ -575,7 +604,7 @@ def main() -> None:
 
     OUTPUT_PATH.write_text("\n".join(L), encoding="utf-8")
     print(f"wrote {OUTPUT_PATH.relative_to(PROJECT_ROOT)}: {len(CANTONS)} cantons, {len(indicators)} indicators")
-    for ind_id, _unit, year, provisional, _s, _u, values, dec in indicators:
+    for ind_id, _unit, year, provisional, _s, _u, values, dec, _cur in indicators:
         print(f"  {ind_id:22s} {year}{' (provisional)' if provisional else ''}  CH {num(values['CH'], dec)}")
 
 

@@ -103,6 +103,7 @@ export interface CantonIndicatorMeta {
   unit: string; // "%", "CHF", "CHF/month", "per 1,000 inhabitants"
   year: number; // one reference year for all cantons
   provisional: boolean;
+  currentBorders: boolean; // true: cantonal borders of cantonBordersDate; false: borders of the reference year
   national: number; // Switzerland, same table and year
   source: LocalizedText;
   sourceUrl: string;

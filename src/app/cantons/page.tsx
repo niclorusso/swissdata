@@ -134,7 +134,7 @@ export default function CantonsPage() {
           {selectedIndicatorMeta && (
             <Card>
               <CardHeader className="pb-2">
-                <CardTitle className="text-sm text-swiss-gray-500">{t.cantons.nationalAverage}</CardTitle>
+                <CardTitle className="text-sm text-swiss-gray-500">{t.cantons.switzerland}</CardTitle>
               </CardHeader>
               <CardContent>
                 {(() => {
@@ -259,7 +259,13 @@ export default function CantonsPage() {
               </li>
             ))}
           </ul>
-          <p className="text-xs text-swiss-gray-500 mt-3">{t.cantons.territoryNote}</p>
+          <p className="text-xs text-swiss-gray-500 mt-3">
+            {t.cantons.territoryNote}{" "}
+            {t.cantons.oldBordersNote.replace(
+              "{list}",
+              cantonIndicators.filter((i) => !i.currentBorders).map((i) => `${i.name} (${i.year})`).join(", ")
+            )}
+          </p>
         </CardContent>
       </Card>
     </div>

@@ -159,7 +159,7 @@ export const translations = {
       averageRent: "Average Rent",
       crimeRate: "Offences per 1,000 inhabitants",
       selectCanton: "Select a canton on the map to see details",
-      nationalAverage: "National Average",
+      switzerland: "Switzerland",
       allCantons: "All Cantons",
       canton: "Canton",
       population: "Population",
@@ -170,7 +170,8 @@ export const translations = {
       unemploymentNote: "Note: This is the SECO registered unemployment rate, which counts people registered as unemployed at RAV offices. The dashboard also shows the ILO rate, which includes all active job seekers and is higher.",
       dataSources: "Data sources",
       provisional: "provisional",
-      territoryNote: "Population and area use the cantonal borders of 1 January 2026 (Moutier in the canton of Jura). The other indicators use the borders valid in their reference year.",
+      territoryNote: "Population, area and foreign share use the cantonal borders of 1 January 2026: Moutier, in the canton of Bern until 31 December 2025, is counted in the canton of Jura. The foreign share is recomputed for these borders from the STATPOP figures of 31 December 2025, so for Jura and Bern it differs from the share the FSO publishes for the 2025 borders.",
+      oldBordersNote: "These indicators refer to the borders before 2026, with Moutier in the canton of Bern: {list}.",
     },
 
     // Canton tooltip
@@ -403,7 +404,7 @@ export const translations = {
       averageRent: "Affitto medio",
       crimeRate: "Reati per 1000 abitanti",
       selectCanton: "Seleziona un cantone sulla mappa per vedere i dettagli",
-      nationalAverage: "Media nazionale",
+      switzerland: "Svizzera",
       allCantons: "Tutti i cantoni",
       canton: "Cantone",
       population: "Popolazione",
@@ -414,7 +415,8 @@ export const translations = {
       unemploymentNote: "Nota: tasso di disoccupazione SECO, che conta i disoccupati iscritti agli URC. La dashboard mostra anche il tasso ILO, che include tutte le persone in cerca di lavoro ed \u00E8 pi\u00F9 alto.",
       dataSources: "Fonti dei dati",
       provisional: "provvisorio",
-      territoryNote: "Popolazione e superficie seguono i confini cantonali del 1\u00B0 gennaio 2026 (Moutier nel Canton Giura). Gli altri indicatori seguono i confini validi nel loro anno di riferimento.",
+      territoryNote: "Popolazione, superficie e quota di stranieri seguono i confini cantonali del 1° gennaio 2026: Moutier, nel Canton Berna fino al 31 dicembre 2025, è contata nel Canton Giura. La quota di stranieri è ricalcolata per questi confini dai dati STATPOP del 31 dicembre 2025; per Giura e Berna è quindi diversa da quella che l'UST pubblica per i confini del 2025.",
+      oldBordersNote: "Questi indicatori si riferiscono ai confini precedenti al 2026, con Moutier nel Canton Berna: {list}.",
     },
 
     // Canton tooltip
@@ -645,7 +647,7 @@ export const translations = {
       averageRent: "Durchschnittsmiete",
       crimeRate: "Straftaten pro 1000 Einwohner",
       selectCanton: "Wähle einen Kanton auf der Karte, um Details zu sehen",
-      nationalAverage: "Nationaler Durchschnitt",
+      switzerland: "Schweiz",
       allCantons: "Alle Kantone",
       canton: "Kanton",
       population: "Bevölkerung",
@@ -656,7 +658,8 @@ export const translations = {
       unemploymentNote: "Hinweis: Dies ist die Arbeitslosenquote des SECO, die bei den RAV registrierte Arbeitslose zählt. Das Dashboard zeigt auch die ILO-Quote, die alle aktiv Stellensuchenden umfasst und höher liegt.",
       dataSources: "Datenquellen",
       provisional: "provisorisch",
-      territoryNote: "Bevölkerung und Fläche beziehen sich auf die Kantonsgrenzen vom 1. Januar 2026 (Moutier im Kanton Jura). Die übrigen Indikatoren beziehen sich auf die Grenzen ihres Referenzjahres.",
+      territoryNote: "Bevölkerung, Fläche und Ausländeranteil beziehen sich auf die Kantonsgrenzen vom 1. Januar 2026: Moutier, bis 31. Dezember 2025 im Kanton Bern, wird zum Kanton Jura gezählt. Der Ausländeranteil ist aus den STATPOP-Zahlen vom 31. Dezember 2025 für diese Grenzen neu berechnet und weicht deshalb für Jura und Bern vom Anteil ab, den das BFS für die Grenzen von 2025 veröffentlicht.",
+      oldBordersNote: "Diese Indikatoren beziehen sich auf die Grenzen vor 2026, mit Moutier im Kanton Bern: {list}.",
     },
 
     // Canton tooltip
@@ -889,7 +892,7 @@ export const translations = {
       averageRent: "Loyer moyen",
       crimeRate: "Infractions pour 1000 habitants",
       selectCanton: "Sélectionnez un canton sur la carte pour voir les détails",
-      nationalAverage: "Moyenne nationale",
+      switzerland: "Suisse",
       allCantons: "Tous les cantons",
       canton: "Canton",
       population: "Population",
@@ -900,7 +903,8 @@ export const translations = {
       unemploymentNote: "Note : il s'agit du taux de chômage du SECO, qui compte les chômeurs inscrits auprès des ORP. Le tableau de bord montre aussi le taux BIT, qui inclut toutes les personnes en recherche active d'emploi et est plus élevé.",
       dataSources: "Sources des données",
       provisional: "provisoire",
-      territoryNote: "La population et la superficie se rapportent aux frontières cantonales du 1er janvier 2026 (Moutier dans le canton du Jura). Les autres indicateurs se rapportent aux frontières valables l'année de référence.",
+      territoryNote: "La population, la superficie et la part d'étrangers se rapportent aux frontières cantonales du 1er janvier 2026 : Moutier, dans le canton de Berne jusqu'au 31 décembre 2025, est comptée dans le canton du Jura. La part d'étrangers est recalculée pour ces frontières à partir des chiffres STATPOP du 31 décembre 2025 ; pour le Jura et Berne, elle diffère donc de celle que l'OFS publie pour les frontières de 2025.",
+      oldBordersNote: "Ces indicateurs se rapportent aux frontières d'avant 2026, avec Moutier dans le canton de Berne : {list}.",
     },
 
     // Canton tooltip
