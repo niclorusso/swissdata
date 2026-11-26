@@ -1,0 +1,60 @@
+# Source watcher: once a day, checks whether the official sources used by the site
+# have a newer edition and whether the source links still work. It changes nothing
+# on the site and commits nothing: findings go into ONE issue labelled "sources",
+# and the state of the last run is stored at the bottom of that issue's body.
+# See README.md, section "Source watcher".
+name: Watch sources
+
+on:
+  schedule:
+    - cron: "41 3 * * *"   # 03:41 UTC every day; GitHub runs schedules only from the default branch (main)
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: watch-sources
+  cancel-in-progress: false
+
+jobs:
+  watch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262  # v4.4.0
+        with:
+          persist-credentials: false
+
+      # ubuntu-latest has Python 3 installed; the scripts use the standard library only (3.9+)
+      - name: Python version
+        run: python3 --version
+
+      - name: Load the state of the last run (from the issue, else the committed seed)
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: >
+          python3 scripts/watch/github_issue.py load-state
+          --repo "$GITHUB_REPOSITORY"
+          --out "$RUNNER_TEMP/previous-state.json"
+          --fallback scripts/watch/state.json
+
+      - name: Check the sources
+        run: >
+          python3 scripts/watch/watch.py
+          --state "$RUNNER_TEMP/previous-state.json"
+          --out-dir "$RUNNER_TEMP/watch"
+
+      - name: Write the report to the job summary
+        if: always()
+        run: cat "$RUNNER_TEMP/watch/report.md" >> "$GITHUB_STEP_SUMMARY" || true
+
+      - name: Open or update the issue (only if there is something to report)
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: >
+          python3 scripts/watch/github_issue.py publish
+          --repo "$GITHUB_REPOSITORY"
+          --out-dir "$RUNNER_TEMP/watch"
+          --previous-state "$RUNNER_TEMP/previous-state.json"
