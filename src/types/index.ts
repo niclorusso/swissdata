@@ -29,6 +29,7 @@ export interface Indicator {
   value: number;
   unit: string;
   previousValue?: number;
+  previousPeriod?: string; // period of previousValue when it is not the preceding year (survey held every two years)
   trend: TrendDirection;
   trendPercentage?: number;
   source: string;

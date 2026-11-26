@@ -93,7 +93,11 @@ export function IndicatorCard({ indicator }: IndicatorCardProps) {
                 {indicator.trendPercentage > 0 ? "+" : ""}
                 {indicator.trendPercentage}%
               </span>
-              <span className="text-swiss-gray-500">{t.indicatorCard.vsLastYear}</span>
+              <span className="text-swiss-gray-500">
+                {indicator.previousPeriod
+                  ? t.indicatorCard.vsPeriod.replace("{period}", indicator.previousPeriod)
+                  : t.indicatorCard.vsLastYear}
+              </span>
             </div>
           )}
 

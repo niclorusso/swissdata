@@ -192,6 +192,7 @@ export const indicators: Indicator[] = [
     value: 7024,
     unit: "CHF",
     previousValue: 6788,
+    previousPeriod: "2022",
     trend: "up",
     trendPercentage: 3.5,
     source: "FSO / UST (Federal Statistical Office)",
@@ -412,7 +413,7 @@ export const indicators: Indicator[] = [
     sourceUrl: "https://ec.europa.eu/eurostat/databrowser/view/demo_mlexpec/default/table",
     lastUpdated: "2024",
     description: "Life expectancy at birth, both sexes combined",
-    context: "In 2024 life expectancy at birth was 82.4 years for men and 85.9 for women. Provisional FSO figures for 2025: 82.7 and 86.3. After the drop in 2020 (83.1) the combined figure has been above the 2019 level (83.8) since 2023.",
+    context: "In 2024 life expectancy at birth was 82.4 years for men and 85.9 for women. FSO figures for 2025: 82.7 and 86.3. After the drop in 2020 (83.1) the combined figure has been above the 2019 level (83.8) since 2023.",
     // Eurostat, table demo_mlexpec (life expectancy at birth, total, FSO data), update of 25.09.2026. The FSO itself publishes life expectancy by sex only.
     historicalData: [
       { year: 1960, value: 71.4 },
@@ -484,7 +485,7 @@ export const indicators: Indicator[] = [
     sourceUrl: "https://statistik.admin.ch/de/themen/gesundheit/kosten-finanzierung-gesundheitswesens",
     lastUpdated: "2024 (provisional)",
     description: "Costs of the healthcare system as a percentage of gross domestic product",
-    context: "In 2024 the healthcare system cost CHF 97.2 billion (provisional), 4.1% more than in 2023, or CHF 899 per person per month. As a share of GDP Switzerland (11.4%) is below Germany (12.3%), Austria (11.8%) and France (11.5%) and above Italy (8.4%).",
+    context: "In 2024 the healthcare system cost CHF 97.2 billion (provisional), 4.1% more than in 2023, or CHF 899 per person per month. As a share of GDP Switzerland (11.4%) is below Germany (12.2%) and Austria (11.7%), level with France (11.3%) and above Italy (8.5%) (OECD, 2024).",
     // FSO, table "Kosten des Gesundheitswesens seit 1960", column % of GDP, data as of 24.04.2026 (2024 provisional).
     historicalData: [
       { year: 2000, value: 9.0 },
@@ -601,7 +602,7 @@ export const indicators: Indicator[] = [
     sourceUrl: "https://www.admin.ch/de/newnsb/YQtEZcK-D9fQ",
     lastUpdated: "2025",
     description: "Share of renewable energy in total final energy consumption",
-    context: "The renewable share of final energy consumption fell to 25.7% in 2022 and has risen every year since. In 2025, 68.3% of Swiss electricity production was renewable: hydropower supplied 55.5% of production and photovoltaics 11.8%.",
+    context: "The renewable share of final energy consumption fell to 25.7% in 2022 and has risen every year since. In 2025, 68.3% of net electricity production (production minus the electricity used by storage pumps) was renewable. Of gross production, hydropower supplied 55.5% and photovoltaics 11.8%.",
     // SFOE, Schweizerische Statistik der erneuerbaren Energien: 1990-2024 from the 2024 edition (September 2025), 2025 from the 2025 edition (June 2026).
     historicalData: [
       { year: 1990, value: 15.8 },

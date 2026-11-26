@@ -86,7 +86,7 @@ const indicatorTranslationsIT: Record<
     name: "Speranza di vita alla nascita",
     shortName: "Speranza di vita",
     description: "Speranza di vita alla nascita, entrambi i sessi",
-    context: "Nel 2024 la speranza di vita alla nascita era di 82,4 anni per gli uomini e 85,9 per le donne. Dati provvisori dell'UST per il 2025: 82,7 e 86,3. Dopo il calo del 2020 (83,1) il valore complessivo è dal 2023 sopra il livello del 2019 (83,8).",
+    context: "Nel 2024 la speranza di vita alla nascita era di 82,4 anni per gli uomini e 85,9 per le donne. Dati dell'UST per il 2025: 82,7 e 86,3. Dopo il calo del 2020 (83,1) il valore complessivo è dal 2023 sopra il livello del 2019 (83,8).",
   },
   "crime-rate-per-1000": {
     name: "Tasso di criminalità (per 1'000 abitanti)",
@@ -106,7 +106,7 @@ const indicatorTranslationsIT: Record<
     name: "Costi della sanità (% del PIL)",
     shortName: "Costi della sanità",
     description: "Costi del sistema sanitario in percentuale del prodotto interno lordo",
-    context: "Nel 2024 il sistema sanitario è costato 97,2 miliardi di franchi (dato provvisorio), il 4,1% in più rispetto al 2023, cioè 899 franchi al mese per persona. In rapporto al PIL la Svizzera (11,4%) è sotto Germania (12,3%), Austria (11,8%) e Francia (11,5%) e sopra l'Italia (8,4%).",
+    context: "Nel 2024 il sistema sanitario è costato 97,2 miliardi di franchi (dato provvisorio), il 4,1% in più rispetto al 2023, cioè 899 franchi al mese per persona. In rapporto al PIL la Svizzera (11,4%) è sotto Germania (12,2%) e Austria (11,7%), allo stesso livello della Francia (11,3%) e sopra l'Italia (8,5%) (OCSE, 2024).",
   },
   "education-spending": {
     name: "Spesa per l'istruzione (% del PIL)",
@@ -126,7 +126,7 @@ const indicatorTranslationsIT: Record<
     name: "Quota di energia rinnovabile",
     shortName: "Rinnovabili",
     description: "Quota di energia rinnovabile sul consumo finale totale di energia",
-    context: "La quota rinnovabile del consumo finale di energia è scesa al 25,7% nel 2022 e da allora è aumentata ogni anno. Nel 2025 il 68,3% della produzione svizzera di elettricità era rinnovabile: l'idroelettrico ha fornito il 55,5% della produzione e il fotovoltaico l'11,8%.",
+    context: "La quota rinnovabile del consumo finale di energia è scesa al 25,7% nel 2022 e da allora è aumentata ogni anno. Nel 2025 era rinnovabile il 68,3% della produzione netta di elettricità (produzione meno il consumo delle pompe di accumulazione). Della produzione lorda, l'idroelettrico ha fornito il 55,5% e il fotovoltaico l'11,8%.",
   },
 };
 
@@ -409,7 +409,7 @@ const questionTranslationsIT: Record<
     question:
       "Quale percentuale del consumo finale di energia in Svizzera veniva da fonti rinnovabili nel 2025?",
     explanation:
-      "Nel 2025 le fonti rinnovabili hanno coperto il 30,6% del consumo finale di energia, contro il 29,9% del 2024 (Ufficio federale dell'energia). La quota era del 19,9% nel 2010 ed è scesa temporaneamente al 25,7% nel 2022. Nella sola produzione di elettricità, nel 2025 l'idroelettrico ha fornito il 55,5% e il fotovoltaico l'11,8%. Il confronto mostra gli anni precedenti in Svizzera.",
+      "Nel 2025 le fonti rinnovabili hanno coperto il 30,6% del consumo finale di energia, contro il 29,9% del 2024 (Ufficio federale dell'energia). La quota era del 19,9% nel 2010 ed è scesa temporaneamente al 25,7% nel 2022. Della produzione lorda di elettricità, nel 2025 l'idroelettrico ha fornito il 55,5% e il fotovoltaico l'11,8%. Il confronto mostra gli anni precedenti in Svizzera.",
   },
   "recycling-rate": {
     question:
@@ -536,7 +536,7 @@ const indicatorTranslationsDE: Record<
     name: "Lebenserwartung bei Geburt",
     shortName: "Lebenserwartung",
     description: "Lebenserwartung bei Geburt, beide Geschlechter",
-    context: "2024 betrug die Lebenserwartung bei Geburt 82,4 Jahre für Männer und 85,9 für Frauen. Provisorische Zahlen des BFS für 2025: 82,7 und 86,3. Nach dem Rückgang von 2020 (83,1) liegt der Gesamtwert seit 2023 über dem Stand von 2019 (83,8).",
+    context: "2024 betrug die Lebenserwartung bei Geburt 82,4 Jahre für Männer und 85,9 für Frauen. Zahlen des BFS für 2025: 82,7 und 86,3. Nach dem Rückgang von 2020 (83,1) liegt der Gesamtwert seit 2023 über dem Stand von 2019 (83,8).",
   },
   "crime-rate-per-1000": {
     name: "Kriminalitätsrate (pro 1'000 Einwohner)",
@@ -554,7 +554,7 @@ const indicatorTranslationsDE: Record<
     name: "Gesundheitskosten (% des BIP)",
     shortName: "Gesundheitskosten",
     description: "Kosten des Gesundheitswesens in Prozent des Bruttoinlandprodukts",
-    context: "2024 kostete das Gesundheitswesen 97,2 Milliarden Franken (provisorisch), 4,1% mehr als 2023, das sind 899 Franken pro Person und Monat. Gemessen am BIP liegt die Schweiz (11,4%) unter Deutschland (12,3%), Österreich (11,8%) und Frankreich (11,5%) und über Italien (8,4%).",
+    context: "2024 kostete das Gesundheitswesen 97,2 Milliarden Franken (provisorisch), 4,1% mehr als 2023, das sind 899 Franken pro Person und Monat. Gemessen am BIP liegt die Schweiz (11,4%) unter Deutschland (12,2%) und Österreich (11,7%), gleichauf mit Frankreich (11,3%) und über Italien (8,5%) (OECD, 2024).",
   },
   "education-spending": {
     name: "Bildungsausgaben (% des BIP)",
@@ -572,7 +572,7 @@ const indicatorTranslationsDE: Record<
     name: "Anteil erneuerbarer Energien",
     shortName: "Erneuerbare",
     description: "Anteil erneuerbarer Energien am gesamten Endenergieverbrauch",
-    context: "Der erneuerbare Anteil am Endenergieverbrauch sank 2022 auf 25,7% und ist seither jedes Jahr gestiegen. 2025 waren 68,3% der Schweizer Stromproduktion erneuerbar: Die Wasserkraft lieferte 55,5% der Produktion, die Photovoltaik 11,8%.",
+    context: "Der erneuerbare Anteil am Endenergieverbrauch sank 2022 auf 25,7% und ist seither jedes Jahr gestiegen. 2025 waren 68,3% der Netto-Stromproduktion (Produktion abzüglich des Verbrauchs der Speicherpumpen) erneuerbar. Von der Bruttoproduktion lieferte die Wasserkraft 55,5% und die Photovoltaik 11,8%.",
   },
 };
 
@@ -657,7 +657,7 @@ const indicatorTranslationsFR: Record<
     name: "Espérance de vie à la naissance",
     shortName: "Espérance de vie",
     description: "Espérance de vie à la naissance, les deux sexes",
-    context: "En 2024 l'espérance de vie à la naissance était de 82,4 ans pour les hommes et de 85,9 pour les femmes. Chiffres provisoires de l'OFS pour 2025 : 82,7 et 86,3. Après la baisse de 2020 (83,1), la valeur globale dépasse depuis 2023 le niveau de 2019 (83,8).",
+    context: "En 2024 l'espérance de vie à la naissance était de 82,4 ans pour les hommes et de 85,9 pour les femmes. Chiffres de l'OFS pour 2025 : 82,7 et 86,3. Après la baisse de 2020 (83,1), la valeur globale dépasse depuis 2023 le niveau de 2019 (83,8).",
   },
   "crime-rate-per-1000": {
     name: "Taux de criminalité (pour 1'000 habitants)",
@@ -675,7 +675,7 @@ const indicatorTranslationsFR: Record<
     name: "Coûts de la santé (% du PIB)",
     shortName: "Coûts de la santé",
     description: "Coûts du système de santé en pourcentage du produit intérieur brut",
-    context: "En 2024 le système de santé a coûté 97,2 milliards de francs (provisoire), 4,1% de plus qu'en 2023, soit 899 francs par personne et par mois. En part du PIB, la Suisse (11,4%) se situe sous l'Allemagne (12,3%), l'Autriche (11,8%) et la France (11,5%) et au-dessus de l'Italie (8,4%).",
+    context: "En 2024 le système de santé a coûté 97,2 milliards de francs (provisoire), 4,1% de plus qu'en 2023, soit 899 francs par personne et par mois. En part du PIB, la Suisse (11,4%) se situe sous l'Allemagne (12,2%) et l'Autriche (11,7%), au même niveau que la France (11,3%) et au-dessus de l'Italie (8,5%) (OCDE, 2024).",
   },
   "education-spending": {
     name: "Dépenses d'éducation (% du PIB)",
@@ -693,7 +693,7 @@ const indicatorTranslationsFR: Record<
     name: "Part des énergies renouvelables",
     shortName: "Renouvelables",
     description: "Part des énergies renouvelables dans la consommation finale totale d'énergie",
-    context: "La part renouvelable de la consommation finale d'énergie est tombée à 25,7% en 2022 et augmente chaque année depuis. En 2025, 68,3% de la production suisse d'électricité était renouvelable : l'hydraulique a fourni 55,5% de la production et le photovoltaïque 11,8%.",
+    context: "La part renouvelable de la consommation finale d'énergie est tombée à 25,7% en 2022 et augmente chaque année depuis. En 2025, 68,3% de la production nette d'électricité (production moins la consommation des pompes d'accumulation) était renouvelable. De la production brute, l'hydraulique a fourni 55,5% et le photovoltaïque 11,8%.",
   },
 };
 

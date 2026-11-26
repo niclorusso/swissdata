@@ -8,6 +8,7 @@ import { indicators, getLocalizedIndicatorsByCategory } from "@/data/indicators"
 import { useLanguage } from "@/i18n/LanguageContext";
 import { ArrowRight, HelpCircle, Map, CheckCircle2, BarChart3, Landmark } from "lucide-react";
 import { SPENDING_URL } from "@/lib/utils";
+import { indicatorSources } from "@/data/sources";
 
 export default function HomePage() {
   const { t, locale } = useLanguage();
@@ -128,12 +129,7 @@ export default function HomePage() {
       <section className="space-y-4">
         <h3 className="text-lg font-semibold text-swiss-gray-900">{t.home.ourSources}</h3>
         <div className="flex flex-wrap gap-3 sm:gap-4">
-          {[
-            { name: "BFS", url: "https://www.bfs.admin.ch", desc: t.home.sourceBFS },
-            { name: "SECO", url: "https://www.seco.admin.ch", desc: t.home.sourceSECO },
-            { name: "BAG", url: "https://www.bag.admin.ch", desc: t.home.sourceBAG },
-            { name: "OpenData", url: "https://opendata.swiss", desc: t.home.sourceOpenData },
-          ].map((source) => (
+          {indicatorSources.map((s) => ({ name: s.abbr, url: s.url, desc: s.name[locale] })).map((source) => (
             <a
               key={source.name}
               href={source.url}

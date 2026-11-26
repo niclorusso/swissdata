@@ -1075,7 +1075,7 @@ export const questions: QuizQuestion[] = [
     maxValue: 60,
     actualValue: 30.6,
     explanation:
-      "In 2025 renewable sources covered 30.6% of final energy consumption, up from 29.9% in 2024 (Swiss Federal Office of Energy). The share was 19.9% in 2010 and fell temporarily to 25.7% in 2022. In electricity production alone, hydropower supplied 55.5% and photovoltaics 11.8% in 2025. The comparison shows earlier years in Switzerland.",
+      "In 2025 renewable sources covered 30.6% of final energy consumption, up from 29.9% in 2024 (Swiss Federal Office of Energy). The share was 19.9% in 2010 and fell temporarily to 25.7% in 2022. Of gross electricity production, hydropower supplied 55.5% and photovoltaics 11.8% in 2025. The comparison shows earlier years in Switzerland.",
     source: "Swiss Federal Office of Energy (SFOE), Swiss renewable energy statistics",
     sourceUrl: "https://www.admin.ch/de/newnsb/YQtEZcK-D9fQ",
     comparisonData: [

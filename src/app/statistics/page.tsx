@@ -4,6 +4,7 @@ import { useState, useMemo } from "react";
 import { indicators, getIndicatorsByCategory, getLocalizedIndicators, getLocalizedIndicatorsByCategory } from "@/data/indicators";
 import { LargeChart, SingleIndicatorChart } from "@/components/statistics/LargeChart";
 import { SPENDING_URL } from "@/lib/utils";
+import { indicatorSources } from "@/data/sources";
 import {
   TimeRangeSelector,
   TimeRange,
@@ -264,12 +265,7 @@ export default function StatisticsPage() {
       <section className="border-t border-swiss-gray-200 pt-6 sm:pt-8 mt-8 sm:mt-12">
         <h3 className="text-lg font-semibold text-swiss-gray-900 mb-4">{t.statistics.dataSources}</h3>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
-          {[
-            { name: "BFS", url: "https://www.bfs.admin.ch", desc: t.statistics.sourceBFS },
-            { name: "SECO", url: "https://www.seco.admin.ch", desc: t.statistics.sourceSECO },
-            { name: "BAG", url: "https://www.bag.admin.ch", desc: t.statistics.sourceBAG },
-            { name: "OpenData.swiss", url: "https://opendata.swiss", desc: t.statistics.sourceOpenData },
-          ].map((source) => (
+          {indicatorSources.map((s) => ({ name: s.abbr, url: s.url, desc: s.name[locale] })).map((source) => (
             <a key={source.name} href={source.url} target="_blank" rel="noopener noreferrer" className="p-3 sm:p-4 bg-swiss-gray-50 rounded-lg hover:bg-swiss-gray-100 transition-colors">
               <p className="font-medium text-swiss-gray-900 text-sm sm:text-base">{source.name}</p>
               <p className="text-xs sm:text-sm text-swiss-gray-500">{source.desc}</p>

@@ -16,7 +16,7 @@ export const translations = {
 
     // Footer
     footer: {
-      disclaimer: "Data sourced from official Swiss government statistics (BFS, SECO, BAG). Always verify before making decisions.",
+      disclaimer: "Each figure names its source: Swiss federal offices, Eurostat, the OECD and others. Check the source before relying on a figure.",
       about: "About",
     },
 
@@ -27,7 +27,7 @@ export const translations = {
       badge: "100% sourced from official Swiss statistics",
       title: "Switzerland",
       titleHighlight: "in Numbers",
-      subtitle: "Explore real statistics about Switzerland's economy, demographics, and society. Test your knowledge with verified data from official sources.",
+      subtitle: "Statistics on Switzerland's economy, population and society, each with its source. A quiz to test what you know.",
       testKnowledge: "Test Your Knowledge",
       exploreByCanton: "Explore by Canton",
       showStats: "Show Statistics",
@@ -42,10 +42,6 @@ export const translations = {
       startQuiz: "Start the Quiz",
       // Sources
       ourSources: "Our Sources",
-      sourceBFS: "Federal Statistical Office",
-      sourceSECO: "State Secretariat for Economic Affairs",
-      sourceBAG: "Federal Office of Public Health",
-      sourceOpenData: "Swiss Open Government Data",
     },
 
     // Quiz page
@@ -134,11 +130,6 @@ export const translations = {
       dataSources: "Data Sources",
       whatIsIt: "What is it?",
       whyItMatters: "Why it matters",
-      // Source descriptions
-      sourceBFS: "Federal Statistical Office",
-      sourceSECO: "State Secretariat for Economic Affairs",
-      sourceBAG: "Federal Office of Public Health",
-      sourceOpenData: "Swiss Open Government Data",
     },
 
     // Time range
@@ -209,28 +200,15 @@ export const translations = {
       principle4Title: "Context Over Clickbait",
       principle4Desc: "Numbers alone can mislead. We always provide context, historical trends, and international comparisons to give you the full picture.",
       sourcesTitle: "Our Sources",
-      sourcesIntro: "We exclusively use official Swiss government statistics and internationally recognized databases:",
-      // Sources
-      bfsName: "Federal Statistical Office",
-      bfsDesc: "The primary source for Swiss statistics on population, economy, society, and environment.",
-      secoName: "State Secretariat for Economic Affairs",
-      secoDesc: "Labor market statistics, unemployment figures, and economic indicators.",
-      bagName: "Federal Office of Public Health",
-      bagDesc: "Health statistics, insurance data, and public health indicators.",
-      semName: "State Secretariat for Migration",
-      semDesc: "Migration statistics, asylum data, and visa information.",
-      snbName: "Swiss National Bank",
-      snbDesc: "Financial statistics, exchange rates, and monetary policy data.",
-      oecdName: "Organisation for Economic Co-operation and Development",
-      oecdDesc: "International comparisons and standardized economic indicators.",
+      sourcesIntro: "The indicators and the canton figures come from Swiss federal offices and Eurostat. The quiz also uses the OECD, the World Bank, the IMF, the European Central Bank, SIPRI, the World Gold Council, the Swiss Bankers Association and SBB. Each figure names its source.",
       // Methodology
       methodologyTitle: "Methodology",
       dataCollectionTitle: "Data Collection",
-      dataCollectionDesc: "We collect data directly from official government APIs and publications. We never use secondary sources or media reports without verification. All data points include links to their original sources.",
+      dataCollectionDesc: "We take each figure from the table, database or publication of the body named as its source, and link to it. We do not use media reports as a source.",
       questionSelectionTitle: "Question Selection",
       questionSelectionDesc: "The questions in our quiz cover key Swiss statistics across economic, demographic, and social domains. We select topics that are relevant to informed citizenship and testable with official data sources.",
       accuracyScoringTitle: "Accuracy Scoring",
-      accuracyScoringDesc: "Quiz accuracy is calculated using an exponential decay function based on the distance between your guess and the actual value, normalized by the question\u2019s range. This rewards close guesses while being forgiving of reasonable estimates.",
+      accuracyScoringDesc: "The score of an answer is 100% minus the distance between your guess and the actual value, measured as a share of the slider's range. A guess off by a tenth of the range scores 90%.",
       updateFrequencyTitle: "Update Frequency",
       updateFrequencyDesc: "We update indicators as soon as new official data is released. Most economic indicators are updated quarterly; demographic data annually. Each indicator shows its last update date.",
       // Limitations
@@ -265,6 +243,7 @@ export const translations = {
       whatIsIt: "What is it?",
       whyItMatters: "Why it matters",
       vsLastYear: "vs last year",
+      vsPeriod: "vs {period}",
     },
   },
 
@@ -281,7 +260,7 @@ export const translations = {
 
     // Footer
     footer: {
-      disclaimer: "Dati provenienti da statistiche ufficiali del governo svizzero (UST, SECO, UFSP). Verificare sempre prima di prendere decisioni.",
+      disclaimer: "Ogni cifra indica la sua fonte: uffici federali svizzeri, Eurostat, OCSE e altre. Verifica la fonte prima di basarti su una cifra.",
       about: "Chi siamo",
     },
 
@@ -292,7 +271,7 @@ export const translations = {
       badge: "100% basato su statistiche ufficiali svizzere",
       title: "La Svizzera",
       titleHighlight: "in numeri",
-      subtitle: "Esplora statistiche reali sull'economia, la demografia e la società svizzera. Testa le tue conoscenze con dati verificati da fonti ufficiali.",
+      subtitle: "Statistiche su economia, popolazione e società della Svizzera, ognuna con la sua fonte. Un quiz per mettere alla prova quello che sai.",
       testKnowledge: "Testa le tue conoscenze",
       exploreByCanton: "Esplora per Cantone",
       showStats: "Vedi Statistiche",
@@ -307,10 +286,6 @@ export const translations = {
       startQuiz: "Inizia il Quiz",
       // Sources
       ourSources: "Le nostre fonti",
-      sourceBFS: "Ufficio federale di statistica",
-      sourceSECO: "Segretariato di Stato dell\u2019economia",
-      sourceBAG: "Ufficio federale della sanit\u00E0 pubblica",
-      sourceOpenData: "Dati aperti del governo svizzero",
     },
 
     // Quiz page
@@ -399,11 +374,6 @@ export const translations = {
       dataSources: "Fonti dei dati",
       whatIsIt: "Cos\u2019\u00E8?",
       whyItMatters: "Perch\u00E9 \u00E8 importante",
-      // Source descriptions
-      sourceBFS: "Ufficio federale di statistica",
-      sourceSECO: "Segretariato di Stato dell\u2019economia",
-      sourceBAG: "Ufficio federale della sanit\u00E0 pubblica",
-      sourceOpenData: "Dati aperti del governo svizzero",
     },
 
     // Time range
@@ -474,28 +444,15 @@ export const translations = {
       principle4Title: "Contesto, non sensazionalismo",
       principle4Desc: "I numeri da soli possono ingannare. Forniamo sempre contesto, tendenze storiche e confronti internazionali per darti il quadro completo.",
       sourcesTitle: "Le nostre fonti",
-      sourcesIntro: "Utilizziamo esclusivamente statistiche ufficiali del governo svizzero e banche dati riconosciute a livello internazionale:",
-      // Sources
-      bfsName: "Ufficio federale di statistica",
-      bfsDesc: "La fonte principale per le statistiche svizzere su popolazione, economia, societ\u00E0 e ambiente.",
-      secoName: "Segretariato di Stato dell\u2019economia",
-      secoDesc: "Statistiche sul mercato del lavoro, dati sulla disoccupazione e indicatori economici.",
-      bagName: "Ufficio federale della sanit\u00E0 pubblica",
-      bagDesc: "Statistiche sanitarie, dati assicurativi e indicatori di salute pubblica.",
-      semName: "Segretariato di Stato della migrazione",
-      semDesc: "Statistiche sulla migrazione, dati sull\u2019asilo e informazioni sui visti.",
-      snbName: "Banca nazionale svizzera",
-      snbDesc: "Statistiche finanziarie, tassi di cambio e dati di politica monetaria.",
-      oecdName: "Organizzazione per la cooperazione e lo sviluppo economico",
-      oecdDesc: "Confronti internazionali e indicatori economici standardizzati.",
+      sourcesIntro: "Gli indicatori e i dati dei Cantoni vengono da uffici federali svizzeri e da Eurostat. Il quiz usa anche OCSE, Banca mondiale, FMI, Banca centrale europea, SIPRI, World Gold Council, Associazione svizzera dei banchieri e FFS. Ogni cifra indica la sua fonte.",
       // Methodology
       methodologyTitle: "Metodologia",
       dataCollectionTitle: "Raccolta dati",
-      dataCollectionDesc: "Raccogliamo i dati direttamente dalle API e pubblicazioni ufficiali del governo. Non utilizziamo mai fonti secondarie o reportage senza verifica. Tutti i dati includono collegamenti alle fonti originali.",
+      dataCollectionDesc: "Prendiamo ogni cifra dalla tabella, dalla banca dati o dalla pubblicazione dell'ente indicato come fonte, con il link. Non usiamo articoli di stampa come fonte.",
       questionSelectionTitle: "Selezione delle domande",
       questionSelectionDesc: "Le domande del nostro quiz coprono le principali statistiche svizzere nei settori economico, demografico e sociale. Selezioniamo argomenti rilevanti per una cittadinanza informata e verificabili con fonti ufficiali.",
       accuracyScoringTitle: "Calcolo della precisione",
-      accuracyScoringDesc: "La precisione del quiz viene calcolata utilizzando una funzione di decadimento esponenziale basata sulla distanza tra la tua stima e il valore reale, normalizzata per l\u2019intervallo della domanda. Questo premia le stime vicine pur essendo tollerante con le stime ragionevoli.",
+      accuracyScoringDesc: "Il punteggio di una risposta è 100% meno la distanza tra la tua stima e il valore reale, misurata in rapporto all'ampiezza del cursore. Una stima che sbaglia di un decimo dell'ampiezza vale 90%.",
       updateFrequencyTitle: "Frequenza di aggiornamento",
       updateFrequencyDesc: "Aggiorniamo gli indicatori non appena vengono rilasciati nuovi dati ufficiali. La maggior parte degli indicatori economici viene aggiornata trimestralmente; i dati demografici annualmente. Ogni indicatore mostra la data dell\u2019ultimo aggiornamento.",
       // Limitations
@@ -528,6 +485,7 @@ export const translations = {
       whatIsIt: "Cos'è?",
       whyItMatters: "Perché è importante",
       vsLastYear: "rispetto all'anno scorso",
+      vsPeriod: "rispetto al {period}",
     },
   },
 
@@ -544,7 +502,7 @@ export const translations = {
 
     // Footer
     footer: {
-      disclaimer: "Daten aus offiziellen Schweizer Statistiken (BFS, SECO, BAG). Bitte vor Entscheidungen immer überprüfen.",
+      disclaimer: "Jede Zahl nennt ihre Quelle: Schweizer Bundesämter, Eurostat, OECD und weitere. Prüfe die Quelle, bevor du dich auf eine Zahl stützt.",
       about: "Über uns",
     },
 
@@ -555,7 +513,7 @@ export const translations = {
       badge: "100% aus offiziellen Schweizer Statistiken",
       title: "Die Schweiz",
       titleHighlight: "in Zahlen",
-      subtitle: "Entdecke echte Statistiken über die Wirtschaft, Demografie und Gesellschaft der Schweiz. Teste dein Wissen mit verifizierten Daten aus offiziellen Quellen.",
+      subtitle: "Statistiken zu Wirtschaft, Bevölkerung und Gesellschaft der Schweiz, jede mit ihrer Quelle. Ein Quiz, um dein Wissen zu testen.",
       testKnowledge: "Teste dein Wissen",
       exploreByCanton: "Nach Kanton erkunden",
       showStats: "Statistiken anzeigen",
@@ -570,10 +528,6 @@ export const translations = {
       startQuiz: "Quiz starten",
       // Sources
       ourSources: "Unsere Quellen",
-      sourceBFS: "Bundesamt für Statistik",
-      sourceSECO: "Staatssekretariat für Wirtschaft",
-      sourceBAG: "Bundesamt für Gesundheit",
-      sourceOpenData: "Offene Behördendaten der Schweiz",
     },
 
     // Quiz page
@@ -662,11 +616,6 @@ export const translations = {
       dataSources: "Datenquellen",
       whatIsIt: "Was ist das?",
       whyItMatters: "Warum es wichtig ist",
-      // Source descriptions
-      sourceBFS: "Bundesamt für Statistik",
-      sourceSECO: "Staatssekretariat für Wirtschaft",
-      sourceBAG: "Bundesamt für Gesundheit",
-      sourceOpenData: "Offene Behördendaten der Schweiz",
     },
 
     // Time range
@@ -737,28 +686,15 @@ export const translations = {
       principle4Title: "Kontext statt Clickbait",
       principle4Desc: "Zahlen allein können irreführen. Wir liefern immer Kontext, historische Trends und internationale Vergleiche, um dir das vollständige Bild zu geben.",
       sourcesTitle: "Unsere Quellen",
-      sourcesIntro: "Wir verwenden ausschliesslich offizielle Schweizer Regierungsstatistiken und international anerkannte Datenbanken:",
-      // Sources
-      bfsName: "Bundesamt für Statistik",
-      bfsDesc: "Die Hauptquelle für Schweizer Statistiken zu Bevölkerung, Wirtschaft, Gesellschaft und Umwelt.",
-      secoName: "Staatssekretariat für Wirtschaft",
-      secoDesc: "Arbeitsmarktstatistiken, Arbeitslosenzahlen und Wirtschaftsindikatoren.",
-      bagName: "Bundesamt für Gesundheit",
-      bagDesc: "Gesundheitsstatistiken, Versicherungsdaten und Indikatoren der öffentlichen Gesundheit.",
-      semName: "Staatssekretariat für Migration",
-      semDesc: "Migrationsstatistiken, Asyldaten und Visainformationen.",
-      snbName: "Schweizerische Nationalbank",
-      snbDesc: "Finanzstatistiken, Wechselkurse und geldpolitische Daten.",
-      oecdName: "Organisation für wirtschaftliche Zusammenarbeit und Entwicklung",
-      oecdDesc: "Internationale Vergleiche und standardisierte Wirtschaftsindikatoren.",
+      sourcesIntro: "Die Indikatoren und die Kantonszahlen stammen von Schweizer Bundesämtern und von Eurostat. Das Quiz verwendet zudem OECD, Weltbank, IWF, Europäische Zentralbank, SIPRI, World Gold Council, Schweizerische Bankiervereinigung und SBB. Jede Zahl nennt ihre Quelle.",
       // Methodology
       methodologyTitle: "Methodik",
       dataCollectionTitle: "Datenerhebung",
-      dataCollectionDesc: "Wir sammeln Daten direkt von offiziellen Regierungs-APIs und Publikationen. Wir verwenden nie Sekundärquellen oder Medienberichte ohne Überprüfung. Alle Datenpunkte enthalten Links zu ihren Originalquellen.",
+      dataCollectionDesc: "Wir entnehmen jede Zahl der Tabelle, Datenbank oder Publikation der als Quelle genannten Stelle und verlinken sie. Medienberichte verwenden wir nicht als Quelle.",
       questionSelectionTitle: "Fragenauswahl",
       questionSelectionDesc: "Die Fragen in unserem Quiz decken wichtige Schweizer Statistiken aus den Bereichen Wirtschaft, Demografie und Gesellschaft ab. Wir wählen Themen, die für informierte Bürger relevant und mit offiziellen Datenquellen überprüfbar sind.",
       accuracyScoringTitle: "Genauigkeitsbewertung",
-      accuracyScoringDesc: "Die Quiz-Genauigkeit wird mit einer exponentiellen Abklingfunktion berechnet, basierend auf der Distanz zwischen deiner Schätzung und dem tatsächlichen Wert, normalisiert durch den Fragebereich. Dies belohnt nahe Schätzungen und ist nachsichtig bei vernünftigen Einschätzungen.",
+      accuracyScoringDesc: "Die Punktzahl einer Antwort ist 100% minus der Abstand zwischen deiner Schätzung und dem tatsächlichen Wert, gemessen am Bereich des Schiebereglers. Eine Schätzung, die um einen Zehntel des Bereichs danebenliegt, ergibt 90%.",
       updateFrequencyTitle: "Aktualisierungshäufigkeit",
       updateFrequencyDesc: "Wir aktualisieren Indikatoren, sobald neue offizielle Daten veröffentlicht werden. Die meisten Wirtschaftsindikatoren werden vierteljährlich aktualisiert; demografische Daten jährlich. Jeder Indikator zeigt sein letztes Aktualisierungsdatum.",
       // Limitations
@@ -793,6 +729,7 @@ export const translations = {
       whatIsIt: "Was ist das?",
       whyItMatters: "Warum es wichtig ist",
       vsLastYear: "gegenüber Vorjahr",
+      vsPeriod: "gegenüber {period}",
     },
   },
 
@@ -809,7 +746,7 @@ export const translations = {
 
     // Footer
     footer: {
-      disclaimer: "Données provenant des statistiques officielles du gouvernement suisse (OFS, SECO, OFSP). Toujours vérifier avant de prendre des décisions.",
+      disclaimer: "Chaque chiffre indique sa source : offices fédéraux suisses, Eurostat, OCDE et autres. Vérifiez la source avant de vous appuyer sur un chiffre.",
       about: "À propos",
     },
 
@@ -820,7 +757,7 @@ export const translations = {
       badge: "100% basé sur les statistiques officielles suisses",
       title: "La Suisse",
       titleHighlight: "en chiffres",
-      subtitle: "Explorez les statistiques réelles sur l'économie, la démographie et la société suisse. Testez vos connaissances avec des données vérifiées provenant de sources officielles.",
+      subtitle: "Des statistiques sur l'économie, la population et la société suisses, chacune avec sa source. Un quiz pour tester vos connaissances.",
       testKnowledge: "Testez vos connaissances",
       exploreByCanton: "Explorer par canton",
       showStats: "Voir les statistiques",
@@ -835,10 +772,6 @@ export const translations = {
       startQuiz: "Commencer le quiz",
       // Sources
       ourSources: "Nos sources",
-      sourceBFS: "Office fédéral de la statistique",
-      sourceSECO: "Secrétariat d'État à l'économie",
-      sourceBAG: "Office fédéral de la santé publique",
-      sourceOpenData: "Données ouvertes du gouvernement suisse",
     },
 
     // Quiz page
@@ -927,11 +860,6 @@ export const translations = {
       dataSources: "Sources des données",
       whatIsIt: "Qu'est-ce que c'est ?",
       whyItMatters: "Pourquoi c'est important",
-      // Source descriptions
-      sourceBFS: "Office fédéral de la statistique",
-      sourceSECO: "Secrétariat d'État à l'économie",
-      sourceBAG: "Office fédéral de la santé publique",
-      sourceOpenData: "Données ouvertes du gouvernement suisse",
     },
 
     // Time range
@@ -1002,28 +930,15 @@ export const translations = {
       principle4Title: "Contexte, pas sensationnalisme",
       principle4Desc: "Les chiffres seuls peuvent induire en erreur. Nous fournissons toujours du contexte, des tendances historiques et des comparaisons internationales pour vous donner une image complète.",
       sourcesTitle: "Nos sources",
-      sourcesIntro: "Nous utilisons exclusivement les statistiques officielles du gouvernement suisse et les bases de données reconnues internationalement :",
-      // Sources
-      bfsName: "Office fédéral de la statistique",
-      bfsDesc: "La source principale pour les statistiques suisses sur la population, l'économie, la société et l'environnement.",
-      secoName: "Secrétariat d'État à l'économie",
-      secoDesc: "Statistiques du marché du travail, données sur le chômage et indicateurs économiques.",
-      bagName: "Office fédéral de la santé publique",
-      bagDesc: "Statistiques sanitaires, données d'assurance et indicateurs de santé publique.",
-      semName: "Secrétariat d'État aux migrations",
-      semDesc: "Statistiques sur la migration, données sur l'asile et informations sur les visas.",
-      snbName: "Banque nationale suisse",
-      snbDesc: "Statistiques financières, taux de change et données de politique monétaire.",
-      oecdName: "Organisation de coopération et de développement économiques",
-      oecdDesc: "Comparaisons internationales et indicateurs économiques standardisés.",
+      sourcesIntro: "Les indicateurs et les chiffres des cantons proviennent d'offices fédéraux suisses et d'Eurostat. Le quiz utilise aussi l'OCDE, la Banque mondiale, le FMI, la Banque centrale européenne, le SIPRI, le World Gold Council, l'Association suisse des banquiers et les CFF. Chaque chiffre indique sa source.",
       // Methodology
       methodologyTitle: "Méthodologie",
       dataCollectionTitle: "Collecte des données",
-      dataCollectionDesc: "Nous collectons les données directement à partir des API et publications officielles du gouvernement. Nous n'utilisons jamais de sources secondaires ou de reportages sans vérification. Tous les points de données incluent des liens vers leurs sources originales.",
+      dataCollectionDesc: "Nous prenons chaque chiffre dans le tableau, la base de données ou la publication de l'organisme indiqué comme source, avec le lien. Nous n'utilisons pas d'articles de presse comme source.",
       questionSelectionTitle: "Sélection des questions",
       questionSelectionDesc: "Les questions de notre quiz couvrent les principales statistiques suisses dans les domaines économique, démographique et social. Nous sélectionnons des sujets pertinents pour une citoyenneté informée et vérifiables avec des sources officielles.",
       accuracyScoringTitle: "Calcul de la précision",
-      accuracyScoringDesc: "La précision du quiz est calculée à l'aide d'une fonction de décroissance exponentielle basée sur la distance entre votre estimation et la valeur réelle, normalisée par la plage de la question. Cela récompense les estimations proches tout en étant tolérant avec les estimations raisonnables.",
+      accuracyScoringDesc: "Le score d'une réponse est 100% moins l'écart entre votre estimation et la valeur réelle, mesuré par rapport à l'étendue du curseur. Une estimation qui s'écarte d'un dixième de l'étendue vaut 90%.",
       updateFrequencyTitle: "Fréquence de mise à jour",
       updateFrequencyDesc: "Nous mettons à jour les indicateurs dès que de nouvelles données officielles sont publiées. La plupart des indicateurs économiques sont mis à jour trimestriellement ; les données démographiques annuellement. Chaque indicateur affiche sa date de dernière mise à jour.",
       // Limitations
@@ -1058,6 +973,7 @@ export const translations = {
       whatIsIt: "Qu'est-ce que c'est ?",
       whyItMatters: "Pourquoi c'est important",
       vsLastYear: "par rapport à l'année dernière",
+      vsPeriod: "par rapport à {period}",
     },
   },
 } as const;

@@ -3,6 +3,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { useLanguage } from "@/i18n/LanguageContext";
+import { dataSources } from "@/data/sources";
 import {
   CheckCircle2,
   ExternalLink,
@@ -15,7 +16,7 @@ import {
 } from "lucide-react";
 
 export default function AboutPage() {
-  const { t } = useLanguage();
+  const { t, locale } = useLanguage();
 
   return (
     <div className="container mx-auto px-4 py-6 sm:py-8 space-y-8 sm:space-y-12">
@@ -84,14 +85,7 @@ export default function AboutPage() {
           {t.about.sourcesIntro}
         </p>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {[
-            { abbr: "BFS", name: t.about.bfsName, nameDE: "Bundesamt für Statistik", url: "https://www.bfs.admin.ch", description: t.about.bfsDesc },
-            { abbr: "SECO", name: t.about.secoName, nameDE: "Staatssekretariat für Wirtschaft", url: "https://www.seco.admin.ch", description: t.about.secoDesc },
-            { abbr: "BAG", name: t.about.bagName, nameDE: "Bundesamt für Gesundheit", url: "https://www.bag.admin.ch", description: t.about.bagDesc },
-            { abbr: "SEM", name: t.about.semName, nameDE: "Staatssekretariat für Migration", url: "https://www.sem.admin.ch", description: t.about.semDesc },
-            { abbr: "SNB", name: t.about.snbName, nameDE: "Schweizerische Nationalbank", url: "https://www.snb.ch", description: t.about.snbDesc },
-            { abbr: "OECD", name: t.about.oecdName, url: "https://www.oecd.org", description: t.about.oecdDesc },
-          ].map((source) => (
+          {dataSources.map((s) => ({ abbr: s.abbr, name: s.name[locale], url: s.url, description: s.use[locale] })).map((source) => (
             <a key={source.abbr} href={source.url} target="_blank" rel="noopener noreferrer" className="block">
               <Card className="h-full hover:border-primary/50 hover:shadow-sm transition-all">
                 <CardContent className="pt-6">
@@ -99,14 +93,11 @@ export default function AboutPage() {
                     <Badge className="shrink-0">{source.abbr}</Badge>
                     <div className="min-w-0">
                       <div className="flex items-center gap-2">
-                        <h3 className="font-semibold text-swiss-gray-900 text-sm sm:text-base truncate">
+                        <h3 className="font-semibold text-swiss-gray-900 text-sm sm:text-base">
                           {source.name}
                         </h3>
                         <ExternalLink className="h-3 w-3 text-swiss-gray-400 shrink-0" />
                       </div>
-                      {source.nameDE && (
-                        <p className="text-xs text-swiss-gray-400 italic">{source.nameDE}</p>
-                      )}
                       <p className="text-xs sm:text-sm text-swiss-gray-600 mt-2">{source.description}</p>
                     </div>
                   </div>

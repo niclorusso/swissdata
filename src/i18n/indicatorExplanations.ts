@@ -172,8 +172,8 @@ const indicatorExplanations: Record<string, Record<Locale, { what: ExplanationTe
         statistics: "The rate at which prices increase over time, measured by the Consumer Price Index (CPI).",
       },
       why: {
-        card: "Moderate inflation (1-2%) is normal. High inflation erodes purchasing power; deflation (negative) can signal economic problems.",
-        statistics: "Moderate inflation (1-2%) is normal. High inflation erodes purchasing power.",
+        card: "The SNB defines price stability as a rise in consumer prices of less than 2% a year; a lasting fall in prices (deflation) also breaches it. From 2000 to 2025 Swiss inflation averaged 0.6% a year.",
+        statistics: "The SNB defines price stability as a rise in consumer prices of less than 2% a year. From 2000 to 2025 Swiss inflation averaged 0.6% a year.",
       },
     },
     it: {
@@ -182,8 +182,8 @@ const indicatorExplanations: Record<string, Record<Locale, { what: ExplanationTe
         statistics: "Il tasso a cui i prezzi aumentano nel tempo, misurato dall'Indice dei Prezzi al Consumo (IPC).",
       },
       why: {
-        card: "Un'inflazione moderata (1-2%) è normale. Un'inflazione alta erode il potere d'acquisto; la deflazione può segnalare problemi economici.",
-        statistics: "Un'inflazione moderata (1-2%) è normale. Un'inflazione alta erode il potere d'acquisto.",
+        card: "La BNS definisce la stabilità dei prezzi come un aumento dei prezzi al consumo inferiore al 2% all'anno; anche un calo duraturo dei prezzi (deflazione) la viola. Dal 2000 al 2025 il rincaro in Svizzera è stato in media dello 0,6% all'anno.",
+        statistics: "La BNS definisce la stabilità dei prezzi come un aumento dei prezzi al consumo inferiore al 2% all'anno. Dal 2000 al 2025 il rincaro in Svizzera è stato in media dello 0,6% all'anno.",
       },
     },
     de: {
@@ -192,8 +192,8 @@ const indicatorExplanations: Record<string, Record<Locale, { what: ExplanationTe
         statistics: "Die Rate, mit der die Preise im Laufe der Zeit steigen, gemessen am Konsumentenpreisindex (KPI).",
       },
       why: {
-        card: "Moderate Inflation (1-2%) ist normal. Hohe Inflation verringert die Kaufkraft; Deflation kann auf wirtschaftliche Probleme hinweisen.",
-        statistics: "Moderate Inflation (1-2%) ist normal. Hohe Inflation verringert die Kaufkraft.",
+        card: "Die SNB versteht unter Preisstabilität einen Anstieg der Konsumentenpreise von weniger als 2% pro Jahr; auch ein anhaltender Rückgang des Preisniveaus (Deflation) verletzt sie. Von 2000 bis 2025 betrug die Teuerung in der Schweiz im Durchschnitt 0,6% pro Jahr.",
+        statistics: "Die SNB versteht unter Preisstabilität einen Anstieg der Konsumentenpreise von weniger als 2% pro Jahr. Von 2000 bis 2025 betrug die Teuerung in der Schweiz im Durchschnitt 0,6% pro Jahr.",
       },
     },
     fr: {
@@ -202,8 +202,8 @@ const indicatorExplanations: Record<string, Record<Locale, { what: ExplanationTe
         statistics: "Le taux auquel les prix augmentent au fil du temps, mesuré par l'Indice des Prix à la Consommation (IPC).",
       },
       why: {
-        card: "Une inflation modérée (1-2%) est normale. Une inflation élevée érode le pouvoir d'achat ; la déflation peut signaler des problèmes économiques.",
-        statistics: "Une inflation modérée (1-2%) est normale. Une inflation élevée érode le pouvoir d'achat.",
+        card: "La BNS assimile la stabilité des prix à une hausse des prix à la consommation de moins de 2% par an ; une baisse durable des prix (déflation) y contrevient aussi. De 2000 à 2025, le renchérissement en Suisse a été en moyenne de 0,6% par an.",
+        statistics: "La BNS assimile la stabilité des prix à une hausse des prix à la consommation de moins de 2% par an. De 2000 à 2025, le renchérissement en Suisse a été en moyenne de 0,6% par an.",
       },
     },
   },
@@ -663,19 +663,19 @@ const indicatorExplanations: Record<string, Record<Locale, { what: ExplanationTe
   "renewable-energy": {
     en: {
       what: "Share of total final energy consumption that comes from renewable sources (hydro, solar, wind, biomass).",
-      why: "Indicates progress toward climate goals. In 2025, 68.3% of electricity production was renewable, against 30.6% of total final energy consumption.",
+      why: "Indicates progress toward climate goals. In 2025, 68.3% of net electricity production was renewable, against 30.6% of total final energy consumption.",
     },
     it: {
       what: "Quota del consumo finale totale di energia coperta da fonti rinnovabili (idrico, solare, eolico, biomassa).",
-      why: "Indica i progressi verso gli obiettivi climatici. Nel 2025 era rinnovabile il 68,3% della produzione di elettricità, contro il 30,6% del consumo finale totale di energia.",
+      why: "Indica i progressi verso gli obiettivi climatici. Nel 2025 era rinnovabile il 68,3% della produzione netta di elettricità, contro il 30,6% del consumo finale totale di energia.",
     },
     de: {
       what: "Anteil des gesamten Endenergieverbrauchs aus erneuerbaren Quellen (Wasser, Solar, Wind, Biomasse).",
-      why: "Zeigt Fortschritte bei den Klimazielen. 2025 waren 68,3% der Stromproduktion erneuerbar, gegenüber 30,6% des gesamten Endenergieverbrauchs.",
+      why: "Zeigt Fortschritte bei den Klimazielen. 2025 waren 68,3% der Netto-Stromproduktion erneuerbar, gegenüber 30,6% des gesamten Endenergieverbrauchs.",
     },
     fr: {
       what: "Part de la consommation finale totale d'énergie provenant de sources renouvelables (hydraulique, solaire, éolien, biomasse).",
-      why: "Indique les progrès vers les objectifs climatiques. En 2025, 68,3% de la production d'électricité était renouvelable, contre 30,6% de la consommation finale totale d'énergie.",
+      why: "Indique les progrès vers les objectifs climatiques. En 2025, 68,3% de la production nette d'électricité était renouvelable, contre 30,6% de la consommation finale totale d'énergie.",
     },
   },
 };
