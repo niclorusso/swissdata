@@ -55,7 +55,7 @@ export default function CantonsPage() {
     const min = Math.min(...allValues);
     const max = Math.max(...allValues);
     const normalized = (cantonIndicator.value - min) / (max - min);
-    if (selectedCantonId === canton.id) return "#DC2626";
+    if (selectedCantonId === canton.id) return "#D82525";
     const category = getIndicatorCategory(selectedIndicator);
     const hue = category === "economic" ? 220 : category === "demographic" ? 270 : 160;
     return `hsl(${hue}, 60%, ${90 - normalized * 40}%)`;

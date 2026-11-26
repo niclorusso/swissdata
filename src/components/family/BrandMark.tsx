@@ -2,7 +2,7 @@
 export function BrandMark({ size = 28, className }: { size?: number; className?: string }) {
   return (
     <svg className={className} width={size} height={size} viewBox="0 0 32 32" aria-hidden="true" style={{ flex: "none", display: "block" }}>
-      <rect width="32" height="32" rx="5.5" fill="#DC2626" />
+      <rect width="32" height="32" rx="5.5" fill="#D82525" />
       <g fill="none" stroke="#fff" strokeWidth="2">
         <path d="M8 4.3v7.4M4.3 8h7.4" />
         <path d="M20.3 8h7.4" />

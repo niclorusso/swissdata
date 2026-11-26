@@ -8,6 +8,7 @@ import { formatNumber, formatWithUnit, percentSign } from "@/lib/formatters";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { getIndicatorExplanation } from "@/i18n/indicatorExplanations";
 import { localizePeriod } from "@/i18n/periods";
+import { localizeSource } from "@/i18n/sourceNames";
 import { TrendingUp, TrendingDown, Minus } from "lucide-react";
 
 interface IndicatorCardProps {
@@ -64,7 +65,7 @@ export function IndicatorCard({ indicator }: IndicatorCardProps) {
             <div className="flex items-center gap-1 text-sm text-swiss-gray-700">
               <TrendIcon className="h-4 w-4" aria-hidden="true" />
               <span className="font-medium swiss-number">
-                {formatNumber(indicator.trendPercentage, locale, { sign: true })}
+                {formatNumber(indicator.trendPercentage, locale, { decimals: 1, sign: true })}
                 {percentSign(locale)}
               </span>
               <span className="text-swiss-gray-500">
@@ -83,7 +84,7 @@ export function IndicatorCard({ indicator }: IndicatorCardProps) {
           )}
 
           <SourceLine
-            publisher={indicator.source}
+            publisher={localizeSource(indicator.source, locale)}
             url={indicator.sourceUrl}
             date={localizePeriod(indicator.lastUpdated, locale)}
           />

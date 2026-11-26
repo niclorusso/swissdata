@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { QuizQuestion } from "@/types";
 import { Badge } from "@/components/ui/badge";
 import { useLanguage } from "@/i18n/LanguageContext";
+import { quizTextLang } from "@/i18n/dataTranslations";
 import { HelpCircle } from "lucide-react";
 
 interface QuestionCardProps {
@@ -13,7 +14,7 @@ interface QuestionCardProps {
 }
 
 export function QuestionCard({ question, questionNumber, totalQuestions }: QuestionCardProps) {
-  const { t } = useLanguage();
+  const { t, locale } = useLanguage();
 
   const categoryVariant =
     question.category === "economic"
@@ -46,7 +47,7 @@ export function QuestionCard({ question, questionNumber, totalQuestions }: Quest
             <p className="text-sm font-medium text-swiss-gray-600 mb-2 sm:mb-3">
               {t.questionCard.testKnowledge}
             </p>
-            <p className="text-lg sm:text-xl font-semibold text-swiss-gray-900 leading-relaxed">
+            <p className="text-lg sm:text-xl font-semibold text-swiss-gray-900 leading-relaxed" lang={quizTextLang(locale)}>
               {question.question}
             </p>
           </div>

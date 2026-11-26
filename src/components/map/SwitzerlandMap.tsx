@@ -24,7 +24,7 @@ export function SwitzerlandMap({
   const { t, locale } = useLanguage();
 
   const defaultGetColor = (canton: Canton) => {
-    if (selectedCanton === canton.id) return "#DC2626";
+    if (selectedCanton === canton.id) return "#D82525";
     if (hoveredCanton === canton.id) return "#FCA5A5";
     return "#E5E5E5";
   };
@@ -59,7 +59,7 @@ export function SwitzerlandMap({
               key={canton.id}
               d={path}
               fill={colorFn(canton)}
-              stroke={isSelected ? "#991B1B" : isHovered ? "#DC2626" : "#525252"}
+              stroke={isSelected ? "#991B1B" : isHovered ? "#D82525" : "#525252"}
               strokeWidth={isSelected ? 2 : isHovered ? 1.5 : 0.5}
               className="cursor-pointer transition-colors duration-200"
               onMouseEnter={() => setHoveredCanton(canton.id)}

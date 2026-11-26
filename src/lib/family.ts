@@ -55,6 +55,19 @@ export const FAMILY_SITES: FamilySite[] = [
   },
 ];
 
+/**
+ * Address of a SwissData site for a visitor reading in `locale`, so that the language is kept where the
+ * target can take it:
+ * - this site: its own home page (the language is already known here);
+ * - Parliament: it, de, fr, en through ?lang= (read by its i18n setup, then remembered there);
+ * - Spending: Italian at the root, English under /en/ (German and French readers get English).
+ */
+export function familySiteHref(site: FamilySite, locale: "it" | "de" | "fr" | "en"): string {
+  if (site.id === CURRENT_SITE) return "/";
+  if (site.id === "parl") return `${site.url}/?lang=${locale}`;
+  return locale === "it" ? `${site.url}/` : `${site.url}/en/`;
+}
+
 export const FAMILY_INDEPENDENT: LocalizedText = {
   it: "Progetto indipendente di Nicola Lo Russo. Non è un sito ufficiale della Confederazione.",
   en: "Independent project by Nicola Lo Russo. Not an official website of the Confederation.",

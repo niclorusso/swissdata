@@ -1,9 +1,10 @@
 "use client";
 
 import { LanguageProvider, useLanguage } from "@/i18n/LanguageContext";
+import type { Locale } from "@/i18n/translations";
 import { Navigation } from "@/components/Navigation";
 import { BrandMark, Wordmark } from "@/components/family/BrandMark";
-import { CURRENT_SITE, FAMILY_INDEPENDENT, FAMILY_SITES } from "@/lib/family";
+import { CURRENT_SITE, FAMILY_INDEPENDENT, FAMILY_SITES, familySiteHref } from "@/lib/family";
 
 /** Family footer: the three SwissData sites and the line on independence first, then this site's own links. */
 function Footer() {
@@ -21,7 +22,7 @@ function Footer() {
             {FAMILY_SITES.map((site) => (
               <a
                 key={site.id}
-                href={site.url}
+                href={familySiteHref(site, locale)}
                 aria-current={site.id === CURRENT_SITE ? "true" : undefined}
                 className={`block px-3.5 py-3 border border-white/[0.14] rounded-xl min-h-[44px] hover:border-white/40 ${site.id === CURRENT_SITE ? "bg-white/[0.07]" : ""}`}
               >
@@ -56,9 +57,9 @@ function Footer() {
   );
 }
 
-export function ClientLayout({ children }: { children: React.ReactNode }) {
+export function ClientLayout({ initialLocale, children }: { initialLocale: Locale; children: React.ReactNode }) {
   return (
-    <LanguageProvider>
+    <LanguageProvider initialLocale={initialLocale}>
       <div className="min-h-screen flex flex-col">
         <Navigation />
         <main className="flex-1">{children}</main>

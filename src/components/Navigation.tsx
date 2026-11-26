@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { BrandMark, Wordmark, Chevron } from "@/components/family/BrandMark";
-import { CURRENT_SITE, FAMILY_SITES, LANGUAGES } from "@/lib/family";
+import { CURRENT_SITE, FAMILY_SITES, LANGUAGES, familySiteHref } from "@/lib/family";
 
 /** A button that opens a small panel. Closes on Escape (focus back on the button), on a click outside and when focus leaves. */
 function useDisclosure() {
@@ -51,13 +51,13 @@ function SectionSwitcher() {
   const current = FAMILY_SITES.find((site) => site.id === CURRENT_SITE)!;
 
   return (
-    <div className="flex items-center gap-1.5 sm:gap-2 text-base sm:text-lg leading-none whitespace-nowrap min-w-0">
-      <Link href="/" className="inline-flex items-center gap-1.5 sm:gap-2 min-h-[44px]" aria-label="SwissData">
+    <div className="flex items-center gap-1.5 sm:gap-2 text-base sm:text-lg leading-none whitespace-nowrap min-w-0 max-[359px]:text-sm max-[359px]:gap-1">
+      <Link href="/" className="inline-flex items-center gap-1.5 max-[359px]:gap-1 sm:gap-2 min-h-[44px]" aria-label="SwissData">
         <BrandMark size={28} className="w-6 h-6 sm:w-7 sm:h-7" />
         <Wordmark />
       </Link>
       <span aria-hidden="true" className="font-normal text-[#a9a69c]">/</span>
-      <div ref={root} className="relative" onBlur={onBlur}>
+      <div ref={root} className="relative max-[379px]:static" onBlur={onBlur}>
         <button
           ref={button}
           type="button"
@@ -70,12 +70,12 @@ function SectionSwitcher() {
           {current.short[locale]}
           <Chevron className={cn("transition-transform", open && "rotate-180")} />
         </button>
-        <div id={id} hidden={!open} className={cn(panel, "-left-3 min-w-[230px]")}>
+        <div id={id} hidden={!open} className={cn(panel, "-left-3 max-[379px]:left-0 min-w-[230px] max-w-[calc(100vw-32px)]")}>
           <ul aria-label={t.nav.switchSite}>
             {FAMILY_SITES.map((site) => (
               <li key={site.id}>
                 <a
-                  href={site.url}
+                  href={familySiteHref(site, locale)}
                   aria-current={site.id === CURRENT_SITE ? "true" : undefined}
                   className={cn(
                     "flex items-center gap-1.5 min-h-[44px] px-2.5 rounded-lg text-[15px] hover:bg-paper",
@@ -108,12 +108,12 @@ function LanguageMenu() {
         aria-controls={id}
         aria-label={`${t.nav.language}: ${LANGUAGES.find((l) => l.code === locale)?.label}`}
         onClick={() => setOpen(!open)}
-        className="inline-flex items-center gap-1 h-11 sm:h-9 px-2.5 sm:px-3 border border-swiss-gray-300 rounded-full bg-white text-ink text-sm font-semibold"
+        className="inline-flex items-center gap-1 h-11 lg:h-9 px-2.5 max-[359px]:px-2 lg:px-3 border border-swiss-gray-300 rounded-full bg-white text-ink text-sm font-semibold"
       >
         {locale.toUpperCase()}
         <Chevron className={cn("transition-transform", open && "rotate-180")} />
       </button>
-      <div id={id} hidden={!open} className={cn(panel, "right-0 sm:top-[40px] top-[48px] min-w-[170px]")}>
+      <div id={id} hidden={!open} className={cn(panel, "right-0 top-[48px] lg:top-[40px] min-w-[170px] max-w-[calc(100vw-32px)]")}>
         <ul aria-label={t.nav.language}>
           {LANGUAGES.map((language) => (
             <li key={language.code}>
@@ -181,7 +181,7 @@ function PageRow() {
   }, [pathname, t, measure]);
 
   return (
-    <div className="relative order-3 basis-full md:order-2 md:basis-auto md:ml-auto border-t border-[#eceae3] md:border-0 -mx-2 md:mx-0 min-w-0">
+    <div className="order-3 basis-full lg:order-2 lg:basis-auto lg:ml-auto border-t border-[#eceae3] lg:border-0 -mx-2 lg:mx-0 min-w-0 relative">
       <nav aria-label={t.nav.pages}>
         <div ref={row} onScroll={measure} className="sdf-navrow flex gap-1 overflow-x-auto">
           {pages.map((page) => {
@@ -203,12 +203,12 @@ function PageRow() {
         </div>
       </nav>
       {more.left && (
-        <span aria-hidden="true" className="pointer-events-none absolute inset-y-0 left-0 w-9 flex items-center justify-start pl-1 text-swiss-gray-600 bg-gradient-to-r from-[#f5f4ef] via-[#f5f4efe6] to-transparent md:hidden">
+        <span aria-hidden="true" className="pointer-events-none absolute inset-y-0 left-0 w-9 flex items-center justify-start pl-1 text-swiss-gray-600 bg-gradient-to-r from-[#f5f4ef] via-[#f5f4efe6] to-transparent lg:hidden">
           <Chevron className="rotate-90" />
         </span>
       )}
       {more.right && (
-        <span aria-hidden="true" className="pointer-events-none absolute inset-y-0 right-0 w-9 flex items-center justify-end pr-1 text-swiss-gray-600 bg-gradient-to-l from-[#f5f4ef] via-[#f5f4efe6] to-transparent md:hidden">
+        <span aria-hidden="true" className="pointer-events-none absolute inset-y-0 right-0 w-9 flex items-center justify-end pr-1 text-swiss-gray-600 bg-gradient-to-l from-[#f5f4ef] via-[#f5f4efe6] to-transparent lg:hidden">
           <Chevron className="-rotate-90" />
         </span>
       )}
@@ -221,12 +221,13 @@ export function Navigation() {
   return (
     <header className="sticky top-0 z-50 w-full border-b border-line bg-[rgba(245,244,239,0.92)] backdrop-blur">
       <div className="container mx-auto px-4">
-        <div className="flex flex-wrap items-center gap-x-4 min-h-[52px] md:min-h-[60px]">
+        {/* below 1024px: two rows (lockup and language, then the pages); from 1024px: one row */}
+        <div className="relative flex flex-wrap items-center gap-x-2 sm:gap-x-4 min-h-[52px] lg:min-h-[60px]">
           <div className="order-1 flex items-center min-h-[52px]">
             <SectionSwitcher />
           </div>
           <PageRow />
-          <div className="order-2 md:order-3 ml-auto md:ml-0 flex items-center">
+          <div className="order-2 lg:order-3 ml-auto lg:ml-0 flex items-center">
             <LanguageMenu />
           </div>
         </div>

@@ -56,6 +56,11 @@ export default function QuizPage() {
             <p className="text-base sm:text-lg text-swiss-gray-600">
               {t.quiz.subtitle}
             </p>
+            {t.quiz.languageNote && (
+              <p className="text-sm text-swiss-gray-700 bg-swiss-gray-50 rounded-xl px-4 py-3" lang={locale}>
+                {t.quiz.languageNote}
+              </p>
+            )}
           </div>
 
           {/* How it works */}
@@ -192,6 +197,9 @@ export default function QuizPage() {
   return (
     <div className="container mx-auto px-4 py-6 sm:py-8">
       <div className="max-w-2xl mx-auto space-y-6">
+        {t.quiz.languageNote && (
+          <p className="text-sm text-swiss-gray-700 bg-swiss-gray-50 rounded-xl px-4 py-3">{t.quiz.languageNote}</p>
+        )}
         {/* Progress bar */}
         <div className="space-y-2">
           <div className="flex items-center justify-between text-sm">

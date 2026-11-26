@@ -36,7 +36,7 @@ const config: Config = {
         },
         // Semantic colors
         primary: {
-          DEFAULT: "#DC2626",
+          DEFAULT: "#D82525",
           foreground: "#FFFFFF",
         },
         secondary: {
@@ -52,7 +52,7 @@ const config: Config = {
           foreground: "#991B1B",
         },
         destructive: {
-          DEFAULT: "#DC2626",
+          DEFAULT: "#D82525",
           foreground: "#FFFFFF",
         },
         // Category colors for indicators
@@ -71,7 +71,7 @@ const config: Config = {
         },
         // Chart colors
         chart: {
-          1: "#DC2626",
+          1: "#D82525",
           2: "#2563EB",
           3: "#059669",
           4: "#7C3AED",

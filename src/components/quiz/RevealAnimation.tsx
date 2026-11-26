@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { QuizQuestion, QuizResult } from "@/types";
 import { useLanguage } from "@/i18n/LanguageContext";
+import { quizTextLang } from "@/i18n/dataTranslations";
 import { BarChart3, Info } from "lucide-react";
 import { formatNumber, formatPercent, formatWithUnit, ownDecimals } from "@/lib/formatters";
 import { SourceLine } from "@/components/ui/source-line";
@@ -94,7 +95,7 @@ export function RevealAnimation({ question, result }: RevealAnimationProps) {
           <Info className="h-5 w-5 text-primary" />
           {t.reveal.context}
         </h4>
-        <p className="text-sm sm:text-base text-swiss-gray-700 leading-relaxed">{question.explanation}</p>
+        <p className="text-sm sm:text-base text-swiss-gray-700 leading-relaxed" lang={quizTextLang(locale)}>{question.explanation}</p>
 
         {/* Comparison chart if available */}
         {question.comparisonData && question.comparisonData.length > 0 && (
@@ -127,7 +128,7 @@ export function RevealAnimation({ question, result }: RevealAnimationProps) {
                         fill={
                           entry.label === "Switzerland" ||
                           entry.label.includes("Swiss")
-                            ? "#DC2626"
+                            ? "#D82525"
                             : "#A9A69C"
                         }
                       />
@@ -139,7 +140,7 @@ export function RevealAnimation({ question, result }: RevealAnimationProps) {
           </div>
         )}
 
-        <SourceLine publisher={question.source} url={question.sourceUrl} />
+        <SourceLine publisher={question.source} url={question.sourceUrl} date={question.period} />
       </motion.div>
     </motion.div>
   );

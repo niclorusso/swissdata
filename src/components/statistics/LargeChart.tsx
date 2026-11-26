@@ -8,10 +8,12 @@ import {
   CartesianGrid,
   Tooltip,
   ResponsiveContainer,
+  type TooltipProps,
 } from "recharts";
 import { Indicator } from "@/types";
 import { useLanguage } from "@/i18n/LanguageContext";
-import { formatNumber, formatWithUnit } from "@/lib/formatters";
+import { formatNumber, formatWithUnit, formatYear } from "@/lib/formatters";
+import { niceTicks } from "@/lib/ticks";
 
 /** Line chart of one indicator over the years. */
 export function SingleIndicatorChart({
@@ -43,11 +45,19 @@ export function SingleIndicatorChart({
     );
   }
 
-  const CustomTooltip = ({ active, payload, label }: any) => {
+  // Value axis: round steps, every label with the same number of decimals, width from the longest label
+  const values = data.map((d) => d.value);
+  const { ticks, decimals } = niceTicks(Math.min(...values), Math.max(...values));
+  const tickLabel = (value: number) => formatNumber(value, locale, { decimals });
+  const axisWidth = Math.max(...ticks.map((tick) => tickLabel(tick).length)) * 8.4 + 12;
+  // Year axis: first and last year always shown, in between as many as fit
+  const years = data.map((d) => d.year);
+
+  const CustomTooltip = ({ active, payload, label }: TooltipProps<number, string>) => {
     if (active && payload && payload.length) {
       return (
         <div className="bg-white border border-line rounded-lg shadow-lg p-3">
-          <p className="font-semibold text-swiss-gray-900">{label}</p>
+          <p className="font-semibold text-swiss-gray-900">{formatYear(Number(label))}</p>
           <p className="text-sm text-swiss-gray-900 swiss-number">
             {formatWithUnit(payload[0].value, indicator.unit, locale)}
           </p>
@@ -59,22 +69,30 @@ export function SingleIndicatorChart({
 
   return (
     <ResponsiveContainer width="100%" height={height}>
-      <LineChart data={data} margin={{ top: 10, right: 10, left: 0, bottom: 10 }}>
+      <LineChart data={data} margin={{ top: 10, right: 22, left: 0, bottom: 10 }}>
         <CartesianGrid strokeDasharray="3 3" stroke="#DEDBD1" />
         <XAxis
           dataKey="year"
+          type="number"
+          domain={[years[0], years[years.length - 1]]}
+          ticks={years}
+          interval="preserveStartEnd"
+          minTickGap={18}
+          tickMargin={8}
+          tickFormatter={(year: number) => formatYear(year)}
           tick={{ fill: "#4B5058", fontSize: 14 }}
           tickLine={{ stroke: "#A9A69C" }}
           axisLine={{ stroke: "#A9A69C" }}
-          minTickGap={16}
         />
         <YAxis
           tick={{ fill: "#4B5058", fontSize: 14 }}
           tickLine={{ stroke: "#A9A69C" }}
           axisLine={{ stroke: "#A9A69C" }}
-          width={48}
-          domain={["auto", "auto"]}
-          tickFormatter={(value: number) => formatNumber(value, locale)}
+          width={axisWidth}
+          domain={[ticks[0], ticks[ticks.length - 1]]}
+          ticks={ticks}
+          interval={0}
+          tickFormatter={tickLabel}
         />
         <Tooltip content={<CustomTooltip />} />
         <Line

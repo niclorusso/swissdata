@@ -201,7 +201,7 @@ export const indicators: Indicator[] = [
     sourceUrl: "https://statistik.admin.ch/de/themen/arbeit-erwerb/loehne-erwerbseinkommen-arbeitskosten",
     lastUpdated: "2024",
     description: "Median gross monthly wage for a full-time position, private and public sector together. The survey is carried out every two years.",
-    context: "The median wage rose from CHF 6,788 in 2022 to CHF 7,024 in 2024 (+3.5%). Half of employees earn more, half less.",
+    context: "The median wage rose from CHF\u00A06,788 in 2022 to CHF\u00A07,024 in 2024 (+3.5%). Half of employees earn more, half less.",
     // FSO Earnings Structure Survey (LSE), STAT-TAB px-x-0304010000_201, private and public sector, biennial, LSE 2024 published 25.11.2025
     historicalData: [
       { year: 2012, value: 6439 },
@@ -227,7 +227,7 @@ export const indicators: Indicator[] = [
     sourceUrl: "https://www.efv.admin.ch/dam/en/sd-web/bjAPAViEZor6/Taschenstatistik-2025-e-web.pdf",
     lastUpdated: "2025 (end of year)",
     description: "Net debt of the Swiss Confederation as percentage of GDP (excluding Cantons/Municipalities)",
-    context: "This figure tracks the debt managed by the 'Debt Brake' (Schuldenbremse). Net debt rose from CHF 103 bn (2019) to CHF 142 bn (2023) with the pandemic expenditures and stood at CHF 140 bn at the end of 2025.",
+    context: "This figure tracks the debt managed by the 'Debt Brake' (Schuldenbremse). Net debt rose from CHF\u00A0103 bn (2019) to CHF\u00A0142 bn (2023) with the pandemic expenditures and stood at CHF\u00A0140 bn at the end of 2025.",
     // FFA pocket statistics "Public finances 2025" (key figures of the Confederation, net debt in % of GDP: 2023 17.0, 2024 16.6, 2025 16.1), data status February 2026, after the GDP revision.
     historicalData: [
       { year: 2010, value: 16.3 },
@@ -333,7 +333,7 @@ export const indicators: Indicator[] = [
     sourceUrl: "https://statistik.admin.ch/de/themen/bevoelkerung",
     lastUpdated: "2025",
     description: "Permanent resident population on 31 December (in millions)",
-    context: "At the end of 2025 Switzerland had 9,127,100 permanent residents, 0.8% more than a year earlier (9,051,029). The population passed 9 million during 2024: at the end of 2023 it was 8,962,258.",
+    context: "At the end of 2025 Switzerland had 9,127,100 permanent residents, 0.8% more than a year earlier (9,051,029). The population passed 9\u00A0million during 2024: at the end of 2023 it was 8,962,258.",
     // FSO, permanent resident population on 31 December (STATPOP), as transmitted to Eurostat table demo_gind (extracted 12.11.2026); 2025: definitive FSO figure of August 2026.
     historicalData: [
       { year: 2000, value: 7.204 },
@@ -487,7 +487,7 @@ export const indicators: Indicator[] = [
     sourceUrl: "https://statistik.admin.ch/de/themen/gesundheit/kosten-finanzierung-gesundheitswesens",
     lastUpdated: "2024 (provisional)",
     description: "Costs of the healthcare system as a percentage of gross domestic product",
-    context: "In 2024 the healthcare system cost CHF 97.2 billion (provisional), 4.1% more than in 2023, or CHF 899 per person per month. As a share of GDP Switzerland (11.4%) is below Germany (12.2%) and Austria (11.7%), level with France (11.3%) and above Italy (8.5%) (OECD, 2024).",
+    context: "In 2024 the healthcare system cost CHF\u00A097.2\u00A0billion (provisional), 4.1% more than in 2023, or CHF\u00A0899 per person per month. As a share of GDP Switzerland (11.4%) is below Germany (12.2%) and Austria (11.7%), level with France (11.3%) and above Italy (8.5%) (OECD, 2024).",
     // FSO, table "Kosten des Gesundheitswesens seit 1960", column % of GDP, data as of 24.04.2026 (2024 provisional).
     historicalData: [
       { year: 2000, value: 9.0 },
@@ -531,7 +531,7 @@ export const indicators: Indicator[] = [
     sourceUrl: "https://www.bfs.admin.ch/asset/de/je-d-15.06.01.03",
     lastUpdated: "2023",
     description: "Total public expenditure on education as percentage of GDP",
-    context: "In 2023 the Confederation, cantons and municipalities spent CHF 45.5 billion on education, 18.1% of all public spending and 5.5% of GDP (2022: CHF 42.7 billion, 5.2%).",
+    context: "In 2023 the Confederation, cantons and municipalities spent CHF\u00A045.5\u00A0billion on education, 18.1% of all public spending and 5.5% of GDP (2022: CHF\u00A042.7\u00A0billion, 5.2%).",
     // FSO table T 15.06.01.03 (je-d-15.06.01.03), public education expenditure in % of GDP, data as of 30.09.2025, published 11.12.2025. Latest year: 2023.
     historicalData: [
       { year: 2000, value: 4.8 },
@@ -574,7 +574,7 @@ export const indicators: Indicator[] = [
     sourceUrl: "https://statistik.admin.ch/de/asset/36395150",
     lastUpdated: "2024",
     description: "Poverty rate (absolute): share of the population with a household income below the poverty line",
-    context: "In 2024, 8.4% of the population, about 743,000 people, were income-poor. The poverty line was CHF 2,388 per month for a single person and CHF 4,159 for two adults with two children. The at-risk-of-poverty rate is a separate measure (income below 60% of the median): 16.4%, about 1,451,000 people. Figures before 2014 are not comparable.",
+    context: "In 2024, 8.4% of the population, about 743,000 people, were income-poor. The poverty line was CHF\u00A02,388 per month for a single person and CHF\u00A04,159 for two adults with two children. The at-risk-of-poverty rate is a separate measure (income below 60% of the median): 16.4%, about 1,451,000 people. Figures before 2014 are not comparable.",
     // FSO, table T 20.03.02.01.01 (poverty rate, total population, SILC 2024, version 24.10.2025). Series starts in 2014: break in the series, earlier years are not comparable.
     historicalData: [
       { year: 2014, value: 6.7 },

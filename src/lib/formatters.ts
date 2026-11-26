@@ -1,25 +1,33 @@
 /**
- * Numbers, the same way everywhere on the site.
+ * Numbers, the same way everywhere on the site (and in the three SwissData sites).
  *
  * Italian, German, French: the rule of the Federal Chancellery (Schreibweisungen, Rz 512):
- *   groups of three separated by a narrow no-break space, only from five digits up
- *   (803 250 but 4201), decimal comma (4,8), a no-break space before % (4,8 %).
+ *   groups of three separated by a narrow no-break space (U+202F), only from five digits up
+ *   (803 250 but 4201), decimal comma (4,8), a space before %: U+00A0 in Italian and German,
+ *   U+202F in French (French typographic rule).
  * English: 803,250 and 4.8%.
- * Amounts in CHF follow the same rule.
+ * Negative numbers: the minus sign U+2212, directly before the first digit.
+ * Amounts in CHF follow the same rule. A value that is missing is written as an en dash.
  *
- * The grouping is written by hand and does not use Intl: the locale data for de-CH differs
- * between Node and browsers (U+2019 against U+0027 as separator), so the server and the
- * browser produced different strings and React reported hydration error #418.
+ * Nothing here uses Intl or toFixed: the locale data for de-CH differs between Node and
+ * browsers (U+2019 against U+0027), which made the server and the browser disagree
+ * (React hydration error #418), and toFixed rounds the binary value (4.05 -> "4.0").
  */
 
 export type NumberLocale = "en" | "it" | "de" | "fr";
 
-/** U+202F, narrow no-break space: thousands separator in it/de/fr */
-export const NNBSP = " ";
-/** U+00A0, no-break space: before % and between CHF and the amount */
-export const NBSP = " ";
+/** U+202F, narrow no-break space: thousands separator in it/de/fr, space before % in French */
+export const NNBSP = "\u202F";
+/** U+00A0, no-break space: before % in Italian and German, between a number and its unit */
+export const NBSP = "\u00A0";
 /** U+2212, minus sign */
-export const MINUS = "−";
+export const MINUS = "\u2212";
+/** U+2013, en dash: a value that is not available */
+export const MISSING = "\u2013";
+
+type Numeric = number | null | undefined;
+
+const isNumber = (value: Numeric): value is number => typeof value === "number" && Number.isFinite(value);
 
 /**
  * Decimals of a figure as it is written in the data (9.127 -> 3, 61.3 -> 1, 7024 -> 0),
@@ -31,6 +39,28 @@ export function ownDecimals(value: number): number {
   return dot < 0 || text.includes("e") ? 0 : Math.min(3, text.length - dot - 1);
 }
 
+/**
+ * The absolute value with exactly `decimals` decimals, rounded half away from zero on the
+ * decimal digits of the number as written (4.05 -> "4.1", 5.55 -> "5.6", 2.5 -> "3").
+ */
+export function roundDecimal(value: number, decimals: number): string {
+  const text = String(Math.abs(value));
+  if (text.includes("e")) return Math.abs(value).toFixed(decimals); // very large or very small: outside what the site shows
+  const [whole, fraction = ""] = text.split(".");
+  if (fraction.length <= decimals) return decimals > 0 ? `${whole}.${fraction.padEnd(decimals, "0")}` : whole;
+  const digits = (whole + fraction.slice(0, decimals)).split("").map(Number);
+  if (fraction.charCodeAt(decimals) >= 53) {
+    // next digit is 5 or more: add one to the last kept digit and carry
+    let i = digits.length - 1;
+    while (i >= 0 && digits[i] === 9) digits[i--] = 0;
+    if (i >= 0) digits[i] += 1;
+    else digits.unshift(1);
+  }
+  const all = digits.join("");
+  const cut = all.length - decimals;
+  return decimals > 0 ? `${all.slice(0, cut)}.${all.slice(cut)}` : all;
+}
+
 export interface NumberOptions {
   /** number of decimals; default: the decimals of the value as written (at most 3) */
   decimals?: number;
@@ -38,11 +68,11 @@ export interface NumberOptions {
   sign?: boolean;
 }
 
-/** The one function that writes a number. */
-export function formatNumber(value: number, locale: NumberLocale = "en", options: NumberOptions = {}): string {
-  if (!Number.isFinite(value)) return "";
+/** The one function that writes a number. Not for years: see formatYear. */
+export function formatNumber(value: Numeric, locale: NumberLocale = "en", options: NumberOptions = {}): string {
+  if (!isNumber(value)) return MISSING;
   const decimals = options.decimals ?? ownDecimals(value);
-  const fixed = Math.abs(value).toFixed(decimals);
+  const fixed = roundDecimal(value, decimals);
   const dot = fixed.indexOf(".");
   const whole = dot < 0 ? fixed : fixed.slice(0, dot);
   const fraction = dot < 0 ? "" : fixed.slice(dot + 1);
@@ -63,19 +93,25 @@ export function formatNumber(value: number, locale: NumberLocale = "en", options
   return prefix + grouped + (fraction ? (english ? "." : ",") + fraction : "");
 }
 
-/** 4.8% in English, 4,8 % (no-break space) in Italian, German and French. Default: one decimal. */
-export function formatPercent(value: number, locale: NumberLocale = "en", options: NumberOptions = {}): string {
-  const text = formatNumber(value, locale, { decimals: 1, ...options });
-  return text + percentSign(locale);
+/** A year is never grouped: 2025, in every language. */
+export function formatYear(value: Numeric): string {
+  return isNumber(value) ? String(Math.round(value)) : MISSING;
 }
 
-/** "%" with the space the language asks for. */
+/** "%" with the space the language asks for: none in English, U+00A0 in Italian and German, U+202F in French. */
 export function percentSign(locale: NumberLocale = "en"): string {
-  return locale === "en" ? "%" : NBSP + "%";
+  return locale === "en" ? "%" : (locale === "fr" ? NNBSP : NBSP) + "%";
+}
+
+/** 4.8% in English, 4,8 % in Italian, German and French. Default: one decimal. */
+export function formatPercent(value: Numeric, locale: NumberLocale = "en", options: NumberOptions = {}): string {
+  if (!isNumber(value)) return MISSING;
+  return formatNumber(value, locale, { decimals: 1, ...options }) + percentSign(locale);
 }
 
 /** CHF 7,024 in English, CHF 7024 and CHF 95 486 in Italian, German and French. */
-export function formatCHF(value: number, locale: NumberLocale = "en", options: NumberOptions = {}): string {
+export function formatCHF(value: Numeric, locale: NumberLocale = "en", options: NumberOptions = {}): string {
+  if (!isNumber(value)) return MISSING;
   return "CHF" + NBSP + formatNumber(value, locale, { decimals: 0, ...options });
 }
 
@@ -167,14 +203,15 @@ export function getTranslatedUnit(unit: string, locale: NumberLocale = "en"): st
 }
 
 /** A figure with its unit: "4,8 %", "CHF 7024", "9,127 milioni", "11,4 % del PIL", "61,3 per 1000 abitanti". */
-export function formatWithUnit(value: number, unit: string, locale: NumberLocale = "en", options: NumberOptions = {}): string {
+export function formatWithUnit(value: Numeric, unit: string, locale: NumberLocale = "en", options: NumberOptions = {}): string {
+  if (!isNumber(value)) return MISSING;
   const unitText = getTranslatedUnit(unit, locale);
   if (unit === "%") return formatPercent(value, locale, { decimals: Math.max(1, ownDecimals(value)), ...options });
   if (unit === "CHF") return formatCHF(value, locale, options);
   if (unit === "CHF/month") return formatCHF(value, locale, options) + "/" + unitText.split("/")[1];
   if (unit === "CHF bn") return locale === "en" ? `CHF${NBSP}${formatNumber(value, locale, options)} bn` : `${formatNumber(value, locale, options)}${NBSP}${unitText}`;
   if (unit === "rank") return "#" + formatNumber(value, locale, { decimals: 0 });
-  if (unit === "year") return String(Math.round(value));
+  if (unit === "year") return formatYear(value);
   if (unit === "count" || unit === "index" || unit === "rate") return formatNumber(value, locale, options);
   if (unitText.startsWith("%")) return formatNumber(value, locale, options) + percentSign(locale) + unitText.slice(1);
   return formatNumber(value, locale, options) + NBSP + unitText;

@@ -19,6 +19,7 @@ export const questions: QuizQuestion[] = [
       "The registered unemployment rate averaged 2.8% in 2025, up from 2.4% in 2024 (SECO). It counts only people registered at a regional employment centre. The chart uses the ILO survey definition, which is the one comparable across countries: on that measure Switzerland was at 4.9% in 2025 and the EU at 6.0% (Eurostat).",
     source: "SECO labour market statistics (FSO table T 3.3.2.2); Eurostat (une_rt_a) for the comparison",
     sourceUrl: "https://www.bfs.admin.ch/asset/de/je-d-03.03.02.02",
+    period: "2025",
     comparisonLabel: "ILO unemployment rate, 2025, in % (Eurostat; the answer is the SECO registered rate)",
     comparisonData: [
       { label: "Germany", value: 3.8 },
@@ -44,6 +45,7 @@ export const questions: QuizQuestion[] = [
       "Youth unemployment by the ILO definition was 8.8% in 2025 (2024: 8.2%), higher than the rate for all ages (4.9%) but well below the EU average of 15.2%. Source: Swiss Labour Force Survey of the BFS, as published by Eurostat.",
     source: "BFS Swiss Labour Force Survey / Eurostat (une_rt_a)",
     sourceUrl: "https://ec.europa.eu/eurostat/databrowser/view/une_rt_a/default/table?lang=en",
+    period: "2025",
     comparisonLabel: "Youth unemployment rate (ILO, ages 15-24), 2025, in % (Eurostat)",
     comparisonData: [
       { label: "Germany", value: 7.1 },
@@ -69,6 +71,7 @@ export const questions: QuizQuestion[] = [
       "In 2025, 84.1% of people aged 15 to 64 in Switzerland were employed or looking for work, against 75.6% in the EU. The rate for women was 80.8%. Source: Swiss Labour Force Survey of the BFS, as published by Eurostat.",
     source: "BFS Swiss Labour Force Survey / Eurostat (lfsi_emp_a)",
     sourceUrl: "https://ec.europa.eu/eurostat/databrowser/view/lfsi_emp_a/default/table?lang=en",
+    period: "2025",
     comparisonLabel: "Labour force participation rate, ages 15-64, 2025, in % (Eurostat)",
     comparisonData: [
       { label: "Iceland", value: 88.1 },
@@ -94,6 +97,7 @@ export const questions: QuizQuestion[] = [
       "In 2025, 39.8% of employed people aged 15 to 64 in Switzerland worked part-time, the second-highest share in the comparison after the Netherlands (42.2%). The EU average was 17.7%. Among employed women in Switzerland the share was 61.3%. This is Eurostat's definition, which counts people who say they work part-time (source: Swiss Labour Force Survey of the BFS, as published by Eurostat). The BFS's own definition counts all employed people aged 15 and over with a workload below 90% and gives 38.7% for 2025.",
     source: "BFS Swiss Labour Force Survey / Eurostat (lfsi_pt_a); BFS table T 03.02.01.16 for the BFS definition",
     sourceUrl: "https://ec.europa.eu/eurostat/databrowser/view/lfsi_pt_a/default/table?lang=en",
+    period: "2025",
     comparisonLabel: "Part-time share of employed people, ages 15-64, 2025, in % (Eurostat)",
     comparisonData: [
       { label: "Netherlands", value: 42.2 },
@@ -115,9 +119,10 @@ export const questions: QuizQuestion[] = [
     maxValue: 50,
     actualValue: 40.05,
     explanation:
-      "Full-time employees in Switzerland actually worked 40 hours and 3 minutes per week in 2025 (2019: 40 hours 54 minutes), according to the BFS work volume statistics. The chart uses a different measure, the only one available for all countries: usual weekly hours of full-time employed people (Eurostat, 2025), where Switzerland is at 43.2 hours and the EU at 40.2.",
+      "Full-time employees in Switzerland actually worked 40\u00A0hours and 3\u00A0minutes per week in 2025 (2019: 40\u00A0hours 54\u00A0minutes), according to the BFS work volume statistics. The chart uses a different measure, the only one available for all countries: usual weekly hours of full-time employed people (Eurostat, 2025), where Switzerland is at 43.2\u00A0hours and the EU at 40.2.",
     source: "BFS Work Volume Statistics; Eurostat (lfsa_ewhun2) for the comparison",
     sourceUrl: "https://www.bfs.admin.ch/asset/de/2026-0533-d",
+    period: "2025",
     comparisonLabel: "Usual weekly hours of full-time employed people, 2025 (Eurostat; the answer is the hours actually worked by full-time employees, BFS)",
     comparisonData: [
       { label: "Switzerland", value: 43.2 },
@@ -144,9 +149,10 @@ export const questions: QuizQuestion[] = [
     maxValue: 20,
     actualValue: 2,
     explanation:
-      "Adjusted for purchasing power, the average annual wage in Switzerland was USD 92,285 in 2025, second among the 33 OECD countries with a 2025 figure, behind Luxembourg (USD 98,530) and ahead of the United States (USD 86,977). The chart shows the rank of the first eight of these countries. Iceland, fourth in 2024, has no 2025 figure yet.",
+      "Adjusted for purchasing power, the average annual wage in Switzerland was USD\u00A092,285 in 2025, second among the 33 OECD countries with a 2025 figure, behind Luxembourg (USD\u00A098,530) and ahead of the United States (USD\u00A086,977). The chart shows the rank of the first eight of these countries. Iceland, fourth in 2024, has no 2025 figure yet.",
     source: "OECD, Average annual wages (2025, USD at purchasing power parity)",
     sourceUrl: "https://www.oecd.org/en/data/indicators/average-annual-wages.html",
+    period: "2025",
     comparisonLabel: "Rank by average annual wage at purchasing power parity, 2025 (OECD)",
     comparisonData: [
       { label: "Luxembourg", value: 1 },
@@ -169,9 +175,10 @@ export const questions: QuizQuestion[] = [
     maxValue: 10000,
     actualValue: 7024,
     explanation:
-      "The median gross salary for a full-time job was CHF 7,024 per month in 2024 (2022: CHF 6,788), according to the BFS Earnings Structure Survey. Half of employees earn more and half earn less. Among the major regions, Zürich was highest with CHF 7,502 and Ticino lowest with CHF 5,708.",
+      "The median gross salary for a full-time job was CHF\u00A07,024 per month in 2024 (2022: CHF\u00A06,788), according to the BFS Earnings Structure Survey. Half of employees earn more and half earn less. Among the major regions, Zürich was highest with CHF\u00A07,502 and Ticino lowest with CHF\u00A05,708.",
     source: "BFS Swiss Earnings Structure Survey 2024",
     sourceUrl: "https://www.pxweb.bfs.admin.ch/pxweb/de/px-x-0304010000_201/",
+    period: "2024",
     comparisonLabel: "Median gross monthly wage, full-time, 2024, in CHF (BFS)",
     comparisonData: [
       { label: "Zürich region", value: 7502 },
@@ -189,9 +196,10 @@ export const questions: QuizQuestion[] = [
     maxValue: 25,
     actualValue: 15.7,
     explanation:
-      "In 2024 women earned on average 15.7% less than men in the whole economy (2022: 16.2%), according to the BFS Earnings Structure Survey. The part of the gap not explained by factors such as occupation, sector or education was 6.5% of the wage, or CHF 640 per month. Measured on the median wage the gap was 8.4%. The chart uses Eurostat's indicator for 2024 (hourly earnings, without public administration), where Switzerland is at 16.0%. Since July 2020 employers with 100 or more employees must carry out an equal pay analysis.",
+      "In 2024 women earned on average 15.7% less than men in the whole economy (2022: 16.2%), according to the BFS Earnings Structure Survey. The part of the gap not explained by factors such as occupation, sector or education was 6.5% of the wage, or CHF\u00A0640 per month. Measured on the median wage the gap was 8.4%. The chart uses Eurostat's indicator for 2024 (hourly earnings, without public administration), where Switzerland is at 16.0%. Since July 2020 employers with 100 or more employees must carry out an equal pay analysis.",
     source: "BFS Swiss Earnings Structure Survey 2024; Eurostat (earn_gr_gpgr2) for the comparison",
     sourceUrl: "https://www.bfs.admin.ch/asset/de/2026-0504-d",
+    period: "2024",
     comparisonLabel: "Gender pay gap in hourly earnings, without public administration, 2024, in % (Eurostat definition; the answer is the BFS figure for the whole economy)",
     comparisonData: [
       { label: "Belgium", value: 0.7 },
@@ -218,6 +226,7 @@ export const questions: QuizQuestion[] = [
       "Switzerland's Gini coefficient of equivalised disposable income was 31.0 in 2024 (2023: 31.5), slightly above the EU average of 29.4 and close to France (30.0) and Germany (29.5). A value of 0 means everyone has the same income, 100 means one person has all of it. Source: SILC survey of the BFS, as published by Eurostat.",
     source: "BFS SILC survey / Eurostat (ilc_di12)",
     sourceUrl: "https://ec.europa.eu/eurostat/databrowser/view/ilc_di12/default/table?lang=en",
+    period: "2024",
     comparisonLabel: "Gini coefficient of disposable income, 2024 (Eurostat)",
     comparisonData: [
       { label: "Slovakia", value: 21.7 },
@@ -245,9 +254,10 @@ export const questions: QuizQuestion[] = [
     maxValue: 40,
     actualValue: 14.4,
     explanation:
-      "On January 15, 2015, the Swiss National Bank discontinued the minimum exchange rate of CHF 1.20 per euro and lowered its interest rate to -0.75%. The ECB reference rate fell from 1.2010 on January 14 to 1.0280 on January 15, a drop of 14.4%. It kept falling in the following days, to 0.9816 on January 23 (-18.3% compared with January 14).",
+      "On January 15, 2015, the Swiss National Bank discontinued the minimum exchange rate of CHF\u00A01.20 per euro and lowered its interest rate to \u22120.75%. The ECB reference rate fell from 1.2010 on January 14 to 1.0280 on January 15, a drop of 14.4%. It kept falling in the following days, to 0.9816 on January 23 (\u221218.3% compared with January 14).",
     source: "European Central Bank, euro reference rates; SNB",
     sourceUrl: "https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/eurofxref-graph-chf.en.html",
+    period: "2015",
     comparisonLabel: "Fall of the euro against the franc compared with 14 January 2015, in % (ECB reference rates)",
     comparisonData: [
       { label: "Jan 15, 2015", value: 14.4 },
@@ -268,6 +278,7 @@ export const questions: QuizQuestion[] = [
       "Exports of goods and services were equal to 78.1% of Swiss GDP in 2025 (2024: 71.2%), according to national accounts data published by the World Bank. Exports are counted at their full sale value while GDP counts only value added, which is why the ratio can exceed 100%, as in Singapore and Ireland.",
     source: "World Bank, national accounts data (NE.EXP.GNFS.ZS)",
     sourceUrl: "https://data.worldbank.org/indicator/NE.EXP.GNFS.ZS?locations=CH",
+    period: "2025",
     comparisonLabel: "Exports of goods and services in % of GDP, 2025 (World Bank)",
     comparisonData: [
       { label: "Singapore", value: 177.9 },
@@ -291,9 +302,10 @@ export const questions: QuizQuestion[] = [
     maxValue: 2000,
     actualValue: 1040,
     explanation:
-      "The SNB holds 1,040 tonnes of gold (1,039.9 tonnes in IMF data for September 2026). In the World Gold Council table of February 2026 it was the eighth-largest official holding when the IMF is included. About 70% is stored in Switzerland, 20% at the Bank of England and 10% at the Bank of Canada. In 2014 voters rejected an initiative that would have required the SNB to hold at least 20% of its assets in gold. The chart shows IMF data for September and October 2026 (Russia: November 2025, the last month reported in IMF data): China's holding is now larger than Russia's.",
+      "The SNB holds 1,040\u00A0tonnes of gold (1,039.9\u00A0tonnes in IMF data for September 2026). In the World Gold Council table of February 2026 it was the eighth-largest official holding when the IMF is included. About 70% is stored in Switzerland, 20% at the Bank of England and 10% at the Bank of Canada. In 2014 voters rejected an initiative that would have required the SNB to hold at least 20% of its assets in gold. The chart shows IMF data for September and October 2026 (Russia: November 2025, the last month reported in IMF data): China's holding is now larger than Russia's.",
     source: "Swiss National Bank; IMF International Liquidity statistics (autumn 2026) for the comparison; World Gold Council (February 2026) for the rank",
     sourceUrl: "https://www.snb.ch/en/the-snb/mandates-goals/investment-assets/assets-structure",
+    period: "2026",
     comparisonLabel: "Official gold holdings in tonnes, September-October 2026 (IMF)",
     comparisonData: [
       { label: "USA", value: 8133.5 },
@@ -316,9 +328,10 @@ export const questions: QuizQuestion[] = [
     maxValue: 5000,
     actualValue: 2358,
     explanation:
-      "Banks in Switzerland managed CHF 2,358 billion of cross-border assets for private clients in 2025, according to the Banking Barometer 2026 of the Swiss Bankers Association, which describes Switzerland as one of the world's leading centres for this business. Total assets under management at banks in Switzerland were CHF 9,729 billion at the end of 2025.",
+      "Banks in Switzerland managed CHF\u00A02,358\u00A0billion of cross-border assets for private clients in 2025, according to the Banking Barometer 2026 of the Swiss Bankers Association, which describes Switzerland as one of the world's leading centres for this business. Total assets under management at banks in Switzerland were CHF\u00A09,729\u00A0billion at the end of 2025.",
     source: "Swiss Bankers Association, Banking Barometer 2026",
     sourceUrl: "https://publications.swissbanking.ch/banking-barometer-2026-en/wealth-management",
+    period: "2025",
     comparisonLabel: "Assets managed by banks in Switzerland, 2025, in CHF billion (Swiss Bankers Association)",
     comparisonData: [
       { label: "All assets managed", value: 9729 },
@@ -338,6 +351,7 @@ export const questions: QuizQuestion[] = [
       "Switzerland had 225 banks at the end of 2025 (2024: 230), down from 375 in 2000 and 275 in 2014 (SNB). The 2025 total is made up of 24 cantonal banks, 2 big banks, 58 regional and savings banks, the Raiffeisen group (counted once), 37 stock exchange banks, 15 other banking institutions, 5 private bankers, 61 foreign-controlled banks and 22 branches of foreign banks.",
     source: "Swiss National Bank (SNB), data portal, structure of banks in Switzerland (published 24 September 2026)",
     sourceUrl: "https://data.snb.ch/en/topics/banken/cube/bastrbwa",
+    period: "2025",
     comparisonLabel: "Number of banks in Switzerland at the end of the year (SNB)",
     comparisonData: [
       { label: "2000", value: 375 },
@@ -362,9 +376,10 @@ export const questions: QuizQuestion[] = [
     maxValue: 10,
     actualValue: 4.1,
     explanation:
-      "The task area 'Migration' is about 4.1% of the 2026 federal budget (CHF 3.75 billion of CHF 91.1 billion). Most of it is paid to the cantons for the social assistance of asylum seekers and refugees. For comparison, security is 8.6%, education and research 9.9%, and transport 11.8%.",
+      "The task area 'Migration' is about 4.1% of the 2026 federal budget (CHF\u00A03.75\u00A0billion of CHF\u00A091.1\u00A0billion). Most of it is paid to the cantons for the social assistance of asylum seekers and refugees. For comparison, security is 8.6%, education and research 9.9%, and transport 11.8%.",
     source: "Federal Finance Administration, Budget 2027 with financial plan, volume 1 (column for the 2026 budget)",
     sourceUrl: "https://www.efv.admin.ch/dam/de/sd-web/ecUEO27taiGw/Voranschlag%202027%20mit%20IAFP%202028%E2%80%932030%20%E2%80%93%20Band%201%20DE.pdf",
+    period: "2026",
     comparisonLabel: "Largest task areas in % of the 2026 federal budget (Federal Finance Administration)",
     comparisonData: [
       { label: "Social Welfare", value: 34.9 },
@@ -389,6 +404,7 @@ export const questions: QuizQuestion[] = [
       "By the IMF's gross-debt definition, the debt of the Confederation, cantons, municipalities and social insurance together was 40.1% of GDP in 2025 (estimate of the Federal Finance Administration, September 2026), one of the lowest among developed countries. By the narrower Maastricht definition used in the EU it was 23.4%. The 'debt brake' constitutional rule since 2003 requires balanced federal budgets over the business cycle.",
     source: "Federal Finance Administration (FFA), financial statistics, international comparison (data of 22 September 2026)",
     sourceUrl: "https://www.efv.admin.ch/en/overview-financial-statistics-data",
+    period: "2025",
     comparisonLabel: "Gross public debt in % of GDP, 2025 (FFA; other countries from OECD Economic Outlook 119)",
     comparisonData: [
       { label: "Italy", value: 152.7 },
@@ -412,6 +428,7 @@ export const questions: QuizQuestion[] = [
       "Taxes and social security contributions were 27.2% of GDP in Switzerland in 2024 (provisional; 2023: 26.9%), against an OECD average of 34.1%. Source: OECD Revenue Statistics 2025. Compulsory health insurance premiums are paid to private insurers and are not counted in this figure.",
     source: "OECD Revenue Statistics 2025",
     sourceUrl: "https://www.oecd.org/en/publications/revenue-statistics-2025_3a264267-en/full-report.html",
+    period: "2024",
     comparisonLabel: "Taxes and social contributions in % of GDP, 2024 (OECD Revenue Statistics 2025)",
     comparisonData: [
       { label: "Denmark", value: 45.2 },
@@ -434,9 +451,10 @@ export const questions: QuizQuestion[] = [
     maxValue: 15,
     actualValue: 7.2,
     explanation:
-      "Military defence is about 7.2% of the 2026 federal budget (CHF 6.6 billion of CHF 91.1 billion). The whole 'security' area, which adds police, intelligence and civil protection, is 8.6% (CHF 7.8 billion). The chart shows a different measure, the one available for all countries: military spending as a share of GDP in 2025 according to SIPRI, which gives 0.8% for Switzerland.",
+      "Military defence is about 7.2% of the 2026 federal budget (CHF\u00A06.6\u00A0billion of CHF\u00A091.1\u00A0billion). The whole 'security' area, which adds police, intelligence and civil protection, is 8.6% (CHF\u00A07.8\u00A0billion). The chart shows a different measure, the one available for all countries: military spending as a share of GDP in 2025 according to SIPRI, which gives 0.8% for Switzerland.",
     source: "Federal Finance Administration, Budget 2027 with financial plan, volume 1 (column for the 2026 budget); SIPRI Military Expenditure Database (2025) for the comparison",
     sourceUrl: "https://www.efv.admin.ch/dam/de/sd-web/ecUEO27taiGw/Voranschlag%202027%20mit%20IAFP%202028%E2%80%932030%20%E2%80%93%20Band%201%20DE.pdf",
+    period: "2026",
     comparisonLabel: "Military spending as % of GDP, 2025 (SIPRI)",
     comparisonData: [
       { label: "USA", value: 3.1 },
@@ -461,6 +479,7 @@ export const questions: QuizQuestion[] = [
       "Swiss real GDP grew in 9 of the 10 years from 2016 to 2025. The only exception was 2020, when it fell by 2.3%. Growth was 1.5% in 2024 and 1.6% in 2025 (Federal Statistical Office, national accounts of 25 August 2026). The comparison uses Eurostat figures.",
     source: "Federal Statistical Office (FSO), national accounts (T 04.02.01.01); Eurostat (nama_10_gdp) for the comparison",
     sourceUrl: "https://www.bfs.admin.ch/asset/de/je-d-04.02.01.01",
+    period: "2016–2025",
     comparisonLabel: "Years with real GDP growth out of ten, 2016-2025 (Eurostat)",
     comparisonData: [
       { label: "Switzerland", value: 9 },
@@ -487,6 +506,7 @@ export const questions: QuizQuestion[] = [
       "Switzerland had 226 inhabitants per km² of land area in 2024, according to Eurostat. That is roughly twice the density of Austria or France and less than half that of the Netherlands.",
     source: "Eurostat (demo_r_d3dens)",
     sourceUrl: "https://ec.europa.eu/eurostat/databrowser/view/demo_r_d3dens/default/table",
+    period: "2024",
     comparisonLabel: "Inhabitants per km² of land area, 2024 (Eurostat)",
     comparisonData: [
       { label: "Netherlands", value: 529.5 },
@@ -508,9 +528,10 @@ export const questions: QuizQuestion[] = [
     maxValue: 12,
     actualValue: 9.1,
     explanation:
-      "At the end of 2025 Switzerland had 9,127,100 permanent residents (Federal Statistical Office), up from 9,051,000 a year earlier. In 1950 the population was 4.7 million. The comparison shows Eurostat figures for 1 January 2026.",
+      "At the end of 2025 Switzerland had 9,127,100 permanent residents (Federal Statistical Office), up from 9,051,000 a year earlier. In 1950 the population was 4.7\u00A0million. The comparison shows Eurostat figures for 1 January 2026.",
     source: "Federal Statistical Office (FSO); Eurostat (demo_gind) for the comparison",
     sourceUrl: "https://www.bfs.admin.ch/asset/en/je-e-01.01.01",
+    period: "2025",
     comparisonLabel: "Population on 1 January 2026, in millions (Eurostat)",
     comparisonData: [
       { label: "Germany", value: 83.5 },
@@ -533,9 +554,10 @@ export const questions: QuizQuestion[] = [
     maxValue: 98,
     actualValue: 86.3,
     explanation:
-      "At the end of 2025, 7.88 million of Switzerland's 9.13 million permanent residents (86.3%) lived in urban areas, according to the Federal Statistical Office. The FSO typology counts intermediate municipalities as urban; 13.7% lived in rural areas. International sources use other definitions and give different figures.",
+      "At the end of 2025, 7.88\u00A0million of Switzerland's 9.13\u00A0million permanent residents (86.3%) lived in urban areas, according to the Federal Statistical Office. The FSO typology counts intermediate municipalities as urban; 13.7% lived in rural areas. International sources use other definitions and give different figures.",
     source: "Federal Statistical Office (FSO), population data over time (T 01.01.01)",
     sourceUrl: "https://www.bfs.admin.ch/asset/en/je-e-01.01.01",
+    period: "2025",
     comparisonLabel: "Permanent residents by type of area, end of 2025, in % (FSO)",
     comparisonData: [
       { label: "Urban (incl. intermediate)", value: 86.3 },
@@ -555,6 +577,7 @@ export const questions: QuizQuestion[] = [
       "On 1 January 2026 Switzerland had 2,110 municipalities, according to the official commune register of the Federal Statistical Office. There were 2,131 in 2024 and 3,021 in 1990: the number keeps falling because municipalities merge.",
     source: "Federal Statistical Office (FSO), official commune register",
     sourceUrl: "https://www.agvchapp.bfs.admin.ch/de/communes/query",
+    period: "2026",
     comparisonLabel: "Number of municipalities on 1 January (FSO)",
     comparisonData: [
       { label: "1990", value: 3021 },
@@ -582,6 +605,7 @@ export const questions: QuizQuestion[] = [
       "In 2025 net migration of the permanent resident population was 70,400 people, or 7.7 per 1,000 inhabitants (Federal Statistical Office). The rate was 15.7 in 2023, when refugees from Ukraine entered the permanent population, and 9.2 in 2024. The comparison uses Eurostat's 2025 rate, which includes statistical adjustments and gives 7.4 for Switzerland.",
     source: "Federal Statistical Office (FSO); Eurostat (demo_gind) for the comparison",
     sourceUrl: "https://www.bfs.admin.ch/asset/en/je-e-01.01.01",
+    period: "2025",
     comparisonLabel: "Net migration per 1,000 inhabitants, 2025 (Eurostat, with statistical adjustments; the answer is the FSO figure)",
     comparisonData: [
       { label: "Luxembourg", value: 10.1 },
@@ -604,9 +628,10 @@ export const questions: QuizQuestion[] = [
     maxValue: 45,
     actualValue: 27.7,
     explanation:
-      "At the end of 2025, 27.7% of permanent residents (2.53 million people) were foreign nationals (Federal Statistical Office). The largest groups were Italians (346,100), Germans (336,400), Portuguese (258,100) and French (179,400). The comparison is calculated from Eurostat population counts on 1 January 2025, when the Swiss share was 27.4%.",
+      "At the end of 2025, 27.7% of permanent residents (2.53\u00A0million people) were foreign nationals (Federal Statistical Office). The largest groups were Italians (346,100), Germans (336,400), Portuguese (258,100) and French (179,400). The comparison is calculated from Eurostat population counts on 1 January 2025, when the Swiss share was 27.4%.",
     source: "Federal Statistical Office (FSO); Eurostat (migr_pop1ctz) for the comparison",
     sourceUrl: "https://www.bfs.admin.ch/asset/en/je-e-01.01.01",
+    period: "2025",
     comparisonLabel: "Foreign nationals in % of the population, 1 January 2025 (Eurostat; the answer is for the end of 2025)",
     comparisonData: [
       { label: "Luxembourg", value: 47.0 },
@@ -631,6 +656,7 @@ export const questions: QuizQuestion[] = [
       "In the third quarter of 2026, 414,488 cross-border commuters with a G permit worked in Switzerland (Federal Statistical Office, provisional). Most lived in France (241,012), followed by Italy (92,509), Germany (67,681) and Austria (9,014).",
     source: "Federal Statistical Office (FSO), cross-border commuters statistics",
     sourceUrl: "https://www.bfs.admin.ch/asset/de/ds-d-03.02.01.06.04-02",
+    period: "2026",
     comparisonLabel: "Cross-border commuters by country of residence, 3rd quarter 2026 (FSO)",
     comparisonData: [
       { label: "From France", value: 241012 },
@@ -657,6 +683,7 @@ export const questions: QuizQuestion[] = [
       "In 2025 the total fertility rate was 1.28 children per woman (Federal Statistical Office), down from 1.52 in 2021 and 1.50 in 2000. Married mothers were on average 31.4 years old at the birth of their first child. The comparison shows Eurostat figures for 2024, when the Swiss rate was 1.29.",
     source: "Federal Statistical Office (FSO); Eurostat (tps00199) for the comparison",
     sourceUrl: "https://www.bfs.admin.ch/asset/en/je-e-01.01.01",
+    period: "2025",
     comparisonLabel: "Children per woman, 2024 (Eurostat; the answer is for 2025)",
     comparisonData: [
       { label: "France", value: 1.61 },
@@ -682,6 +709,7 @@ export const questions: QuizQuestion[] = [
       "In 2025 single women married for the first time at 30.7 years on average and single men at 32.4 (Federal Statistical Office, people under 50). In 1990 the averages were 26.7 and 29.1. The comparison shows Eurostat figures for women in 2024; Eurostat uses a different method and gives 31.3 for Switzerland.",
     source: "Federal Statistical Office (FSO); Eurostat (demo_nind) for the comparison",
     sourceUrl: "https://www.bfs.admin.ch/asset/en/je-e-01.01.01",
+    period: "2025",
     comparisonLabel: "Mean age of women at first marriage, 2024 (Eurostat method; the answer is the FSO figure for 2025)",
     comparisonData: [
       { label: "Sweden", value: 35.2 },
@@ -707,6 +735,7 @@ export const questions: QuizQuestion[] = [
       "At the end of 2025, 19.8% of the permanent resident population was aged 65 or over (Federal Statistical Office), compared with 15.4% in 2000 and 9.6% in 1950. The comparison shows Eurostat figures for 1 January 2025, when the Swiss share was 19.5%.",
     source: "Federal Statistical Office (FSO); Eurostat (demo_pjanind) for the comparison",
     sourceUrl: "https://www.bfs.admin.ch/asset/en/je-e-01.01.01",
+    period: "2025",
     comparisonLabel: "Population aged 65 or over in %, 1 January 2025 (Eurostat; the answer is for the end of 2025)",
     comparisonData: [
       { label: "Italy", value: 24.7 },
@@ -733,9 +762,10 @@ export const questions: QuizQuestion[] = [
     maxValue: 55,
     actualValue: 29.1,
     explanation:
-      "In 2025, 2.64 million people received premium subsidies (Prämienverbilligung): 29.1% of the insured population, according to the Federal Office of Public Health. Subsidies totalled CHF 7.3 billion. The average monthly premium for adults is CHF 465.30 in 2026.",
+      "In 2025, 2.64\u00A0million people received premium subsidies (Prämienverbilligung): 29.1% of the insured population, according to the Federal Office of Public Health. Subsidies totalled CHF\u00A07.3\u00A0billion. The average monthly premium for adults is CHF\u00A0465.30 in 2026.",
     source: "Federal Office of Public Health (FOPH), Statistics on compulsory health insurance 2025, T 4.01",
     sourceUrl: "https://www.bag.admin.ch/de/statistik-der-obligatorischen-krankenversicherung",
+    period: "2025",
     comparisonLabel: "Insured people with premium subsidies in Switzerland, in % (FOPH)",
     comparisonData: [
       { label: "2021", value: 27.1 },
@@ -758,6 +788,7 @@ export const questions: QuizQuestion[] = [
       "In 2024 life expectancy at birth was 84.2 years for both sexes together (Eurostat, from Federal Statistical Office data): 85.9 for women and 82.4 for men. The figures for 2025 are 86.3 and 82.7 (published as provisional on 18 June 2026; the FSO table of 24 September 2026 has the same values). In 1990 they were 80.8 and 74.0: the gap between women and men has narrowed from 6.8 to 3.6 years. The comparison shows OECD figures for 2023, when Switzerland stood at 84.3.",
     source: "Eurostat and Federal Statistical Office (FSO); OECD Health at a Glance 2025 for the comparison",
     sourceUrl: "https://ec.europa.eu/eurostat/databrowser/view/demo_mlexpec/default/table",
+    period: "2024",
     comparisonLabel: "Life expectancy at birth in years, 2023 (OECD, Health at a Glance 2025; the answer is the Eurostat figure for 2024)",
     comparisonData: [
       { label: "Switzerland", value: 84.3 },
@@ -783,6 +814,7 @@ export const questions: QuizQuestion[] = [
       "Switzerland had 4.2 hospital beds per 1,000 inhabitants in 2024, according to Eurostat. That is below the EU average of 5.1 and well below Germany (7.6) and Austria (6.6).",
     source: "Eurostat (hlth_rs_bds1)",
     sourceUrl: "https://ec.europa.eu/eurostat/databrowser/view/hlth_rs_bds1/default/table",
+    period: "2024",
     comparisonLabel: "Hospital beds per 1,000 inhabitants, 2024 (Eurostat)",
     comparisonData: [
       { label: "Germany", value: 7.6 },
@@ -805,9 +837,10 @@ export const questions: QuizQuestion[] = [
     maxValue: 18,
     actualValue: 11.4,
     explanation:
-      "Switzerland spent 11.4% of GDP on healthcare in 2024 (provisional figure of the Federal Statistical Office, also used by the OECD): CHF 97 billion, or CHF 10,792 per person. That is less than the USA (17.2%) and Germany (12.2%) and level with France (11.3%). The comparison shows the OECD's figures for 2024.",
+      "Switzerland spent 11.4% of GDP on healthcare in 2024 (provisional figure of the Federal Statistical Office, also used by the OECD): CHF\u00A097\u00A0billion, or CHF\u00A010,792 per person. That is less than the USA (17.2%) and Germany (12.2%) and level with France (11.3%). The comparison shows the OECD's figures for 2024.",
     source: "Federal Statistical Office (FSO), costs of the healthcare system (T 14.05.01.01); OECD health expenditure database (2024) for the comparison",
     sourceUrl: "https://www.bfs.admin.ch/asset/de/je-d-14.05.01.01",
+    period: "2024",
     comparisonLabel: "Health spending in % of GDP, 2024 (OECD)",
     comparisonData: [
       { label: "USA", value: 17.2 },
@@ -836,6 +869,7 @@ export const questions: QuizQuestion[] = [
       "In 2025, 51% of 25-34 year-olds in Switzerland had a tertiary degree (university or higher vocational education), according to the OECD. The OECD average was 49%; Korea reached 71% and Italy 31%.",
     source: "OECD, Education at a Glance (educational attainment database)",
     sourceUrl: "https://www.oecd.org/en/publications/education-at-a-glance-2026_b4968bbc-en.html",
+    period: "2025",
     comparisonLabel: "25-34 year-olds with a tertiary degree, 2025, in % (OECD)",
     comparisonData: [
       { label: "Korea", value: 71 },
@@ -861,6 +895,7 @@ export const questions: QuizQuestion[] = [
       "Around two thirds of young people in Switzerland go through vocational education and training, according to the State Secretariat for Education, Research and Innovation (Facts and Figures 2025). Around 250 occupations can be learned this way.",
     source: "State Secretariat for Education, Research and Innovation (SERI), Vocational education and training in Switzerland: Facts and Figures 2025",
     sourceUrl: "https://www.sbfi.admin.ch/de/berufliche-grundbildung",
+    period: "2025",
   },
   {
     id: "education-spending-gdp",
@@ -872,9 +907,10 @@ export const questions: QuizQuestion[] = [
     maxValue: 8,
     actualValue: 5.5,
     explanation:
-      "Public spending on education was 5.5% of GDP in 2023 (CHF 45.5 billion), after 5.2% in 2022, according to the Federal Statistical Office. Most funding comes from cantons and municipalities (compulsory school) and from the Confederation and cantons for universities and vocational training. The comparison uses a different measure: the OECD's government expenditure on education, primary to tertiary, in 2023, which gives 4.4% for Switzerland.",
+      "Public spending on education was 5.5% of GDP in 2023 (CHF\u00A045.5\u00A0billion), after 5.2% in 2022, according to the Federal Statistical Office. Most funding comes from cantons and municipalities (compulsory school) and from the Confederation and cantons for universities and vocational training. The comparison uses a different measure: the OECD's government expenditure on education, primary to tertiary, in 2023, which gives 4.4% for Switzerland.",
     source: "Federal Statistical Office (FSO), public education expenditure (T 15.06.01.03); OECD (government expenditure on education, 2023) for the comparison",
     sourceUrl: "https://www.bfs.admin.ch/asset/de/je-d-15.06.01.03",
+    period: "2023",
     comparisonLabel: "Government expenditure on education, primary to tertiary, in % of GDP, 2023 (OECD definition; the answer is the FSO figure)",
     comparisonData: [
       { label: "Denmark", value: 5.7 },
@@ -904,6 +940,7 @@ export const questions: QuizQuestion[] = [
       "In 2024, 35.7% of occupied dwellings were owner-occupied (Federal Statistical Office, Structural Survey). The rate was 38.4% in 2015, 36.2% in 2020 and 35.9% in 2022. The comparison uses a different measure: Eurostat's share of the population living in an owner-occupied home in 2024, which is 42.0% for Switzerland and 68.4% in the EU.",
     source: "Federal Statistical Office (FSO), Structural Survey (T 09.03.02.01.03); Eurostat (ilc_lvho02) for the comparison",
     sourceUrl: "https://www.bfs.admin.ch/asset/de/je-d-09.03.02.01.03",
+    period: "2024",
     comparisonLabel: "Population living in an owner-occupied home, 2024, in % (Eurostat; the answer counts dwellings, not people)",
     comparisonData: [
       { label: "Romania", value: 94.3 },
@@ -925,9 +962,10 @@ export const questions: QuizQuestion[] = [
     maxValue: 2500,
     actualValue: 1446,
     explanation:
-      "In 2024 a rented 3-room apartment cost CHF 1,446 per month on average, without ancillary and heating costs (Federal Statistical Office, Structural Survey). The average over all rented dwellings was CHF 1,485. The comparison shows cantonal averages for 3-room apartments in 2024: Zug was the most expensive canton (CHF 1,875) and Jura the cheapest (CHF 926).",
+      "In 2024 a rented 3-room apartment cost CHF\u00A01,446 per month on average, without ancillary and heating costs (Federal Statistical Office, Structural Survey). The average over all rented dwellings was CHF\u00A01,485. The comparison shows cantonal averages for 3-room apartments in 2024: Zug was the most expensive canton (CHF\u00A01,875) and Jura the cheapest (CHF\u00A0926).",
     source: "Federal Statistical Office (FSO), Structural Survey, table T 09.03.03.01",
     sourceUrl: "https://statistik.admin.ch/en/asset/36398431",
+    period: "2024",
     comparisonLabel: "Average monthly net rent of a 3-room flat by canton, 2024, in CHF (FSO)",
     comparisonData: [
       { label: "Zug", value: 1875 },
@@ -953,6 +991,7 @@ export const questions: QuizQuestion[] = [
       "On 1 June 2026, 45,493 dwellings were vacant, 0.93% of the housing stock including single-family houses (Federal Statistical Office, vacant dwellings census). The rate was 1.00% in 2025 and has fallen for six years in a row. The comparison shows cantons on the same date: 15 cantons were below 1%, Zug was lowest and Jura highest.",
     source: "Federal Statistical Office (FSO), vacant dwellings census 2026",
     sourceUrl: "https://www.bfs.admin.ch/de/newnsb/kgvqAd91MYZr",
+    period: "2026",
     comparisonLabel: "Vacant dwellings by canton, 1 June 2026, in % (FSO)",
     comparisonData: [
       { label: "Jura", value: 3.35 },
@@ -980,6 +1019,7 @@ export const questions: QuizQuestion[] = [
       "Police recorded 46,509 violent offences in 2012 and 49,915 in 2025, an increase of 7.3% (Federal Statistical Office, Police Crime Statistics). The number fell to 42,266 in 2015 and has risen every year since 2021. Serious violent offences numbered 2,654 in 2025. The comparison shows the change against 2012 for other years. These are absolute numbers: the population also grew over the period.",
     source: "Federal Statistical Office (FSO), Police Crime Statistics, annual reports 2016 and 2025",
     sourceUrl: "https://statistik.admin.ch/de/themen/kriminalitaet-strafrecht",
+    period: "2012–2025",
     comparisonLabel: "Violent offences recorded by the police in Switzerland, change against 2012, in % (FSO)",
     comparisonData: [
       { label: "2015 vs 2012", value: -9.1 },
@@ -1002,6 +1042,7 @@ export const questions: QuizQuestion[] = [
       "Police recorded 55 completed homicides in 2025, 0.6 per 100,000 inhabitants (Federal Statistical Office, Police Crime Statistics). There were 45 in 2024 and the average since 2009 is 48 per year. In 2025, 34 of the 55 (61.8%) were committed within a partnership or the family. The comparison shows Eurostat figures for intentional homicide in 2024, when Switzerland stood at 0.50.",
     source: "Federal Statistical Office (FSO), Police Crime Statistics 2025; Eurostat (crim_off_cat) for the comparison",
     sourceUrl: "https://www.admin.ch/de/newnsb/Lt4dQR54SMqZFh_vCX8oA",
+    period: "2025",
     comparisonLabel: "Intentional homicides per 100,000 inhabitants, 2024 (Eurostat; the answer is the FSO figure for 2025)",
     comparisonData: [
       { label: "Belgium", value: 1.4 },
@@ -1024,6 +1065,7 @@ export const questions: QuizQuestion[] = [
       "According to Eurostat, 75.0 people per 100,000 inhabitants were held in prison in Switzerland in 2024. All countries in the comparison come from the same Eurostat table for 2024. The Federal Statistical Office counted 7,119 detainees on 31 January 2026, the highest number since 1988, with 97% of places occupied.",
     source: "Eurostat (crim_pris_cap); Federal Statistical Office (FSO), detention survey 2026",
     sourceUrl: "https://ec.europa.eu/eurostat/databrowser/view/crim_pris_cap/default/table",
+    period: "2024",
     comparisonLabel: "Prisoners per 100,000 inhabitants, 2024 (Eurostat)",
     comparisonData: [
       { label: "Spain", value: 121.8 },
@@ -1047,6 +1089,7 @@ export const questions: QuizQuestion[] = [
       "In 2024 police recorded 46,070 break-in and sneak-in thefts, which Eurostat reports as 514 burglaries per 100,000 inhabitants. In 2025 the number rose by 1.2% to 46,636, about 128 per day (Federal Statistical Office). In 2012 it was 73,714. The comparison shows Eurostat figures for 2024; national definitions of burglary differ, so countries are only roughly comparable.",
     source: "Eurostat (crim_off_cat); Federal Statistical Office (FSO), Police Crime Statistics",
     sourceUrl: "https://ec.europa.eu/eurostat/databrowser/view/crim_off_cat/default/table",
+    period: "2024",
     comparisonLabel: "Burglaries per 100,000 inhabitants, 2024 (Eurostat)",
     comparisonData: [
       { label: "Austria", value: 700 },
@@ -1073,9 +1116,10 @@ export const questions: QuizQuestion[] = [
     maxValue: 80,
     actualValue: 27.2,
     explanation:
-      "In 2025 nuclear power plants supplied 27.2% of Swiss electricity production (18.4 TWh of 67.5 TWh), below the ten-year average of 32.0%; it was 28.4% in 2024 and 32.1% in 2023 (Swiss Federal Office of Energy). The comparison shows the 2025 production mix: hydropower 55.5%, photovoltaics 11.8%. Four reactors are in operation: Beznau 1 and 2, Gösgen and Leibstadt.",
+      "In 2025 nuclear power plants supplied 27.2% of Swiss electricity production (18.4\u00A0TWh of 67.5\u00A0TWh), below the ten-year average of 32.0%; it was 28.4% in 2024 and 32.1% in 2023 (Swiss Federal Office of Energy). The comparison shows the 2025 production mix: hydropower 55.5%, photovoltaics 11.8%. Four reactors are in operation: Beznau 1 and 2, Gösgen and Leibstadt.",
     source: "Swiss Federal Office of Energy (SFOE), Swiss Electricity Statistics 2025",
     sourceUrl: "https://pubdb.bfe.admin.ch/de/publication/download/12681",
+    period: "2025",
     comparisonLabel: "Gross electricity production in Switzerland by source, 2025, in % (SFOE)",
     comparisonData: [
       { label: "Hydropower", value: 55.5 },
@@ -1095,9 +1139,10 @@ export const questions: QuizQuestion[] = [
     maxValue: 15,
     actualValue: 3.5,
     explanation:
-      "In 2024 Switzerland emitted 3.5 tonnes of CO2 per capita within its borders, or 4.5 tonnes of CO2 equivalents counting all greenhouse gases (Federal Office for the Environment, greenhouse gas inventory). In 1990 it was 8.3 tonnes of CO2 equivalents. International aviation and imported goods are not included: the consumption-based footprint was about 15 tonnes of CO2 equivalents per capita in 2023. The comparison uses a different measure: IEA figures for CO2 from energy use in 2023, when Switzerland stood at 3.4 tonnes.",
+      "In 2024 Switzerland emitted 3.5\u00A0tonnes of CO2 per capita within its borders, or 4.5\u00A0tonnes of CO2 equivalents counting all greenhouse gases (Federal Office for the Environment, greenhouse gas inventory). In 1990 it was 8.3\u00A0tonnes of CO2 equivalents. International aviation and imported goods are not included: the consumption-based footprint was about 15\u00A0tonnes of CO2 equivalents per capita in 2023. The comparison uses a different measure: IEA figures for CO2 from energy use in 2023, when Switzerland stood at 3.4\u00A0tonnes.",
     source: "Federal Office for the Environment (FOEN), greenhouse gas inventory; IEA figures as published by FOEN for the comparison",
     sourceUrl: "https://www.bafu.admin.ch/de/zustand-klima",
+    period: "2024",
     comparisonLabel: "CO2 from energy use per capita, 2023, in tonnes (IEA; the answer is the FOEN inventory for 2024)",
     comparisonData: [
       { label: "USA", value: 13.1 },
@@ -1121,6 +1166,7 @@ export const questions: QuizQuestion[] = [
       "In 2025 renewable sources covered 30.6% of final energy consumption, up from 29.9% in 2024 (Swiss Federal Office of Energy). The share was 19.9% in 2010 and fell temporarily to 25.7% in 2022. Of gross electricity production, hydropower supplied 55.5% and photovoltaics 11.8% in 2025. The comparison shows earlier years in Switzerland.",
     source: "Swiss Federal Office of Energy (SFOE), Swiss renewable energy statistics",
     sourceUrl: "https://www.admin.ch/de/newnsb/YQtEZcK-D9fQ",
+    period: "2025",
     comparisonLabel: "Renewable share of final energy consumption in Switzerland, in % (SFOE)",
     comparisonData: [
       { label: "2010", value: 19.9 },
@@ -1141,9 +1187,10 @@ export const questions: QuizQuestion[] = [
     maxValue: 80,
     actualValue: 52,
     explanation:
-      "In 2024 Switzerland produced about 6 million tonnes of municipal waste: 3.1 million tonnes were collected separately and recycled (52%) and 2.9 million tonnes were incinerated (Federal Office for the Environment). Recycling rates were 100% for glass bottles, 90% for aluminium cans, 85% for paper and cardboard and 84% for PET bottles. The comparison shows Eurostat's recycling rate of municipal waste for 2024, which gives 51.8% for Switzerland.",
+      "In 2024 Switzerland produced about 6\u00A0million tonnes of municipal waste: 3.1\u00A0million tonnes were collected separately and recycled (52%) and 2.9\u00A0million tonnes were incinerated (Federal Office for the Environment). Recycling rates were 100% for glass bottles, 90% for aluminium cans, 85% for paper and cardboard and 84% for PET bottles. The comparison shows Eurostat's recycling rate of municipal waste for 2024, which gives 51.8% for Switzerland.",
     source: "Federal Office for the Environment (FOEN), waste statistics 2024; Eurostat (cei_wm011) for the comparison",
     sourceUrl: "https://www.admin.ch/de/newnsb/EcpWws7Ra2HcYI1J88uP4",
+    period: "2024",
     comparisonLabel: "Recycling rate of municipal waste, 2024, in % (Eurostat; the answer is the FOEN figure)",
     comparisonData: [
       { label: "Germany", value: 69.0 },
@@ -1163,15 +1210,16 @@ export const questions: QuizQuestion[] = [
     id: "train-punctuality",
     category: "social",
     subcategory: "transport",
-    question: "What percentage of SBB passenger trains were on time (less than 3 minutes late) in 2025?",
+    question: "What percentage of SBB passenger trains were on time (less than 3\u00A0minutes late) in 2025?",
     unit: "%",
     minValue: 70,
     maxValue: 100,
     actualValue: 94.1,
     explanation:
-      "In 2025, 94.1% of SBB passenger trains were on time, the highest annual value SBB has reported; in 2024 it was 93.2%. SBB counts a train as on time if it arrives less than 3 minutes late. Punctuality was 93.4% in western Switzerland and 92.1% in Ticino. SBB carried 1.43 million passengers per day in 2025.",
+      "In 2025, 94.1% of SBB passenger trains were on time, the highest annual value SBB has reported; in 2024 it was 93.2%. SBB counts a train as on time if it arrives less than 3\u00A0minutes late. Punctuality was 93.4% in western Switzerland and 92.1% in Ticino. SBB carried 1.43\u00A0million passengers per day in 2025.",
     source: "SBB Annual Report 2025; Federal Council, short report on SBB 2025",
     sourceUrl: "https://www.uvek.admin.ch/dam/de/sd-web/ZkrHkvQElJad/kurzbericht-br-sbb-2025-de.pdf",
+    period: "2025",
     comparisonLabel: "SBB passenger trains on time, in % (SBB)",
     comparisonData: [
       { label: "SBB 2025", value: 94.1 },
@@ -1190,9 +1238,10 @@ export const questions: QuizQuestion[] = [
     maxValue: 8000,
     actualValue: 5307,
     explanation:
-      "In 2024 Switzerland had 5,307 km of railway lines according to Eurostat; the Federal Statistical Office's own latest figure is 5,317 km (2020). This is the length of lines: a double-track line counts once. All countries in the comparison come from the same Eurostat table for 2024. The network includes the 57 km Gotthard Base Tunnel.",
+      "In 2024 Switzerland had 5,307\u00A0km of railway lines according to Eurostat; the Federal Statistical Office's own latest figure is 5,317\u00A0km (2020). This is the length of lines: a double-track line counts once. All countries in the comparison come from the same Eurostat table for 2024. The network includes the 57\u00A0km Gotthard Base Tunnel.",
     source: "Eurostat (rail_if_line_tr); Federal Statistical Office (FSO), Mobility and Transport pocket statistics 2025",
     sourceUrl: "https://ec.europa.eu/eurostat/databrowser/view/rail_if_line_tr/default/table",
+    period: "2024",
     comparisonLabel: "Railway lines in km, 2024 (Eurostat)",
     comparisonData: [
       { label: "France", value: 27564 },
@@ -1213,9 +1262,10 @@ export const questions: QuizQuestion[] = [
     maxValue: 50,
     actualValue: 30.2,
     explanation:
-      "In 2024 commuters needed 30.2 minutes on average to reach their workplace, over an average distance of 14.0 km (2022: 29.6 minutes, 13.7 km). For 34.6% the trip took at most 15 minutes and for 8.8% more than an hour. Of the 3.7 million commuters, 49.4% used a car as their main means of transport, 17.1% the train and 13.6% bus or tram (Federal Statistical Office, tables T 11.4.4.3 and T 11.4.4.4, 2024).",
+      "In 2024 commuters needed 30.2\u00A0minutes on average to reach their workplace, over an average distance of 14.0\u00A0km (2022: 29.6\u00A0minutes, 13.7\u00A0km). For 34.6% the trip took at most 15\u00A0minutes and for 8.8% more than an hour. Of the 3.7\u00A0million commuters, 49.4% used a car as their main means of transport, 17.1% the train and 13.6% bus or tram (Federal Statistical Office, tables T 11.4.4.3 and T 11.4.4.4, 2024).",
     source: "Federal Statistical Office (FSO), commuters by length and duration of the trip (T 11.4.4.3) and by main means of transport (T 11.4.4.4), published 29 January 2026",
     sourceUrl: "https://www.bfs.admin.ch/asset/de/je-d-11.04.04.03",
+    period: "2024",
   },
   {
     id: "cars-per-capita",
@@ -1230,6 +1280,7 @@ export const questions: QuizQuestion[] = [
       "In 2025 Switzerland had 4,839,465 registered passenger cars, 535 per 1,000 inhabitants (Federal Statistical Office; the 2024 figure was revised to 536). Battery-electric cars made up 22.7% of new registrations in 2025 and 5.2% of all cars on the road (2024: 4.2%). The comparison shows Eurostat figures for 2024, which use a slightly different method and give 542 for Switzerland.",
     source: "Federal Statistical Office (FSO), road vehicle statistics 2025 (T 11.3.2.1.2); Eurostat (road_eqs_carhab) for the comparison",
     sourceUrl: "https://www.bfs.admin.ch/asset/de/je-d-11.03.02.01.02",
+    period: "2025",
     comparisonLabel: "Passenger cars per 1,000 inhabitants, 2024 (Eurostat method; the answer is the FSO figure for 2025)",
     comparisonData: [
       { label: "Italy", value: 701 },
@@ -1254,9 +1305,10 @@ export const questions: QuizQuestion[] = [
     maxValue: 2040,
     actualValue: 2026,
     explanation:
-      "According to the Federal Social Insurance Office's outlook of 2 July 2026, the AHV's pay-as-you-go result (receipts minus expenditure, without investment income) turns negative in 2026. The reason is the 13th monthly pension, paid for the first time in 2026, which costs about CHF 4 billion a year and is not yet financed. The deficit is projected to grow from about CHF 1.3 billion in 2026 to about CHF 4.9 billion in 2035 (2025 prices).",
+      "According to the Federal Social Insurance Office's outlook of 2 July 2026, the AHV's pay-as-you-go result (receipts minus expenditure, without investment income) turns negative in 2026. The reason is the 13th monthly pension, paid for the first time in 2026, which costs about CHF\u00A04\u00A0billion a year and is not yet financed. The deficit is projected to grow from about CHF\u00A01.3\u00A0billion in 2026 to about CHF\u00A04.9\u00A0billion in 2035 (2025 prices).",
     source: "Federal Social Insurance Office (FSIO), AHV financial outlook, 2 July 2026",
     sourceUrl: "https://www.bsv.admin.ch/de/newnsb/ycAZ-AX4nU4qc3hf5qwJP",
+    period: "2026",
   },
   {
     id: "poverty-rate",
@@ -1268,9 +1320,10 @@ export const questions: QuizQuestion[] = [
     maxValue: 20,
     actualValue: 8.4,
     explanation:
-      "In 2024, 8.4% of the population, about 743,000 people, were income-poor (Federal Statistical Office, SILC survey). This is the absolute poverty rate: household income below the poverty line derived from the social assistance guidelines, on average CHF 2,388 per month for a single person and CHF 4,159 for two adults with two children. Among employed people the rate was 4.3%. The at-risk-of-poverty rate used in European comparisons is a different, relative measure (income below 60% of the median) and stands at about 16% in Switzerland. The comparison shows the Swiss absolute rate in earlier years.",
+      "In 2024, 8.4% of the population, about 743,000 people, were income-poor (Federal Statistical Office, SILC survey). This is the absolute poverty rate: household income below the poverty line derived from the social assistance guidelines, on average CHF\u00A02,388 per month for a single person and CHF\u00A04,159 for two adults with two children. Among employed people the rate was 4.3%. The at-risk-of-poverty rate used in European comparisons is a different, relative measure (income below 60% of the median) and stands at about 16% in Switzerland. The comparison shows the Swiss absolute rate in earlier years.",
     source: "Federal Statistical Office (FSO), SILC survey 2024",
     sourceUrl: "https://statistik.admin.ch/de/asset/36395150",
+    period: "2024",
     comparisonLabel: "Absolute poverty rate in Switzerland, in % (FSO)",
     comparisonData: [
       { label: "2014", value: 6.7 },

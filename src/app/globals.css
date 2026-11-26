@@ -6,7 +6,7 @@
 
 /* This site's accent in the SwissData family (the tokens file is shared, the accent is not). */
 :root {
-  --sdf-accent: #dc2626;
+  --sdf-accent: #d82525;
 }
 
 @layer base {
@@ -30,13 +30,6 @@
       letter-spacing: -0.02em;
     }
   }
-}
-
-/* The language is chosen before the first paint (script in layout.tsx). While the page
-   still shows the prerendered English text for another language, it stays hidden.
-   (Outside @layer: the class is set by a script, Tailwind must not drop the rule.) */
-html.sd-lang-pending body {
-  visibility: hidden;
 }
 
 /* Figures: digits of equal width */

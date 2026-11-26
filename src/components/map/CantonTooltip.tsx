@@ -116,7 +116,7 @@ export function CantonTooltip({ canton, onClose }: CantonTooltipProps) {
                     <span className="font-semibold swiss-number text-sm">
                       {formatIndicatorValue(indicator.unit, cantonValue)}
                     </span>
-                    <span className="block text-source text-swiss-gray-600 swiss-number">
+                    <span className="block text-sm text-swiss-gray-600 swiss-number">
                       {formatDiff(indicator.unit, diff)} {t.cantonTooltip.vsCH}
                     </span>
                   </div>

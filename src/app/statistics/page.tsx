@@ -16,6 +16,7 @@ import { cn } from "@/lib/utils";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { getIndicatorExplanation } from "@/i18n/indicatorExplanations";
 import { localizePeriod } from "@/i18n/periods";
+import { localizeSource } from "@/i18n/sourceNames";
 import { formatNumber, formatPercent, percentSign } from "@/lib/formatters";
 import { Indicator, IndicatorCategory } from "@/types";
 import { TrendingUp, Users, Heart, DollarSign, Calendar } from "lucide-react";
@@ -91,7 +92,7 @@ export default function StatisticsPage() {
           })}
         </div>
 
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-3 min-w-0">
           <Calendar className="h-5 w-5 text-swiss-gray-500 shrink-0" aria-hidden="true" />
           <TimeRangeSelector selected={timeRange} onChange={setTimeRange} />
         </div>
@@ -141,7 +142,7 @@ export default function StatisticsPage() {
                     <SingleIndicatorChart indicator={indicator} height={170} startYear={startYear} color={CHART_COLOR[category]} />
                     <SourceLine
                       className="mx-4 sm:mx-0"
-                      publisher={indicator.source}
+                      publisher={localizeSource(indicator.source, locale)}
                       url={indicator.sourceUrl}
                       date={localizePeriod(indicator.lastUpdated, locale)}
                     />

@@ -58,6 +58,7 @@ export interface QuizQuestion {
   explanation: string;
   source: string;
   sourceUrl: string;
+  period: string; // reference year or period of the answer, shown in the source line
   context?: string;
   comparisonData?: ComparisonPoint[];
   comparisonLabel?: string; // title of the chart when it shows another measure than the question

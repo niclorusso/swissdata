@@ -70,6 +70,7 @@ export const translations = {
       nextQuestion: "Next Question",
       seeResults: "See Results",
       restartQuiz: "Restart Quiz",
+      languageNote: "",
     },
 
     // Quiz - Question Card
@@ -116,11 +117,9 @@ export const translations = {
       economic: "Economic",
       demographic: "Demographic",
       social: "Social",
-      keyEconomicIndicators: "Key Economic Indicators",
       economicTrends: "Economic Trends",
       demographicTrends: "Demographic Trends",
       socialTrends: "Social Trends",
-      comparingChart: "Comparing unemployment rate, GDP growth, and inflation over time. Vertical lines mark major economic events.",
       dataSources: "Data Sources",
       whatIsIt: "What is it?",
       whyItMatters: "Why it matters",
@@ -135,13 +134,6 @@ export const translations = {
       "10Y": "10 Years",
       "20Y": "20 Years",
       ALL: "All Time",
-    },
-
-    // Historical events
-    events: {
-      financialCrisis: "Financial Crisis",
-      snbShock: "SNB Shock",
-      covid: "COVID-19",
     },
 
     // Cantons page
@@ -233,7 +225,6 @@ export const translations = {
       demographicDesc: "Population, migration, and age structure",
       socialTitle: "Social Indicators",
       socialDesc: "Healthcare, education, and quality of life",
-      historicalTrend: "Historical Trend",
       viewAllStatistics: "View All Statistics",
     },
 
@@ -313,6 +304,7 @@ export const translations = {
       nextQuestion: "Prossima domanda",
       seeResults: "Vedi risultati",
       restartQuiz: "Ricomincia il Quiz",
+      languageNote: "",
     },
 
     // Quiz - Question Card
@@ -359,11 +351,9 @@ export const translations = {
       economic: "Economici",
       demographic: "Demografici",
       social: "Sociali",
-      keyEconomicIndicators: "Indicatori economici chiave",
       economicTrends: "Tendenze economiche",
       demographicTrends: "Tendenze demografiche",
       socialTrends: "Tendenze sociali",
-      comparingChart: "Confronto tra tasso di disoccupazione, crescita del PIL e inflazione nel tempo. Le linee verticali indicano eventi economici importanti.",
       dataSources: "Fonti dei dati",
       whatIsIt: "Cos\u2019\u00E8?",
       whyItMatters: "Perch\u00E9 \u00E8 importante",
@@ -378,13 +368,6 @@ export const translations = {
       "10Y": "10 anni",
       "20Y": "20 anni",
       ALL: "Tutto",
-    },
-
-    // Historical events
-    events: {
-      financialCrisis: "Crisi finanziaria",
-      snbShock: "Shock BNS",
-      covid: "COVID-19",
     },
 
     // Cantons page
@@ -451,7 +434,7 @@ export const translations = {
       questionSelectionTitle: "Selezione delle domande",
       questionSelectionDesc: "Le domande del nostro quiz coprono le principali statistiche svizzere nei settori economico, demografico e sociale. Selezioniamo argomenti rilevanti per una cittadinanza informata e verificabili con fonti ufficiali.",
       accuracyScoringTitle: "Calcolo della precisione",
-      accuracyScoringDesc: "Il punteggio di una risposta è 100\u00A0\u00A0% meno la distanza tra la tua stima e il valore reale, misurata in rapporto all'ampiezza del cursore. Una stima che sbaglia di un decimo dell'ampiezza vale 90\u00A0\u00A0%.",
+      accuracyScoringDesc: "Il punteggio di una risposta è 100\u00A0% meno la distanza tra la tua stima e il valore reale, misurata in rapporto all'ampiezza del cursore. Una stima che sbaglia di un decimo dell'ampiezza vale 90\u00A0%.",
       updateFrequencyTitle: "Frequenza di aggiornamento",
       updateFrequencyDesc: "Aggiorniamo gli indicatori non appena vengono rilasciati nuovi dati ufficiali. La maggior parte degli indicatori economici viene aggiornata trimestralmente; i dati demografici annualmente. Ogni indicatore mostra la data dell\u2019ultimo aggiornamento.",
       // Limitations
@@ -475,8 +458,7 @@ export const translations = {
       demographicTitle: "Indicatori demografici",
       demographicDesc: "Popolazione, migrazione e struttura per et\u00E0",
       socialTitle: "Indicatori sociali",
-      socialDesc: "Sanit\u00E0, istruzione e qualit\u00E0 della vita",
-      historicalTrend: "Tendenza storica",      viewAllStatistics: "Vedi tutte le statistiche",    },
+      socialDesc: "Sanit\u00E0, istruzione e qualit\u00E0 della vita",      viewAllStatistics: "Vedi tutte le statistiche",    },
 
     // Indicator card
     indicatorCard: {
@@ -554,6 +536,7 @@ export const translations = {
       nextQuestion: "Nächste Frage",
       seeResults: "Ergebnisse anzeigen",
       restartQuiz: "Quiz neu starten",
+      languageNote: "Die Quizfragen und ihre Erklärungen gibt es nur auf Englisch und Italienisch. Hier erscheinen sie auf Englisch.",
     },
 
     // Quiz - Question Card
@@ -600,11 +583,9 @@ export const translations = {
       economic: "Wirtschaftlich",
       demographic: "Demografisch",
       social: "Sozial",
-      keyEconomicIndicators: "Wichtige Wirtschaftsindikatoren",
       economicTrends: "Wirtschaftstrends",
       demographicTrends: "Demografische Trends",
       socialTrends: "Soziale Trends",
-      comparingChart: "Vergleich von Arbeitslosenquote, BIP-Wachstum und Inflation im Zeitverlauf. Vertikale Linien markieren wichtige wirtschaftliche Ereignisse.",
       dataSources: "Datenquellen",
       whatIsIt: "Was ist das?",
       whyItMatters: "Warum es wichtig ist",
@@ -619,13 +600,6 @@ export const translations = {
       "10Y": "10 Jahre",
       "20Y": "20 Jahre",
       ALL: "Alle",
-    },
-
-    // Historical events
-    events: {
-      financialCrisis: "Finanzkrise",
-      snbShock: "SNB-Schock",
-      covid: "COVID-19",
     },
 
     // Cantons page
@@ -692,7 +666,7 @@ export const translations = {
       questionSelectionTitle: "Fragenauswahl",
       questionSelectionDesc: "Die Fragen in unserem Quiz decken wichtige Schweizer Statistiken aus den Bereichen Wirtschaft, Demografie und Gesellschaft ab. Wir wählen Themen, die für informierte Bürger relevant und mit offiziellen Datenquellen überprüfbar sind.",
       accuracyScoringTitle: "Genauigkeitsbewertung",
-      accuracyScoringDesc: "Die Punktzahl einer Antwort ist 100\u00A0\u00A0% minus der Abstand zwischen deiner Schätzung und dem tatsächlichen Wert, gemessen am Bereich des Schiebereglers. Eine Schätzung, die um einen Zehntel des Bereichs danebenliegt, ergibt 90\u00A0\u00A0%.",
+      accuracyScoringDesc: "Die Punktzahl einer Antwort ist 100\u00A0% minus der Abstand zwischen deiner Schätzung und dem tatsächlichen Wert, gemessen am Bereich des Schiebereglers. Eine Schätzung, die um einen Zehntel des Bereichs danebenliegt, ergibt 90\u00A0%.",
       updateFrequencyTitle: "Aktualisierungshäufigkeit",
       updateFrequencyDesc: "Wir aktualisieren Indikatoren, sobald neue offizielle Daten veröffentlicht werden. Die meisten Wirtschaftsindikatoren werden vierteljährlich aktualisiert; demografische Daten jährlich. Jeder Indikator zeigt sein letztes Aktualisierungsdatum.",
       // Limitations
@@ -717,7 +691,6 @@ export const translations = {
       demographicDesc: "Bevölkerung, Migration und Altersstruktur",
       socialTitle: "Soziale Indikatoren",
       socialDesc: "Gesundheit, Bildung und Lebensqualität",
-      historicalTrend: "Historischer Trend",
       viewAllStatistics: "Alle Statistiken anzeigen",
     },
 
@@ -797,6 +770,7 @@ export const translations = {
       nextQuestion: "Question suivante",
       seeResults: "Voir les résultats",
       restartQuiz: "Recommencer le quiz",
+      languageNote: "Les questions du quiz et leurs explications existent uniquement en anglais et en italien. Elles s'affichent ici en anglais.",
     },
 
     // Quiz - Question Card
@@ -843,11 +817,9 @@ export const translations = {
       economic: "Économiques",
       demographic: "Démographiques",
       social: "Sociaux",
-      keyEconomicIndicators: "Indicateurs économiques clés",
       economicTrends: "Tendances économiques",
       demographicTrends: "Tendances démographiques",
       socialTrends: "Tendances sociales",
-      comparingChart: "Comparaison du taux de chômage, de la croissance du PIB et de l'inflation au fil du temps. Les lignes verticales marquent les événements économiques majeurs.",
       dataSources: "Sources des données",
       whatIsIt: "Qu'est-ce que c'est ?",
       whyItMatters: "Pourquoi c'est important",
@@ -862,13 +834,6 @@ export const translations = {
       "10Y": "10 ans",
       "20Y": "20 ans",
       ALL: "Tout",
-    },
-
-    // Historical events
-    events: {
-      financialCrisis: "Crise financière",
-      snbShock: "Choc BNS",
-      covid: "COVID-19",
     },
 
     // Cantons page
@@ -935,7 +900,7 @@ export const translations = {
       questionSelectionTitle: "Sélection des questions",
       questionSelectionDesc: "Les questions de notre quiz couvrent les principales statistiques suisses dans les domaines économique, démographique et social. Nous sélectionnons des sujets pertinents pour une citoyenneté informée et vérifiables avec des sources officielles.",
       accuracyScoringTitle: "Calcul de la précision",
-      accuracyScoringDesc: "Le score d'une réponse est 100\u00A0\u00A0% moins l'écart entre votre estimation et la valeur réelle, mesuré par rapport à l'étendue du curseur. Une estimation qui s'écarte d'un dixième de l'étendue vaut 90\u00A0\u00A0%.",
+      accuracyScoringDesc: "Le score d'une réponse est 100\u202F% moins l'écart entre votre estimation et la valeur réelle, mesuré par rapport à l'étendue du curseur. Une estimation qui s'écarte d'un dixième de l'étendue vaut 90\u202F%.",
       updateFrequencyTitle: "Fréquence de mise à jour",
       updateFrequencyDesc: "Nous mettons à jour les indicateurs dès que de nouvelles données officielles sont publiées. La plupart des indicateurs économiques sont mis à jour trimestriellement ; les données démographiques annuellement. Chaque indicateur affiche sa date de dernière mise à jour.",
       // Limitations
@@ -960,7 +925,6 @@ export const translations = {
       demographicDesc: "Population, migration et structure par âge",
       socialTitle: "Indicateurs sociaux",
       socialDesc: "Santé, éducation et qualité de vie",
-      historicalTrend: "Tendance historique",
       viewAllStatistics: "Voir toutes les statistiques",
     },
 

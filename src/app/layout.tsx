@@ -2,46 +2,39 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { ClientLayout } from "@/components/ClientLayout";
-import { LANGUAGE_INIT_SCRIPT } from "@/i18n/LanguageContext";
+import { translations } from "@/i18n/translations";
+import { getRequestLocale } from "@/i18n/server";
 
 const inter = Inter({ subsets: ["latin"] });
 
-export const metadata: Metadata = {
-  title: "SwissData – Switzerland in Numbers",
-  description:
-    "Statistics on Switzerland's economy, population and society, each with its source. A quiz and a comparison of the 26 cantons.",
-  keywords: [
-    "Switzerland",
-    "statistics",
-    "data",
-    "economy",
-    "demographics",
-    "BFS",
-    "SECO",
-  ],
-  authors: [{ name: "SwissData" }],
-  openGraph: {
-    title: "SwissData – Switzerland in Numbers",
-    description:
-      "Statistics on Switzerland's economy, population and society, each with its source.",
-    type: "website",
-    locale: "en_CH",
-  },
-};
+const OG_LOCALE = { en: "en_CH", it: "it_CH", de: "de_CH", fr: "fr_CH" } as const;
 
-export default function RootLayout({
+// Title and description in the language of the request (cookie, then Accept-Language, then English).
+export async function generateMetadata(): Promise<Metadata> {
+  const locale = await getRequestLocale();
+  const t = translations[locale];
+  const title = `SwissData – ${t.home.title} ${t.home.titleHighlight}`;
+  return {
+    title,
+    description: t.home.subtitle,
+    keywords: ["Switzerland", "statistics", "data", "economy", "demographics", "BFS", "SECO"],
+    authors: [{ name: "SwissData" }],
+    openGraph: { title, description: t.home.subtitle, type: "website", locale: OG_LOCALE[locale] },
+  };
+}
+
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  // Reading the cookie and the header makes every page render on the server per request:
+  // the HTML arrives with the right <html lang>, title and texts, with or without JavaScript.
+  const locale = await getRequestLocale();
   return (
-    // lang and class are set by the script below before React starts: no hydration warning for them
-    <html lang="en" suppressHydrationWarning>
-      <head>
-        <script dangerouslySetInnerHTML={{ __html: LANGUAGE_INIT_SCRIPT }} />
-      </head>
+    <html lang={locale}>
       <body className={inter.className}>
-        <ClientLayout>{children}</ClientLayout>
+        <ClientLayout initialLocale={locale}>{children}</ClientLayout>
       </body>
     </html>
   );
