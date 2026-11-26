@@ -85,7 +85,8 @@ export interface QuizQuestion {
   maxValue: number;
   actualValue: number;
   explanation: string;
-  source: string;
+  /** who publishes the answer, in the four languages (offices as "full name (acronym)") */
+  source: LocalizedText;
   sourceUrl: string;
   period: string; // reference year or period of the answer, shown in the source line
   context?: string;

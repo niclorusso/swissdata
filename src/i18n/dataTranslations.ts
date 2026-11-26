@@ -161,7 +161,7 @@ const questionTranslationsIT: Record<
     question:
       "Qual era il tasso di disoccupazione registrato in Svizzera nel 2025 (SECO, media annua)?",
     explanation:
-      "Nel 2025 il tasso di disoccupazione registrato è stato in media del 2,8\u00A0%, contro il 2,4\u00A0% del 2024 (SECO). Conta solo le persone iscritte a un ufficio regionale di collocamento. Il grafico usa la definizione ILO, basata su un'indagine e confrontabile tra Paesi: con questa misura la Svizzera era al 4,9\u00A0% nel 2025 e l'UE al 6,0\u00A0% (Eurostat).",
+      "Nel 2025 il tasso di disoccupazione registrato è stato in media del 2,8\u00A0%, contro il 2,4\u00A0% del 2024 (SECO). Conta solo le persone iscritte a un ufficio regionale di collocamento. Il grafico usa la definizione ILO, basata su un'indagine e confrontabile tra Paesi: con questa misura la Svizzera era al 4,9\u00A0% nel 2025 secondo Eurostat, per le persone tra 15 e 74 anni (il dato nazionale dell'UST è 4,8\u00A0%), e l'UE al 6,0\u00A0% (Eurostat).",
     comparisonLabel: "Tasso di disoccupazione ILO, 2025, in % (Eurostat; la risposta è il tasso SECO dei disoccupati iscritti)",
   },
   "youth-unemployment": {

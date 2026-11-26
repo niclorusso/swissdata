@@ -8,11 +8,13 @@ import { GuessSlider } from "@/components/quiz/GuessSlider";
 import { RevealAnimation } from "@/components/quiz/RevealAnimation";
 import { ScoreCard } from "@/components/quiz/ScoreCard";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { questions } from "@/data/questions";
 import { useLanguage } from "@/i18n/LanguageContext";
-import { Play, ArrowRight, RotateCcw, Brain } from "lucide-react";
+import { ArrowRight, RotateCcw } from "lucide-react";
+
+const LENGTHS = [5, 10, 20] as const;
 
 export default function QuizPage() {
   const { t, locale } = useLanguage();
@@ -43,134 +45,26 @@ export default function QuizPage() {
     }
   }, [currentQuestion, currentGuess, setGuess]);
 
-  // Quiz not started - show intro
+  // Before the first question: what the quiz is and where the answers come from
   if (!isQuizActive && !isQuizComplete) {
     return (
-      <div className="container mx-auto px-4 py-6 sm:py-8">
-        <div className="max-w-2xl mx-auto space-y-6 sm:space-y-8">
-          {/* Header */}
-          <div className="text-center space-y-4">
-            <h1 className="text-2xl sm:text-4xl font-bold text-swiss-gray-900">
-              {t.quiz.title}
-            </h1>
-            <p className="text-base sm:text-lg text-swiss-gray-600">
-              {t.quiz.subtitle}
-            </p>
-            {t.quiz.languageNote && (
-              <p className="text-sm text-swiss-gray-700 bg-swiss-gray-50 rounded-xl px-4 py-3" lang={locale}>
-                {t.quiz.languageNote}
-              </p>
-            )}
-          </div>
-
-          {/* How it works */}
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <Brain className="h-5 w-5 text-primary" />
-                {t.quiz.howItWorks}
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="flex items-start gap-4">
-                <div className="flex items-center justify-center w-8 h-8 rounded-full bg-accent text-accent-foreground font-semibold shrink-0">
-                  1
-                </div>
-                <div>
-                  <p className="font-medium text-swiss-gray-900">
-                    {t.quiz.step1Title}
-                  </p>
-                  <p className="text-sm text-swiss-gray-600">
-                    {t.quiz.step1Desc}
-                  </p>
-                </div>
-              </div>
-              <div className="flex items-start gap-4">
-                <div className="flex items-center justify-center w-8 h-8 rounded-full bg-accent text-accent-foreground font-semibold shrink-0">
-                  2
-                </div>
-                <div>
-                  <p className="font-medium text-swiss-gray-900">
-                    {t.quiz.step2Title}
-                  </p>
-                  <p className="text-sm text-swiss-gray-600">
-                    {t.quiz.step2Desc}
-                  </p>
-                </div>
-              </div>
-              <div className="flex items-start gap-4">
-                <div className="flex items-center justify-center w-8 h-8 rounded-full bg-accent text-accent-foreground font-semibold shrink-0">
-                  3
-                </div>
-                <div>
-                  <p className="font-medium text-swiss-gray-900">
-                    {t.quiz.step3Title}
-                  </p>
-                  <p className="text-sm text-swiss-gray-600">
-                    {t.quiz.step3Desc}
-                  </p>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-
-          {/* Quiz options */}
-          <div className="space-y-4">
-            <p className="text-center text-swiss-gray-600 text-sm sm:text-base">
-              {t.quiz.chooseLength} {questions.length} {t.quiz.questionsAvailable}
-            </p>
-            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center flex-wrap">
-              <Button
-                onClick={() => startQuiz(5, locale)}
-                size="lg"
-                variant="outline"
-                className="gap-2"
-              >
-                <Play className="h-4 w-4" />
-                {t.quiz.quick} (5)
-              </Button>
-              <Button
-                onClick={() => startQuiz(10, locale)}
-                size="lg"
-                variant="outline"
-                className="gap-2"
-              >
-                <Play className="h-4 w-4" />
-                {t.quiz.standard} (10)
-              </Button>
-              <Button onClick={() => startQuiz(20, locale)} size="lg" className="gap-2">
-                <Play className="h-4 w-4" />
-                {t.quiz.deepDive} (20)
-              </Button>
-            </div>
-          </div>
-
-          {/* Sample topics preview */}
-          <div className="space-y-4">
-            <h3 className="text-lg font-semibold text-swiss-gray-900">
-              {t.quiz.topicsCovered}
-            </h3>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              <div className="p-4 bg-economic/10 rounded-lg border border-economic/20">
-                <p className="text-sm font-medium text-swiss-gray-700">
-                  {t.quiz.topicEconomy}
-                </p>
-              </div>
-              <div className="p-4 bg-demographic/10 rounded-lg border border-demographic/20">
-                <p className="text-sm font-medium text-swiss-gray-700">
-                  {t.quiz.topicPopulation}
-                </p>
-              </div>
-              <div className="p-4 bg-social/10 rounded-lg border border-social/20">
-                <p className="text-sm font-medium text-swiss-gray-700">
-                  {t.quiz.topicHealthcare}
-                </p>
-              </div>
-              <div className="p-4 bg-swiss-gray-100 rounded-lg border border-swiss-gray-200">
-                <p className="text-sm font-medium text-swiss-gray-700">
-                  {t.quiz.topicEnergy}
-                </p>
-              </div>
+      <div className="container mx-auto px-4 py-6 sm:py-10">
+        <div className="max-w-[68ch] space-y-5">
+          <h1 className="text-[1.75rem] sm:text-[2.5rem] font-bold leading-tight text-ink">{t.quiz.title}</h1>
+          <p className="text-base sm:text-lg text-swiss-gray-700 leading-relaxed">
+            {t.quiz.intro.replace("{questionCount}", String(questions.length))}
+          </p>
+          {t.quiz.languageNote && (
+            <p className="text-sm text-swiss-gray-700 bg-white border border-line rounded-xl px-4 py-3">{t.quiz.languageNote}</p>
+          )}
+          <div className="space-y-3 pt-2">
+            <p className="text-base font-medium text-ink">{t.quiz.chooseLength}</p>
+            <div className="flex flex-wrap gap-3">
+              {LENGTHS.map((n) => (
+                <Button key={n} onClick={() => startQuiz(n, locale)} size="lg" variant={n === 10 ? "default" : "outline"}>
+                  {t.quiz.length.replace("{n}", String(n))}
+                </Button>
+              ))}
             </div>
           </div>
         </div>
@@ -183,11 +77,7 @@ export default function QuizPage() {
     return (
       <div className="container mx-auto px-4 py-6 sm:py-8">
         <div className="max-w-2xl mx-auto">
-          <ScoreCard
-            results={results}
-            totalScore={totalScore}
-            onRestart={resetQuiz}
-          />
+          <ScoreCard results={results} totalScore={totalScore} onRestart={resetQuiz} />
         </div>
       </div>
     );
@@ -197,21 +87,7 @@ export default function QuizPage() {
   return (
     <div className="container mx-auto px-4 py-6 sm:py-8">
       <div className="max-w-2xl mx-auto space-y-6">
-        {t.quiz.languageNote && (
-          <p className="text-sm text-swiss-gray-700 bg-swiss-gray-50 rounded-xl px-4 py-3">{t.quiz.languageNote}</p>
-        )}
-        {/* Progress bar */}
-        <div className="space-y-2">
-          <div className="flex items-center justify-between text-sm">
-            <span className="text-swiss-gray-600">{t.quiz.progress}</span>
-            <span className="font-medium text-swiss-gray-700">
-              {currentIndex + 1} / {selectedQuestions.length}
-            </span>
-          </div>
-          <Progress
-            value={((currentIndex + (hasRevealed ? 1 : 0)) / selectedQuestions.length) * 100}
-          />
-        </div>
+        <Progress value={((currentIndex + (hasRevealed ? 1 : 0)) / selectedQuestions.length) * 100} />
 
         <Card>
           <CardContent className="pt-6 px-4 sm:px-6">
@@ -224,21 +100,18 @@ export default function QuizPage() {
                   exit={{ opacity: 0 }}
                   className="space-y-6"
                 >
-                  {/* Question card */}
                   <QuestionCard
                     question={currentQuestion}
                     questionNumber={currentIndex + 1}
                     totalQuestions={selectedQuestions.length}
                   />
 
-                  {/* Guess slider */}
                   <GuessSlider
                     question={currentQuestion}
                     value={currentGuess ?? (currentQuestion.minValue + currentQuestion.maxValue) / 2}
                     onChange={setGuess}
                   />
 
-                  {/* Submit button */}
                   <div className="flex justify-center pt-4">
                     <Button
                       onClick={revealAnswer}
@@ -247,7 +120,7 @@ export default function QuizPage() {
                       className="gap-2 min-w-[180px] sm:min-w-[200px]"
                     >
                       {t.quiz.revealAnswer}
-                      <ArrowRight className="h-4 w-4" />
+                      <ArrowRight className="h-4 w-4" aria-hidden="true" />
                     </Button>
                   </div>
                 </motion.div>
@@ -259,23 +132,12 @@ export default function QuizPage() {
                   exit={{ opacity: 0 }}
                   className="space-y-6"
                 >
-                  {/* Reveal animation */}
                   <RevealAnimation question={currentQuestion} result={currentResult} />
 
-                  {/* Next button */}
                   <div className="flex justify-center pt-4">
                     <Button onClick={nextQuestion} size="lg" className="gap-2 min-w-[180px] sm:min-w-[200px]">
-                      {currentIndex < selectedQuestions.length - 1 ? (
-                        <>
-                          {t.quiz.nextQuestion}
-                          <ArrowRight className="h-4 w-4" />
-                        </>
-                      ) : (
-                        <>
-                          {t.quiz.seeResults}
-                          <ArrowRight className="h-4 w-4" />
-                        </>
-                      )}
+                      {currentIndex < selectedQuestions.length - 1 ? t.quiz.nextQuestion : t.quiz.seeResults}
+                      <ArrowRight className="h-4 w-4" aria-hidden="true" />
                     </Button>
                   </div>
                 </motion.div>
@@ -284,15 +146,9 @@ export default function QuizPage() {
           </CardContent>
         </Card>
 
-        {/* Quit button */}
         <div className="flex justify-center">
-          <Button
-            onClick={resetQuiz}
-            variant="ghost"
-            size="sm"
-            className="text-swiss-gray-600 gap-2 h-11"
-          >
-            <RotateCcw className="h-4 w-4" />
+          <Button onClick={resetQuiz} variant="ghost" size="sm" className="text-swiss-gray-600 gap-2 h-11">
+            <RotateCcw className="h-4 w-4" aria-hidden="true" />
             {t.quiz.restartQuiz}
           </Button>
         </div>
