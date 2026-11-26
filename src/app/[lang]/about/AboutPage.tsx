@@ -1,161 +1,108 @@
 "use client";
 
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
+import Link from "next/link";
+import { Fragment } from "react";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { dataSources } from "@/data/sources";
-import {
-  CheckCircle2,
-  ExternalLink,
-  Scale,
-  Eye,
-  RefreshCcw,
-  Shield,
-  BookOpen,
-  Users,
-} from "lucide-react";
+import { indicators } from "@/data/indicators";
+import { questions } from "@/data/questions";
+import { CONTACT_LABEL, CONTACT_URL, DATA_CHECKED } from "@/data/meta";
+import { localePath } from "@/i18n/routes";
+import { formatLongDate } from "@/lib/formatters";
+import { ReportError } from "@/components/ReportError";
 
+/** A text with {contactLink} written as the link to the author's site. */
+function WithContact({ text }: { text: string }) {
+  const [before, after] = text.split("{contactLink}");
+  return (
+    <>
+      {before}
+      <a href={CONTACT_URL} target="_blank" rel="noopener noreferrer" className="underline underline-offset-[3px] hover:text-ink">
+        {CONTACT_LABEL}
+      </a>
+      {after}
+    </>
+  );
+}
+
+function Section({ title, children }: { title: string; children: React.ReactNode }) {
+  return (
+    <section className="space-y-2">
+      <h2 className="text-xl sm:text-2xl font-semibold text-ink">{title}</h2>
+      {children}
+    </section>
+  );
+}
+
+/** What the site is, who makes it, why, how the figures are checked, how to report an error, limits, sources. */
 export default function AboutPage() {
   const { t, locale } = useLanguage();
+  const lastCheck = formatLongDate(DATA_CHECKED, locale);
+  const p = "text-base leading-relaxed text-swiss-gray-700";
 
   return (
-    <div className="container mx-auto px-4 py-6 sm:py-8 space-y-8 sm:space-y-12">
-      {/* Header */}
-      <section className="max-w-3xl mx-auto text-center space-y-4">
-        <h1 className="text-2xl sm:text-4xl font-bold text-swiss-gray-900">
-          {t.about.title}
-        </h1>
-        <p className="text-base sm:text-lg text-swiss-gray-600">
-          {t.about.mission}
-        </p>
-      </section>
+    <div className="container mx-auto px-4 py-6 sm:py-10">
+      <div className="max-w-[68ch] space-y-8">
+        <h1 className="text-[1.75rem] sm:text-[2.5rem] font-bold leading-tight text-ink">{t.about.title}</h1>
 
-      {/* Why This Matters */}
-      <section className="max-w-4xl mx-auto">
-        <Card>
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-base sm:text-lg">
-              <BookOpen className="h-5 w-5 text-primary" />
-              {t.about.whyTitle}
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-4 text-sm sm:text-base text-swiss-gray-700">
-            <p>{t.about.whyP1}</p>
-            <p>{t.about.whyP2}</p>
-            <p>{t.about.whyP3}</p>
-          </CardContent>
-        </Card>
-      </section>
+        <Section title={t.about.whatTitle}>
+          <p className={p}>
+            {t.about.what
+              .replace("{indicatorCount}", String(indicators.length))
+              .replace("{questionCount}", String(questions.length))}
+          </p>
+        </Section>
 
-      {/* Our Principles */}
-      <section className="max-w-4xl mx-auto space-y-6">
-        <h2 className="text-xl sm:text-2xl font-bold text-swiss-gray-900">{t.about.principlesTitle}</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {[
-            { icon: Scale, title: t.about.principle1Title, description: t.about.principle1Desc },
-            { icon: Eye, title: t.about.principle2Title, description: t.about.principle2Desc },
-            { icon: RefreshCcw, title: t.about.principle3Title, description: t.about.principle3Desc },
-            { icon: Shield, title: t.about.principle4Title, description: t.about.principle4Desc },
-          ].map((principle) => (
-            <Card key={principle.title}>
-              <CardContent className="pt-6">
-                <div className="flex items-start gap-4">
-                  <div className="p-2 bg-primary/10 rounded-lg shrink-0">
-                    <principle.icon className="h-5 w-5 text-primary" />
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-swiss-gray-900">
-                      {principle.title}
-                    </h3>
-                    <p className="text-xs sm:text-sm text-swiss-gray-600 mt-1">
-                      {principle.description}
-                    </p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
-      </section>
+        <Section title={t.about.whoTitle}>
+          <p className={p}>
+            <WithContact text={t.about.who} />
+          </p>
+        </Section>
 
-      {/* Data Sources */}
-      <section className="max-w-4xl mx-auto space-y-6">
-        <h2 className="text-xl sm:text-2xl font-bold text-swiss-gray-900">{t.about.sourcesTitle}</h2>
-        <p className="text-sm sm:text-base text-swiss-gray-600">
-          {t.about.sourcesIntro}
-        </p>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {dataSources.map((s) => ({ abbr: s.abbr, name: s.name[locale], url: s.url, description: s.use[locale] })).map((source) => (
-            <a key={source.abbr} href={source.url} target="_blank" rel="noopener noreferrer" className="block">
-              <Card className="h-full hover:border-primary/50 hover:shadow-sm transition-all">
-                <CardContent className="pt-6">
-                  <div className="flex items-start gap-4">
-                    <Badge className="shrink-0">{source.abbr}</Badge>
-                    <div className="min-w-0">
-                      <div className="flex items-center gap-2">
-                        <h3 className="font-semibold text-swiss-gray-900 text-sm sm:text-base">
-                          {source.name}
-                        </h3>
-                        <ExternalLink className="h-3 w-3 text-swiss-gray-400 shrink-0" />
-                      </div>
-                      <p className="text-xs sm:text-sm text-swiss-gray-600 mt-2">{source.description}</p>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            </a>
-          ))}
-        </div>
-      </section>
+        <Section title={t.about.whyTitle}>
+          <p className={p}>{t.about.why}</p>
+        </Section>
 
-      {/* Methodology */}
-      <section className="max-w-4xl mx-auto space-y-6">
-        <h2 className="text-xl sm:text-2xl font-bold text-swiss-gray-900">{t.about.methodologyTitle}</h2>
-        <Card>
-          <CardContent className="pt-6 space-y-4">
-            {[
-              { title: t.about.dataCollectionTitle, desc: t.about.dataCollectionDesc },
-              { title: t.about.questionSelectionTitle, desc: t.about.questionSelectionDesc },
-              { title: t.about.accuracyScoringTitle, desc: t.about.accuracyScoringDesc },
-              { title: t.about.updateFrequencyTitle, desc: t.about.updateFrequencyDesc },
-            ].map((item) => (
-              <div key={item.title} className="space-y-3">
-                <h3 className="font-semibold text-swiss-gray-900 flex items-center gap-2">
-                  <CheckCircle2 className="h-4 w-4 text-social" />
-                  {item.title}
-                </h3>
-                <p className="text-swiss-gray-600 text-xs sm:text-sm">{item.desc}</p>
-              </div>
+        <Section title={t.about.checkTitle}>
+          <p className={p}>{t.about.check.replace("{lastCheck}", lastCheck)}</p>
+          <p>
+            <Link href={localePath(locale, "/changes")} className="inline-flex items-center min-h-[44px] text-base font-medium text-ink underline underline-offset-[3px] hover:text-swiss-gray-600">
+              {t.about.changeLogLink}
+            </Link>
+          </p>
+        </Section>
+
+        <Section title={t.about.reportTitle}>
+          <p className={p}>{t.about.report}</p>
+          <ReportError withTitle={false} />
+        </Section>
+
+        <Section title={t.about.limitsTitle}>
+          <ul className={`${p} list-disc pl-5 space-y-1.5`}>
+            {[t.about.limit1, t.about.limit2, t.about.limit3, t.about.limit4].map((limit) => (
+              <li key={limit}>{limit}</li>
             ))}
-          </CardContent>
-        </Card>
-      </section>
+          </ul>
+        </Section>
 
-      {/* Limitations */}
-      <section className="max-w-4xl mx-auto space-y-6">
-        <h2 className="text-xl sm:text-2xl font-bold text-swiss-gray-900">{t.about.limitationsTitle}</h2>
-        <Card className="border-yellow-200 bg-yellow-50/50">
-          <CardContent className="pt-6 space-y-3 text-xs sm:text-sm text-swiss-gray-700">
-            <p><strong>{t.about.limitation1}</strong> {t.about.limitation1Desc}</p>
-            <p><strong>{t.about.limitation2}</strong> {t.about.limitation2Desc}</p>
-            <p><strong>{t.about.limitation3}</strong> {t.about.limitation3Desc}</p>
-            <p><strong>{t.about.limitation4}</strong> {t.about.limitation4Desc}</p>
-          </CardContent>
-        </Card>
-      </section>
+        <Section title={t.about.quizScoreTitle}>
+          <p className={p}>{t.about.quizScore}</p>
+        </Section>
 
-      {/* CTA */}
-      <section className="max-w-3xl mx-auto text-center space-y-6 py-8">
-        <div className="flex items-center justify-center gap-3">
-          <Users className="h-8 w-8 text-primary" />
-        </div>
-        <h2 className="text-xl sm:text-2xl font-bold text-swiss-gray-900">
-          {t.about.ctaTitle}
-        </h2>
-        <p className="text-sm sm:text-base text-swiss-gray-600">
-          {t.about.ctaText}
-        </p>
-      </section>
+        <Section title={t.about.sourcesTitle}>
+          <ul className="space-y-2 text-base leading-relaxed text-swiss-gray-700">
+            {dataSources.map((source) => (
+              <li key={source.abbr}>
+                <a href={source.url} target="_blank" rel="noopener noreferrer" className="font-medium text-ink underline underline-offset-[3px] hover:text-swiss-gray-600">
+                  {source.name[locale]}
+                </a>
+                <Fragment>{" – "}</Fragment>
+                {source.use[locale]}
+              </li>
+            ))}
+          </ul>
+        </Section>
+      </div>
     </div>
   );
 }
