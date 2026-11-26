@@ -10,6 +10,7 @@ interface SwitzerlandMapProps {
   onCantonSelect: (cantonId: string | null) => void;
   highlightIndicator?: string;
   getCantonColor?: (canton: Canton) => string;
+  isCantonDimmed?: (canton: Canton) => boolean;
 }
 
 export function SwitzerlandMap({
@@ -17,6 +18,7 @@ export function SwitzerlandMap({
   onCantonSelect,
   highlightIndicator,
   getCantonColor,
+  isCantonDimmed,
 }: SwitzerlandMapProps) {
   const [hoveredCanton, setHoveredCanton] = useState<string | null>(null);
 
@@ -48,6 +50,7 @@ export function SwitzerlandMap({
 
           const isSelected = selectedCanton === canton.id;
           const isHovered = hoveredCanton === canton.id;
+          const isDimmed = isCantonDimmed ? isCantonDimmed(canton) : false;
 
           return (
             <path
@@ -56,7 +59,10 @@ export function SwitzerlandMap({
               fill={colorFn(canton)}
               stroke={isSelected ? "#991B1B" : isHovered ? "#DC2626" : "#525252"}
               strokeWidth={isSelected ? 2 : isHovered ? 1.5 : 0.5}
-              className="cursor-pointer transition-colors duration-200"
+              opacity={isDimmed ? 0.2 : 1}
+              data-canton={canton.id}
+              data-dimmed={isDimmed ? "true" : undefined}
+              className="cursor-pointer transition-[fill,stroke,opacity] duration-200 motion-reduce:transition-none"
               onMouseEnter={() => setHoveredCanton(canton.id)}
               onMouseLeave={() => setHoveredCanton(null)}
               onClick={() =>

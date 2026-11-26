@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { AnimatePresence } from "framer-motion";
 import { SwitzerlandMap } from "@/components/map/SwitzerlandMap";
 import { CantonTooltip } from "@/components/map/CantonTooltip";
@@ -16,12 +16,22 @@ import { Map, TrendingUp, Users, Heart, ArrowUpDown, Info } from "lucide-react";
 type SortKey = "name" | "population" | "area" | "density";
 type SortDirection = "asc" | "desc";
 
+// The legend draws five steps. Each step covers one fifth of the range between
+// the lowest and the highest canton value of the selected indicator.
+const LEGEND_STEPS = [0.2, 0.4, 0.6, 0.8, 1];
+
 export default function CantonsPage() {
   const { t, locale } = useLanguage();
   const [selectedCantonId, setSelectedCantonId] = useState<string | null>(null);
   const [selectedIndicator, setSelectedIndicator] = useState<string>("unemployment-rate");
   const [sortKey, setSortKey] = useState<SortKey>("population");
   const [sortDirection, setSortDirection] = useState<SortDirection>("desc");
+  // Legend filter: step under the mouse pointer, step with keyboard focus, step tapped on a touch screen
+  const [hoveredStep, setHoveredStep] = useState<number | null>(null);
+  const [focusedStep, setFocusedStep] = useState<number | null>(null);
+  const [tappedStep, setTappedStep] = useState<number | null>(null);
+  const lastPointerType = useRef<string | null>(null);
+  const activeStep = hoveredStep ?? focusedStep ?? tappedStep;
 
   // Ids, units, reference years and sources come from src/data/cantons.ts (generated from official tables).
   const cantonIndicatorNames: Record<string, string> = {
@@ -59,6 +69,40 @@ export default function CantonsPage() {
     return `hsl(${hue}, 60%, ${90 - normalized * 40}%)`;
   };
 
+  const getIndicatorRange = () => {
+    const allValues = cantons.map((c) => c.indicators.find((i) => i.indicatorId === selectedIndicator)?.value).filter((v): v is number => v !== undefined);
+    return { min: Math.min(...allValues), max: Math.max(...allValues) };
+  };
+
+  // Index of the legend step a canton falls in, or null if the canton has no value for the indicator.
+  // Step n covers the values above n fifths and up to n + 1 fifths of the range; the lowest value is in step 0.
+  const getLegendStep = (canton: Canton) => {
+    const cantonIndicator = canton.indicators.find((i) => i.indicatorId === selectedIndicator);
+    if (!cantonIndicator) return null;
+    const { min, max } = getIndicatorRange();
+    if (max === min) return LEGEND_STEPS.length - 1;
+    const normalized = (cantonIndicator.value - min) / (max - min);
+    const step = Math.ceil(normalized * LEGEND_STEPS.length - 1e-9) - 1;
+    return Math.max(0, Math.min(LEGEND_STEPS.length - 1, step));
+  };
+
+  const isCantonDimmed = (canton: Canton) => {
+    if (activeStep === null) return false;
+    const step = getLegendStep(canton);
+    return step !== null && step !== activeStep;
+  };
+
+  // Value range of a legend step, used as the name of the step for screen readers
+  const getLegendStepLabel = (index: number) => {
+    const { min, max } = getIndicatorRange();
+    const unit = selectedIndicatorMeta?.unit ?? "";
+    const format = (value: number) =>
+      unit === "%" || unit === "per 1,000 inhabitants" ? formatSwissNumber(value, { decimals: 1 }) : formatSwissNumber(Math.round(value));
+    const from = min + ((max - min) * index) / LEGEND_STEPS.length;
+    const to = min + ((max - min) * (index + 1)) / LEGEND_STEPS.length;
+    return `${selectedIndicatorMeta?.name ?? ""}: ${format(from)} \u2013 ${format(to)} ${getTranslatedUnit(unit, locale)}`;
+  };
+
   const sortedCantons = [...cantons].sort((a, b) => {
     let aVal: number, bVal: number;
     switch (sortKey) {
@@ -91,7 +135,7 @@ export default function CantonsPage() {
           <div className="flex flex-wrap gap-2 pb-1">
             <span className="text-sm text-swiss-gray-500 self-center mr-2 shrink-0">{t.cantons.colorBy}</span>
             {cantonIndicators.map((indicator) => (
-              <button key={indicator.id} onClick={() => setSelectedIndicator(indicator.id)}
+              <button key={indicator.id} onClick={() => { setSelectedIndicator(indicator.id); setTappedStep(null); }}
                 className={`px-3 py-1.5 rounded-full text-xs sm:text-sm font-medium transition-colors whitespace-nowrap ${selectedIndicator === indicator.id ? "bg-primary text-white" : "bg-swiss-gray-100 text-swiss-gray-700 hover:bg-swiss-gray-200"}`}>
                 {indicator.name}
               </button>
@@ -100,17 +144,32 @@ export default function CantonsPage() {
 
           <Card>
             <CardContent className="p-2 sm:p-4">
-              <SwitzerlandMap selectedCanton={selectedCantonId} onCantonSelect={setSelectedCantonId} highlightIndicator={selectedIndicator} getCantonColor={getCantonColor} />
+              <SwitzerlandMap selectedCanton={selectedCantonId} onCantonSelect={setSelectedCantonId} highlightIndicator={selectedIndicator} getCantonColor={getCantonColor} isCantonDimmed={isCantonDimmed} />
             </CardContent>
           </Card>
 
           <div className="flex items-center justify-center gap-4 text-xs sm:text-sm">
             <span className="text-swiss-gray-500">{t.cantons.lower}</span>
-            <div className="flex h-4 rounded overflow-hidden">
-              {[0.2, 0.4, 0.6, 0.8, 1].map((val) => {
+            <div className="flex h-4"
+              onPointerLeave={(e) => { if (e.pointerType === "mouse") setHoveredStep(null); }}>
+              {LEGEND_STEPS.map((val, index) => {
                 const category = getIndicatorCategory(selectedIndicator);
                 const hue = category === "economic" ? 220 : category === "demographic" ? 270 : 160;
-                return <div key={val} className="w-6 sm:w-8 h-full" style={{ backgroundColor: `hsl(${hue}, 60%, ${90 - val * 40}%)` }} />;
+                return (
+                  <button key={val} type="button" aria-label={getLegendStepLabel(index)} aria-pressed={activeStep === index}
+                    onPointerEnter={(e) => { if (e.pointerType === "mouse") setHoveredStep(index); }}
+                    onPointerDown={(e) => { lastPointerType.current = e.pointerType; }}
+                    // On phones the ::after of the step extends the tap area to 44px in height; the visible size stays the same
+                    onClick={() => {
+                      // A tap switches the filter on and off; with a mouse or the keyboard, hover and focus do it
+                      if (lastPointerType.current === "touch" || lastPointerType.current === "pen") setTappedStep(tappedStep === index ? null : index);
+                      lastPointerType.current = null;
+                    }}
+                    onFocus={(e) => { if (e.currentTarget.matches(":focus-visible")) setFocusedStep(index); }}
+                    onBlur={() => setFocusedStep(null)}
+                    className={`relative w-6 sm:w-8 h-full min-w-0 min-h-0 first:rounded-l last:rounded-r after:absolute after:inset-x-0 after:-inset-y-3.5 after:content-[''] sm:after:content-none focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-swiss-gray-900 ${activeStep === index ? "ring-2 ring-inset ring-swiss-gray-900" : ""}`}
+                    style={{ backgroundColor: `hsl(${hue}, 60%, ${90 - val * 40}%)` }} />
+                );
               })}
             </div>
             <span className="text-swiss-gray-500">{t.cantons.higher}</span>
