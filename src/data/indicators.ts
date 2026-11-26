@@ -2,6 +2,8 @@ import { Indicator } from "@/types";
 import { Locale } from "@/i18n/translations";
 import { getLocalizedIndicator } from "@/i18n/dataTranslations";
 
+// trendPercentage is the change between previousValue and value, computed from the figures of the source
+// before rounding where the source publishes them (e.g. 5.452 against 5.210), otherwise from the published ones.
 export const indicators: Indicator[] = [
   // Economic Indicators
   {
@@ -13,7 +15,7 @@ export const indicators: Indicator[] = [
     unit: "%",
     previousValue: 4.3,
     trend: "up",
-    trendPercentage: 11.6,
+    trendPercentage: 11.5,
     source: "FSO / UST (Federal Statistical Office)",
     sourceUrl: "https://statistik.admin.ch/de/themen/arbeit-erwerb/erwerbslosigkeit-unterbeschaeftigung",
     lastUpdated: "2025",
@@ -58,7 +60,7 @@ export const indicators: Indicator[] = [
     unit: "%",
     previousValue: 2.4,
     trend: "up",
-    trendPercentage: 16.7,
+    trendPercentage: 18.8,
     source: "SECO (State Secretariat for Economic Affairs)",
     sourceUrl: "https://www.seco.admin.ch/de/arbeitsmarktstatistik-berichte-rechtsgrundlagen",
     lastUpdated: "2025",
@@ -103,7 +105,7 @@ export const indicators: Indicator[] = [
     unit: "%",
     previousValue: 1.5,
     trend: "up",
-    trendPercentage: 6.7,
+    trendPercentage: 6.1,
     source: "FSO / UST (National Accounts)",
     sourceUrl: "https://statistik.admin.ch/de/themen/volkswirtschaft/wachstum-produktivitaet",
     lastUpdated: "2025",
@@ -480,7 +482,7 @@ export const indicators: Indicator[] = [
     unit: "% of GDP",
     previousValue: 11.2,
     trend: "up",
-    trendPercentage: 1.8,
+    trendPercentage: 1.7,
     source: "FSO (Federal Statistical Office)",
     sourceUrl: "https://statistik.admin.ch/de/themen/gesundheit/kosten-finanzierung-gesundheitswesens",
     lastUpdated: "2024 (provisional)",
@@ -524,7 +526,7 @@ export const indicators: Indicator[] = [
     unit: "%",
     previousValue: 5.2,
     trend: "up",
-    trendPercentage: 5.8,
+    trendPercentage: 4.7,
     source: "FSO / UST (Federal Statistical Office)",
     sourceUrl: "https://www.bfs.admin.ch/asset/de/je-d-15.06.01.03",
     lastUpdated: "2023",
@@ -567,7 +569,7 @@ export const indicators: Indicator[] = [
     unit: "%",
     previousValue: 8.1,
     trend: "up",
-    trendPercentage: 3.7,
+    trendPercentage: 3.9,
     source: "FSO (SILC survey)",
     sourceUrl: "https://statistik.admin.ch/de/asset/36395150",
     lastUpdated: "2024",
