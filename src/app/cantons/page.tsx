@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
 import { AnimatePresence } from "framer-motion";
 import { SwitzerlandMap } from "@/components/map/SwitzerlandMap";
@@ -84,6 +85,12 @@ export default function CantonsPage() {
           {t.cantons.title}
         </h1>
         <p className="text-sm sm:text-lg text-swiss-gray-600 max-w-2xl">{t.cantons.subtitle}</p>
+        <Link
+          href="/cantons-cartogram"
+          className="inline-flex items-center rounded-md border border-swiss-gray-300 bg-white px-3 py-2 text-sm font-medium text-swiss-gray-700 hover:bg-swiss-gray-50"
+        >
+          Open distorted cartogram view
+        </Link>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8">
