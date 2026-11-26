@@ -17,8 +17,8 @@ export const questions: QuizQuestion[] = [
     actualValue: 2.8,
     explanation:
       "The registered unemployment rate averaged 2.8% in 2025, up from 2.4% in 2024 (SECO). It counts only people registered at a regional employment centre. The chart uses the ILO survey definition, which is the one comparable across countries: on that measure Switzerland was at 4.9% in 2025 and the EU at 6.0% (Eurostat).",
-    source: "SECO Labor Market Statistics; Eurostat (une_rt_a) for the comparison",
-    sourceUrl: "https://www.seco.admin.ch/seco/en/home/wirtschaftslage---wirtschaftspolitik/Wirtschaftslage/Arbeitslosenzahlen.html",
+    source: "SECO labour market statistics (FSO table T 3.3.2.2); Eurostat (une_rt_a) for the comparison",
+    sourceUrl: "https://www.bfs.admin.ch/asset/de/je-d-03.03.02.02",
     comparisonData: [
       { label: "Germany", value: 3.8 },
       { label: "Netherlands", value: 3.9 },
@@ -113,7 +113,7 @@ export const questions: QuizQuestion[] = [
     explanation:
       "Full-time employees in Switzerland actually worked 40 hours and 3 minutes per week in 2025 (2019: 40 hours 54 minutes), according to the BFS work volume statistics. The chart uses a different measure, the only one available for all countries: usual weekly hours of full-time employed people (Eurostat, 2025), where Switzerland is at 43.2 hours and the EU at 40.2.",
     source: "BFS Work Volume Statistics; Eurostat (lfsa_ewhun2) for the comparison",
-    sourceUrl: "https://www.bfs.admin.ch/bfs/en/home/statistics/work-income/employment-working-hours.html",
+    sourceUrl: "https://www.bfs.admin.ch/asset/de/2026-0533-d",
     comparisonData: [
       { label: "Switzerland", value: 43.2 },
       { label: "Greece", value: 42.0 },
@@ -165,7 +165,7 @@ export const questions: QuizQuestion[] = [
     explanation:
       "The median gross salary for a full-time job was CHF 7,024 per month in 2024 (2022: CHF 6,788), according to the BFS Earnings Structure Survey. Half of employees earn more and half earn less. Among the major regions, Zürich was highest with CHF 7,502 and Ticino lowest with CHF 5,708.",
     source: "BFS Swiss Earnings Structure Survey 2024",
-    sourceUrl: "https://www.bfs.admin.ch/bfs/en/home/statistics/work-income/wages-income-employment-labour-costs.html",
+    sourceUrl: "https://www.pxweb.bfs.admin.ch/pxweb/de/px-x-0304010000_201/",
     comparisonData: [
       { label: "Zürich region", value: 7502 },
       { label: "Swiss Median", value: 7024 },
@@ -184,7 +184,7 @@ export const questions: QuizQuestion[] = [
     explanation:
       "In 2024 women earned on average 15.7% less than men in the whole economy (2022: 16.2%), according to the BFS Earnings Structure Survey. The part of the gap not explained by factors such as occupation, sector or education was 6.5% of the wage, or CHF 640 per month. Measured on the median wage the gap was 8.4%. The chart uses Eurostat's indicator for 2024 (hourly earnings, without public administration), where Switzerland is at 16.0%. Since July 2020 employers with 100 or more employees must carry out an equal pay analysis.",
     source: "BFS Swiss Earnings Structure Survey 2024; Eurostat (earn_gr_gpgr2) for the comparison",
-    sourceUrl: "https://www.bfs.admin.ch/bfs/en/home/statistics/work-income/wages-income-employment-labour-costs/earnings-structure/wage-gap.html",
+    sourceUrl: "https://www.bfs.admin.ch/asset/de/2026-0504-d",
     comparisonData: [
       { label: "Belgium", value: 0.7 },
       { label: "Romania", value: 3.7 },
@@ -373,7 +373,7 @@ export const questions: QuizQuestion[] = [
     explanation:
       "By the IMF's gross-debt definition, the debt of the Confederation, cantons, municipalities and social insurance together was 40.1% of GDP in 2025 (estimate of the Federal Finance Administration, September 2026), one of the lowest among developed countries. By the narrower Maastricht definition used in the EU it was 23.4%. The 'debt brake' constitutional rule since 2003 requires balanced federal budgets over the business cycle.",
     source: "Federal Finance Administration (FFA), financial statistics, international comparison (data of 22 September 2026)",
-    sourceUrl: "https://www.efv.admin.ch/efv/en/home/finanzberichterstattung/bundeshaushalt_ueb/schulden.html",
+    sourceUrl: "https://www.efv.admin.ch/en/overview-financial-statistics-data",
     comparisonData: [
       { label: "Italy", value: 152.7 },
       { label: "USA", value: 125.9 },
@@ -443,7 +443,7 @@ export const questions: QuizQuestion[] = [
     explanation:
       "Swiss real GDP grew in 9 of the 10 years from 2016 to 2025. The only exception was 2020, when it fell by 2.3%. Growth was 1.5% in 2024 and 1.6% in 2025 (Federal Statistical Office, national accounts of 25 August 2026). The comparison uses Eurostat figures.",
     source: "Federal Statistical Office (FSO), national accounts (T 04.02.01.01); Eurostat (nama_10_gdp) for the comparison",
-    sourceUrl: "https://www.bfs.admin.ch/bfs/en/home/statistics/national-economy.html",
+    sourceUrl: "https://www.bfs.admin.ch/asset/de/je-d-04.02.01.01",
     comparisonData: [
       { label: "Switzerland", value: 9 },
       { label: "France", value: 9 },
@@ -491,7 +491,7 @@ export const questions: QuizQuestion[] = [
     explanation:
       "At the end of 2025 Switzerland had 9,127,100 permanent residents (Federal Statistical Office), up from 9,051,000 a year earlier. In 1950 the population was 4.7 million. The comparison shows Eurostat figures for 1 January 2026.",
     source: "Federal Statistical Office (FSO); Eurostat (demo_gind) for the comparison",
-    sourceUrl: "https://www.bfs.admin.ch/bfs/en/home/statistics/population.html",
+    sourceUrl: "https://www.bfs.admin.ch/asset/en/je-e-01.01.01",
     comparisonData: [
       { label: "Germany", value: 83.5 },
       { label: "France", value: 69.1 },
@@ -515,7 +515,7 @@ export const questions: QuizQuestion[] = [
     explanation:
       "At the end of 2025, 7.88 million of Switzerland's 9.13 million permanent residents (86.3%) lived in urban areas, according to the Federal Statistical Office. The FSO typology counts intermediate municipalities as urban; 13.7% lived in rural areas. International sources use other definitions and give different figures.",
     source: "Federal Statistical Office (FSO), population data over time (T 01.01.01)",
-    sourceUrl: "https://www.bfs.admin.ch/bfs/en/home/statistics/population/stand-entwicklung.html",
+    sourceUrl: "https://www.bfs.admin.ch/asset/en/je-e-01.01.01",
     comparisonData: [
       { label: "Urban (incl. intermediate)", value: 86.3 },
       { label: "Rural", value: 13.7 },
@@ -533,7 +533,7 @@ export const questions: QuizQuestion[] = [
     explanation:
       "On 1 January 2026 Switzerland had 2,110 municipalities, according to the official commune register of the Federal Statistical Office. There were 2,131 in 2024 and 3,021 in 1990: the number keeps falling because municipalities merge.",
     source: "Federal Statistical Office (FSO), official commune register",
-    sourceUrl: "https://www.bfs.admin.ch/bfs/en/home/statistics/regional-statistics/regional-portraits-key-figures/communes.html",
+    sourceUrl: "https://www.agvchapp.bfs.admin.ch/de/communes/query",
     comparisonData: [
       { label: "1990", value: 3021 },
       { label: "2000", value: 2899 },
@@ -559,7 +559,7 @@ export const questions: QuizQuestion[] = [
     explanation:
       "In 2025 net migration of the permanent resident population was 70,400 people, or 7.7 per 1,000 inhabitants (Federal Statistical Office). The rate was 15.7 in 2023, when refugees from Ukraine entered the permanent population, and 9.2 in 2024. The comparison uses Eurostat's 2025 rate, which includes statistical adjustments and gives 7.4 for Switzerland.",
     source: "Federal Statistical Office (FSO); Eurostat (demo_gind) for the comparison",
-    sourceUrl: "https://www.bfs.admin.ch/bfs/en/home/statistics/population/migration-integration.html",
+    sourceUrl: "https://www.bfs.admin.ch/asset/en/je-e-01.01.01",
     comparisonData: [
       { label: "Luxembourg", value: 10.1 },
       { label: "Switzerland", value: 7.4 },
@@ -583,7 +583,7 @@ export const questions: QuizQuestion[] = [
     explanation:
       "At the end of 2025, 27.7% of permanent residents (2.53 million people) were foreign nationals (Federal Statistical Office). The largest groups were Italians (346,100), Germans (336,400), Portuguese (258,100) and French (179,400). The comparison is calculated from Eurostat population counts on 1 January 2025, when the Swiss share was 27.4%.",
     source: "Federal Statistical Office (FSO); Eurostat (migr_pop1ctz) for the comparison",
-    sourceUrl: "https://www.bfs.admin.ch/bfs/en/home/statistics/population/migration-integration/foreign.html",
+    sourceUrl: "https://www.bfs.admin.ch/asset/en/je-e-01.01.01",
     comparisonData: [
       { label: "Luxembourg", value: 47.0 },
       { label: "Switzerland", value: 27.4 },
@@ -606,7 +606,7 @@ export const questions: QuizQuestion[] = [
     explanation:
       "In the third quarter of 2026, 414,488 cross-border commuters with a G permit worked in Switzerland (Federal Statistical Office, provisional). Most lived in France (241,012), followed by Italy (92,509), Germany (67,681) and Austria (9,014).",
     source: "Federal Statistical Office (FSO), cross-border commuters statistics",
-    sourceUrl: "https://www.bfs.admin.ch/bfs/en/home/statistics/work-income/employment-working-hours/economically-active-population/foreign-labour-force.html",
+    sourceUrl: "https://www.bfs.admin.ch/asset/de/ds-d-03.02.01.06.04-02",
     comparisonData: [
       { label: "From France", value: 241012 },
       { label: "From Italy", value: 92509 },
@@ -631,7 +631,7 @@ export const questions: QuizQuestion[] = [
     explanation:
       "In 2025 the total fertility rate was 1.28 children per woman (Federal Statistical Office), down from 1.52 in 2021 and 1.50 in 2000. Married mothers were on average 31.4 years old at the birth of their first child. The comparison shows Eurostat figures for 2024, when the Swiss rate was 1.29.",
     source: "Federal Statistical Office (FSO); Eurostat (tps00199) for the comparison",
-    sourceUrl: "https://www.bfs.admin.ch/bfs/en/home/statistics/population/births-deaths.html",
+    sourceUrl: "https://www.bfs.admin.ch/asset/en/je-e-01.01.01",
     comparisonData: [
       { label: "France", value: 1.61 },
       { label: "Ireland", value: 1.47 },
@@ -655,7 +655,7 @@ export const questions: QuizQuestion[] = [
     explanation:
       "In 2025 single women married for the first time at 30.7 years on average and single men at 32.4 (Federal Statistical Office, people under 50). In 1990 the averages were 26.7 and 29.1. The comparison shows Eurostat figures for women in 2024; Eurostat uses a different method and gives 31.3 for Switzerland.",
     source: "Federal Statistical Office (FSO); Eurostat (demo_nind) for the comparison",
-    sourceUrl: "https://www.bfs.admin.ch/bfs/en/home/statistics/population/marriages-partnerships-divorces.html",
+    sourceUrl: "https://www.bfs.admin.ch/asset/en/je-e-01.01.01",
     comparisonData: [
       { label: "Sweden", value: 35.2 },
       { label: "Spain", value: 35.2 },
@@ -679,7 +679,7 @@ export const questions: QuizQuestion[] = [
     explanation:
       "At the end of 2025, 19.8% of the permanent resident population was aged 65 or over (Federal Statistical Office), compared with 15.4% in 2000 and 9.6% in 1950. The comparison shows Eurostat figures for 1 January 2025, when the Swiss share was 19.5%.",
     source: "Federal Statistical Office (FSO); Eurostat (demo_pjanind) for the comparison",
-    sourceUrl: "https://www.bfs.admin.ch/bfs/en/home/statistics/population/effectif-change.html",
+    sourceUrl: "https://www.bfs.admin.ch/asset/en/je-e-01.01.01",
     comparisonData: [
       { label: "Italy", value: 24.7 },
       { label: "Germany", value: 22.7 },
@@ -728,7 +728,7 @@ export const questions: QuizQuestion[] = [
     explanation:
       "In 2024 life expectancy at birth was 84.2 years for both sexes together (Eurostat, from Federal Statistical Office data): 85.9 for women and 82.4 for men. The figures for 2025 are 86.3 and 82.7. In 1990 they were 80.8 and 74.0: the gap between women and men has narrowed from 6.8 to 3.6 years. The comparison shows OECD figures for 2023, when Switzerland stood at 84.3.",
     source: "Eurostat and Federal Statistical Office (FSO); OECD Health at a Glance 2025 for the comparison",
-    sourceUrl: "https://www.bfs.admin.ch/bfs/en/home/statistics/population/births-deaths.html",
+    sourceUrl: "https://ec.europa.eu/eurostat/databrowser/view/demo_mlexpec/default/table",
     comparisonData: [
       { label: "Switzerland", value: 84.3 },
       { label: "Japan", value: 84.1 },
@@ -869,7 +869,7 @@ export const questions: QuizQuestion[] = [
     explanation:
       "In 2024, 35.7% of occupied dwellings were owner-occupied (Federal Statistical Office, Structural Survey). The rate was 38.4% in 2015, 36.2% in 2020 and 35.9% in 2022. The comparison uses a different measure: Eurostat's share of the population living in an owner-occupied home in 2024, which is 42.0% for Switzerland and 68.4% in the EU.",
     source: "Federal Statistical Office (FSO), Structural Survey (T 09.03.02.01.03); Eurostat (ilc_lvho02) for the comparison",
-    sourceUrl: "https://www.atlas.bfs.admin.ch/core/projects/13/xshared/pdf/27612_131.pdf",
+    sourceUrl: "https://www.bfs.admin.ch/asset/de/je-d-09.03.02.01.03",
     comparisonData: [
       { label: "Romania", value: 94.3 },
       { label: "Italy", value: 75.9 },
@@ -1125,8 +1125,8 @@ export const questions: QuizQuestion[] = [
     actualValue: 94.1,
     explanation:
       "In 2025, 94.1% of SBB passenger trains were on time, the highest annual value SBB has reported; in 2024 it was 93.2%. SBB counts a train as on time if it arrives less than 3 minutes late. Punctuality was 93.4% in western Switzerland and 92.1% in Ticino. SBB carried 1.43 million passengers per day in 2025.",
-    source: "SBB Annual Report 2025",
-    sourceUrl: "https://company.sbb.ch/content/dam/internet/corporate/downloads/de/ueber-die-sbb/geschaeftsbericht/SBB-Geschaeftsbericht-2025.pdf.sbbdownload.pdf",
+    source: "SBB Annual Report 2025; Federal Council, short report on SBB 2025",
+    sourceUrl: "https://www.uvek.admin.ch/dam/de/sd-web/ZkrHkvQElJad/kurzbericht-br-sbb-2025-de.pdf",
     comparisonData: [
       { label: "SBB 2025", value: 94.1 },
       { label: "Western Switzerland 2025", value: 93.4 },
@@ -1168,7 +1168,7 @@ export const questions: QuizQuestion[] = [
     explanation:
       "In 2024 commuters needed 30.2 minutes on average to reach their workplace, over an average distance of 14.0 km (2022: 29.6 minutes, 13.7 km). For 34.6% the trip took at most 15 minutes and for 8.8% more than an hour (Federal Statistical Office, table T 11.4.4.3).",
     source: "Federal Statistical Office (FSO), commuters by length and duration of the trip to work (T 11.4.4.3), published 29 January 2026",
-    sourceUrl: "https://dam-api.bfs.admin.ch/hub/api/dam/assets/31525916/master",
+    sourceUrl: "https://www.bfs.admin.ch/asset/de/je-d-11.04.04.03",
   },
   {
     id: "cars-per-capita",
@@ -1182,7 +1182,7 @@ export const questions: QuizQuestion[] = [
     explanation:
       "In 2025 Switzerland had 4,839,465 registered passenger cars, 535 per 1,000 inhabitants (Federal Statistical Office; the 2024 figure was revised to 536). Battery-electric cars made up 22.7% of new registrations in 2025 and 5.2% of all cars on the road (2024: 4.2%). The comparison shows Eurostat figures for 2024, which use a slightly different method and give 542 for Switzerland.",
     source: "Federal Statistical Office (FSO), road vehicle statistics 2025 (T 11.3.2.1.2); Eurostat (road_eqs_carhab) for the comparison",
-    sourceUrl: "https://dam-api.bfs.admin.ch/hub/api/dam/assets/33827877/master",
+    sourceUrl: "https://www.bfs.admin.ch/asset/de/je-d-11.03.02.01.02",
     comparisonData: [
       { label: "Italy", value: 701 },
       { label: "Germany", value: 590 },
