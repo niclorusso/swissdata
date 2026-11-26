@@ -349,8 +349,8 @@ export const questions: QuizQuestion[] = [
     actualValue: 4.1,
     explanation:
       "The task area 'Migration' is about 4.1% of the 2026 federal budget (CHF 3.75 billion of CHF 91.1 billion). Most of it is paid to the cantons for the social assistance of asylum seekers and refugees. For comparison, security is 8.6%, education and research 9.9%, and transport 11.8%.",
-    source: "Federal Finance Administration",
-    sourceUrl: "https://www.efv.admin.ch/en/expenditure",
+    source: "Federal Finance Administration, Budget 2027 with financial plan, volume 1 (column for the 2026 budget)",
+    sourceUrl: "https://www.efv.admin.ch/dam/de/sd-web/ecUEO27taiGw/Voranschlag%202027%20mit%20IAFP%202028%E2%80%932030%20%E2%80%93%20Band%201%20DE.pdf",
     comparisonData: [
       { label: "Social Welfare", value: 34.9 },
       { label: "Finances & Taxes", value: 16.6 },
@@ -418,8 +418,8 @@ export const questions: QuizQuestion[] = [
     actualValue: 7.2,
     explanation:
       "Military defence is about 7.2% of the 2026 federal budget (CHF 6.6 billion of CHF 91.1 billion). The whole 'security' area, which adds police, intelligence and civil protection, is 8.6% (CHF 7.8 billion). The chart shows a different measure, the one available for all countries: military spending as a share of GDP in 2025 according to SIPRI, which gives 0.8% for Switzerland.",
-    source: "Federal Finance Administration; SIPRI Military Expenditure Database (2025) for the comparison",
-    sourceUrl: "https://www.efv.admin.ch/en/expenditure",
+    source: "Federal Finance Administration, Budget 2027 with financial plan, volume 1 (column for the 2026 budget); SIPRI Military Expenditure Database (2025) for the comparison",
+    sourceUrl: "https://www.efv.admin.ch/dam/de/sd-web/ecUEO27taiGw/Voranschlag%202027%20mit%20IAFP%202028%E2%80%932030%20%E2%80%93%20Band%201%20DE.pdf",
     comparisonLabel: "Military spending as % of GDP, 2025 (SIPRI)",
     comparisonData: [
       { label: "USA", value: 3.1 },
