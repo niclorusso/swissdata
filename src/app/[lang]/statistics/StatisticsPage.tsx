@@ -35,7 +35,7 @@ function ChartCard({ indicator, startYear }: { indicator: Indicator; startYear: 
   const axis = shown.length ? valueAxis(indicator, shown.map((d) => d.value)) : null;
   const howToRead = howToReadText(indicator, locale);
   const related = relatedText(indicator, locale);
-  const years = shown.length ? ` · ${formatYear(shown[0].year)}–${formatYear(shown[shown.length - 1].year)}` : "";
+  const years = shown.length ? `${formatYear(shown[0].year)}–${formatYear(shown[shown.length - 1].year)}` : "";
 
   return (
     <Card id={indicator.id} data-indicator={indicator.id} className="flex flex-col p-4 sm:p-5 scroll-mt-4">
