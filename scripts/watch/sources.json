@@ -1,0 +1,791 @@
+{
+  "about": "Registry of the official sources the site depends on. One item per figure on the site (indicator, canton field, quiz fact). 'shown' says where the watcher reads the period the site shows and the link visitors see; 'probes' say how to notice a newer edition; 'manual' marks what a person checks by hand. Built on 2026-11-26 from the data files on dev and the fact-check of that day (swissdata-verifica-2026-11-26). How to add a source: see README, section 'Source watcher'.",
+  "probe_kinds": {
+    "fso-dam": "FSO DAM API, https://dam-api.bfs.admin.ch/hub/api/dam/assets?orderNr=<orderNr>. Fingerprint: asset id, publication date, provisional flag of the current asset. Period: description.bibliography.period.",
+    "fso-pxweb": "FSO STAT-TAB (PXWeb) API. Fingerprint: the table's 'updated' timestamp and the last value of its time variable. Period: that last value.",
+    "eurostat": "Eurostat dissemination API (JSON-stat), filtered to Switzerland. Fingerprint: latest period with a value and a hash of the values. Period: latest period with a value.",
+    "snb-cube": "SNB data portal API: /api/cube/<id>/lastUpdate and the latest date in the data.",
+    "http-headers": "A file at a stable address: ETag / Last-Modified from a HEAD request.",
+    "http-hash": "A small file or API answer at a stable address: SHA-256 of the content (for servers without reliable headers).",
+    "http-regex": "A page that lists the editions: the set of matches of a pattern (e.g. file names with a year). Optional period: the highest year in the matches.",
+    "calendar-year": "No request. The figure is defined per calendar year (premium of the year, budget of the year, state on 1 January): flags when the site shows an earlier year than today's.",
+    "options": "compare_period: false = do not compare periods for this probe (why says why); period_offset: -1 = the site is expected to show the year before the newest one (e.g. the newest is only an estimate); edition: 'annual' = for a monthly or quarterly FSO table, only a new complete year counts as a new publication.",
+    "shown": "Where the period shown on the site is read: from indicators (src/data/indicators.ts, latest year in the chart), questions (src/data/questions.ts, year in the question), cantons (src/data/cantons.ts, year shown on the canton page), explanations (src/i18n/indicatorExplanations.ts, latest year in the English info text). A list checks several places."
+  },
+  "redirect_rules": [
+    {"from": "^https://www\\.bfs\\.admin\\.ch/asset/(de|en|fr|it)/[^/]+$", "to": "^https://statistik\\.admin\\.ch/(de|en|fr|it)/asset/\\d+$", "why": "FSO asset links by order number resolve to the page of the current asset"},
+    {"from": "^https://[^/]+/?$", "to": "^https://[^/]+/(de|en|fr|it)/?$", "why": "home pages redirect to their language version"},
+    {"from": "^https://www\\.ecb\\.europa\\.eu/?$", "to": "^https://www\\.ecb\\.europa\\.eu/home/html/index\\.en\\.html$", "why": "ECB home page"}
+  ],
+  "link_skip": [
+    {"match": "^https://ec\\.europa\\.eu/eurostat/databrowser/view/(?P<dataset>[a-z0-9_]+)/", "why": "the Eurostat data browser answers 200 for any address; the dataset is checked through the Eurostat API"}
+  ],
+  "host_pause": {"www.pxweb.bfs.admin.ch": 2.0},
+  "manual_link_hosts": {
+    "www.oecd.org": {"why": "the OECD site answers HTTP 403 to automated requests", "last_checked": "2026-11-26", "how": "open the link in a browser and check that it shows the publication or indicator named in the source text"},
+    "data.worldbank.org": {"why": "the World Bank data site answers HTTP 403 to automated requests", "last_checked": "2026-11-26", "how": "open the link in a browser"},
+    "www.imf.org": {"why": "the IMF site answers HTTP 404 to automated requests", "last_checked": "2026-11-26", "how": "open the link in a browser"},
+    "www.sbb.ch": {"why": "the SBB site answers HTTP 403 to automated requests", "last_checked": "2026-11-26", "how": "open the link in a browser"}
+  },
+  "items": [
+    {
+      "id": "indicator/unemployment-rate-ilo",
+      "label": "Unemployment rate, ILO definition (indicator)",
+      "publisher": "FSO",
+      "used_in": {"file": "src/data/indicators.ts", "key": "unemployment-rate-ilo: value, previousValue, trendPercentage, lastUpdated, context, historicalData", "also": "src/i18n/dataTranslations.ts (it, de, fr)"},
+      "shown": {"from": "indicators", "id": "unemployment-rate-ilo"},
+      "url": "https://statistik.admin.ch/de/themen/arbeit-erwerb/erwerbslosigkeit-unterbeschaeftigung",
+      "probes": [
+        {"kind": "fso-dam", "orderNr": "je-d-03.03.01.14", "edition": "annual", "why": "quarterly FSO table of ILO unemployment rates, released together with T 03.03.01.03 (the annual averages the site uses, whose metadata period 1991-2026 does not say which quarters are in); its period ends on a quarter (30.9.2026), so a new year counts once the fourth quarter is in"},
+        {"kind": "eurostat", "dataset": "une_rt_a", "filters": {"geo": "CH", "age": "Y15-74", "sex": "T", "unit": "PC_ACT"}, "why": "annual ILO rate for Switzerland: shows when a new annual average exists"}
+      ]
+    },
+    {
+      "id": "indicator/unemployment-rate",
+      "label": "Unemployment rate, SECO registered (indicator)",
+      "publisher": "SECO / FSO",
+      "used_in": {"file": "src/data/indicators.ts", "key": "unemployment-rate: value, previousValue, trendPercentage, lastUpdated, context, historicalData", "also": "src/i18n/dataTranslations.ts (it, de, fr)"},
+      "shown": {"from": "indicators", "id": "unemployment-rate"},
+      "url": "https://www.seco.admin.ch/de/arbeitsmarktstatistik-berichte-rechtsgrundlagen",
+      "probes": [{"kind": "fso-dam", "orderNr": "je-d-03.03.02.02"}]
+    },
+    {
+      "id": "indicator/gdp-growth-rate",
+      "label": "GDP growth rate (indicator)",
+      "publisher": "FSO",
+      "used_in": {"file": "src/data/indicators.ts", "key": "gdp-growth-rate: value, previousValue, trendPercentage, lastUpdated, context, historicalData", "also": "src/i18n/dataTranslations.ts (it, de, fr)"},
+      "shown": {"from": "indicators", "id": "gdp-growth-rate"},
+      "url": "https://statistik.admin.ch/de/themen/volkswirtschaft/wachstum-produktivitaet",
+      "probes": [{"kind": "fso-dam", "orderNr": "je-d-04.02.01.01"}]
+    },
+    {
+      "id": "indicator/inflation-rate",
+      "label": "Inflation rate, CPI annual average (indicator)",
+      "publisher": "FSO",
+      "used_in": {"file": "src/data/indicators.ts", "key": "inflation-rate: value, previousValue, trendPercentage, lastUpdated, context, historicalData", "also": "src/i18n/dataTranslations.ts (it, de, fr) and src/i18n/indicatorExplanations.ts (inflation-rate, four languages)"},
+      "shown": [{"from": "indicators", "id": "inflation-rate"}, {"from": "explanations", "id": "inflation-rate"}],
+      "url": "https://statistik.admin.ch/de/konsumentenpreise",
+      "probes": [{"kind": "fso-dam", "orderNr": "cc-d-05.02.08", "edition": "annual", "why": "monthly table; only a new complete year (December in) counts, the site shows annual averages"}]
+    },
+    {
+      "id": "indicator/average-wage",
+      "label": "Median monthly wage (indicator)",
+      "publisher": "FSO",
+      "used_in": {"file": "src/data/indicators.ts", "key": "average-wage: value, previousValue, previousPeriod, trendPercentage, lastUpdated, context, historicalData", "also": "src/i18n/dataTranslations.ts (it, de, fr)"},
+      "shown": {"from": "indicators", "id": "average-wage"},
+      "url": "https://statistik.admin.ch/de/themen/arbeit-erwerb/loehne-erwerbseinkommen-arbeitskosten",
+      "probes": [{"kind": "fso-pxweb", "cube": "px-x-0304010000_201", "time_var": "Jahr", "why": "Earnings Structure Survey, every two years"}]
+    },
+    {
+      "id": "indicator/federal-debt-gdp",
+      "label": "Federal debt ratio (indicator)",
+      "publisher": "FFA",
+      "used_in": {"file": "src/data/indicators.ts", "key": "federal-debt-gdp: value, previousValue, trendPercentage, lastUpdated, context, historicalData", "also": "src/i18n/dataTranslations.ts (it, de, fr)"},
+      "shown": {"from": "indicators", "id": "federal-debt-gdp"},
+      "url": "https://www.efv.admin.ch/dam/en/sd-web/bjAPAViEZor6/Taschenstatistik-2025-e-web.pdf",
+      "probes": [{"kind": "http-headers", "url": "https://www.efv.admin.ch/dam/de/sd-web/m9aWXSnsRvNO/bundeshaushalt_de.csv", "label": "FFA federal budget data (CSV)", "why": "the FFA updates this file with the federal accounts and budgets; a change means new federal figures, not necessarily a new debt ratio"}],
+      "manual": {"last_checked": "2026-11-26", "why": "the debt ratio is read from the FFA pocket statistics, a PDF whose next edition gets a new address", "how": "look for the pocket statistics 'Public finances' of the next year on www.efv.admin.ch and compare net debt in % of GDP"}
+    },
+    {
+      "id": "indicator/housing-price-index",
+      "label": "Residential property price index IMPI (indicator)",
+      "publisher": "FSO",
+      "used_in": {"file": "src/data/indicators.ts", "key": "housing-price-index: value, previousValue, trendPercentage, lastUpdated, context, historicalData", "also": "src/i18n/dataTranslations.ts (it, de, fr)"},
+      "shown": {"from": "indicators", "id": "housing-price-index"},
+      "url": "https://statistik.admin.ch/de/themen/preise/immobilienpreise",
+      "probes": [{"kind": "fso-dam", "orderNr": "su-q-05.06.03.01.06", "why": "on 26.11.2026 the FSO metadata say 2017-2024 while the file already holds 2025: the period can lag, the asset id cannot"}]
+    },
+    {
+      "id": "indicator/foreign-population",
+      "label": "Foreign resident population (indicator)",
+      "publisher": "FSO",
+      "used_in": {"file": "src/data/indicators.ts", "key": "foreign-population: value, previousValue, trendPercentage, lastUpdated, context, historicalData", "also": "src/i18n/dataTranslations.ts (it, de, fr)"},
+      "shown": {"from": "indicators", "id": "foreign-population"},
+      "url": "https://statistik.admin.ch/de/themen/bevoelkerung",
+      "probes": [{"kind": "fso-pxweb", "cube": "px-x-0102020000_101"}]
+    },
+    {
+      "id": "indicator/population-total",
+      "label": "Total population (indicator)",
+      "publisher": "FSO",
+      "used_in": {"file": "src/data/indicators.ts", "key": "population-total: value, previousValue, trendPercentage, lastUpdated, context, historicalData", "also": "src/i18n/dataTranslations.ts (it, de, fr)"},
+      "shown": {"from": "indicators", "id": "population-total"},
+      "url": "https://statistik.admin.ch/de/themen/bevoelkerung",
+      "probes": [{"kind": "fso-pxweb", "cube": "px-x-0102020000_101"}]
+    },
+    {
+      "id": "indicator/median-age",
+      "label": "Median age (indicator)",
+      "publisher": "Eurostat",
+      "used_in": {"file": "src/data/indicators.ts", "key": "median-age: value, previousValue, trendPercentage, lastUpdated, context, historicalData", "also": "src/i18n/dataTranslations.ts (it, de, fr)"},
+      "shown": {"from": "indicators", "id": "median-age"},
+      "url": "https://ec.europa.eu/eurostat/databrowser/view/demo_pjanind/default/table",
+      "probes": [{"kind": "eurostat", "dataset": "demo_pjanind", "filters": {"geo": "CH", "indic_de": "MEDAGEPOP"}}]
+    },
+    {
+      "id": "indicator/life-expectancy",
+      "label": "Life expectancy at birth (indicator)",
+      "publisher": "Eurostat / FSO",
+      "used_in": {"file": "src/data/indicators.ts", "key": "life-expectancy: value, previousValue, trendPercentage, lastUpdated, context, historicalData", "also": "src/i18n/dataTranslations.ts (it, de, fr)"},
+      "shown": {"from": "indicators", "id": "life-expectancy"},
+      "url": "https://ec.europa.eu/eurostat/databrowser/view/demo_mlexpec/default/table",
+      "probes": [
+        {"kind": "eurostat", "dataset": "demo_mlexpec", "filters": {"geo": "CH", "sex": "T", "age": "Y_LT1", "unit": "YR"}},
+        {"kind": "fso-dam", "orderNr": "su-d-01.04.02.02.06", "compare_period": false, "why": "FSO figures by sex, used in the context text; the FSO publishes a year before Eurostat has the total, so its period is ahead on purpose"}
+      ]
+    },
+    {
+      "id": "indicator/crime-rate-per-1000",
+      "label": "Criminal Code offences per 1,000 inhabitants (indicator)",
+      "publisher": "FSO",
+      "used_in": {"file": "src/data/indicators.ts", "key": "crime-rate-per-1000: value, previousValue, trendPercentage, lastUpdated, context, historicalData", "also": "src/i18n/dataTranslations.ts (it, de, fr) and src/i18n/indicatorExplanations.ts (crime-rate-per-1000, four languages)"},
+      "shown": [{"from": "indicators", "id": "crime-rate-per-1000"}, {"from": "explanations", "id": "crime-rate-per-1000"}],
+      "url": "https://statistik.admin.ch/de/themen/kriminalitaet-strafrecht",
+      "probes": [{"kind": "fso-pxweb", "cube": "px-x-1903020100_101"}]
+    },
+    {
+      "id": "indicator/healthcare-cost",
+      "label": "Healthcare costs, % of GDP (indicator)",
+      "publisher": "FSO",
+      "used_in": {"file": "src/data/indicators.ts", "key": "healthcare-cost: value, previousValue, trendPercentage, lastUpdated, context, historicalData", "also": "src/i18n/dataTranslations.ts (it, de, fr) and src/i18n/indicatorExplanations.ts (healthcare-cost, four languages)"},
+      "shown": [{"from": "indicators", "id": "healthcare-cost"}, {"from": "explanations", "id": "healthcare-cost"}],
+      "url": "https://statistik.admin.ch/de/themen/gesundheit/kosten-finanzierung-gesundheitswesens",
+      "probes": [{"kind": "fso-dam", "orderNr": "je-d-14.05.01.01", "period_offset": -1, "why": "the last year of this table is an FSO estimate (2025 in the edition of 24.04.2026); the site shows the provisional year before it"}]
+    },
+    {
+      "id": "indicator/education-spending",
+      "label": "Public education expenditure, % of GDP (indicator)",
+      "publisher": "FSO",
+      "used_in": {"file": "src/data/indicators.ts", "key": "education-spending: value, previousValue, trendPercentage, lastUpdated, context, historicalData", "also": "src/i18n/dataTranslations.ts (it, de, fr)"},
+      "shown": {"from": "indicators", "id": "education-spending"},
+      "url": "https://www.bfs.admin.ch/asset/de/je-d-15.06.01.03",
+      "probes": [{"kind": "fso-dam", "orderNr": "je-d-15.06.01.03"}]
+    },
+    {
+      "id": "indicator/poverty-rate",
+      "label": "Poverty rate, absolute (indicator)",
+      "publisher": "FSO",
+      "used_in": {"file": "src/data/indicators.ts", "key": "poverty-rate: value, previousValue, trendPercentage, lastUpdated, context, historicalData", "also": "src/i18n/dataTranslations.ts (it, de, fr) and src/i18n/indicatorExplanations.ts (poverty-rate, four languages)"},
+      "shown": [{"from": "indicators", "id": "poverty-rate"}, {"from": "explanations", "id": "poverty-rate"}],
+      "url": "https://statistik.admin.ch/de/asset/36395150",
+      "probes": [{"kind": "fso-dam", "orderNr": "je-d-20.03.02.01.01"}]
+    },
+    {
+      "id": "indicator/renewable-energy",
+      "label": "Renewable share of final energy consumption (indicator)",
+      "publisher": "SFOE",
+      "used_in": {"file": "src/data/indicators.ts", "key": "renewable-energy: value, previousValue, trendPercentage, lastUpdated, context, historicalData", "also": "src/i18n/dataTranslations.ts (it, de, fr) and src/i18n/indicatorExplanations.ts (renewable-energy, four languages)"},
+      "shown": [{"from": "indicators", "id": "renewable-energy"}, {"from": "explanations", "id": "renewable-energy"}],
+      "url": "https://www.admin.ch/de/newnsb/YQtEZcK-D9fQ",
+      "probes": [{"kind": "fso-dam", "orderNr": "ind-d-21.02.30.0702.02.01", "why": "FSO indicator table built on the SFOE renewable energy statistics; it follows the SFOE edition by a few months"}]
+    },
+
+    {
+      "id": "cantons/population",
+      "label": "Canton population (canton map and table)",
+      "publisher": "FSO",
+      "used_in": {"file": "scripts/data/build_cantons.py", "key": "POP_YEAR", "then": "run `python3 scripts/data/build_cantons.py` (it rewrites src/data/cantons.ts)"},
+      "shown": {"from": "cantons", "meta": "population"},
+      "url": "https://www.pxweb.bfs.admin.ch/pxweb/de/px-x-0102020000_201/",
+      "probes": [{"kind": "fso-pxweb", "cube": "px-x-0102020000_201"}]
+    },
+    {
+      "id": "cantons/foreign-population",
+      "label": "Canton foreign share (canton map and table)",
+      "publisher": "FSO",
+      "used_in": {"file": "scripts/data/build_cantons.py", "key": "POP_YEAR (same table as the population)", "then": "run `python3 scripts/data/build_cantons.py`"},
+      "shown": {"from": "cantons", "id": "foreign-population"},
+      "url": "https://www.pxweb.bfs.admin.ch/pxweb/de/px-x-0102020000_201/",
+      "probes": [{"kind": "fso-pxweb", "cube": "px-x-0102020000_201"}]
+    },
+    {
+      "id": "cantons/area",
+      "label": "Canton area (canton map and table)",
+      "publisher": "swisstopo",
+      "used_in": {"file": "scripts/data/build_cantons.py", "key": "AREA_DATE", "then": "run `python3 scripts/data/build_cantons.py`"},
+      "shown": {"from": "cantons", "meta": "area"},
+      "url": "https://www.swisstopo.admin.ch/de/landschaftsmodell-swissboundaries3d",
+      "probes": [{"kind": "http-regex", "url": "https://api3.geo.admin.ch/rest/services/api/MapServer/ch.swisstopo.swissboundaries3d-kanton-flaeche.fill/legend?lang=de", "pattern": "Datenstand\\s*(?:<[^>]+>\\s*)*(\\d{2}\\.\\d{2}\\.\\d{4})", "period": "max-year", "label": "swisstopo layer legend", "page": "https://www.swisstopo.admin.ch/de/landschaftsmodell-swissboundaries3d", "why": "the legend of the canton-area layer states its data status (Datenstand)"}]
+    },
+    {
+      "id": "cantons/unemployment-rate",
+      "label": "Canton unemployment rate (canton map and table)",
+      "publisher": "SECO / FSO",
+      "used_in": {"file": "scripts/data/build_cantons.py", "key": "UNEMP_YEAR, UNEMP_XLSX", "then": "run `python3 scripts/data/build_cantons.py`"},
+      "shown": {"from": "cantons", "id": "unemployment-rate"},
+      "url": "https://www.bfs.admin.ch/asset/de/je-d-03.03.02.03",
+      "probes": [{"kind": "fso-dam", "orderNr": "je-d-03.03.02.03", "why": "FSO table T 3.3.2.3 with the SECO annual averages by canton; it carries a new year in early February, months before SECO's yearly report 'Arbeitslosigkeit in der Schweiz'"}]
+    },
+    {
+      "id": "cantons/health-premium",
+      "label": "Canton mean health insurance premium (canton map and table)",
+      "publisher": "FOPH",
+      "used_in": {"file": "scripts/data/build_cantons.py", "key": "PREMIUM_YEAR, PREMIUM_PDF", "then": "run `python3 scripts/data/build_cantons.py`"},
+      "shown": {"from": "cantons", "id": "health-premium"},
+      "url": "https://www.bag.admin.ch/de/newnsb/BfuGvedj0OOX",
+      "probes": [
+        {"kind": "http-headers", "url": "https://cms.news.admin.ch/fileservice/sdweb-docs-prod-nsbcch-files/files/2026/09/29/b8752eb8-9587-4fc9-b347-8b705f3ecc73.pdf", "label": "FOPH premium table (PDF)", "page": "https://www.bag.admin.ch/de/newnsb/BfuGvedj0OOX", "why": "the file the build script reads; a change means FOPH replaced it"},
+        {"kind": "calendar-year", "why": "the site shows the premium of the current year; the next year's premiums are announced in September and apply from 1 January"}
+      ]
+    },
+    {
+      "id": "cantons/gdp-per-capita",
+      "label": "Canton GDP per capita (canton map and table)",
+      "publisher": "FSO",
+      "used_in": {"file": "scripts/data/build_cantons.py", "key": "GDP_YEAR, GDP_XLSX", "then": "run `python3 scripts/data/build_cantons.py`"},
+      "shown": {"from": "cantons", "id": "gdp-per-capita"},
+      "url": "https://www.bfs.admin.ch/asset/en/je-e-04.02.06.03",
+      "probes": [{"kind": "fso-dam", "orderNr": "je-e-04.02.06.03"}]
+    },
+    {
+      "id": "cantons/average-rent",
+      "label": "Canton average rent (canton map and table)",
+      "publisher": "FSO",
+      "used_in": {"file": "scripts/data/build_cantons.py", "key": "RENT_YEAR, RENT_XLSX", "then": "run `python3 scripts/data/build_cantons.py`"},
+      "shown": {"from": "cantons", "id": "average-rent"},
+      "url": "https://www.bfs.admin.ch/asset/de/je-d-09.03.03.01",
+      "probes": [{"kind": "fso-dam", "orderNr": "je-d-09.03.03.01"}]
+    },
+    {
+      "id": "cantons/crime-rate-per-1000",
+      "label": "Canton offences per 1,000 inhabitants (canton map and table)",
+      "publisher": "FSO",
+      "used_in": {"file": "scripts/data/build_cantons.py", "key": "CRIME_YEAR", "then": "run `python3 scripts/data/build_cantons.py`"},
+      "shown": {"from": "cantons", "id": "crime-rate-per-1000"},
+      "url": "https://www.pxweb.bfs.admin.ch/pxweb/de/px-x-1903020100_101/",
+      "probes": [{"kind": "fso-pxweb", "cube": "px-x-1903020100_101"}]
+    },
+
+    {
+      "id": "quiz/unemployment-rate",
+      "label": "Quiz: registered unemployment rate",
+      "publisher": "SECO / FSO",
+      "used_in": {"file": "src/data/questions.ts", "key": "unemployment-rate: question, actualValue, explanation, comparisonData", "also": "src/i18n/dataTranslations.ts (it)"},
+      "shown": {"from": "questions", "id": "unemployment-rate"},
+      "url": "https://www.bfs.admin.ch/asset/de/je-d-03.03.02.02",
+      "probes": [
+        {"kind": "fso-dam", "orderNr": "je-d-03.03.02.02"},
+        {"kind": "eurostat", "dataset": "une_rt_a", "filters": {"geo": "CH", "age": "Y15-74", "sex": "T", "unit": "PC_ACT"}, "why": "comparison chart (ILO rate)"}
+      ]
+    },
+    {
+      "id": "quiz/youth-unemployment",
+      "label": "Quiz: youth unemployment rate",
+      "publisher": "Eurostat / FSO",
+      "used_in": {"file": "src/data/questions.ts", "key": "youth-unemployment: question, actualValue, explanation, comparisonData", "also": "src/i18n/dataTranslations.ts (it)"},
+      "shown": {"from": "questions", "id": "youth-unemployment"},
+      "url": "https://ec.europa.eu/eurostat/databrowser/view/une_rt_a/default/table?lang=en",
+      "probes": [{"kind": "eurostat", "dataset": "une_rt_a", "filters": {"geo": "CH", "age": "Y15-24", "sex": "T", "unit": "PC_ACT"}}]
+    },
+    {
+      "id": "quiz/labor-participation",
+      "label": "Quiz: labour force participation rate",
+      "publisher": "Eurostat / FSO",
+      "used_in": {"file": "src/data/questions.ts", "key": "labor-participation: question, actualValue, explanation, comparisonData", "also": "src/i18n/dataTranslations.ts (it)"},
+      "shown": {"from": "questions", "id": "labor-participation"},
+      "url": "https://ec.europa.eu/eurostat/databrowser/view/lfsi_emp_a/default/table?lang=en",
+      "probes": [{"kind": "eurostat", "dataset": "lfsi_emp_a", "filters": {"geo": "CH", "indic_em": "ACT", "age": "Y15-64", "unit": "PC_POP", "sex": "T"}}]
+    },
+    {
+      "id": "quiz/part-time-rate",
+      "label": "Quiz: part-time rate",
+      "publisher": "Eurostat / FSO",
+      "used_in": {"file": "src/data/questions.ts", "key": "part-time-rate: question, actualValue, explanation, comparisonData", "also": "src/i18n/dataTranslations.ts (it)"},
+      "shown": {"from": "questions", "id": "part-time-rate"},
+      "url": "https://ec.europa.eu/eurostat/databrowser/view/lfsi_pt_a/default/table?lang=en",
+      "probes": [
+        {"kind": "eurostat", "dataset": "lfsi_pt_a", "filters": {"geo": "CH", "age": "Y15-64", "unit": "PC_EMP", "sex": "T", "wstatus": "EMP_PT"}},
+        {"kind": "fso-dam", "orderNr": "je-d-03.02.01.16", "edition": "annual", "why": "FSO definition quoted in the explanation; quarterly table, a year counts once the fourth quarter is in"}
+      ]
+    },
+    {
+      "id": "quiz/weekly-work-hours",
+      "label": "Quiz: weekly hours of full-time employees",
+      "publisher": "FSO / Eurostat",
+      "used_in": {"file": "src/data/questions.ts", "key": "weekly-work-hours: question, actualValue, explanation, comparisonData", "also": "src/i18n/dataTranslations.ts (it)"},
+      "shown": {"from": "questions", "id": "weekly-work-hours"},
+      "url": "https://www.bfs.admin.ch/asset/de/2026-0533-d",
+      "probes": [
+        {"kind": "fso-dam", "orderNr": "je-d-03.02.03.01.02.04", "why": "the answer: FSO table of the actual weekly hours of full-time employees (Arbeitsvolumenstatistik), published with the press release of May"},
+        {"kind": "eurostat", "dataset": "lfsa_ewhun2", "filters": {"geo": "CH", "age": "Y15-64", "sex": "T", "worktime": "FT", "wstatus": "EMP", "nace_r2": "TOTAL"}, "why": "the comparison chart"}
+      ]
+    },
+    {
+      "id": "quiz/purchasing-power-rank",
+      "label": "Quiz: rank for average wages at PPP",
+      "publisher": "OECD",
+      "used_in": {"file": "src/data/questions.ts", "key": "purchasing-power-rank: question, actualValue, explanation, comparisonData", "also": "src/i18n/dataTranslations.ts (it)"},
+      "shown": {"from": "questions", "id": "purchasing-power-rank"},
+      "url": "https://www.oecd.org/en/data/indicators/average-annual-wages.html",
+      "probes": [],
+      "manual": {"last_checked": "2026-11-26", "why": "OECD pages answer HTTP 403 to automated requests", "how": "open the OECD average annual wages indicator, compare the latest year and Switzerland's rank"}
+    },
+    {
+      "id": "quiz/median-salary",
+      "label": "Quiz: median monthly salary",
+      "publisher": "FSO",
+      "used_in": {"file": "src/data/questions.ts", "key": "median-salary: question, actualValue, explanation, comparisonData", "also": "src/i18n/dataTranslations.ts (it)"},
+      "shown": {"from": "questions", "id": "median-salary"},
+      "url": "https://www.pxweb.bfs.admin.ch/pxweb/de/px-x-0304010000_201/",
+      "probes": [{"kind": "fso-pxweb", "cube": "px-x-0304010000_201", "time_var": "Jahr"}]
+    },
+    {
+      "id": "quiz/gender-pay-gap",
+      "label": "Quiz: gender pay gap",
+      "publisher": "FSO / Eurostat",
+      "used_in": {"file": "src/data/questions.ts", "key": "gender-pay-gap: question, actualValue, explanation, comparisonData", "also": "src/i18n/dataTranslations.ts (it)"},
+      "shown": {"from": "questions", "id": "gender-pay-gap"},
+      "url": "https://www.bfs.admin.ch/asset/de/2026-0504-d",
+      "probes": [
+        {"kind": "fso-pxweb", "cube": "px-x-0304010000_201", "time_var": "Jahr", "why": "the pay gap comes from the same survey as the median wage (every two years)"},
+        {"kind": "eurostat", "dataset": "earn_gr_gpgr2", "filters": {"geo": "CH", "nace_r2": "B-S_X_O", "unit": "PC"}, "why": "comparison chart"}
+      ]
+    },
+    {
+      "id": "quiz/gini-coefficient",
+      "label": "Quiz: Gini coefficient",
+      "publisher": "Eurostat / FSO",
+      "used_in": {"file": "src/data/questions.ts", "key": "gini-coefficient: question, actualValue, explanation, comparisonData", "also": "src/i18n/dataTranslations.ts (it)"},
+      "shown": {"from": "questions", "id": "gini-coefficient"},
+      "url": "https://ec.europa.eu/eurostat/databrowser/view/ilc_di12/default/table?lang=en",
+      "probes": [{"kind": "eurostat", "dataset": "ilc_di12", "filters": {"geo": "CH", "age": "TOTAL", "statinfo": "GINI_HND"}}]
+    },
+    {
+      "id": "quiz/snb-shock",
+      "label": "Quiz: euro against the franc on 15 January 2015",
+      "publisher": "ECB / SNB",
+      "used_in": {"file": "src/data/questions.ts", "key": "snb-shock"},
+      "shown": {"from": "questions", "id": "snb-shock"},
+      "url": "https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/eurofxref-graph-chf.en.html",
+      "probes": [],
+      "notes": "A past event: nothing can become newer. Only the link is checked."
+    },
+    {
+      "id": "quiz/export-gdp-share",
+      "label": "Quiz: exports as a share of GDP",
+      "publisher": "World Bank",
+      "used_in": {"file": "src/data/questions.ts", "key": "export-gdp-share: question, actualValue, explanation, comparisonData", "also": "src/i18n/dataTranslations.ts (it)"},
+      "shown": {"from": "questions", "id": "export-gdp-share"},
+      "url": "https://data.worldbank.org/indicator/NE.EXP.GNFS.ZS?locations=CH",
+      "probes": [],
+      "manual": {"last_checked": "2026-11-26", "why": "the World Bank data pages answer HTTP 403 to automated requests", "how": "open the indicator NE.EXP.GNFS.ZS for Switzerland and compare the latest year"}
+    },
+    {
+      "id": "quiz/snb-gold-reserves",
+      "label": "Quiz: SNB gold holdings",
+      "publisher": "SNB / IMF / World Gold Council",
+      "used_in": {"file": "src/data/questions.ts", "key": "snb-gold-reserves: question, actualValue, explanation, comparisonData", "also": "src/i18n/dataTranslations.ts (it)"},
+      "shown": {"from": "questions", "id": "snb-gold-reserves"},
+      "url": "https://www.snb.ch/en/the-snb/mandates-goals/investment-assets/assets-structure",
+      "probes": [],
+      "manual": {"last_checked": "2026-11-26", "why": "the answer and the chart combine the SNB, the IMF (403/404 to automated requests) and the World Gold Council ranking", "how": "check the SNB gold holding in tonnes, the IMF International Liquidity figures and the WGC ranking for the chart"}
+    },
+    {
+      "id": "quiz/wealth-managed",
+      "label": "Quiz: cross-border wealth managed in Switzerland",
+      "publisher": "Swiss Bankers Association",
+      "used_in": {"file": "src/data/questions.ts", "key": "wealth-managed: question, actualValue, explanation", "also": "src/i18n/dataTranslations.ts (it)"},
+      "shown": {"from": "questions", "id": "wealth-managed"},
+      "url": "https://publications.swissbanking.ch/banking-barometer-2026-en/wealth-management",
+      "probes": [],
+      "manual": {"last_checked": "2026-11-26", "why": "the Banking Barometer comes out once a year at a new address", "how": "look for the next Banking Barometer on swissbanking.ch (usually in late summer)"}
+    },
+    {
+      "id": "quiz/number-of-banks",
+      "label": "Quiz: number of banks",
+      "publisher": "SNB",
+      "used_in": {"file": "src/data/questions.ts", "key": "number-of-banks: question, actualValue, explanation, comparisonData", "also": "src/i18n/dataTranslations.ts (it)"},
+      "shown": {"from": "questions", "id": "number-of-banks"},
+      "url": "https://data.snb.ch/en/topics/banken/cube/bastrbwa",
+      "probes": [{"kind": "snb-cube", "cube": "bastrbwa", "page": "https://data.snb.ch/en/topics/banken/cube/bastrbwa"}]
+    },
+    {
+      "id": "quiz/asylum-budget",
+      "label": "Quiz: share of the federal budget for migration",
+      "publisher": "FFA",
+      "used_in": {"file": "src/data/questions.ts", "key": "asylum-budget: question, actualValue, explanation", "also": "src/i18n/dataTranslations.ts (it)"},
+      "shown": {"from": "questions", "id": "asylum-budget"},
+      "url": "https://www.efv.admin.ch/dam/de/sd-web/ecUEO27taiGw/Voranschlag%202027%20mit%20IAFP%202028%E2%80%932030%20%E2%80%93%20Band%201%20DE.pdf",
+      "probes": [{"kind": "calendar-year", "why": "the question is about the budget of the current year"}],
+      "manual": {"last_checked": "2026-11-26", "why": "Parliament adopts the next budget in December; the adopted figures appear in a new FFA document", "how": "after the winter session, take the adopted budget's table of expenditure by task area"}
+    },
+    {
+      "id": "quiz/public-debt-gdp",
+      "label": "Quiz: public debt, % of GDP (GFS)",
+      "publisher": "FFA",
+      "used_in": {"file": "src/data/questions.ts", "key": "public-debt-gdp: question, actualValue, explanation, comparisonData", "also": "src/i18n/dataTranslations.ts (it)"},
+      "shown": {"from": "questions", "id": "public-debt-gdp"},
+      "url": "https://www.efv.admin.ch/en/overview-financial-statistics-data",
+      "probes": [{"kind": "http-headers", "url": "https://www.data.finance.admin.ch/static/assets/datasets/gfs_dashboard/kennz_int.csv", "label": "FFA financial statistics, international key figures (CSV)", "page": "https://www.efv.admin.ch/en/overview-financial-statistics-data", "why": "the file the figures were read from; it answered HEAD requests with ETag and Last-Modified on 26.11.2026 (the fact-check had found this portal blocking other automated requests: a block shows up under 'could not check')"}]
+    },
+    {
+      "id": "quiz/tax-revenue-gdp",
+      "label": "Quiz: tax revenue, % of GDP",
+      "publisher": "OECD",
+      "used_in": {"file": "src/data/questions.ts", "key": "tax-revenue-gdp: question, actualValue, explanation, comparisonData", "also": "src/i18n/dataTranslations.ts (it)"},
+      "shown": {"from": "questions", "id": "tax-revenue-gdp"},
+      "url": "https://www.oecd.org/en/publications/revenue-statistics-2025_3a264267-en/full-report.html",
+      "probes": [],
+      "manual": {"last_checked": "2026-11-26", "why": "OECD pages answer HTTP 403 to automated requests", "how": "look for the next Revenue Statistics edition (usually December)"}
+    },
+    {
+      "id": "quiz/defense-spending",
+      "label": "Quiz: share of the federal budget for defence",
+      "publisher": "FFA / SIPRI",
+      "used_in": {"file": "src/data/questions.ts", "key": "defense-spending: question, actualValue, explanation, comparisonData", "also": "src/i18n/dataTranslations.ts (it)"},
+      "shown": {"from": "questions", "id": "defense-spending"},
+      "url": "https://www.efv.admin.ch/dam/de/sd-web/ecUEO27taiGw/Voranschlag%202027%20mit%20IAFP%202028%E2%80%932030%20%E2%80%93%20Band%201%20DE.pdf",
+      "probes": [{"kind": "calendar-year", "why": "the question is about the budget of the current year"}],
+      "manual": {"last_checked": "2026-11-26", "why": "the adopted budget appears in a new FFA document; the SIPRI chart data come in a yearly file with a new name", "how": "after the winter session, take the adopted budget; in spring, check the new SIPRI Military Expenditure Database for the chart"}
+    },
+    {
+      "id": "quiz/gdp-growth-years",
+      "label": "Quiz: years of GDP growth",
+      "publisher": "FSO / Eurostat",
+      "used_in": {"file": "src/data/questions.ts", "key": "gdp-growth-years: question, actualValue, explanation, comparisonData", "also": "src/i18n/dataTranslations.ts (it)"},
+      "shown": {"from": "questions", "id": "gdp-growth-years"},
+      "url": "https://www.bfs.admin.ch/asset/de/je-d-04.02.01.01",
+      "probes": [
+        {"kind": "fso-dam", "orderNr": "je-d-04.02.01.01"},
+        {"kind": "eurostat", "dataset": "nama_10_gdp", "filters": {"geo": "CH", "na_item": "B1GQ", "unit": "CLV_PCH_PRE"}, "why": "comparison chart"}
+      ]
+    },
+    {
+      "id": "quiz/population-density",
+      "label": "Quiz: population density",
+      "publisher": "Eurostat",
+      "used_in": {"file": "src/data/questions.ts", "key": "population-density: question, actualValue, explanation, comparisonData", "also": "src/i18n/dataTranslations.ts (it)"},
+      "shown": {"from": "questions", "id": "population-density"},
+      "url": "https://ec.europa.eu/eurostat/databrowser/view/demo_r_d3dens/default/table",
+      "probes": [{"kind": "eurostat", "dataset": "demo_r_d3dens", "filters": {"geo": "CH", "unit": "PER_KM2"}}]
+    },
+    {
+      "id": "quiz/total-population",
+      "label": "Quiz: permanent resident population",
+      "publisher": "FSO",
+      "used_in": {"file": "src/data/questions.ts", "key": "total-population: question, actualValue, explanation, comparisonData", "also": "src/i18n/dataTranslations.ts (it)"},
+      "shown": {"from": "questions", "id": "total-population"},
+      "url": "https://www.bfs.admin.ch/asset/en/je-e-01.01.01",
+      "probes": [{"kind": "fso-pxweb", "cube": "px-x-0102020000_101"}, {"kind": "fso-dam", "orderNr": "je-e-01.01.01"}]
+    },
+    {
+      "id": "quiz/urban-population",
+      "label": "Quiz: share living in urban areas",
+      "publisher": "FSO",
+      "used_in": {"file": "src/data/questions.ts", "key": "urban-population: question, actualValue, explanation", "also": "src/i18n/dataTranslations.ts (it)"},
+      "shown": {"from": "questions", "id": "urban-population"},
+      "url": "https://www.bfs.admin.ch/asset/en/je-e-01.01.01",
+      "probes": [{"kind": "fso-dam", "orderNr": "je-e-01.01.01"}]
+    },
+    {
+      "id": "quiz/number-municipalities",
+      "label": "Quiz: number of municipalities",
+      "publisher": "FSO",
+      "used_in": {"file": "src/data/questions.ts", "key": "number-municipalities: question, actualValue, explanation, comparisonData", "also": "src/i18n/dataTranslations.ts (it)"},
+      "shown": {"from": "questions", "id": "number-municipalities"},
+      "url": "https://www.agvchapp.bfs.admin.ch/de/communes/query",
+      "probes": [
+        {"kind": "http-hash", "url": "https://www.agvchapp.bfs.admin.ch/api/communes/snapshot?date={today:%d-%m-%Y}", "label": "FSO official commune register, today's snapshot", "page": "https://www.agvchapp.bfs.admin.ch/de/communes/query", "why": "the snapshot of today's communes changes only when a merger or another mutation takes effect (usually 1 January)"},
+        {"kind": "calendar-year", "why": "the question gives the number on 1 January of a year"}
+      ]
+    },
+    {
+      "id": "quiz/net-migration-rate",
+      "label": "Quiz: net migration rate",
+      "publisher": "FSO / Eurostat",
+      "used_in": {"file": "src/data/questions.ts", "key": "net-migration-rate: question, actualValue, explanation, comparisonData", "also": "src/i18n/dataTranslations.ts (it)"},
+      "shown": {"from": "questions", "id": "net-migration-rate"},
+      "url": "https://www.bfs.admin.ch/asset/en/je-e-01.01.01",
+      "probes": [
+        {"kind": "fso-pxweb", "cube": "px-x-0102020000_101"},
+        {"kind": "eurostat", "dataset": "demo_gind", "filters": {"geo": "CH", "indic_de": "CNMIGRATRT"}, "why": "comparison chart"}
+      ]
+    },
+    {
+      "id": "quiz/foreign-population",
+      "label": "Quiz: share of foreign nationals",
+      "publisher": "FSO",
+      "used_in": {"file": "src/data/questions.ts", "key": "foreign-population: question, actualValue, explanation, comparisonData", "also": "src/i18n/dataTranslations.ts (it)"},
+      "shown": {"from": "questions", "id": "foreign-population"},
+      "url": "https://www.bfs.admin.ch/asset/en/je-e-01.01.01",
+      "probes": [{"kind": "fso-pxweb", "cube": "px-x-0102020000_101"}]
+    },
+    {
+      "id": "quiz/cross-border-commuters",
+      "label": "Quiz: cross-border commuters",
+      "publisher": "FSO",
+      "used_in": {"file": "src/data/questions.ts", "key": "cross-border-commuters: question, actualValue, explanation, comparisonData", "also": "src/i18n/dataTranslations.ts (it)"},
+      "shown": {"from": "questions", "id": "cross-border-commuters"},
+      "url": "https://www.bfs.admin.ch/asset/de/ds-d-03.02.01.06.04-02",
+      "probes": [{"kind": "fso-dam", "orderNr": "ds-d-03.02.01.06.04-02", "compare_period": false, "why": "quarterly figure (the question names a quarter); every new quarter shows up as a new asset"}]
+    },
+    {
+      "id": "quiz/fertility-rate",
+      "label": "Quiz: total fertility rate",
+      "publisher": "FSO",
+      "used_in": {"file": "src/data/questions.ts", "key": "fertility-rate: question, actualValue, explanation, comparisonData", "also": "src/i18n/dataTranslations.ts (it)"},
+      "shown": {"from": "questions", "id": "fertility-rate"},
+      "url": "https://www.bfs.admin.ch/asset/en/je-e-01.01.01",
+      "probes": [{"kind": "fso-pxweb", "cube": "px-x-0102020204_111"}]
+    },
+    {
+      "id": "quiz/average-marriage-age",
+      "label": "Quiz: women's age at first marriage",
+      "publisher": "FSO",
+      "used_in": {"file": "src/data/questions.ts", "key": "average-marriage-age: question, actualValue, explanation, comparisonData", "also": "src/i18n/dataTranslations.ts (it)"},
+      "shown": {"from": "questions", "id": "average-marriage-age"},
+      "url": "https://www.bfs.admin.ch/asset/en/je-e-01.01.01",
+      "probes": [{"kind": "fso-pxweb", "cube": "px-x-0102020202_110"}]
+    },
+    {
+      "id": "quiz/population-over-65",
+      "label": "Quiz: share aged 65 or over",
+      "publisher": "FSO",
+      "used_in": {"file": "src/data/questions.ts", "key": "population-over-65: question, actualValue, explanation, comparisonData", "also": "src/i18n/dataTranslations.ts (it)"},
+      "shown": {"from": "questions", "id": "population-over-65"},
+      "url": "https://www.bfs.admin.ch/asset/en/je-e-01.01.01",
+      "probes": [{"kind": "fso-pxweb", "cube": "px-x-0102020000_104"}]
+    },
+    {
+      "id": "quiz/health-subsidies",
+      "label": "Quiz: share of insured with premium subsidies",
+      "publisher": "FOPH",
+      "used_in": {"file": "src/data/questions.ts", "key": "health-subsidies: question, actualValue, explanation, comparisonData", "also": "src/i18n/dataTranslations.ts (it)"},
+      "shown": {"from": "questions", "id": "health-subsidies"},
+      "url": "https://www.bag.admin.ch/de/statistik-der-obligatorischen-krankenversicherung",
+      "probes": [{"kind": "http-regex", "url": "https://www.bag.admin.ch/de/statistik-der-obligatorischen-krankenversicherung", "pattern": "/(KVSTAT\\s?\\d{4}[^\"/]*?\\.zip)\"", "period": "max-year", "label": "FOPH statistics of compulsory health insurance (list of files)", "why": "the page lists the KVSTAT files by year and version"}]
+    },
+    {
+      "id": "quiz/life-expectancy",
+      "label": "Quiz: life expectancy at birth",
+      "publisher": "Eurostat / FSO",
+      "used_in": {"file": "src/data/questions.ts", "key": "life-expectancy: question, actualValue, explanation, comparisonData", "also": "src/i18n/dataTranslations.ts (it)"},
+      "shown": {"from": "questions", "id": "life-expectancy"},
+      "url": "https://ec.europa.eu/eurostat/databrowser/view/demo_mlexpec/default/table",
+      "probes": [
+        {"kind": "eurostat", "dataset": "demo_mlexpec", "filters": {"geo": "CH", "sex": "T", "age": "Y_LT1", "unit": "YR"}},
+        {"kind": "fso-dam", "orderNr": "su-d-01.04.02.02.06", "compare_period": false, "why": "FSO figures by sex used in the explanation; ahead of Eurostat's total on purpose"}
+      ]
+    },
+    {
+      "id": "quiz/hospital-beds",
+      "label": "Quiz: hospital beds per 1,000 inhabitants",
+      "publisher": "Eurostat",
+      "used_in": {"file": "src/data/questions.ts", "key": "hospital-beds: question, actualValue, explanation, comparisonData", "also": "src/i18n/dataTranslations.ts (it)"},
+      "shown": {"from": "questions", "id": "hospital-beds"},
+      "url": "https://ec.europa.eu/eurostat/databrowser/view/hlth_rs_bds1/default/table",
+      "probes": [{"kind": "eurostat", "dataset": "hlth_rs_bds1", "filters": {"geo": "CH", "unit": "P_HTHAB", "facility": "HBEDT", "hlthcare": "TOTAL"}}]
+    },
+    {
+      "id": "quiz/health-spending-gdp",
+      "label": "Quiz: healthcare spending, % of GDP",
+      "publisher": "FSO / OECD",
+      "used_in": {"file": "src/data/questions.ts", "key": "health-spending-gdp: question, actualValue, explanation, comparisonData", "also": "src/i18n/dataTranslations.ts (it)"},
+      "shown": {"from": "questions", "id": "health-spending-gdp"},
+      "url": "https://www.bfs.admin.ch/asset/de/je-d-14.05.01.01",
+      "probes": [{"kind": "fso-dam", "orderNr": "je-d-14.05.01.01", "period_offset": -1, "why": "the last year of this table is an FSO estimate; the question uses the provisional year before it"}],
+      "manual": {"last_checked": "2026-11-26", "why": "the comparison chart comes from the OECD health expenditure database (403 to automated requests)", "how": "compare the chart values with the OECD database for the same year"}
+    },
+    {
+      "id": "quiz/university-graduation",
+      "label": "Quiz: tertiary degree, ages 25-34",
+      "publisher": "OECD",
+      "used_in": {"file": "src/data/questions.ts", "key": "university-graduation: question, actualValue, explanation, comparisonData", "also": "src/i18n/dataTranslations.ts (it)"},
+      "shown": {"from": "questions", "id": "university-graduation"},
+      "url": "https://www.oecd.org/en/publications/education-at-a-glance-2026_b4968bbc-en.html",
+      "probes": [],
+      "manual": {"last_checked": "2026-11-26", "why": "OECD pages answer HTTP 403 to automated requests", "how": "look for the next Education at a Glance (September)"}
+    },
+    {
+      "id": "quiz/apprenticeship-rate",
+      "label": "Quiz: share of young people in vocational training",
+      "publisher": "SERI",
+      "used_in": {"file": "src/data/questions.ts", "key": "apprenticeship-rate: question, actualValue, explanation", "also": "src/i18n/dataTranslations.ts (it)"},
+      "shown": {"from": "questions", "id": "apprenticeship-rate"},
+      "url": "https://www.sbfi.admin.ch/de/berufliche-grundbildung",
+      "probes": [],
+      "manual": {"last_checked": "2026-11-26", "why": "the figure is in the yearly SERI brochure 'Facts and Figures', published at a new address each year and not linked in a form a script can read", "how": "look for the next edition of the brochure on sbfi.admin.ch"}
+    },
+    {
+      "id": "quiz/education-spending-gdp",
+      "label": "Quiz: public education spending, % of GDP",
+      "publisher": "FSO",
+      "used_in": {"file": "src/data/questions.ts", "key": "education-spending-gdp: question, actualValue, explanation, comparisonData", "also": "src/i18n/dataTranslations.ts (it)"},
+      "shown": {"from": "questions", "id": "education-spending-gdp"},
+      "url": "https://www.bfs.admin.ch/asset/de/je-d-15.06.01.03",
+      "probes": [{"kind": "fso-dam", "orderNr": "je-d-15.06.01.03"}]
+    },
+    {
+      "id": "quiz/homeownership-rate",
+      "label": "Quiz: home ownership rate",
+      "publisher": "FSO",
+      "used_in": {"file": "src/data/questions.ts", "key": "homeownership-rate: question, actualValue, explanation, comparisonData", "also": "src/i18n/dataTranslations.ts (it)"},
+      "shown": {"from": "questions", "id": "homeownership-rate"},
+      "url": "https://www.bfs.admin.ch/asset/de/je-d-09.03.02.01.03",
+      "probes": [
+        {"kind": "fso-dam", "orderNr": "je-d-09.03.02.01.03"},
+        {"kind": "eurostat", "dataset": "ilc_lvho02", "filters": {"geo": "CH", "rskpovth": "TOTAL", "hhcomp": "TOTAL", "tenure": "OWN"}, "compare_period": false, "why": "comparison chart, a different survey (SILC) with its own years"}
+      ]
+    },
+    {
+      "id": "quiz/average-rent",
+      "label": "Quiz: average rent of a 3-room flat",
+      "publisher": "FSO",
+      "used_in": {"file": "src/data/questions.ts", "key": "average-rent: question, actualValue, explanation, comparisonData", "also": "src/i18n/dataTranslations.ts (it)"},
+      "shown": {"from": "questions", "id": "average-rent"},
+      "url": "https://statistik.admin.ch/en/asset/36398431",
+      "probes": [{"kind": "fso-dam", "orderNr": "je-d-09.03.03.01"}]
+    },
+    {
+      "id": "quiz/vacancy-rate",
+      "label": "Quiz: vacancy rate",
+      "publisher": "FSO",
+      "used_in": {"file": "src/data/questions.ts", "key": "vacancy-rate: question, actualValue, explanation, comparisonData", "also": "src/i18n/dataTranslations.ts (it)"},
+      "shown": {"from": "questions", "id": "vacancy-rate"},
+      "url": "https://www.bfs.admin.ch/de/newnsb/kgvqAd91MYZr",
+      "probes": [{"kind": "fso-dam", "orderNr": "je-d-09.03.04.04", "why": "vacant dwellings by canton, census of 1 June, published in September"}]
+    },
+    {
+      "id": "quiz/violent-crime-change",
+      "label": "Quiz: change in violent offences",
+      "publisher": "FSO",
+      "used_in": {"file": "src/data/questions.ts", "key": "violent-crime-change: question, actualValue, explanation, comparisonData", "also": "src/i18n/dataTranslations.ts (it)"},
+      "shown": {"from": "questions", "id": "violent-crime-change"},
+      "url": "https://statistik.admin.ch/de/themen/kriminalitaet-strafrecht",
+      "probes": [{"kind": "fso-pxweb", "cube": "px-x-1903020100_101", "why": "same police statistics; the violence totals themselves are only in the yearly report (new order number each year)"}]
+    },
+    {
+      "id": "quiz/homicide-rate",
+      "label": "Quiz: homicides per 100,000 inhabitants",
+      "publisher": "FSO / Eurostat",
+      "used_in": {"file": "src/data/questions.ts", "key": "homicide-rate: question, actualValue, explanation, comparisonData", "also": "src/i18n/dataTranslations.ts (it)"},
+      "shown": {"from": "questions", "id": "homicide-rate"},
+      "url": "https://www.admin.ch/de/newnsb/Lt4dQR54SMqZFh_vCX8oA",
+      "probes": [
+        {"kind": "fso-pxweb", "cube": "px-x-1903020100_101"},
+        {"kind": "eurostat", "dataset": "crim_off_cat", "filters": {"geo": "CH", "iccs": "ICCS0101", "unit": "P_HTHAB"}, "compare_period": false, "why": "comparison chart; Eurostat runs a year behind the FSO on purpose"}
+      ]
+    },
+    {
+      "id": "quiz/prison-population",
+      "label": "Quiz: prisoners per 100,000 inhabitants",
+      "publisher": "Eurostat / FSO",
+      "used_in": {"file": "src/data/questions.ts", "key": "prison-population: question, actualValue, explanation, comparisonData", "also": "src/i18n/dataTranslations.ts (it)"},
+      "shown": {"from": "questions", "id": "prison-population"},
+      "url": "https://ec.europa.eu/eurostat/databrowser/view/crim_pris_cap/default/table",
+      "probes": [{"kind": "eurostat", "dataset": "crim_pris_cap", "filters": {"geo": "CH", "indic_cr": "PRIS_ACT_CAP", "unit": "P_HTHAB"}}]
+    },
+    {
+      "id": "quiz/burglary-rate",
+      "label": "Quiz: burglaries per 100,000 inhabitants",
+      "publisher": "Eurostat / FSO",
+      "used_in": {"file": "src/data/questions.ts", "key": "burglary-rate: question, actualValue, explanation, comparisonData", "also": "src/i18n/dataTranslations.ts (it)"},
+      "shown": {"from": "questions", "id": "burglary-rate"},
+      "url": "https://ec.europa.eu/eurostat/databrowser/view/crim_off_cat/default/table",
+      "probes": [
+        {"kind": "eurostat", "dataset": "crim_off_cat", "filters": {"geo": "CH", "iccs": "ICCS0501", "unit": "P_HTHAB"}},
+        {"kind": "fso-pxweb", "cube": "px-x-1903020100_101", "compare_period": false, "why": "FSO counts quoted in the explanation; the question follows Eurostat's year"}
+      ]
+    },
+    {
+      "id": "quiz/nuclear-electricity",
+      "label": "Quiz: nuclear share of electricity production",
+      "publisher": "SFOE",
+      "used_in": {"file": "src/data/questions.ts", "key": "nuclear-electricity: question, actualValue, explanation, comparisonData", "also": "src/i18n/dataTranslations.ts (it)"},
+      "shown": {"from": "questions", "id": "nuclear-electricity"},
+      "url": "https://pubdb.bfe.admin.ch/de/publication/download/12681",
+      "probes": [{"kind": "http-regex", "url": "https://pubdb.bfe.admin.ch/de/sammlungen/elektrizitaetsstatistik", "pattern": "Schweizerische Elektrizit(?:ä|&auml;)tsstatistik\\s+(\\d{4})", "period": "max-year", "label": "SFOE publication list 'Elektrizitätsstatistik'", "page": "https://pubdb.bfe.admin.ch/de/sammlungen/elektrizitaetsstatistik", "why": "the quiz cites the SFOE 'Schweizerische Elektrizitätsstatistik' (2025: publication 12681); the collection page lists every edition by year"}]
+    },
+    {
+      "id": "quiz/co2-per-capita",
+      "label": "Quiz: CO2 per capita",
+      "publisher": "FOEN",
+      "used_in": {"file": "src/data/questions.ts", "key": "co2-per-capita: question, actualValue, explanation, comparisonData", "also": "src/i18n/dataTranslations.ts (it)"},
+      "shown": {"from": "questions", "id": "co2-per-capita"},
+      "url": "https://www.bafu.admin.ch/de/zustand-klima",
+      "probes": [],
+      "manual": {"last_checked": "2026-11-26", "why": "the greenhouse gas inventory comes out each April in documents with new addresses", "how": "look for the inventory 1990-<year> on bafu.admin.ch"}
+    },
+    {
+      "id": "quiz/renewable-energy-share",
+      "label": "Quiz: renewable share of final energy",
+      "publisher": "SFOE",
+      "used_in": {"file": "src/data/questions.ts", "key": "renewable-energy-share: question, actualValue, explanation, comparisonData", "also": "src/i18n/dataTranslations.ts (it)"},
+      "shown": {"from": "questions", "id": "renewable-energy-share"},
+      "url": "https://www.admin.ch/de/newnsb/YQtEZcK-D9fQ",
+      "probes": [{"kind": "fso-dam", "orderNr": "ind-d-21.02.30.0702.02.01"}]
+    },
+    {
+      "id": "quiz/recycling-rate",
+      "label": "Quiz: recycling rate of municipal waste",
+      "publisher": "FOEN / Eurostat",
+      "used_in": {"file": "src/data/questions.ts", "key": "recycling-rate: question, actualValue, explanation, comparisonData", "also": "src/i18n/dataTranslations.ts (it)"},
+      "shown": {"from": "questions", "id": "recycling-rate"},
+      "url": "https://www.admin.ch/de/newnsb/EcpWws7Ra2HcYI1J88uP4",
+      "probes": [{"kind": "eurostat", "dataset": "cei_wm011", "filters": {"geo": "CH"}, "why": "comparison chart; Eurostat has the Swiss recycling rate"}],
+      "manual": {"last_checked": "2026-11-26", "why": "the FOEN waste statistics come out in a yearly press release", "how": "look for the FOEN waste statistics of the next year (usually November)"}
+    },
+    {
+      "id": "quiz/train-punctuality",
+      "label": "Quiz: SBB punctuality",
+      "publisher": "SBB / Federal Council",
+      "used_in": {"file": "src/data/questions.ts", "key": "train-punctuality: question, actualValue, explanation, comparisonData", "also": "src/i18n/dataTranslations.ts (it)"},
+      "shown": {"from": "questions", "id": "train-punctuality"},
+      "url": "https://www.uvek.admin.ch/dam/de/sd-web/ZkrHkvQElJad/kurzbericht-br-sbb-2025-de.pdf",
+      "probes": [],
+      "manual": {"last_checked": "2026-11-26", "why": "SBB pages answer HTTP 403 to automated requests; the figure is in the yearly report", "how": "look for the SBB punctuality release of January"}
+    },
+    {
+      "id": "quiz/train-track-km",
+      "label": "Quiz: railway lines in km",
+      "publisher": "Eurostat / FSO",
+      "used_in": {"file": "src/data/questions.ts", "key": "train-track-km: question, actualValue, explanation, comparisonData", "also": "src/i18n/dataTranslations.ts (it)"},
+      "shown": {"from": "questions", "id": "train-track-km"},
+      "url": "https://ec.europa.eu/eurostat/databrowser/view/rail_if_line_tr/default/table",
+      "probes": [
+        {"kind": "eurostat", "dataset": "rail_if_line_tr", "filters": {"geo": "CH", "tra_infr": "TOTAL", "n_tracks": "TOTAL", "unit": "KM"}},
+        {"kind": "fso-dam", "orderNr": "je-d-11.03.01.01", "compare_period": false, "why": "FSO network table quoted in the explanation; its own years"}
+      ]
+    },
+    {
+      "id": "quiz/average-commute",
+      "label": "Quiz: average commuting time",
+      "publisher": "FSO",
+      "used_in": {"file": "src/data/questions.ts", "key": "average-commute: question, actualValue, explanation, comparisonData", "also": "src/i18n/dataTranslations.ts (it)"},
+      "shown": {"from": "questions", "id": "average-commute"},
+      "url": "https://www.bfs.admin.ch/asset/de/je-d-11.04.04.03",
+      "probes": [{"kind": "fso-dam", "orderNr": "je-d-11.04.04.03"}]
+    },
+    {
+      "id": "quiz/cars-per-capita",
+      "label": "Quiz: cars per 1,000 inhabitants",
+      "publisher": "FSO",
+      "used_in": {"file": "src/data/questions.ts", "key": "cars-per-capita: question, actualValue, explanation, comparisonData", "also": "src/i18n/dataTranslations.ts (it)"},
+      "shown": {"from": "questions", "id": "cars-per-capita"},
+      "url": "https://www.bfs.admin.ch/asset/de/je-d-11.03.02.01.02",
+      "probes": [
+        {"kind": "fso-dam", "orderNr": "je-d-11.03.02.01.02"},
+        {"kind": "eurostat", "dataset": "road_eqs_carhab", "filters": {"geo": "CH", "unit": "NR"}, "compare_period": false, "why": "comparison chart; Eurostat may run a year behind"}
+      ]
+    },
+    {
+      "id": "quiz/ahv-funding",
+      "label": "Quiz: AHV financial outlook",
+      "publisher": "FSIO",
+      "used_in": {"file": "src/data/questions.ts", "key": "ahv-funding: question, actualValue, explanation", "also": "src/i18n/dataTranslations.ts (it)"},
+      "shown": {"from": "questions", "id": "ahv-funding"},
+      "url": "https://www.bsv.admin.ch/de/newnsb/ycAZ-AX4nU4qc3hf5qwJP",
+      "probes": [],
+      "manual": {"last_checked": "2026-11-26", "why": "the FSIO publishes a new financial outlook in a press release, usually in summer and after votes", "how": "look for the latest 'Finanzperspektiven AHV' on bsv.admin.ch"}
+    },
+    {
+      "id": "quiz/poverty-rate",
+      "label": "Quiz: absolute poverty rate",
+      "publisher": "FSO",
+      "used_in": {"file": "src/data/questions.ts", "key": "poverty-rate: question, actualValue, explanation, comparisonData", "also": "src/i18n/dataTranslations.ts (it)"},
+      "shown": {"from": "questions", "id": "poverty-rate"},
+      "url": "https://statistik.admin.ch/de/asset/36395150",
+      "probes": [{"kind": "fso-dam", "orderNr": "je-d-20.03.02.01.01"}]
+    }
+  ]
+}
