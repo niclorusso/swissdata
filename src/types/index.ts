@@ -59,6 +59,7 @@ export interface QuizQuestion {
   sourceUrl: string;
   context?: string;
   comparisonData?: ComparisonPoint[];
+  comparisonLabel?: string; // title of the chart when it shows another measure than the question
 }
 
 

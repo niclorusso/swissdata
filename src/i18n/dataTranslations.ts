@@ -133,7 +133,7 @@ const indicatorTranslationsIT: Record<
 // Italian translations for quiz question fields
 const questionTranslationsIT: Record<
   string,
-  { question: string; explanation: string }
+  { question: string; explanation: string; comparisonLabel?: string }
 > = {
   "unemployment-rate": {
     question:
@@ -155,9 +155,9 @@ const questionTranslationsIT: Record<
   },
   "part-time-rate": {
     question:
-      "Quale percentuale degli occupati in Svizzera lavorava a tempo parziale nel 2025 (15-64 anni)?",
+      "Quale percentuale degli occupati in Svizzera lavorava a tempo parziale nel 2025 (15-64 anni, definizione Eurostat)?",
     explanation:
-      "Nel 2025 il 39,8% degli occupati tra 15 e 64 anni in Svizzera lavorava a tempo parziale, la seconda quota più alta del confronto dopo i Paesi Bassi (42,2%). La media UE era del 17,7%. Tra le donne occupate in Svizzera la quota era del 61,3%. Fonte: rilevazione sulle forze di lavoro dell'UST, pubblicata da Eurostat.",
+      "Nel 2025 il 39,8% degli occupati tra 15 e 64 anni in Svizzera lavorava a tempo parziale, la seconda quota più alta del confronto dopo i Paesi Bassi (42,2%). La media UE era del 17,7%. Tra le donne occupate in Svizzera la quota era del 61,3%. È la definizione di Eurostat, che conta chi dichiara di lavorare a tempo parziale (fonte: rilevazione sulle forze di lavoro dell'UST, pubblicata da Eurostat). La definizione dell'UST conta invece tutti gli occupati dai 15 anni in su con un grado d'occupazione inferiore al 90% e dà il 38,7% per il 2025.",
   },
   "weekly-work-hours": {
     question:
@@ -167,9 +167,9 @@ const questionTranslationsIT: Record<
   },
   "purchasing-power-rank": {
     question:
-      "In che posizione era la Svizzera tra i Paesi OCSE per salario medio annuo a parità di potere d'acquisto nel 2024?",
+      "In che posizione era la Svizzera tra i Paesi OCSE per salario medio annuo a parità di potere d'acquisto nel 2025?",
     explanation:
-      "A parità di potere d'acquisto, nel 2024 il salario medio annuo in Svizzera era di 92'161 dollari: secondo posto tra i 38 Paesi OCSE, dietro al Lussemburgo (97'462 dollari) e davanti agli Stati Uniti (85'546 dollari). Il grafico mostra la posizione dei primi otto Paesi.",
+      "A parità di potere d'acquisto, nel 2025 il salario medio annuo in Svizzera era di 92'285 dollari: secondo posto tra i 33 Paesi OCSE con un dato per il 2025, dietro al Lussemburgo (98'530 dollari) e davanti agli Stati Uniti (86'977 dollari). Il grafico mostra la posizione dei primi otto di questi Paesi. Per l'Islanda, quarta nel 2024, il dato del 2025 non c'è ancora.",
   },
   "median-salary": {
     question:
@@ -205,7 +205,7 @@ const questionTranslationsIT: Record<
     question:
       "Quante tonnellate d'oro possiede la Banca nazionale svizzera?",
     explanation:
-      "La BNS possiede 1'040 tonnellate d'oro (1'039,9 nella tabella del World Gold Council di febbraio 2026): l'ottava riserva ufficiale di quella tabella, contando anche il FMI. Circa il 70% è custodito in Svizzera, il 20% presso la Banca d'Inghilterra e il 10% presso la Banca del Canada. Nel 2014 il popolo ha respinto un'iniziativa che avrebbe obbligato la BNS a tenere in oro almeno il 20% dei suoi attivi.",
+      "La BNS possiede 1'040 tonnellate d'oro (1'039,9 nei dati del FMI per settembre 2026). Nella tabella del World Gold Council di febbraio 2026 era l'ottava riserva ufficiale, contando anche il FMI. Circa il 70% è custodito in Svizzera, il 20% presso la Banca d'Inghilterra e il 10% presso la Banca del Canada. Nel 2014 il popolo ha respinto un'iniziativa che avrebbe obbligato la BNS a tenere in oro almeno il 20% dei suoi attivi. Il grafico mostra i dati del FMI per settembre e ottobre 2026 (Russia: novembre 2025, ultimo dato comunicato): la riserva della Cina ora supera quella della Russia.",
   },
   "wealth-managed": {
     question:
@@ -215,9 +215,9 @@ const questionTranslationsIT: Record<
   },
   "number-of-banks": {
     question:
-      "Quante banche c'erano in Svizzera alla fine del 2024?",
+      "Quante banche c'erano in Svizzera alla fine del 2025?",
     explanation:
-      "A fine 2024 la Svizzera aveva 230 banche, contro 375 nel 2000 e 275 nel 2014 (BNS). Il totale del 2024 comprende 24 banche cantonali, 58 banche regionali e casse di risparmio, 40 banche borsistiche, 85 banche estere, 5 banchieri privati, il gruppo Raiffeisen e 1 grande banca.",
+      "A fine 2025 la Svizzera aveva 225 banche (2024: 230), contro 375 nel 2000 e 275 nel 2014 (BNS). Il totale del 2025 comprende 24 banche cantonali, 2 grandi banche, 58 banche regionali e casse di risparmio, il gruppo Raiffeisen (contato una volta), 37 banche borsistiche, 15 altri istituti bancari, 5 banchieri privati, 61 banche in mani straniere e 22 succursali di banche estere.",
   },
   "asylum-budget": {
     question:
@@ -226,9 +226,9 @@ const questionTranslationsIT: Record<
       "Il settore «Migrazione» vale circa il 4,1% del preventivo federale 2026 (3,75 miliardi di CHF su 91,1 miliardi). La maggior parte è versata ai Cantoni per l'aiuto sociale a richiedenti l'asilo e rifugiati. Per confronto, la sicurezza assorbe l'8,6%, formazione e ricerca il 9,9% e i trasporti l'11,8%.",
   },
   "public-debt-gdp": {
-    question: "Qual è il debito pubblico svizzero in percentuale del PIL (debito lordo, definizione FMI)?",
+    question: "Qual era il debito pubblico svizzero in percentuale del PIL nel 2025 (debito lordo, definizione FMI)?",
     explanation:
-      "Secondo la definizione di debito lordo del FMI, il debito di Confederazione, Cantoni, Comuni e assicurazioni sociali insieme era il 40,2% del PIL nel 2025, uno dei più bassi tra i paesi sviluppati. Secondo la definizione di Maastricht, più ristretta e usata nell'UE, era il 24,2%. La norma costituzionale del 'freno all'indebitamento', in vigore dal 2003, impone bilanci federali in pareggio nell'arco del ciclo economico.",
+      "Secondo la definizione di debito lordo del FMI, il debito di Confederazione, Cantoni, Comuni e assicurazioni sociali insieme era il 40,1% del PIL nel 2025 (stima dell'Amministrazione federale delle finanze, settembre 2026), uno dei più bassi tra i paesi sviluppati. Secondo la definizione di Maastricht, più ristretta e usata nell'UE, era il 23,4%. La norma costituzionale del 'freno all'indebitamento', in vigore dal 2003, impone bilanci federali in pareggio nell'arco del ciclo economico.",
   },
   "tax-revenue-gdp": {
     question:
@@ -238,15 +238,16 @@ const questionTranslationsIT: Record<
   },
   "defense-spending": {
     question:
-      "Quale percentuale del bilancio federale svizzero è destinata alla difesa?",
+      "Quale percentuale del preventivo federale 2026 è destinata alla difesa militare?",
     explanation:
-      "La difesa militare è circa il 7,2% del preventivo federale 2026 (6,6 miliardi di CHF su 91,1 miliardi), ovvero circa lo 0,8% del PIL. L'intero settore «sicurezza», che aggiunge polizia, servizio informazioni e protezione della popolazione, è l'8,6% (7,8 miliardi). È meno della soglia del 2% del PIL raccomandata dalla NATO.",
+      "La difesa militare è circa il 7,2% del preventivo federale 2026 (6,6 miliardi di CHF su 91,1 miliardi). L'intero settore «sicurezza», che aggiunge polizia, servizio informazioni e protezione della popolazione, è l'8,6% (7,8 miliardi). Il grafico usa un'altra misura, l'unica disponibile per tutti i Paesi: la spesa militare in rapporto al PIL nel 2025 secondo il SIPRI, che per la Svizzera indica lo 0,8%.",
+    comparisonLabel: "Spesa militare in % del PIL, 2025 (SIPRI)",
   },
   "gdp-growth-years": {
     question:
       "In quanti dei 10 anni dal 2016 al 2025 il PIL reale della Svizzera è cresciuto?",
     explanation:
-      "Il PIL reale svizzero è cresciuto in 9 dei 10 anni dal 2016 al 2025. L'unica eccezione è il 2020, quando è sceso del 2,3%. La crescita è stata dell'1,4% nel 2024 e dell'1,3% nel 2025. Fonte: contabilità nazionale pubblicata da Eurostat.",
+      "Il PIL reale svizzero è cresciuto in 9 dei 10 anni dal 2016 al 2025. L'unica eccezione è il 2020, quando è sceso del 2,3%. La crescita è stata dell'1,5% nel 2024 e dell'1,6% nel 2025 (Ufficio federale di statistica, contabilità nazionale del 25 agosto 2026). Il confronto usa i dati Eurostat.",
   },
   "population-density": {
     question:
@@ -318,7 +319,7 @@ const questionTranslationsIT: Record<
     question:
       "Qual era la speranza di vita alla nascita in Svizzera nel 2024?",
     explanation:
-      "Nel 2024 la speranza di vita alla nascita era di 84,2 anni per i due sessi insieme (Eurostat, su dati dell'Ufficio federale di statistica): 85,9 per le donne e 82,4 per gli uomini. I dati provvisori del 2025 sono 86,3 e 82,7. Nel 1990 erano 80,8 e 74,0: il divario tra donne e uomini è sceso da 6,8 a 3,6 anni. Il confronto riporta i dati OCSE del 2023, quando la Svizzera era a 84,3.",
+      "Nel 2024 la speranza di vita alla nascita era di 84,2 anni per i due sessi insieme (Eurostat, su dati dell'Ufficio federale di statistica): 85,9 per le donne e 82,4 per gli uomini. I dati del 2025 sono 86,3 e 82,7. Nel 1990 erano 80,8 e 74,0: il divario tra donne e uomini è sceso da 6,8 a 3,6 anni. Il confronto riporta i dati OCSE del 2023, quando la Svizzera era a 84,3.",
   },
   "hospital-beds": {
     question:
@@ -330,7 +331,7 @@ const questionTranslationsIT: Record<
     question:
       "Quale percentuale del PIL ha speso la Svizzera per la sanità nel 2024?",
     explanation:
-      "Nel 2024 la Svizzera ha speso per la sanità l'11,8% del PIL, secondo l'OCSE: meno degli Stati Uniti (17,2%) e della Germania (12,3%), e più della media OCSE (9,3%). L'Ufficio federale di statistica, che usa una definizione propria, indica per il 2024 l'11,4% del PIL: 97 miliardi di franchi, pari a 10 792 franchi a persona.",
+      "Nel 2024 la Svizzera ha speso per la sanità l'11,4% del PIL (dato provvisorio dell'Ufficio federale di statistica, ripreso dall'OCSE): 97 miliardi di franchi, pari a 10 792 franchi a persona. È meno degli Stati Uniti (17,2%) e della Germania (12,2%) e allo stesso livello della Francia (11,3%). Il confronto riporta i dati OCSE per il 2024.",
   },
   "university-graduation": {
     question:
@@ -352,9 +353,9 @@ const questionTranslationsIT: Record<
   },
   "homeownership-rate": {
     question:
-      "Quale quota delle abitazioni occupate in Svizzera era abitata dal proprietario nel 2022?",
+      "Quale quota delle abitazioni occupate in Svizzera era abitata dal proprietario nel 2024?",
     explanation:
-      "Nel 2022 il 35,9% delle abitazioni occupate era abitato dal proprietario (Ufficio federale di statistica, rilevazione strutturale). Il tasso era del 38,4% nel 2015 e del 36,2% nel 2020. Il confronto usa un'altra misura: la quota della popolazione che vive in un'abitazione di proprietà nel 2024 secondo Eurostat, pari al 42,0% per la Svizzera e al 68,4% nell'UE.",
+      "Nel 2024 il 35,7% delle abitazioni occupate era abitato dal proprietario (Ufficio federale di statistica, rilevazione strutturale). Il tasso era del 38,4% nel 2015, del 36,2% nel 2020 e del 35,9% nel 2022. Il confronto usa un'altra misura: la quota della popolazione che vive in un'abitazione di proprietà nel 2024 secondo Eurostat, pari al 42,0% per la Svizzera e al 68,4% nell'UE.",
   },
   "average-rent": {
     question:
@@ -430,15 +431,15 @@ const questionTranslationsIT: Record<
   },
   "average-commute": {
     question:
-      "Quanti minuti durava in media il tragitto di sola andata verso il lavoro in Svizzera nel 2022?",
+      "Quanti minuti durava in media il tragitto di sola andata verso il lavoro in Svizzera nel 2024?",
     explanation:
-      "Nel 2022 i pendolari impiegavano in media 29,6 minuti per raggiungere il posto di lavoro, su una distanza media di 13,7 km (Ufficio federale di statistica, ultima rilevazione pubblicata). Per il 36% il tragitto durava al massimo 15 minuti, per circa l'8% più di un'ora. Metà dei 3,6 milioni di pendolari usava l'auto come mezzo principale, il 16% il treno e il 13% bus o tram.",
+      "Nel 2024 i pendolari impiegavano in media 30,2 minuti per raggiungere il posto di lavoro, su una distanza media di 14,0 km (2022: 29,6 minuti, 13,7 km). Per il 34,6% il tragitto durava al massimo 15 minuti, per l'8,8% più di un'ora (Ufficio federale di statistica, tabella T 11.4.4.3).",
   },
   "cars-per-capita": {
     question:
-      "Quante automobili erano immatricolate ogni 1'000 abitanti in Svizzera nel 2024?",
+      "Quante automobili erano immatricolate ogni 1'000 abitanti in Svizzera nel 2025?",
     explanation:
-      "Nel 2024 in Svizzera erano immatricolate 4'796'090 automobili, 535 ogni 1'000 abitanti (Ufficio federale di statistica). Le auto elettriche a batteria erano il 19,0% delle nuove immatricolazioni nel 2024 (20,7% nel 2023) e il 4,2% del parco circolante. Il confronto mostra i dati Eurostat per il 2024, che usano un metodo leggermente diverso e per la Svizzera indicano 542.",
+      "Nel 2025 in Svizzera erano immatricolate 4'839'465 automobili, 535 ogni 1'000 abitanti (Ufficio federale di statistica; il dato del 2024 è stato rivisto a 536). Le auto elettriche a batteria erano il 22,7% delle nuove immatricolazioni nel 2025 e il 5,2% del parco circolante (2024: 4,2%). Il confronto mostra i dati Eurostat per il 2024, che usano un metodo leggermente diverso e per la Svizzera indicano 542.",
   },
   "ahv-funding": {
     question:
@@ -723,9 +724,9 @@ export function getLocalizedIndicator(
 // Helper function to get localized question fields
 export function getLocalizedQuestion(
   id: string,
-  fields: { question: string; explanation: string },
+  fields: { question: string; explanation: string; comparisonLabel?: string },
   locale: Locale
-): { question: string; explanation: string } {
+): { question: string; explanation: string; comparisonLabel?: string } {
   if (locale === "en") return fields;
   // For now, German and French fall back to English for quiz questions
   // (adding full German/French quiz translations would be a large undertaking)
@@ -735,5 +736,6 @@ export function getLocalizedQuestion(
   return {
     question: t.question,
     explanation: t.explanation,
+    comparisonLabel: t.comparisonLabel ?? fields.comparisonLabel,
   };
 }

@@ -104,7 +104,7 @@ export function RevealAnimation({ question, result }: RevealAnimationProps) {
           <div className="mt-4 sm:mt-6">
             <p className="text-xs sm:text-sm font-medium text-swiss-gray-500 mb-3 flex items-center gap-2">
               <BarChart3 className="h-4 w-4" />
-              {t.reveal.internationalComparison}
+              {question.comparisonLabel ?? t.reveal.internationalComparison}
             </p>
             <div style={{ height: chartHeight }}>
               <ResponsiveContainer width="100%" height="100%">
