@@ -70,7 +70,6 @@ export const translations = {
     home: {
       title: "Official statistics on Switzerland",
       lead: "The main figures in one place, each with its official source and the year it refers to.",
-      independent: "Independent site by Nicola Lo Russo, not run by the Confederation",
       allIndicators: "All {indicatorCount} indicators year by year →",
     },
 
@@ -305,7 +304,6 @@ export const translations = {
     home: {
       title: "Statistiche ufficiali sulla Svizzera",
       lead: "Le cifre principali in un unico posto, ognuna con la fonte ufficiale e l’anno a cui si riferisce.",
-      independent: "Sito indipendente di Nicola Lo Russo, non della Confederazione",
       allIndicators: "Tutti i {indicatorCount} indicatori anno per anno →",
     },
 
@@ -539,7 +537,6 @@ export const translations = {
     home: {
       title: "Amtliche Statistiken zur Schweiz",
       lead: "Die wichtigsten Zahlen an einem Ort, jede mit ihrer amtlichen Quelle und dem Jahr, auf das sie sich bezieht.",
-      independent: "Unabhängige Website von Nicola Lo Russo, nicht des Bundes",
       allIndicators: "Alle {indicatorCount} Indikatoren Jahr für Jahr →",
     },
 
@@ -774,7 +771,6 @@ export const translations = {
     home: {
       title: "Statistiques officielles sur la Suisse",
       lead: "Les principaux chiffres réunis en un seul endroit, chacun avec sa source officielle et l’année à laquelle il se rapporte.",
-      independent: "Site indépendant de Nicola Lo Russo, pas de la Confédération",
       allIndicators: "Les {indicatorCount} indicateurs année par année →",
     },
 

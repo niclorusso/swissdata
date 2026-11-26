@@ -22,15 +22,11 @@ export default function HomePage() {
 
   return (
     <div className="container mx-auto px-4 pt-6 pb-8 sm:pt-10 sm:pb-12 space-y-8 sm:space-y-12">
-      {/* What the site is, who makes it and how current the figures are; the figures follow directly */}
+      {/* What the site is and how current the figures are; who makes it is said in the footer */}
       <section className="max-w-[72ch] space-y-3">
         <h1 className="text-[1.75rem] sm:text-[2.5rem] font-bold leading-tight tracking-[-0.02em] text-ink">{t.home.title}</h1>
         <p className="text-base sm:text-lg text-swiss-gray-600">{t.home.lead}</p>
         <p className="text-sm text-subtle">
-          <Link href={localePath(locale, "/about")} className="underline underline-offset-[3px] hover:text-ink">
-            {t.home.independent}
-          </Link>
-          {" · "}
           <span data-last-check="">{t.common.lastCheck.replace("{lastCheck}", formatLongDate(DATA_CHECKED, locale))}</span>
         </p>
       </section>
