@@ -607,8 +607,8 @@ const indicatorExplanations: Record<string, Record<Locale, { what: ExplanationTe
         statistics: "Public education expenditure as % of GDP.",
       },
       why: {
-        card: "Shows government investment in human capital. Switzerland's dual education system (vocational + academic) is highly valued.",
-        statistics: "Shows investment in human capital. Switzerland values both vocational and academic paths.",
+        card: "Shows how much the public sector spends on schools, vocational training and universities. About two thirds of young people in Switzerland go through vocational education and training (SERI, 2025).",
+        statistics: "Shows how much the public sector spends on schools, vocational training and universities.",
       },
     },
     it: {
@@ -617,8 +617,8 @@ const indicatorExplanations: Record<string, Record<Locale, { what: ExplanationTe
         statistics: "Spesa pubblica per l'istruzione in % del PIL.",
       },
       why: {
-        card: "Mostra l'investimento pubblico nel capitale umano. Il sistema duale svizzero (professionale + accademico) è molto apprezzato.",
-        statistics: "Mostra l'investimento nel capitale umano. La Svizzera valorizza sia il percorso professionale che accademico.",
+        card: "Mostra quanto spende il settore pubblico per scuole, formazione professionale e università. Circa due terzi dei giovani in Svizzera seguono una formazione professionale di base (SEFRI, 2025).",
+        statistics: "Mostra quanto spende il settore pubblico per scuole, formazione professionale e università.",
       },
     },
     de: {
@@ -627,8 +627,8 @@ const indicatorExplanations: Record<string, Record<Locale, { what: ExplanationTe
         statistics: "Öffentliche Bildungsausgaben in % des BIP.",
       },
       why: {
-        card: "Zeigt staatliche Investitionen in Humankapital. Das duale Schweizer Bildungssystem (Berufs- + Hochschulbildung) wird sehr geschätzt.",
-        statistics: "Zeigt Investitionen in Humankapital. Die Schweiz schätzt sowohl berufliche als auch akademische Wege.",
+        card: "Zeigt, wie viel die öffentliche Hand für Schulen, Berufsbildung und Hochschulen ausgibt. Rund zwei Drittel der Jugendlichen in der Schweiz absolvieren eine berufliche Grundbildung (SBFI, 2025).",
+        statistics: "Zeigt, wie viel die öffentliche Hand für Schulen, Berufsbildung und Hochschulen ausgibt.",
       },
     },
     fr: {
@@ -637,8 +637,8 @@ const indicatorExplanations: Record<string, Record<Locale, { what: ExplanationTe
         statistics: "Dépenses publiques d'éducation en % du PIB.",
       },
       why: {
-        card: "Montre l'investissement public dans le capital humain. Le système dual suisse (formation professionnelle + académique) est très apprécié.",
-        statistics: "Montre l'investissement dans le capital humain. La Suisse valorise les voies professionnelles et académiques.",
+        card: "Montre combien les pouvoirs publics dépensent pour les écoles, la formation professionnelle et les hautes écoles. Environ deux tiers des jeunes en Suisse suivent une formation professionnelle initiale (SEFRI, 2025).",
+        statistics: "Montre combien les pouvoirs publics dépensent pour les écoles, la formation professionnelle et les hautes écoles.",
       },
     },
   },

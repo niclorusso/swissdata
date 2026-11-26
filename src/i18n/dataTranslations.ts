@@ -114,7 +114,7 @@ const indicatorTranslationsIT: Record<
     description:
       "Spesa pubblica per l'istruzione in percentuale del PIL",
     context:
-      "La Svizzera investe molto nella formazione professionale: circa il 60% dei giovani sceglie un apprendistato.",
+      "Nel 2023 Confederazione, Cantoni e Comuni hanno speso 45,5 miliardi di franchi per l'istruzione, il 18,1% della spesa pubblica totale e il 5,5% del PIL (2022: 42,7 miliardi di franchi, 5,2%).",
   },
   "poverty-rate": {
     name: "Tasso di povertà (assoluta)",
@@ -346,9 +346,9 @@ const questionTranslationsIT: Record<
   },
   "education-spending-gdp": {
     question:
-      "Quale percentuale del PIL la Svizzera spende per l'istruzione?",
+      "A quale percentuale del PIL corrispondeva la spesa pubblica per l'istruzione in Svizzera nel 2023?",
     explanation:
-      "La spesa pubblica per l'istruzione era il 5,6% del PIL nel 2021 (41,3 miliardi di CHF) e il 5,6% nel 2022 (dato provvisorio), secondo l'Ufficio federale di statistica. La maggior parte dei fondi viene da Cantoni e Comuni (scuola dell'obbligo) e da Confederazione e Cantoni per università e formazione professionale. Gli altri paesi mostrati vengono dalle statistiche OCSE, che usano una definizione leggermente diversa.",
+      "Nel 2023 la spesa pubblica per l'istruzione era il 5,5% del PIL (45,5 miliardi di CHF), dopo il 5,2% nel 2022, secondo l'Ufficio federale di statistica. La maggior parte dei fondi viene da Cantoni e Comuni (scuola dell'obbligo) e da Confederazione e Cantoni per università e formazione professionale. Il confronto usa un'altra misura: la spesa delle amministrazioni pubbliche per l'istruzione, dal livello primario al terziario, nel 2023 secondo l'OCSE, che per la Svizzera indica il 4,4%.",
   },
   "homeownership-rate": {
     question:
@@ -559,7 +559,7 @@ const indicatorTranslationsDE: Record<
     name: "Bildungsausgaben (% des BIP)",
     shortName: "Bildung",
     description: "Öffentliche Bildungsausgaben in Prozent des BIP",
-    context: "Die Schweiz investiert stark in die Berufsbildung – etwa 60% der Jugendlichen wählen eine Lehre.",
+    context: "2023 gaben Bund, Kantone und Gemeinden 45,5 Milliarden Franken für die Bildung aus, 18,1% der gesamten öffentlichen Ausgaben und 5,5% des BIP (2022: 42,7 Milliarden Franken, 5,2%).",
   },
   "poverty-rate": {
     name: "Armutsquote (absolut)",
@@ -680,7 +680,7 @@ const indicatorTranslationsFR: Record<
     name: "Dépenses d'éducation (% du PIB)",
     shortName: "Éducation",
     description: "Dépenses publiques d'éducation en pourcentage du PIB",
-    context: "La Suisse investit beaucoup dans la formation professionnelle – environ 60% des jeunes choisissent un apprentissage.",
+    context: "En 2023 la Confédération, les cantons et les communes ont dépensé 45,5 milliards de francs pour l'éducation, soit 18,1% des dépenses publiques totales et 5,5% du PIB (2022 : 42,7 milliards de francs, 5,2%).",
   },
   "poverty-rate": {
     name: "Taux de pauvreté (absolue)",
