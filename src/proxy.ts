@@ -12,6 +12,10 @@ import { DEFAULT_LOCALE, LOCALE_COOKIE, isLocale, localeFromAcceptLanguage } fro
  * every page through one function on /*, and Netlify checks functions before _redirects
  * (https://docs.netlify.com/resources/troubleshooting/request-chain/), so those rules would not be reached
  * for these paths. This proxy runs on Netlify as an edge function, before that function.
+ *
+ * Fallback: each of these addresses also has a prerendered page (src/app/(no-lang), src/components/LanguageRedirect.tsx)
+ * that makes the same choice in the browser (cookie, then navigator.languages, else English) and shows the four
+ * language versions as links without JavaScript. When this proxy runs it answers first and that page is never sent.
  */
 export function proxy(request: NextRequest) {
   const chosen = request.cookies.get(LOCALE_COOKIE)?.value;
