@@ -4,10 +4,12 @@ An interactive web app for exploring real statistics about Switzerland's economy
 
 ## Features
 
-- **Dashboard** — Key indicators across economic, demographic, and social categories with trend charts
-- **Canton Map** — Interactive SVG map of Switzerland's 26 cantons with tooltips and data overlays
-- **Quiz** — Test your knowledge of Swiss statistics with 50+ questions and score tracking
-- **Multilingual** — i18n support with language switching
+- **Dashboard** (`/`) — Key indicators in three categories: economic, demographic and social
+- **Statistics** (`/statistics`) — One chart per indicator with a selectable time range, a category filter and the source of each series
+- **Canton Map** (`/cantons`) — SVG map of the 26 cantons, coloured by a selectable indicator, with a detail panel and a sortable table
+- **Quiz** (`/quiz`) — 53 questions on Swiss statistics, answered with a slider, with a score
+- **About** (`/about`)
+- **Four languages** — English, Italian, German and French. The texts are in `src/i18n/`; the chosen language is stored in the browser
 
 ## Data Sources
 
@@ -18,7 +20,7 @@ An interactive web app for exploring real statistics about Switzerland's economy
 
 ## Tech Stack
 
-- [Next.js 15](https://nextjs.org) (App Router)
+- [Next.js 16](https://nextjs.org) (App Router)
 - [React 19](https://react.dev)
 - [TypeScript](https://www.typescriptlang.org)
 - [Tailwind CSS](https://tailwindcss.com)
@@ -34,6 +36,16 @@ pnpm dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000).
+
+## Data scripts
+
+`scripts/data/build_cantons.py` builds `src/data/cantons.ts` (the figures of the canton map and table) from the official tables listed at the top of the script. `src/data/cantons.ts` is a generated file: to update a value, change the reference year or the source in the script and run it again.
+
+```bash
+python3 scripts/data/build_cantons.py
+```
+
+It needs Python 3.9 or later (standard library only) and `pdftotext` (poppler), because two sources are published only as PDF.
 
 ## License
 
