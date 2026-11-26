@@ -44,7 +44,7 @@ function ChartCard({ indicator, startYear }: { indicator: Indicator; startYear: 
           <h3 className="text-base font-semibold leading-snug text-ink">{indicator.shortName}</h3>
           <MoreInfoButton info={info} label={t.indicatorCard.more.replace("{title}", indicator.shortName)} className="-ml-1.5 mr-0" />
         </div>
-        <span className="text-xl sm:text-2xl font-bold swiss-number text-ink text-right shrink-0">
+        <span data-value="" className="text-xl sm:text-2xl font-bold swiss-number text-ink text-right shrink-0">
           {formatIndicatorValue(indicator, locale)}
         </span>
       </div>

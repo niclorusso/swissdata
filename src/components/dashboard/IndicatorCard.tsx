@@ -50,7 +50,7 @@ export function IndicatorCard({ indicator }: { indicator: Indicator }) {
         <MoreInfoButton info={info} label={t.indicatorCard.more.replace("{title}", indicator.shortName)} />
       </div>
 
-      <p className="mt-2 text-[1.875rem] leading-tight font-bold swiss-number text-ink">
+      <p data-value="" className="mt-2 text-[1.875rem] leading-tight font-bold swiss-number text-ink">
         {formatIndicatorValue(indicator, locale)}
       </p>
       <p data-unit-line="" className="mt-1 text-sm text-swiss-gray-600">
