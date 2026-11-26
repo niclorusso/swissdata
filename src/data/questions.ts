@@ -726,7 +726,7 @@ export const questions: QuizQuestion[] = [
     maxValue: 90,
     actualValue: 84.2,
     explanation:
-      "In 2024 life expectancy at birth was 84.2 years for both sexes together (Eurostat, from Federal Statistical Office data): 85.9 for women and 82.4 for men. The figures for 2025 are 86.3 and 82.7. In 1990 they were 80.8 and 74.0: the gap between women and men has narrowed from 6.8 to 3.6 years. The comparison shows OECD figures for 2023, when Switzerland stood at 84.3.",
+      "In 2024 life expectancy at birth was 84.2 years for both sexes together (Eurostat, from Federal Statistical Office data): 85.9 for women and 82.4 for men. The figures for 2025 are 86.3 and 82.7 (published as provisional on 18 June 2026; the FSO table of 24 September 2026 has the same values). In 1990 they were 80.8 and 74.0: the gap between women and men has narrowed from 6.8 to 3.6 years. The comparison shows OECD figures for 2023, when Switzerland stood at 84.3.",
     source: "Eurostat and Federal Statistical Office (FSO); OECD Health at a Glance 2025 for the comparison",
     sourceUrl: "https://ec.europa.eu/eurostat/databrowser/view/demo_mlexpec/default/table",
     comparisonData: [

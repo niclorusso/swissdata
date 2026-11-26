@@ -86,7 +86,7 @@ const indicatorTranslationsIT: Record<
     name: "Speranza di vita alla nascita",
     shortName: "Speranza di vita",
     description: "Speranza di vita alla nascita, entrambi i sessi",
-    context: "Nel 2024 la speranza di vita alla nascita era di 82,4 anni per gli uomini e 85,9 per le donne. Dati dell'UST per il 2025: 82,7 e 86,3. Dopo il calo del 2020 (83,1) il valore complessivo è dal 2023 sopra il livello del 2019 (83,8).",
+    context: "Nel 2024 la speranza di vita alla nascita era di 82,4 anni per gli uomini e 85,9 per le donne. Dati dell'UST per il 2025: 82,7 e 86,3 (pubblicati come provvisori il 18 giugno 2026; la tabella dell'UST del 24 settembre 2026 riporta gli stessi valori). Dopo il calo del 2020 (83,1) il valore complessivo è dal 2023 sopra il livello del 2019 (83,8).",
   },
   "crime-rate-per-1000": {
     name: "Reati del Codice penale per 1'000 abitanti",
@@ -319,7 +319,7 @@ const questionTranslationsIT: Record<
     question:
       "Qual era la speranza di vita alla nascita in Svizzera nel 2024?",
     explanation:
-      "Nel 2024 la speranza di vita alla nascita era di 84,2 anni per i due sessi insieme (Eurostat, su dati dell'Ufficio federale di statistica): 85,9 per le donne e 82,4 per gli uomini. I dati del 2025 sono 86,3 e 82,7. Nel 1990 erano 80,8 e 74,0: il divario tra donne e uomini è sceso da 6,8 a 3,6 anni. Il confronto riporta i dati OCSE del 2023, quando la Svizzera era a 84,3.",
+      "Nel 2024 la speranza di vita alla nascita era di 84,2 anni per i due sessi insieme (Eurostat, su dati dell'Ufficio federale di statistica): 85,9 per le donne e 82,4 per gli uomini. I dati del 2025 sono 86,3 e 82,7 (pubblicati come provvisori il 18 giugno 2026; la tabella dell'UST del 24 settembre 2026 riporta gli stessi valori). Nel 1990 erano 80,8 e 74,0: il divario tra donne e uomini è sceso da 6,8 a 3,6 anni. Il confronto riporta i dati OCSE del 2023, quando la Svizzera era a 84,3.",
   },
   "hospital-beds": {
     question:
@@ -536,7 +536,7 @@ const indicatorTranslationsDE: Record<
     name: "Lebenserwartung bei Geburt",
     shortName: "Lebenserwartung",
     description: "Lebenserwartung bei Geburt, beide Geschlechter",
-    context: "2024 betrug die Lebenserwartung bei Geburt 82,4 Jahre für Männer und 85,9 für Frauen. Zahlen des BFS für 2025: 82,7 und 86,3. Nach dem Rückgang von 2020 (83,1) liegt der Gesamtwert seit 2023 über dem Stand von 2019 (83,8).",
+    context: "2024 betrug die Lebenserwartung bei Geburt 82,4 Jahre für Männer und 85,9 für Frauen. Zahlen des BFS für 2025: 82,7 und 86,3 (am 18. Juni 2026 als provisorisch veröffentlicht; die BFS-Tabelle vom 24. September 2026 enthält dieselben Werte). Nach dem Rückgang von 2020 (83,1) liegt der Gesamtwert seit 2023 über dem Stand von 2019 (83,8).",
   },
   "crime-rate-per-1000": {
     name: "Straftaten nach Strafgesetzbuch pro 1'000 Einwohner",
@@ -657,7 +657,7 @@ const indicatorTranslationsFR: Record<
     name: "Espérance de vie à la naissance",
     shortName: "Espérance de vie",
     description: "Espérance de vie à la naissance, les deux sexes",
-    context: "En 2024 l'espérance de vie à la naissance était de 82,4 ans pour les hommes et de 85,9 pour les femmes. Chiffres de l'OFS pour 2025 : 82,7 et 86,3. Après la baisse de 2020 (83,1), la valeur globale dépasse depuis 2023 le niveau de 2019 (83,8).",
+    context: "En 2024 l'espérance de vie à la naissance était de 82,4 ans pour les hommes et de 85,9 pour les femmes. Chiffres de l'OFS pour 2025 : 82,7 et 86,3 (publiés comme provisoires le 18 juin 2026 ; le tableau de l'OFS du 24 septembre 2026 contient les mêmes valeurs). Après la baisse de 2020 (83,1), la valeur globale dépasse depuis 2023 le niveau de 2019 (83,8).",
   },
   "crime-rate-per-1000": {
     name: "Infractions au Code pénal pour 1'000 habitants",

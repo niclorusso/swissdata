@@ -415,7 +415,7 @@ export const indicators: Indicator[] = [
     sourceUrl: "https://ec.europa.eu/eurostat/databrowser/view/demo_mlexpec/default/table",
     lastUpdated: "2024",
     description: "Life expectancy at birth, both sexes combined",
-    context: "In 2024 life expectancy at birth was 82.4 years for men and 85.9 for women. FSO figures for 2025: 82.7 and 86.3. After the drop in 2020 (83.1) the combined figure has been above the 2019 level (83.8) since 2023.",
+    context: "In 2024 life expectancy at birth was 82.4 years for men and 85.9 for women. FSO figures for 2025: 82.7 and 86.3 (published as provisional on 18 June 2026; the FSO table of 24 September 2026 has the same values). After the drop in 2020 (83.1) the combined figure has been above the 2019 level (83.8) since 2023.",
     // Eurostat, table demo_mlexpec (life expectancy at birth, total, FSO data), update of 25.09.2026. The FSO itself publishes life expectancy by sex only.
     historicalData: [
       { year: 1960, value: 71.4 },
