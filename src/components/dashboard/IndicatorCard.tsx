@@ -6,7 +6,7 @@ import { InfoTooltip } from "@/components/ui/tooltip";
 import { Indicator } from "@/types";
 import { formatWithUnit, getTrendDisplay } from "@/lib/formatters";
 import { useLanguage } from "@/i18n/LanguageContext";
-import { indicatorExplanations } from "@/i18n/indicatorExplanations";
+import { getIndicatorExplanation } from "@/i18n/indicatorExplanations";
 import { TrendingUp, TrendingDown, Minus, ExternalLink } from "lucide-react";
 
 interface IndicatorCardProps {
@@ -35,8 +35,7 @@ export function IndicatorCard({ indicator }: IndicatorCardProps) {
       ? "demographic"
       : "social";
 
-  const explanationData = indicatorExplanations[indicator.id];
-  const explanation = explanationData ? explanationData[locale] : null;
+  const explanation = getIndicatorExplanation(indicator.id, locale, "card");
 
   return (
     <Card className="card-hover">
