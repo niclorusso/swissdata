@@ -152,8 +152,8 @@ export default function CantonsPage() {
   };
 
   const formatBound = (value: number) => formatNumber(value, locale, { decimals });
-  const withUnit = (text: string) =>
-    meta.unit === "%" ? text + percentSign(locale) : `${text}${NBSP}${unitShort[meta.unit] ?? ""}`;
+  // unit after the last legend label: "%" (with the space of the language) or " CHF/mese"
+  const unitAfter = meta.unit === "%" ? percentSign(locale) : `${NBSP}${unitShort[meta.unit] ?? ""}`;
 
   // "da 1,8 a meno di 2,5: 9 Cantoni"
   const getLegendStepText = (index: number) => {
@@ -265,16 +265,17 @@ export default function CantonsPage() {
                   );
                 })}
               </div>
-              {/* the six bounds; the unit after the last one */}
+              {/* the six bounds; the unit after the last one. From 640px the unit stands just outside the bar, where
+                  there is room, so that it does not push the last number into the one before it */}
               <div ref={labelsRef} className="relative h-5 mt-1 text-source text-swiss-gray-600 swiss-number" data-legend-labels="">
                 {scale.bounds.map((bound, k) => {
                   const hidden = compactLabels && k > 0 && k < LEGEND_STEP_COUNT;
-                  const text = k === LEGEND_STEP_COUNT ? withUnit(formatBound(bound)) : formatBound(bound);
                   const position =
                     k === 0 ? { left: 0 } : k === LEGEND_STEP_COUNT ? { right: 0 } : { left: `${(k * 100) / LEGEND_STEP_COUNT}%`, transform: "translateX(-50%)" };
                   return (
                     <span key={k} data-bound={k} aria-hidden={hidden || undefined} className={cn("absolute top-0 whitespace-nowrap", hidden && "invisible")} style={position}>
-                      {text}
+                      {formatBound(bound)}
+                      {k === LEGEND_STEP_COUNT && <span className="sm:absolute sm:left-full sm:top-0 whitespace-nowrap">{unitAfter}</span>}
                     </span>
                   );
                 })}

@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { SourceLine } from "@/components/ui/source-line";
+import { publishedText } from "@/lib/indicatorText";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { quizTextLang } from "@/i18n/dataTranslations";
 import { SITE_URL, localePath } from "@/i18n/routes";
@@ -76,7 +77,7 @@ export function ScoreCard({ results, totalScore, onRestart }: ScoreCardProps) {
                 <p className="mt-1 text-sm text-swiss-gray-700 swiss-number">
                   {t.scoreCard.estimateAnswer.replace("{guess}", value(result.userGuess)).replace("{answer}", value(result.actualValue))}
                 </p>
-                {question && <SourceLine className="!mt-2 !pt-2" publisher={question.source[locale]} url={question.sourceUrl} date={question.period} />}
+                {question && <SourceLine className="!mt-2 !pt-2" publisher={question.source[locale]} url={question.sourceUrl} date={question.period} published={publishedText(question, locale)} />}
               </li>
             );
           })}

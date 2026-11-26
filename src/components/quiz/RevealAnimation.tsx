@@ -7,6 +7,7 @@ import { quizTextLang } from "@/i18n/dataTranslations";
 import { isSwissLabel, localizeLabel } from "@/i18n/places";
 import { formatNumber, formatPercent, formatWithUnit, ownDecimals } from "@/lib/formatters";
 import { SourceLine } from "@/components/ui/source-line";
+import { publishedText } from "@/lib/indicatorText";
 import { BarChart, Bar, XAxis, YAxis, ResponsiveContainer, Cell, LabelList } from "recharts";
 
 interface RevealAnimationProps {
@@ -72,7 +73,7 @@ export function RevealAnimation({ question, result }: RevealAnimationProps) {
           </div>
         )}
 
-        <SourceLine publisher={question.source[locale]} url={question.sourceUrl} date={question.period} />
+        <SourceLine publisher={question.source[locale]} url={question.sourceUrl} date={question.period} published={publishedText(question, locale)} />
       </div>
     </motion.div>
   );

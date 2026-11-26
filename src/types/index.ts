@@ -93,6 +93,8 @@ export interface QuizQuestion {
   /** who publishes the answer, in the four languages (offices as "full name (acronym)") */
   source: LocalizedText;
   sourceUrl: string;
+  /** publication date of the answer's table by the source, when known: ISO date or "YYYY-MM" */
+  sourcePublished?: string;
   period: string; // reference year or period of the answer, shown in the source line
   context?: string;
   comparisonData?: ComparisonPoint[];

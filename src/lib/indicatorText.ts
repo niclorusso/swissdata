@@ -101,9 +101,9 @@ export function changeLine(indicator: Indicator, locale: Locale): ChangeLine | n
   return split(fill(template), formatNumber(difference, locale, { decimals: 1, sign: true }));
 }
 
-/** "pubblicato il 12 novembre 2026", "pubblicato ad agosto 2026"; null when the date is not known. */
-export function publishedText(indicator: Indicator, locale: Locale): string | null {
-  const iso = indicator.sourcePublished;
+/** "pubblicato il 12 novembre 2026", "pubblicato ad agosto 2026"; null when the date is not known. Indicators and quiz answers. */
+export function publishedText(item: { sourcePublished?: string }, locale: Locale): string | null {
+  const iso = item.sourcePublished;
   if (!iso) return null;
   const t = translations[locale].common;
   if (/^\d{4}-\d{2}$/.test(iso)) {

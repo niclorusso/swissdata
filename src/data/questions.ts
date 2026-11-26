@@ -415,12 +415,13 @@ export const questions: QuizQuestion[] = [
     explanation:
       "Switzerland had 225 banks at the end of 2025 (2024: 230), down from 375 in 2000 and 275 in 2014 (SNB). The 2025 total is made up of 24 cantonal banks, 2 big banks, 58 regional and savings banks, the Raiffeisen group (counted once), 37 stock exchange banks, 15 other banking institutions, 5 private bankers, 61 foreign-controlled banks and 22 branches of foreign banks.",
     source: {
-      en: "Swiss National Bank (SNB), data portal, structure of banks in Switzerland (published 24 September 2026)",
-      it: "Banca nazionale svizzera (BNS), portale dei dati, struttura delle banche in Svizzera (pubblicato il 24 settembre 2026)",
-      de: "Schweizerische Nationalbank (SNB), Datenportal, Struktur der Banken in der Schweiz (veröffentlicht am 24. September 2026)",
-      fr: "Banque nationale suisse (BNS), portail de données, structure des banques en Suisse (publié le 24 septembre 2026)",
+      en: "Swiss National Bank (SNB), data portal, structure of banks in Switzerland",
+      it: "Banca nazionale svizzera (BNS), portale dei dati, struttura delle banche in Svizzera",
+      de: "Schweizerische Nationalbank (SNB), Datenportal, Struktur der Banken in der Schweiz",
+      fr: "Banque nationale suisse (BNS), portail de données, structure des banques en Suisse",
     },
     sourceUrl: "https://data.snb.ch/en/topics/banken/cube/bastrbwa",
+    sourcePublished: "2026-09-24",
     period: "2025",
     comparisonLabel: "Number of banks in Switzerland at the end of the year (SNB)",
     comparisonData: [
@@ -1509,12 +1510,13 @@ export const questions: QuizQuestion[] = [
     explanation:
       "In 2024 commuters needed 30.2\u00A0minutes on average to reach their workplace, over an average distance of 14.0\u00A0km (2022: 29.6\u00A0minutes, 13.7\u00A0km). For 34.6% the trip took at most 15\u00A0minutes and for 8.8% more than an hour. Of the 3.7\u00A0million commuters, 49.4% used a car as their main means of transport, 17.1% the train and 13.6% bus or tram (Federal Statistical Office, tables T 11.4.4.3 and T 11.4.4.4, 2024).",
     source: {
-      en: "Federal Statistical Office (FSO), commuters by length and duration of the trip (T 11.4.4.3) and by main means of transport (T 11.4.4.4), published 29 January 2026",
-      it: "Ufficio federale di statistica (UST), pendolari secondo la lunghezza e la durata del tragitto (T 11.4.4.3) e secondo il mezzo di trasporto principale (T 11.4.4.4), pubblicato il 29 gennaio 2026",
-      de: "Bundesamt für Statistik (BFS), Pendlerinnen und Pendler nach Länge und Dauer des Arbeitswegs (T 11.4.4.3) und nach Hauptverkehrsmittel (T 11.4.4.4), veröffentlicht am 29. Januar 2026",
-      fr: "Office fédéral de la statistique (OFS), pendulaires selon la longueur et la durée du trajet (T 11.4.4.3) et selon le moyen de transport principal (T 11.4.4.4), publié le 29 janvier 2026",
+      en: "Federal Statistical Office (FSO), commuters by length and duration of the trip (T 11.4.4.3) and by main means of transport (T 11.4.4.4)",
+      it: "Ufficio federale di statistica (UST), pendolari secondo la lunghezza e la durata del tragitto (T 11.4.4.3) e secondo il mezzo di trasporto principale (T 11.4.4.4)",
+      de: "Bundesamt für Statistik (BFS), Pendlerinnen und Pendler nach Länge und Dauer des Arbeitswegs (T 11.4.4.3) und nach Hauptverkehrsmittel (T 11.4.4.4)",
+      fr: "Office fédéral de la statistique (OFS), pendulaires selon la longueur et la durée du trajet (T 11.4.4.3) et selon le moyen de transport principal (T 11.4.4.4)",
     },
     sourceUrl: "https://www.bfs.admin.ch/asset/de/je-d-11.04.04.03",
+    sourcePublished: "2026-01-29",
     period: "2024",
   },
   {
