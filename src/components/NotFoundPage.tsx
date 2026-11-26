@@ -25,8 +25,7 @@ function NotFoundContent() {
 
   useEffect(() => {
     document.documentElement.lang = locale;
-    document.title = `${t.notFound.title} – SwissData`;
-  }, [locale, t]);
+  }, [locale]);
 
   const pages = [
     { href: localePath(locale), label: t.notFound.home },
@@ -38,6 +37,8 @@ function NotFoundContent() {
 
   return (
     <div className="container mx-auto px-4 py-10 sm:py-16">
+      {/* React puts the title in the head; it follows the language of the address */}
+      <title>{`${t.notFound.title} – SwissData`}</title>
       <div className="max-w-[68ch] space-y-4">
         <h1 className="text-[1.75rem] sm:text-[2.5rem] font-bold leading-tight text-ink">{t.notFound.title}</h1>
         <p className="text-base sm:text-lg text-swiss-gray-700">{t.notFound.text}</p>

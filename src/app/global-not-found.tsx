@@ -5,8 +5,8 @@ import { NotFoundPage } from "@/components/NotFoundPage";
 
 const inter = Inter({ subsets: ["latin"] });
 
+// The title is rendered by NotFoundPage, in the language of the address
 export const metadata: Metadata = {
-  title: "Page not found – SwissData",
   robots: { index: false },
 };
 

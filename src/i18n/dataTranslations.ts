@@ -551,7 +551,7 @@ const indicatorTranslationsDE: Record<string, IndicatorTexts> = {
     description: "Wie stark sich der Wert der in der Schweiz hergestellten Waren und Dienstleistungen verändert hat, ohne Preiseffekt.",
     context: "Erste Schätzung des BFS für 2025, veröffentlicht am 25. August 2026. Das Wachstum 2024 wurde von 1,4\u00A0% auf 1,5\u00A0% revidiert.",
     unitLine: "real, {year}",
-    howToRead: "Unter null: Das BIP ist gegenüber dem Vorjahr geschrumpft.",
+    howToRead: "Unter null: Das BIP ist gegenüber dem Jahr davor geschrumpft.",
   },
   "inflation-rate": {
     name: "Inflationsrate (LIK)",
