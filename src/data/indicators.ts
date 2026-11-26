@@ -20,7 +20,7 @@ export const indicators: Indicator[] = [
     unrounded: { value: 4.841, previous: 4.343 }, // FSO T 03.03.01.03: 4.8407 and 4.3425
     source: "FSO / UST (Federal Statistical Office)",
     sourceUrl: "https://statistik.admin.ch/de/themen/arbeit-erwerb/erwerbslosigkeit-unterbeschaeftigung",
-    sourcePublished: "2026-11-12",
+    sourcePublished: "2026-02-17", // first FSO table T 03.03.01.03 with the 2025 average (asset 36346835); 12.11.2026 was the Q3 2026 release
     lastUpdated: "2025",
     description: "People without work who are looking for a job and available for it, registered or not. Estimated from a sample survey.",
     unitLine: "of the labour force, {year} average",
@@ -71,7 +71,7 @@ export const indicators: Indicator[] = [
     unrounded: { value: 2.835, previous: 2.386 }, // FSO/SECO T 3.3.2.2: 2.8346 and 2.3862
     source: "SECO (State Secretariat for Economic Affairs)",
     sourceUrl: "https://www.seco.admin.ch/de/arbeitsmarktstatistik-berichte-rechtsgrundlagen",
-    sourcePublished: "2026-02-04",
+    sourcePublished: "2026-01-09", // SECO release on December 2025 with the 2025 average of 2.8% (admin.ch newnsb yFqP7XwYSs3ODBR8ZdR9g)
     lastUpdated: "2025",
     description: "People registered as unemployed at a regional employment centre. Counted from the registers.",
     unitLine: "of the labour force, {year} average",
@@ -169,7 +169,7 @@ export const indicators: Indicator[] = [
     changeKind: "previous",
     source: "FSO / UST (Federal Statistical Office)",
     sourceUrl: "https://statistik.admin.ch/de/konsumentenpreise",
-    sourcePublished: "2026-11-03",
+    sourcePublished: "2026-01-08", // FSO release of the 2025 average, +0.2% (asset 36353839); 03.11.2026 was the October 2026 CPI
     lastUpdated: "2025",
     description: "How much the prices of a fixed basket of goods and services bought by households changed over a year.",
     unitLine: "annual average, {year}",
@@ -219,7 +219,7 @@ export const indicators: Indicator[] = [
     changeKind: "relative",
     source: "FSO / UST (Federal Statistical Office)",
     sourceUrl: "https://statistik.admin.ch/de/themen/arbeit-erwerb/loehne-erwerbseinkommen-arbeitskosten",
-    sourcePublished: "2026-04-29",
+    sourcePublished: "2025-11-25", // FSO release of the 2024 median wage, CHF 7024 (asset 36195847); 29.04.2026 was a table update
     lastUpdated: "2024",
     description: "Half of employees earn more, half earn less. Private and public sector; surveyed every two years.",
     unitLine: "gross per month, full time, {year}",
@@ -413,7 +413,7 @@ export const indicators: Indicator[] = [
     changeKind: "years",
     source: "Eurostat (based on FSO data)",
     sourceUrl: "https://ec.europa.eu/eurostat/databrowser/view/demo_pjanind/default/table",
-    sourcePublished: "2026-11-26",
+    // no publication date: Eurostat gives no date per value; 26.11.2026 is a structure update of demo_pjanind (the value was public by 02.02.2026)
     lastUpdated: "2025 (1 January)",
     description: "Half the population is younger, half is older.",
     unitLine: "1 January {year}",
@@ -453,7 +453,7 @@ export const indicators: Indicator[] = [
     changeKind: "years",
     source: "Eurostat (based on FSO data); FSO for figures by sex",
     sourceUrl: "https://ec.europa.eu/eurostat/databrowser/view/demo_mlexpec/default/table",
-    sourcePublished: "2026-11-26",
+    // no publication date: Eurostat gives no date per value; 26.11.2026 is a structure update of demo_mlexpec (the value was public by March 2026)
     lastUpdated: "2024",
     description: "How many years a newborn would live on average if that year's death rates stayed the same.",
     unitLine: "women and men together, {year}",

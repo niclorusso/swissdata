@@ -3,7 +3,8 @@
 import { useLanguage } from "@/i18n/LanguageContext";
 import { changeLog } from "@/data/changeLog";
 import { DATA_CHECKED } from "@/data/meta";
-import { colon, formatLongDate } from "@/lib/formatters";
+import { colon, formatLongDate, formatNumber } from "@/lib/formatters";
+import { localizeLabel } from "@/i18n/places";
 import { ReportError } from "@/components/ReportError";
 
 /** Dated corrections and updates of the figures, newest first, grouped by day. */
@@ -29,8 +30,8 @@ export default function ChangesPage() {
             <ul className="space-y-5">
               {changeLog
                 .filter((entry) => entry.date === date)
-                .map((entry, index) => (
-                  <li key={index} className="border-t border-line pt-4 space-y-2">
+                .map((entry) => (
+                  <li key={entry.id} className="border-t border-line pt-4 space-y-2">
                     <p className="text-sm font-semibold text-swiss-gray-600">
                       {entry.kind === "update" ? t.changes.update : t.changes.correction}
                     </p>
@@ -39,6 +40,28 @@ export default function ChangesPage() {
                       <ul className="list-disc pl-5 space-y-1.5 text-base text-ink leading-relaxed">
                         {entry.items.map((item, i) => (
                           <li key={i}>{item[locale]}</li>
+                        ))}
+                      </ul>
+                    )}
+                    {entry.values && (
+                      <ul
+                        className={
+                          entry.values.length > 8
+                            ? "grid grid-cols-2 sm:grid-cols-4 gap-x-6 gap-y-1 text-base text-ink leading-relaxed"
+                            : "list-disc pl-5 space-y-1 text-base text-ink leading-relaxed"
+                        }
+                      >
+                        {entry.values.map((row) => (
+                          <li key={row.label}>
+                            {localizeLabel(row.label, locale) + colon(locale)}{" "}
+                            {row.before === undefined
+                              ? `${formatNumber(row.after ?? 0, locale, { decimals: entry.decimals })} (${t.changes.added})`
+                              : `${formatNumber(row.before, locale, { decimals: entry.decimals })} → ${
+                                  row.after === undefined
+                                    ? t.changes.removed
+                                    : formatNumber(row.after, locale, { decimals: entry.decimals })
+                                }`}
+                          </li>
                         ))}
                       </ul>
                     )}

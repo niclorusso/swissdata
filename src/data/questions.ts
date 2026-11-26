@@ -421,7 +421,7 @@ export const questions: QuizQuestion[] = [
       fr: "Banque nationale suisse (BNS), portail de données, structure des banques en Suisse",
     },
     sourceUrl: "https://data.snb.ch/en/topics/banken/cube/bastrbwa",
-    sourcePublished: "2026-09-24",
+    sourcePublished: "2026-06-18", // SNB data portal, end-2025 figures (225 since 18.06.2026); 24.09.2026 was a revision that left the count unchanged
     period: "2025",
     comparisonLabel: "Number of banks in Switzerland at the end of the year (SNB)",
     comparisonData: [

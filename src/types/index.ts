@@ -58,7 +58,10 @@ export interface Indicator {
   unrounded?: { value: number; previous: number };
   source: string;
   sourceUrl: string;
-  /** publication date of the latest figure by the source: ISO date, or "YYYY-MM" when only the month is known */
+  /**
+   * the day the source first published the figure for the year shown (not a later table refresh or data-update
+   * timestamp): ISO date, or "YYYY-MM" when only the month is known; absent when that day cannot be established
+   */
   sourcePublished?: string;
   lastUpdated: string;
   /** definition in one or two sentences */
@@ -93,7 +96,7 @@ export interface QuizQuestion {
   /** who publishes the answer, in the four languages (offices as "full name (acronym)") */
   source: LocalizedText;
   sourceUrl: string;
-  /** publication date of the answer's table by the source, when known: ISO date or "YYYY-MM" */
+  /** the day the source first published the answer's figure, as for Indicator.sourcePublished; absent when not known */
   sourcePublished?: string;
   period: string; // reference year or period of the answer, shown in the source line
   context?: string;

@@ -6,10 +6,13 @@ import { LocalizedText } from "@/types";
  * DATA_CHECKED in src/data/meta.ts.
  *
  * The log starts on 26 November 2026; the full check of 12 November 2026 is one summary entry at the end.
- * "Before" names only a value that visitors could see on swissdata-platform.ch: a value that was changed
- * again before it was published is not listed. All four languages say the same.
+ * "Before" names only a value that visitors could see on swissdata-platform.ch (commit 7fe24f0): a value that
+ * was changed again before it was published, or a text the site never showed, is not listed. All four
+ * languages say the same.
  */
 export interface ChangeLogEntry {
+  /** short name of the entry, unique */
+  id: string;
   /** ISO date of the change */
   date: string;
   /** "update": a newer figure from the source; "correction": a figure, text, label or link that was wrong */
@@ -17,117 +20,263 @@ export interface ChangeLogEntry {
   text: LocalizedText;
   /** one line per figure, for an entry that changes several */
   items?: LocalizedText[];
+  /** the values of one chart or series, before and after, written in the language of the page */
+  values?: ValueChange[];
+  /** decimals of `values` */
+  decimals?: number;
   source?: { name: LocalizedText; url: string };
+}
+
+/** One value of a chart or series. */
+export interface ValueChange {
+  /** label of the bar as in src/data/questions.ts (translated by src/i18n/places.ts), a canton or a year */
+  label: string;
+  /** value the site showed before; absent for a value that is new */
+  before?: number;
+  /** value shown now; absent for a value that was removed */
+  after?: number;
 }
 
 export const changeLog: ChangeLogEntry[] = [
   {
+    id: "education-series",
     date: "2026-11-26",
     kind: "update",
     text: {
-      it: "Spesa pubblica per l’istruzione: la serie viene ora dalla tabella UST T 15.06.01.03, con un valore per ogni anno dal 2000 al 2023. Ultimo dato: 5,5\u00A0% del PIL nel 2023 (prima: 5,6\u00A0% nel 2022, provvisorio). Anche per gli anni precedenti la tabella dà valori più bassi: 5,2\u00A0% nel 2022, 5,4\u00A0% nel 2021 e 5,7\u00A0% nel 2020 (prima: 5,6, 5,6 e 5,9\u00A0%). Aggiornata anche la domanda del quiz.",
-      de: "Öffentliche Bildungsausgaben: Die Reihe stammt jetzt aus der BFS-Tabelle T 15.06.01.03, mit einem Wert für jedes Jahr von 2000 bis 2023. Letzter Wert: 5,5\u00A0% des BIP im Jahr 2023 (vorher: 5,6\u00A0% für 2022, provisorisch). Auch für die früheren Jahre gibt die Tabelle tiefere Werte: 5,2\u00A0% für 2022, 5,4\u00A0% für 2021 und 5,7\u00A0% für 2020 (vorher: 5,6, 5,6 und 5,9\u00A0%). Auch die Quizfrage ist angepasst.",
-      fr: "Dépenses publiques d’éducation\u202F: la série provient désormais du tableau OFS T 15.06.01.03, avec une valeur pour chaque année de 2000 à 2023. Dernière valeur\u202F: 5,5\u202F% du PIB en 2023 (auparavant\u202F: 5,6\u202F% pour 2022, provisoire). Pour les années précédentes aussi, le tableau donne des valeurs plus basses\u202F: 5,2\u202F% en 2022, 5,4\u202F% en 2021 et 5,7\u202F% en 2020 (auparavant\u202F: 5,6, 5,6 et 5,9\u202F%). La question du quiz est aussi mise à jour.",
-      en: "Public spending on education: the series now comes from FSO table T 15.06.01.03, with a figure for every year from 2000 to 2023. Latest figure: 5.5% of GDP in 2023 (before: 5.6% for 2022, provisional). The table also gives lower figures for earlier years: 5.2% for 2022, 5.4% for 2021 and 5.7% for 2020 (before: 5.6, 5.6 and 5.9%). The quiz question was updated as well.",
+      it: "Spesa pubblica per l’istruzione, in % del PIL: la serie viene ora dalla tabella UST T 15.06.01.03, con un valore per ogni anno dal 2000 al 2023. Ultimo dato: 5,5 % nel 2023 (prima: 5,6 % nel 2022, provvisorio). Per il 2010, il 2015 e gli anni dal 2020 al 2022 la tabella dà valori più bassi. Il quiz chiede ora la cifra del 2023 e indica 45,5 miliardi di franchi (prima: 41,3 miliardi nel 2021).",
+      de: "Öffentliche Bildungsausgaben in % des BIP: Die Reihe stammt jetzt aus der BFS-Tabelle T 15.06.01.03, mit einem Wert für jedes Jahr von 2000 bis 2023. Letzter Wert: 5,5 % im Jahr 2023 (vorher: 5,6 % für 2022, provisorisch). Für 2010, 2015 und die Jahre 2020 bis 2022 gibt die Tabelle tiefere Werte. Das Quiz fragt jetzt nach dem Wert für 2023 und nennt 45,5 Milliarden Franken (vorher: 41,3 Milliarden für 2021).",
+      fr: "Dépenses publiques d’éducation en % du PIB : la série provient désormais du tableau OFS T 15.06.01.03, avec une valeur pour chaque année de 2000 à 2023. Dernière valeur : 5,5 % en 2023 (auparavant : 5,6 % pour 2022, provisoire). Pour 2010, 2015 et les années 2020 à 2022, le tableau donne des valeurs plus basses. Le quiz demande désormais le chiffre de 2023 et indique 45,5 milliards de francs (auparavant : 41,3 milliards en 2021).",
+      en: "Public spending on education in % of GDP: the series now comes from FSO table T 15.06.01.03, with a figure for every year from 2000 to 2023. Latest figure: 5.5% in 2023 (before: 5.6% for 2022, provisional). For 2010, 2015 and the years 2020 to 2022 the table gives lower figures. The quiz now asks for the 2023 figure and gives CHF 45.5 billion (before: CHF 41.3 billion in 2021).",
     },
+    values: [
+      { label: "2010", before: 5.2, after: 5.1 },
+      { label: "2015", before: 5.5, after: 5.4 },
+      { label: "2020", before: 5.9, after: 5.7 },
+      { label: "2021", before: 5.6, after: 5.4 },
+      { label: "2022", before: 5.6, after: 5.2 },
+      { label: "2023", after: 5.5 },
+    ],
+    decimals: 1,
     source: {
       name: { it: "UST, tabella T 15.06.01.03", de: "BFS, Tabelle T 15.06.01.03", fr: "OFS, tableau T 15.06.01.03", en: "FSO, table T 15.06.01.03" },
       url: "https://www.bfs.admin.ch/asset/de/je-d-15.06.01.03",
     },
   },
   {
+    id: "education-quiz-chart",
     date: "2026-11-26",
     kind: "update",
     text: {
-      it: "Disoccupazione registrata nei Cantoni: medie annue del 2025 al posto di quelle del 2024, dalla tabella UST T 3.3.2.3 con i dati della SECO. Svizzera: 2,8\u00A0% (prima: 2,4\u00A0% nel 2024).",
-      de: "Registrierte Arbeitslosigkeit in den Kantonen: Jahresmittel 2025 statt 2024, aus der BFS-Tabelle T 3.3.2.3 mit den Zahlen des SECO. Schweiz: 2,8\u00A0% (vorher: 2,4\u00A0% für 2024).",
-      fr: "Chômage enregistré dans les cantons\u202F: moyennes annuelles 2025 au lieu de 2024, tirées du tableau OFS T 3.3.2.3 avec les chiffres du SECO. Suisse\u202F: 2,8\u202F% (auparavant\u202F: 2,4\u202F% pour 2024).",
-      en: "Registered unemployment by canton: 2025 annual averages instead of 2024, from FSO table T 3.3.2.3 with SECO's figures. Switzerland: 2.8% (before: 2.4% for 2024).",
+      it: "Quiz, spesa per l’istruzione, grafico di confronto: cifre dell’OCSE per il 2023, spesa delle amministrazioni pubbliche per l’istruzione dal livello primario al terziario, in % del PIL. La risposta resta la cifra dell’UST.",
+      de: "Quiz, Bildungsausgaben, Vergleichsgrafik: Zahlen der OECD für 2023, Ausgaben des Staates für Bildung von der Primar- bis zur Tertiärstufe, in % des BIP. Die Antwort bleibt die Zahl des BFS.",
+      fr: "Quiz, dépenses d’éducation, graphique de comparaison : chiffres de l’OCDE pour 2023, dépenses des administrations publiques pour l’éducation du primaire au tertiaire, en % du PIB. La réponse reste le chiffre de l’OFS.",
+      en: "Quiz, education spending, comparison chart: OECD figures for 2023, government expenditure on education from primary to tertiary level, in % of GDP. The answer remains the FSO figure.",
     },
+    values: [
+      { label: "Switzerland", before: 4.9, after: 4.4 },
+      { label: "Denmark", before: 6.4, after: 5.7 },
+      { label: "Belgium", before: 6.1, after: 5.5 },
+      { label: "Norway", before: 6.6, after: 5.2 },
+      { label: "UK", before: 5.5, after: 4.7 },
+      { label: "OECD Average", before: 4.9, after: 4.2 },
+      { label: "Germany", before: 4.7, after: 4.1 },
+      { label: "Italy", before: 4.0, after: 3.6 },
+    ],
+    decimals: 1,
+  },
+  {
+    id: "unemployment-cantons",
+    date: "2026-11-26",
+    kind: "update",
+    text: {
+      it: "Disoccupazione registrata nei Cantoni, in %: medie annue del 2025 al posto di quelle del 2024, dalla tabella UST T 3.3.2.3 con i dati della SECO. Svizzera: 2,8 % (prima: 2,4 % nel 2024).",
+      de: "Registrierte Arbeitslosigkeit in den Kantonen, in %: Jahresmittel 2025 statt 2024, aus der BFS-Tabelle T 3.3.2.3 mit den Zahlen des SECO. Schweiz: 2,8 % (vorher: 2,4 % für 2024).",
+      fr: "Chômage enregistré dans les cantons, en % : moyennes annuelles 2025 au lieu de 2024, tirées du tableau OFS T 3.3.2.3 avec les chiffres du SECO. Suisse : 2,8 % (auparavant : 2,4 % pour 2024).",
+      en: "Registered unemployment by canton, in %: 2025 annual averages instead of 2024, from FSO table T 3.3.2.3 with SECO's figures. Switzerland: 2.8% (before: 2.4% for 2024).",
+    },
+    values: [
+      { label: "ZH", before: 2.1, after: 2.6 },
+      { label: "BE", before: 1.7, after: 2.1 },
+      { label: "LU", before: 1.5, after: 2.0 },
+      { label: "UR", before: 1.0, after: 1.1 },
+      { label: "SZ", before: 1.0, after: 1.2 },
+      { label: "OW", before: 0.8, after: 1.0 },
+      { label: "NW", before: 0.9, after: 1.2 },
+      { label: "GL", before: 1.3, after: 1.7 },
+      { label: "ZG", before: 2.0, after: 2.6 },
+      { label: "FR", before: 2.3, after: 2.6 },
+      { label: "SO", before: 2.4, after: 3.1 },
+      { label: "BS", before: 3.7, after: 4.3 },
+      { label: "BL", before: 2.2, after: 2.7 },
+      { label: "SH", before: 2.6, after: 2.9 },
+      { label: "AR", before: 1.4, after: 1.6 },
+      { label: "AI", before: 0.6, after: 0.8 },
+      { label: "SG", before: 1.8, after: 2.0 },
+      { label: "GR", before: 1.0, after: 1.3 },
+      { label: "AG", before: 2.6, after: 3.2 },
+      { label: "TG", before: 2.1, after: 2.3 },
+      { label: "TI", before: 2.6, after: 2.8 },
+      { label: "VD", before: 3.8, after: 4.5 },
+      { label: "VS", before: 2.7, after: 3.1 },
+      { label: "NE", before: 3.5, after: 4.5 },
+      { label: "GE", before: 4.2, after: 4.7 },
+      { label: "JU", before: 4.2, after: 5.0 },
+    ],
+    decimals: 1,
     source: {
       name: { it: "UST, tabella T 3.3.2.3", de: "BFS, Tabelle T 3.3.2.3", fr: "OFS, tableau T 3.3.2.3", en: "FSO, table T 3.3.2.3" },
       url: "https://www.bfs.admin.ch/asset/de/je-d-03.03.02.03",
     },
   },
   {
+    id: "quiz-figures",
     date: "2026-11-26",
     kind: "update",
     text: {
       it: "Quiz: cifre aggiornate alle ultime pubblicazioni ufficiali.",
       de: "Quiz: Zahlen nach den neuesten amtlichen Veröffentlichungen aktualisiert.",
-      fr: "Quiz\u202F: chiffres mis à jour selon les dernières publications officielles.",
+      fr: "Quiz : chiffres mis à jour selon les dernières publications officielles.",
       en: "Quiz: figures updated to the latest official releases.",
     },
     items: [
       {
-        it: "Banche in Svizzera: 225 a fine 2025 (prima: 230 a fine 2024), BNS.",
-        de: "Banken in der Schweiz: 225 Ende 2025 (vorher: 230 Ende 2024), SNB.",
-        fr: "Banques en Suisse\u202F: 225 à fin 2025 (auparavant\u202F: 230 à fin 2024), BNS.",
-        en: "Banks in Switzerland: 225 at the end of 2025 (before: 230 at the end of 2024), SNB.",
+        it: "Banche in Svizzera: 225 a fine 2025 (prima: 230 a fine 2024), BNS. Composizione: 37 banche borsistiche (prima: 40), 61 banche in mani straniere e 22 succursali di banche estere (prima: 85 banche estere), 2 grandi banche (prima: 1) e 15 altri istituti bancari, che prima il testo non contava.",
+        de: "Banken in der Schweiz: 225 Ende 2025 (vorher: 230 Ende 2024), SNB. Zusammensetzung: 37 Börsenbanken (vorher: 40), 61 ausländisch beherrschte Banken und 22 Filialen ausländischer Banken (vorher: 85 ausländische Banken), 2 Grossbanken (vorher: 1) und 15 andere Bankinstitute, die der Text vorher nicht zählte.",
+        fr: "Banques en Suisse : 225 à fin 2025 (auparavant : 230 à fin 2024), BNS. Composition : 37 banques boursières (auparavant : 40), 61 banques en mains étrangères et 22 succursales de banques étrangères (auparavant : 85 banques étrangères), 2 grandes banques (auparavant : 1) et 15 autres établissements bancaires, que le texte ne comptait pas auparavant.",
+        en: "Banks in Switzerland: 225 at the end of 2025 (before: 230 at the end of 2024), SNB. Breakdown: 37 stock exchange banks (before: 40), 61 foreign-controlled banks and 22 branches of foreign banks (before: 85 foreign banks), 2 big banks (before: 1) and 15 other banking institutions, which the text did not count before.",
       },
       {
         it: "Oro della BNS, grafico di confronto: dati del FMI di settembre e ottobre 2026 (Russia: novembre 2025). Cina 2435,4 tonnellate (prima: 2306,3, tabella del World Gold Council di febbraio 2026), ora davanti alla Russia; Germania 3349,1 (prima: 3350,3).",
         de: "Gold der SNB, Vergleichsgrafik: Daten des IWF für September und Oktober 2026 (Russland: November 2025). China 2435,4 Tonnen (vorher: 2306,3, Tabelle des World Gold Council vom Februar 2026), jetzt vor Russland; Deutschland 3349,1 (vorher: 3350,3).",
-        fr: "Or de la BNS, graphique de comparaison\u202F: données du FMI pour septembre et octobre 2026 (Russie\u202F: novembre 2025). Chine 2435,4 tonnes (auparavant\u202F: 2306,3, tableau du World Gold Council de février 2026), désormais devant la Russie\u202F; Allemagne 3349,1 (auparavant\u202F: 3350,3).",
+        fr: "Or de la BNS, graphique de comparaison : données du FMI pour septembre et octobre 2026 (Russie : novembre 2025). Chine 2435,4 tonnes (auparavant : 2306,3, tableau du World Gold Council de février 2026), désormais devant la Russie ; Allemagne 3349,1 (auparavant : 3350,3).",
         en: "SNB gold, comparison chart: IMF data for September and October 2026 (Russia: November 2025). China 2,435.4 tonnes (before: 2,306.3, World Gold Council table of February 2026), now ahead of Russia; Germany 3,349.1 (before: 3,350.3).",
       },
       {
-        it: "Debito pubblico lordo (definizione FMI): 40,1\u00A0% del PIL nel 2025 (prima: 40,2\u00A0%); secondo la definizione di Maastricht 23,4\u00A0% (prima: 24,2\u00A0%). AFF, dati del 22 settembre 2026. Il grafico prende i valori degli altri Paesi dallo stesso file (OCSE, Economic Outlook 119), per esempio Stati Uniti 125,9\u00A0% (prima: 122,6\u00A0%).",
-        de: "Bruttoschulden des Staates (Definition des IWF): 40,1\u00A0% des BIP im Jahr 2025 (vorher: 40,2\u00A0%); nach der Maastricht-Definition 23,4\u00A0% (vorher: 24,2\u00A0%). EFV, Daten vom 22. September 2026. Die Grafik nimmt die Werte der anderen Länder aus derselben Datei (OECD, Economic Outlook 119), zum Beispiel USA 125,9\u00A0% (vorher: 122,6\u00A0%).",
-        fr: "Dette publique brute (définition du FMI)\u202F: 40,1\u202F% du PIB en 2025 (auparavant\u202F: 40,2\u202F%)\u202F; selon la définition de Maastricht, 23,4\u202F% (auparavant\u202F: 24,2\u202F%). AFF, données du 22 septembre 2026. Le graphique reprend les valeurs des autres pays du même fichier (OCDE, Economic Outlook 119), par exemple États-Unis 125,9\u202F% (auparavant\u202F: 122,6\u202F%).",
-        en: "Gross public debt (IMF definition): 40.1% of GDP in 2025 (before: 40.2%); under the Maastricht definition 23.4% (before: 24.2%). FFA, data of 22 September 2026. The chart takes the other countries from the same file (OECD Economic Outlook 119), for example the USA 125.9% (before: 122.6%).",
+        it: "Abitazioni occupate dal proprietario: 35,7 % nel 2024 (prima: 35,9 % nel 2022), UST, rilevazione strutturale.",
+        de: "Von den Eigentümern bewohnte Wohnungen: 35,7 % im Jahr 2024 (vorher: 35,9 % für 2022), BFS, Strukturerhebung.",
+        fr: "Logements occupés par leur propriétaire : 35,7 % en 2024 (auparavant : 35,9 % en 2022), OFS, relevé structurel.",
+        en: "Owner-occupied dwellings: 35.7% in 2024 (before: 35.9% in 2022), FSO, Structural Survey.",
       },
       {
-        it: "Costi della sanità: 11,4\u00A0% del PIL nel 2024 secondo l’UST (prima: 11,8\u00A0% secondo l’OCSE).",
-        de: "Kosten des Gesundheitswesens: 11,4\u00A0% des BIP im Jahr 2024 gemäss BFS (vorher: 11,8\u00A0% gemäss OECD).",
-        fr: "Coûts de la santé\u202F: 11,4\u202F% du PIB en 2024 selon l’OFS (auparavant\u202F: 11,8\u202F% selon l’OCDE).",
-        en: "Healthcare costs: 11.4% of GDP in 2024 according to the FSO (before: 11.8% according to the OECD).",
+        it: "Tragitto casa-lavoro nel 2024: 30,2 minuti in media (prima: 29,6 minuti nel 2022); al massimo 15 minuti per il 34,6 % (prima: 36 %), più di un’ora per l’8,8 % (prima: circa l’8 %). Mezzo di trasporto principale dei 3,7 milioni di pendolari: auto 49,4 %, treno 17,1 %, bus o tram 13,6 % (prima: la metà, 16 e 13 % di 3,6 milioni). UST, tabelle T 11.4.4.3 e T 11.4.4.4.",
+        de: "Arbeitsweg 2024: durchschnittlich 30,2 Minuten (vorher: 29,6 Minuten für 2022); höchstens 15 Minuten für 34,6 % (vorher: 36 %), mehr als eine Stunde für 8,8 % (vorher: etwa 8 %). Hauptverkehrsmittel der 3,7 Millionen Pendlerinnen und Pendler: Auto 49,4 %, Zug 17,1 %, Bus oder Tram 13,6 % (vorher: die Hälfte, 16 und 13 % von 3,6 Millionen). BFS, Tabellen T 11.4.4.3 und T 11.4.4.4.",
+        fr: "Trajet domicile-travail en 2024 : 30,2 minutes en moyenne (auparavant : 29,6 minutes en 2022) ; au plus 15 minutes pour 34,6 % (auparavant : 36 %), plus d’une heure pour 8,8 % (auparavant : environ 8 %). Moyen de transport principal des 3,7 millions de pendulaires : voiture 49,4 %, train 17,1 %, bus ou tram 13,6 % (auparavant : la moitié, 16 et 13 % de 3,6 millions). OFS, tableaux T 11.4.4.3 et T 11.4.4.4.",
+        en: "Commute to work in 2024: 30.2 minutes on average (before: 29.6 minutes in 2022); at most 15 minutes for 34.6% (before: 36%), more than an hour for 8.8% (before: about 8%). Main means of transport of the 3.7 million commuters: car 49.4%, train 17.1%, bus or tram 13.6% (before: half, 16 and 13% of 3.6 million). FSO, tables T 11.4.4.3 and T 11.4.4.4.",
       },
       {
-        it: "Abitazioni occupate dal proprietario: 35,7\u00A0% nel 2024 (prima: 35,9\u00A0% nel 2022).",
-        de: "Von den Eigentümern bewohnte Wohnungen: 35,7\u00A0% im Jahr 2024 (vorher: 35,9\u00A0% für 2022).",
-        fr: "Logements occupés par leur propriétaire\u202F: 35,7\u202F% en 2024 (auparavant\u202F: 35,9\u202F% en 2022).",
-        en: "Owner-occupied dwellings: 35.7% in 2024 (before: 35.9% in 2022).",
-      },
-      {
-        it: "Tragitto casa-lavoro: 30,2 minuti in media nel 2024 (prima: 29,6 minuti nel 2022).",
-        de: "Arbeitsweg: durchschnittlich 30,2 Minuten im Jahr 2024 (vorher: 29,6 Minuten für 2022).",
-        fr: "Trajet domicile-travail\u202F: 30,2 minutes en moyenne en 2024 (auparavant\u202F: 29,6 minutes en 2022).",
-        en: "Commute to work: 30.2 minutes on average in 2024 (before: 29.6 minutes in 2022).",
-      },
-      {
-        it: "Crescita del PIL reale: 1,5\u00A0% nel 2024 e 1,6\u00A0% nel 2025 (prima: 1,4\u00A0% e 1,3\u00A0%), UST, 25 agosto 2026.",
-        de: "Wachstum des realen BIP: 1,5\u00A0% im Jahr 2024 und 1,6\u00A0% im Jahr 2025 (vorher: 1,4\u00A0% und 1,3\u00A0%), BFS, 25. August 2026.",
-        fr: "Croissance du PIB réel\u202F: 1,5\u202F% en 2024 et 1,6\u202F% en 2025 (auparavant\u202F: 1,4\u202F% et 1,3\u202F%), OFS, 25 août 2026.",
+        it: "Crescita del PIL reale: 1,5 % nel 2024 e 1,6 % nel 2025 (prima: 1,4 % e 1,3 %), UST, 25 agosto 2026.",
+        de: "Wachstum des realen BIP: 1,5 % im Jahr 2024 und 1,6 % im Jahr 2025 (vorher: 1,4 % und 1,3 %), BFS, 25. August 2026.",
+        fr: "Croissance du PIB réel : 1,5 % en 2024 et 1,6 % en 2025 (auparavant : 1,4 % et 1,3 %), OFS, 25 août 2026.",
         en: "Real GDP growth: 1.5% in 2024 and 1.6% in 2025 (before: 1.4% and 1.3%), FSO, 25 August 2026.",
       },
       {
-        it: "Automobili per 1000 abitanti: 535 nel 2025 (prima: 535 nel 2024; il dato del 2024 è stato rivisto a 536).",
-        de: "Personenwagen pro 1000 Einwohner: 535 im Jahr 2025 (vorher: 535 für 2024; der Wert für 2024 wurde auf 536 revidiert).",
-        fr: "Voitures pour 1000 habitants\u202F: 535 en 2025 (auparavant\u202F: 535 en 2024\u202F; le chiffre de 2024 a été révisé à 536).",
-        en: "Cars per 1,000 inhabitants: 535 in 2025 (before: 535 in 2024; the 2024 figure was revised to 536).",
+        it: "Automobili per 1000 abitanti: 535 nel 2025 (prima: 535 nel 2024; il dato del 2024 è stato rivisto a 536). Automobili immatricolate: 4 839 465 (prima: 4 796 090 nel 2024). Auto elettriche a batteria: 22,7 % delle nuove immatricolazioni e 5,2 % del parco nel 2025 (prima: 19,0 % e 4,2 % nel 2024). UST, tabella T 11.3.2.1.2.",
+        de: "Personenwagen pro 1000 Einwohner: 535 im Jahr 2025 (vorher: 535 für 2024; der Wert für 2024 wurde auf 536 revidiert). Immatrikulierte Personenwagen: 4 839 465 (vorher: 4 796 090 für 2024). Batterieelektrische Autos: 22,7 % der Neuzulassungen und 5,2 % des Bestands im Jahr 2025 (vorher: 19,0 % und 4,2 % für 2024). BFS, Tabelle T 11.3.2.1.2.",
+        fr: "Voitures pour 1000 habitants : 535 en 2025 (auparavant : 535 en 2024 ; le chiffre de 2024 a été révisé à 536). Voitures immatriculées : 4 839 465 (auparavant : 4 796 090 en 2024). Voitures électriques à batterie : 22,7 % des nouvelles immatriculations et 5,2 % du parc en 2025 (auparavant : 19,0 % et 4,2 % en 2024). OFS, tableau T 11.3.2.1.2.",
+        en: "Cars per 1,000 inhabitants: 535 in 2025 (before: 535 in 2024; the 2024 figure was revised to 536). Registered passenger cars: 4,839,465 (before: 4,796,090 in 2024). Battery-electric cars: 22.7% of new registrations and 5.2% of all cars in 2025 (before: 19.0% and 4.2% in 2024). FSO, table T 11.3.2.1.2.",
       },
       {
-        it: "Salario medio a parità di potere d’acquisto: classifica OCSE del 2025, secondo posto su 33 Paesi con un dato (prima: 2024, su 38 Paesi).",
-        de: "Durchschnittslohn zu Kaufkraftparitäten: OECD-Rangliste 2025, zweiter Platz unter 33 Ländern mit einem Wert (vorher: 2024, unter 38 Ländern).",
-        fr: "Salaire moyen à parité de pouvoir d’achat\u202F: classement OCDE 2025, deuxième rang sur 33 pays disposant d’un chiffre (auparavant\u202F: 2024, sur 38 pays).",
-        en: "Average wage at purchasing power parity: OECD ranking for 2025, second of 33 countries with a figure (before: 2024, of 38 countries).",
-      },
-      {
-        it: "Difesa: la domanda indica il preventivo 2026 e il grafico la spesa militare in % del PIL secondo il SIPRI (2025; Svizzera 0,8\u00A0%, prima: 0,7\u00A0%). Tolto il riferimento all’obiettivo NATO del 2\u00A0% del PIL: dal vertice dell’Aia del 2025 l’impegno è del 5\u00A0% entro il 2035.",
-        de: "Verteidigung: Die Frage nennt den Voranschlag 2026, die Grafik die Militärausgaben in % des BIP gemäss SIPRI (2025; Schweiz 0,8\u00A0%, vorher: 0,7\u00A0%). Der Hinweis auf das NATO-Ziel von 2\u00A0% des BIP ist entfernt: Seit dem Gipfel von Den Haag 2025 gilt die Zusage von 5\u00A0% bis 2035.",
-        fr: "Défense\u202F: la question indique le budget 2026 et le graphique les dépenses militaires en % du PIB selon le SIPRI (2025\u202F; Suisse 0,8\u202F%, auparavant\u202F: 0,7\u202F%). La mention de l’objectif de l’OTAN de 2\u202F% du PIB est retirée\u202F: depuis le sommet de La Haye de 2025, l’engagement est de 5\u202F% d’ici 2035.",
-        en: "Defence: the question names the 2026 budget and the chart shows military spending in % of GDP according to SIPRI (2025; Switzerland 0.8%, before: 0.7%). The reference to NATO's 2% of GDP guideline was removed: since the 2025 Hague summit the commitment is 5% by 2035.",
-      },
-      {
-        it: "Tempo parziale: il 39,8\u00A0% è la cifra secondo la definizione di Eurostat; secondo quella dell’UST è il 38,7\u00A0% (2025). La domanda ora lo dice.",
-        de: "Teilzeit: 39,8\u00A0% ist der Wert nach der Definition von Eurostat; nach jener des BFS sind es 38,7\u00A0% (2025). Die Frage sagt das jetzt.",
-        fr: "Temps partiel\u202F: 39,8\u202F% est le chiffre selon la définition d’Eurostat\u202F; selon celle de l’OFS, il est de 38,7\u202F% (2025). La question le précise désormais.",
+        it: "Tempo parziale: il 39,8 % è la cifra secondo la definizione di Eurostat; secondo quella dell’UST è il 38,7 % (2025). La domanda ora lo dice.",
+        de: "Teilzeit: 39,8 % ist der Wert nach der Definition von Eurostat; nach jener des BFS sind es 38,7 % (2025). Die Frage sagt das jetzt.",
+        fr: "Temps partiel : 39,8 % est le chiffre selon la définition d’Eurostat ; selon celle de l’OFS, il est de 38,7 % (2025). La question le précise désormais.",
         en: "Part-time work: 39.8% is the figure under Eurostat's definition; under the FSO's it is 38.7% (2025). The question now says so.",
       },
     ],
   },
   {
+    id: "public-debt",
+    date: "2026-11-26",
+    kind: "update",
+    text: {
+      it: "Quiz, debito pubblico lordo (definizione FMI): 40,1 % del PIL nel 2025 (prima: 40,2 %); secondo la definizione di Maastricht 23,4 % (prima: 24,2 %). AFF, dati del 22 settembre 2026. Il grafico, in % del PIL, prende i valori degli altri Paesi dallo stesso file (OCSE, Economic Outlook 119).",
+      de: "Quiz, Bruttoschulden des Staates (Definition des IWF): 40,1 % des BIP im Jahr 2025 (vorher: 40,2 %); nach der Maastricht-Definition 23,4 % (vorher: 24,2 %). EFV, Daten vom 22. September 2026. Die Grafik, in % des BIP, nimmt die Werte der anderen Länder aus derselben Datei (OECD, Economic Outlook 119).",
+      fr: "Quiz, dette publique brute (définition du FMI) : 40,1 % du PIB en 2025 (auparavant : 40,2 %) ; selon la définition de Maastricht, 23,4 % (auparavant : 24,2 %). AFF, données du 22 septembre 2026. Le graphique, en % du PIB, reprend les valeurs des autres pays du même fichier (OCDE, Economic Outlook 119).",
+      en: "Quiz, gross public debt (IMF definition): 40.1% of GDP in 2025 (before: 40.2%); under the Maastricht definition 23.4% (before: 24.2%). FFA, data of 22 September 2026. The chart, in % of GDP, takes the other countries from the same file (OECD Economic Outlook 119).",
+    },
+    values: [
+      { label: "Switzerland", before: 40.2, after: 40.1 },
+      { label: "Italy", before: 153.4, after: 152.7 },
+      { label: "USA", before: 122.6, after: 125.9 },
+      { label: "France", before: 120.5, after: 118.2 },
+      { label: "Germany", before: 65.6, after: 64.1 },
+      { label: "Netherlands", before: 48.1, after: 47.1 },
+    ],
+    decimals: 1,
+    source: {
+      name: { it: "AFF, statistica finanziaria", de: "EFV, Finanzstatistik", fr: "AFF, statistique financière", en: "FFA, financial statistics" },
+      url: "https://www.efv.admin.ch/en/overview-financial-statistics-data",
+    },
+  },
+  {
+    id: "health-quiz",
+    date: "2026-11-26",
+    kind: "update",
+    text: {
+      it: "Quiz, costi della sanità: 11,4 % del PIL nel 2024 secondo l’UST (prima: 11,8 % secondo l’OCSE). Il grafico, in % del PIL, mostra le cifre dell’OCSE per il 2024; la media OCSE non c’è più.",
+      de: "Quiz, Kosten des Gesundheitswesens: 11,4 % des BIP im Jahr 2024 gemäss BFS (vorher: 11,8 % gemäss OECD). Die Grafik, in % des BIP, zeigt die Zahlen der OECD für 2024; der OECD-Durchschnitt ist nicht mehr darin.",
+      fr: "Quiz, coûts de la santé : 11,4 % du PIB en 2024 selon l’OFS (auparavant : 11,8 % selon l’OCDE). Le graphique, en % du PIB, montre les chiffres de l’OCDE pour 2024 ; la moyenne OCDE n’y figure plus.",
+      en: "Quiz, healthcare costs: 11.4% of GDP in 2024 according to the FSO (before: 11.8% according to the OECD). The chart, in % of GDP, shows the OECD figures for 2024; the OECD average is no longer in it.",
+    },
+    values: [
+      { label: "Switzerland", before: 11.8, after: 11.4 },
+      { label: "Germany", before: 12.3, after: 12.2 },
+      { label: "France", before: 11.5, after: 11.3 },
+      { label: "Netherlands", before: 10.0, after: 10.1 },
+      { label: "Italy", before: 8.4, after: 8.5 },
+      { label: "OECD Average", before: 9.3 },
+    ],
+    decimals: 1,
+  },
+  {
+    id: "wage-ppp",
+    date: "2026-11-26",
+    kind: "update",
+    text: {
+      it: "Quiz, salario medio a parità di potere d’acquisto: classifica OCSE del 2025, secondo posto su 33 Paesi con un dato (prima: 2024, su 38 Paesi). Svizzera 92 285 dollari (prima: 92 161), Lussemburgo 98 530 (prima: 97 462), Stati Uniti 86 977 (prima: 85 546). L’Islanda, quarta nel 2024, non ha ancora un dato per il 2025. Posizioni nel grafico:",
+      de: "Quiz, Durchschnittslohn zu Kaufkraftparitäten: OECD-Rangliste 2025, zweiter Platz unter 33 Ländern mit einem Wert (vorher: 2024, unter 38 Ländern). Schweiz 92 285 Dollar (vorher: 92 161), Luxemburg 98 530 (vorher: 97 462), USA 86 977 (vorher: 85 546). Island, 2024 auf Platz vier, hat noch keinen Wert für 2025. Plätze in der Grafik:",
+      fr: "Quiz, salaire moyen à parité de pouvoir d’achat : classement OCDE 2025, deuxième rang sur 33 pays disposant d’un chiffre (auparavant : 2024, sur 38 pays). Suisse 92 285 dollars (auparavant : 92 161), Luxembourg 98 530 (auparavant : 97 462), États-Unis 86 977 (auparavant : 85 546). L’Islande, quatrième en 2024, n’a pas encore de chiffre pour 2025. Rangs dans le graphique :",
+      en: "Quiz, average wage at purchasing power parity: OECD ranking for 2025, second of 33 countries with a figure (before: 2024, of 38 countries). Switzerland USD 92,285 (before: 92,161), Luxembourg 98,530 (before: 97,462), United States 86,977 (before: 85,546). Iceland, fourth in 2024, has no 2025 figure yet. Ranks in the chart:",
+    },
+    values: [
+      { label: "Iceland", before: 4 },
+      { label: "Netherlands", before: 5, after: 4 },
+      { label: "Belgium", before: 6, after: 5 },
+      { label: "Austria", before: 8, after: 6 },
+      { label: "Germany", after: 8 },
+    ],
+    decimals: 0,
+    source: {
+      name: { it: "OCSE, salari medi annui", de: "OECD, durchschnittliche Jahreslöhne", fr: "OCDE, salaires annuels moyens", en: "OECD, average annual wages" },
+      url: "https://www.oecd.org/en/data/indicators/average-annual-wages.html",
+    },
+  },
+  {
+    id: "defence",
+    date: "2026-11-26",
+    kind: "update",
+    text: {
+      it: "Quiz, difesa: la domanda indica il preventivo 2026 e il grafico la spesa militare in % del PIL secondo il SIPRI per il 2025. Tolto il riferimento all’obiettivo NATO del 2 % del PIL: dal vertice dell’Aia del 2025 l’impegno è del 5 % entro il 2035.",
+      de: "Quiz, Verteidigung: Die Frage nennt den Voranschlag 2026, die Grafik die Militärausgaben in % des BIP gemäss SIPRI für 2025. Der Hinweis auf das NATO-Ziel von 2 % des BIP ist entfernt: Seit dem Gipfel von Den Haag 2025 gilt die Zusage von 5 % bis 2035.",
+      fr: "Quiz, défense : la question indique le budget 2026 et le graphique les dépenses militaires en % du PIB selon le SIPRI pour 2025. La mention de l’objectif de l’OTAN de 2 % du PIB est retirée : depuis le sommet de La Haye de 2025, l’engagement est de 5 % d’ici 2035.",
+      en: "Quiz, defence: the question names the 2026 budget and the chart shows military spending in % of GDP according to SIPRI for 2025. The reference to NATO's 2% of GDP guideline was removed: since the 2025 Hague summit the commitment is 5% by 2035.",
+    },
+    values: [
+      { label: "Switzerland", before: 0.7, after: 0.8 },
+      { label: "USA", before: 3.5, after: 3.1 },
+      { label: "UK", before: 2.3, after: 2.4 },
+      { label: "Germany", before: 1.5, after: 2.3 },
+      { label: "France", before: 2.1, after: 2.0 },
+      { label: "Italy", before: 1.4, after: 1.9 },
+      { label: "Austria", before: 0.8, after: 1.1 },
+    ],
+    decimals: 1,
+    source: {
+      name: { it: "SIPRI, Military Expenditure Database", de: "SIPRI, Military Expenditure Database", fr: "SIPRI, Military Expenditure Database", en: "SIPRI Military Expenditure Database" },
+      url: "https://www.sipri.org/databases/milex",
+    },
+  },
+  {
+    id: "card-change",
     date: "2026-11-26",
     kind: "correction",
     text: {
@@ -138,6 +287,7 @@ export const changeLog: ChangeLogEntry[] = [
     },
   },
   {
+    id: "health-card-comparison",
     date: "2026-11-26",
     kind: "correction",
     text: {
@@ -148,16 +298,7 @@ export const changeLog: ChangeLogEntry[] = [
     },
   },
   {
-    date: "2026-11-26",
-    kind: "correction",
-    text: {
-      it: "Elettricità rinnovabile: il 68,3\u00A0% è la quota della produzione netta (produzione meno il consumo delle pompe di accumulazione), mentre il 55,5\u00A0% dell’idroelettrico e l’11,8\u00A0% del fotovoltaico sono quote della produzione lorda (UFE, 2025). Prima i testi le riferivano tutte alla stessa produzione.",
-      de: "Erneuerbarer Strom: 68,3\u00A0% ist der Anteil an der Nettoproduktion (Produktion abzüglich des Verbrauchs der Speicherpumpen), 55,5\u00A0% für die Wasserkraft und 11,8\u00A0% für die Photovoltaik sind Anteile an der Bruttoproduktion (BFE, 2025). Vorher bezogen die Texte alle drei auf dieselbe Produktion.",
-      fr: "Électricité renouvelable\u202F: 68,3\u202F% est la part de la production nette (production moins la consommation des pompes d’accumulation), tandis que 55,5\u202F% pour l’hydraulique et 11,8\u202F% pour le photovoltaïque sont des parts de la production brute (OFEN, 2025). Auparavant, les textes rapportaient les trois à la même production.",
-      en: "Renewable electricity: 68.3% is the share of net production (production minus the electricity used by storage pumps), while 55.5% for hydropower and 11.8% for photovoltaics are shares of gross production (SFOE, 2025). Before, the texts referred all three to the same production.",
-    },
-  },
-  {
+    id: "life-expectancy-2025",
     date: "2026-11-26",
     kind: "correction",
     text: {
@@ -168,6 +309,7 @@ export const changeLog: ChangeLogEntry[] = [
     },
   },
   {
+    id: "labels-offences-renewables",
     date: "2026-11-26",
     kind: "correction",
     text: {
@@ -178,6 +320,7 @@ export const changeLog: ChangeLogEntry[] = [
     },
   },
   {
+    id: "source-links",
     date: "2026-11-26",
     kind: "correction",
     text: {
@@ -188,26 +331,29 @@ export const changeLog: ChangeLogEntry[] = [
     },
   },
   {
+    id: "quiz-chart-titles",
     date: "2026-11-26",
     kind: "correction",
     text: {
-      it: "Quiz: ogni grafico indica che cosa mostra, la fonte e l’anno. Quindici grafici mostrano per la Svizzera un valore diverso dalla risposta perché usano un’altra fonte, definizione o anno; il titolo del grafico ora dice quale.",
-      de: "Quiz: Jede Grafik nennt, was sie zeigt, die Quelle und das Jahr. Fünfzehn Grafiken zeigen für die Schweiz einen anderen Wert als die Antwort, weil sie eine andere Quelle, Definition oder ein anderes Jahr verwenden; der Titel der Grafik sagt jetzt, welche.",
-      fr: "Quiz\u202F: chaque graphique indique ce qu’il montre, la source et l’année. Quinze graphiques montrent pour la Suisse une valeur différente de la réponse, car ils utilisent une autre source, définition ou année\u202F; le titre du graphique précise désormais laquelle.",
-      en: "Quiz: every chart says what it shows, its source and its year. Fifteen charts show a Swiss value different from the answer because they use another source, definition or year; the chart title now says which.",
+      it: "Quiz: ogni grafico indica che cosa mostra, la fonte e l’anno. Sedici grafici mostrano per la Svizzera un valore diverso dalla risposta perché usano un’altra fonte, definizione o anno; il titolo del grafico ora dice quale.",
+      de: "Quiz: Jede Grafik nennt, was sie zeigt, die Quelle und das Jahr. Sechzehn Grafiken zeigen für die Schweiz einen anderen Wert als die Antwort, weil sie eine andere Quelle, Definition oder ein anderes Jahr verwenden; der Titel der Grafik sagt jetzt, welche.",
+      fr: "Quiz\u202F: chaque graphique indique ce qu’il montre, la source et l’année. Seize graphiques montrent pour la Suisse une valeur différente de la réponse, car ils utilisent une autre source, définition ou année\u202F; le titre du graphique précise désormais laquelle.",
+      en: "Quiz: every chart says what it shows, its source and its year. Sixteen charts show a Swiss value different from the answer because they use another source, definition or year; the chart title now says which.",
     },
   },
   {
+    id: "quiz-years",
     date: "2026-11-26",
     kind: "correction",
     text: {
-      it: "Quiz: le domande sull’oro della BNS, sul preventivo per la migrazione e sull’apprendistato indicano ora l’anno. La risposta sul tragitto casa-lavoro indica il mezzo di trasporto principale nel 2024: auto 49,4\u00A0%, treno 17,1\u00A0%, bus o tram 13,6\u00A0% dei 3,7 milioni di pendolari (UST, T 11.4.4.4; prima: la metà, 16 e 13\u00A0% di 3,6 milioni, 2022).",
-      de: "Quiz: Die Fragen zum Gold der SNB, zum Migrationsbudget und zur Berufslehre nennen jetzt das Jahr. Die Antwort zum Arbeitsweg nennt das Hauptverkehrsmittel 2024: Auto 49,4\u00A0%, Zug 17,1\u00A0%, Bus oder Tram 13,6\u00A0% der 3,7 Millionen Pendlerinnen und Pendler (BFS, T 11.4.4.4; vorher: die Hälfte, 16 und 13\u00A0% von 3,6 Millionen, 2022).",
-      fr: "Quiz\u202F: les questions sur l’or de la BNS, le budget de la migration et l’apprentissage indiquent désormais l’année. La réponse sur le trajet domicile-travail indique le moyen de transport principal en 2024\u202F: voiture 49,4\u202F%, train 17,1\u202F%, bus ou tram 13,6\u202F% des 3,7 millions de pendulaires (OFS, T 11.4.4.4\u202F; auparavant\u202F: la moitié, 16 et 13\u202F% de 3,6 millions, 2022).",
-      en: "Quiz: the questions on the SNB's gold, the migration budget and apprenticeships now state their year. The commute answer gives the main means of transport in 2024: car 49.4%, train 17.1%, bus or tram 13.6% of the 3.7 million commuters (FSO, T 11.4.4.4; before: half, 16 and 13% of 3.6 million, 2022).",
+      it: "Quiz: le domande sull’oro della BNS, sul debito pubblico, sul preventivo per la migrazione e sull’apprendistato indicano ora l’anno.",
+      de: "Quiz: Die Fragen zum Gold der SNB, zu den Staatsschulden, zum Migrationsbudget und zur Berufslehre nennen jetzt das Jahr.",
+      fr: "Quiz\u202F: les questions sur l’or de la BNS, la dette publique, le budget de la migration et l’apprentissage indiquent désormais l’année.",
+      en: "Quiz: the questions on the SNB's gold, public debt, the migration budget and apprenticeships now state their year.",
     },
   },
   {
+    id: "quiz-unemployment-eurostat",
     date: "2026-11-26",
     kind: "correction",
     text: {
@@ -217,17 +363,19 @@ export const changeLog: ChangeLogEntry[] = [
       en: "Quiz, unemployment: the 4.9% in the comparison is Eurostat's figure for people aged 15 to 74; the FSO's national ILO figure is 4.8%. The explanation now says so.",
     },
   },
-{
+  {
+    id: "card-decimals",
     date: "2026-11-26",
     kind: "correction",
     text: {
-      it: "Schede della pagina iniziale: le cifre sono indicate con i decimali della fonte, come nella pagina delle statistiche. Costi della sanità 11,4\u00A0% del PIL (prima: 11\u00A0%, UST), reati 61,3 per 1000 abitanti (prima: 61, UST), popolazione 9,127 milioni (prima: 9 milioni, UST), debito federale 16,1\u00A0% del PIL (prima: 16\u00A0%, AFF), età mediana 42,9 anni (prima: 43, Eurostat), speranza di vita 84,2 anni (prima: 84, Eurostat).",
-      de: "Karten der Startseite: Die Zahlen stehen mit den Nachkommastellen der Quelle, wie auf der Seite Statistiken. Kosten des Gesundheitswesens 11,4\u00A0% des BIP (vorher: 11\u00A0%, BFS), Straftaten 61,3 pro 1000 Einwohner (vorher: 61, BFS), Bevölkerung 9,127 Millionen (vorher: 9 Millionen, BFS), Bundesschulden 16,1\u00A0% des BIP (vorher: 16\u00A0%, EFV), Medianalter 42,9 Jahre (vorher: 43, Eurostat), Lebenserwartung 84,2 Jahre (vorher: 84, Eurostat).",
-      fr: "Fiches de la page d’accueil\u202F: les chiffres sont indiqués avec les décimales de la source, comme sur la page des statistiques. Coûts de la santé 11,4\u202F% du PIB (auparavant\u202F: 11\u202F%, OFS), infractions 61,3 pour 1000 habitants (auparavant\u202F: 61, OFS), population 9,127 millions (auparavant\u202F: 9 millions, OFS), dette fédérale 16,1\u202F% du PIB (auparavant\u202F: 16\u202F%, AFF), âge médian 42,9 ans (auparavant\u202F: 43, Eurostat), espérance de vie 84,2 ans (auparavant\u202F: 84, Eurostat).",
-      en: "Home page cards: the figures are shown with the decimals of the source, as on the statistics page. Healthcare costs 11.4% of GDP (before: 11%, FSO), offences 61.3 per 1,000 inhabitants (before: 61, FSO), population 9.127 million (before: 9 million, FSO), federal debt 16.1% of GDP (before: 16%, FFA), median age 42.9 years (before: 43, Eurostat), life expectancy 84.2 years (before: 84, Eurostat).",
+      it: "Schede della pagina iniziale: le cifre sono indicate con i decimali della fonte, come nella pagina delle statistiche. Costi della sanità 11,4\u00A0% del PIL (prima: 11\u00A0%, UST), reati 61,3 per 1000 abitanti (prima: 61, UST), popolazione 9,127 milioni (prima: 9 milioni, UST), debito federale 16,1\u00A0% del PIL (prima: 16\u00A0%, AFF), età mediana 42,9 anni (prima: 43, Eurostat), speranza di vita 84,2 anni (prima: 84, Eurostat). La data del debito federale è «fine 2025» (prima: «2026 (Refers to End-2025)»).",
+      de: "Karten der Startseite: Die Zahlen stehen mit den Nachkommastellen der Quelle, wie auf der Seite Statistiken. Kosten des Gesundheitswesens 11,4\u00A0% des BIP (vorher: 11\u00A0%, BFS), Straftaten 61,3 pro 1000 Einwohner (vorher: 61, BFS), Bevölkerung 9,127 Millionen (vorher: 9 Millionen, BFS), Bundesschulden 16,1\u00A0% des BIP (vorher: 16\u00A0%, EFV), Medianalter 42,9 Jahre (vorher: 43, Eurostat), Lebenserwartung 84,2 Jahre (vorher: 84, Eurostat). Das Datum der Bundesschulden lautet «Ende 2025» (vorher: «2026 (Refers to End-2025)»).",
+      fr: "Fiches de la page d’accueil\u202F: les chiffres sont indiqués avec les décimales de la source, comme sur la page des statistiques. Coûts de la santé 11,4\u202F% du PIB (auparavant\u202F: 11\u202F%, OFS), infractions 61,3 pour 1000 habitants (auparavant\u202F: 61, OFS), population 9,127 millions (auparavant\u202F: 9 millions, OFS), dette fédérale 16,1\u202F% du PIB (auparavant\u202F: 16\u202F%, AFF), âge médian 42,9 ans (auparavant\u202F: 43, Eurostat), espérance de vie 84,2 ans (auparavant\u202F: 84, Eurostat). La date de la dette fédérale est «\u202Ffin 2025\u202F» (auparavant\u202F: «\u202F2026 (Refers to End-2025)\u202F»).",
+      en: "Home page cards: the figures are shown with the decimals of the source, as on the statistics page. Healthcare costs 11.4% of GDP (before: 11%, FSO), offences 61.3 per 1,000 inhabitants (before: 61, FSO), population 9.127 million (before: 9 million, FSO), federal debt 16.1% of GDP (before: 16%, FFA), median age 42.9 years (before: 43, Eurostat), life expectancy 84.2 years (before: 84, Eurostat). The date of the federal debt reads 'end of 2025' (before: '2026 (Refers to End-2025)').",
     },
   },
   {
+    id: "population-2025",
     date: "2026-11-26",
     kind: "correction",
     text: {
@@ -242,6 +390,7 @@ export const changeLog: ChangeLogEntry[] = [
     },
   },
   {
+    id: "inflation-text",
     date: "2026-11-26",
     kind: "correction",
     text: {
@@ -256,6 +405,7 @@ export const changeLog: ChangeLogEntry[] = [
     },
   },
   {
+    id: "cantons-borders-note",
     date: "2026-11-26",
     kind: "correction",
     text: {
@@ -270,6 +420,7 @@ export const changeLog: ChangeLogEntry[] = [
     },
   },
   {
+    id: "cantons-switzerland",
     date: "2026-11-26",
     kind: "correction",
     text: {
@@ -280,16 +431,18 @@ export const changeLog: ChangeLogEntry[] = [
     },
   },
   {
+    id: "about-footer",
     date: "2026-11-26",
     kind: "correction",
     text: {
-      it: "Pagina «Il progetto» e piè di pagina: il punteggio del quiz è il 100\u00A0% meno la distanza tra la stima e il valore reale, in rapporto all’ampiezza del cursore; la pagina parlava di una funzione esponenziale, che il quiz non usa. Il piè di pagina diceva «Dati provenienti da statistiche ufficiali del governo svizzero (UST, SECO, UFSP)»; le cifre vengono anche da Eurostat, dall’OCSE e da altri enti, che la pagina «Il progetto» ora elenca tutti.",
-      de: "Seite «Das Projekt» und Fusszeile: Die Punktzahl im Quiz ist 100\u00A0% minus der Abstand zwischen der Schätzung und dem tatsächlichen Wert, gemessen am Bereich des Schiebereglers; die Seite nannte eine exponentielle Funktion, die das Quiz nicht verwendet. Die Fusszeile sagte «Daten aus offiziellen Schweizer Statistiken (BFS, SECO, BAG)»; die Zahlen stammen auch von Eurostat, der OECD und weiteren Stellen, die die Seite «Das Projekt» jetzt alle nennt.",
-      fr: "Page «\u202FÀ propos\u202F» et pied de page\u202F: le score du quiz est 100\u202F% moins l’écart entre l’estimation et la valeur réelle, rapporté à l’étendue du curseur\u202F; la page parlait d’une fonction exponentielle, que le quiz n’utilise pas. Le pied de page disait «\u202FDonnées provenant des statistiques officielles du gouvernement suisse (OFS, SECO, OFSP)\u202F»\u202F; les chiffres viennent aussi d’Eurostat, de l’OCDE et d’autres organismes, que la page «\u202FÀ propos\u202F» liste désormais tous.",
-      en: "About page and footer: the quiz score is 100% minus the distance between the guess and the actual value, as a share of the slider's range; the page spoke of an exponential function, which the quiz does not use. The footer said 'Data sourced from official Swiss government statistics (BFS, SECO, BAG)'; the figures also come from Eurostat, the OECD and other bodies, which the About page now lists in full.",
+      it: "Pagina «Il progetto», pagina iniziale e piè di pagina: il punteggio del quiz è il 100\u00A0% meno la distanza tra la stima e il valore reale, in rapporto all’ampiezza del cursore; la pagina parlava di una funzione esponenziale, che il quiz non usa. Il piè di pagina diceva «Dati provenienti da statistiche ufficiali del governo svizzero (UST, SECO, UFSP)» e la pagina iniziale «100% basato su statistiche ufficiali svizzere»; le cifre vengono anche da Eurostat, dall’OCSE e da altri enti, che la pagina «Il progetto» ora elenca tutti.",
+      de: "Seite «Das Projekt», Startseite und Fusszeile: Die Punktzahl im Quiz ist 100\u00A0% minus der Abstand zwischen der Schätzung und dem tatsächlichen Wert, gemessen am Bereich des Schiebereglers; die Seite nannte eine exponentielle Funktion, die das Quiz nicht verwendet. Die Fusszeile sagte «Daten aus offiziellen Schweizer Statistiken (BFS, SECO, BAG)», die Startseite «100% aus offiziellen Schweizer Statistiken»; die Zahlen stammen auch von Eurostat, der OECD und weiteren Stellen, die die Seite «Das Projekt» jetzt alle nennt.",
+      fr: "Page «\u202FÀ propos\u202F», page d’accueil et pied de page\u202F: le score du quiz est 100\u202F% moins l’écart entre l’estimation et la valeur réelle, rapporté à l’étendue du curseur\u202F; la page parlait d’une fonction exponentielle, que le quiz n’utilise pas. Le pied de page disait «\u202FDonnées provenant des statistiques officielles du gouvernement suisse (OFS, SECO, OFSP)\u202F» et la page d’accueil «\u202F100% basé sur les statistiques officielles suisses\u202F»\u202F; les chiffres viennent aussi d’Eurostat, de l’OCDE et d’autres organismes, que la page «\u202FÀ propos\u202F» liste désormais tous.",
+      en: "About page, home page and footer: the quiz score is 100% minus the distance between the guess and the actual value, as a share of the slider's range; the page spoke of an exponential function, which the quiz does not use. The footer said 'Data sourced from official Swiss government statistics (BFS, SECO, BAG)' and the home page '100% sourced from official Swiss statistics'; the figures also come from Eurostat, the OECD and other bodies, which the About page now lists in full.",
     },
   },
   {
+    id: "check-2026-11-12",
     date: "2026-11-12",
     kind: "correction",
     text: {
